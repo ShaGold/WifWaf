@@ -23,7 +23,7 @@
 - *Description (champ text)*
 - Sociable humain (slider oui - non)
 - *Photos*
-- *Avis (nom de la personne qui l'a donné, niveau(excellent, bien, décevant, à éviter), commentaire))*
+- *Avis (nom de la personne qui l'a donné, niveau(excellent=5, bien=4, passable=3, décevant=2, à éviter=1), commentaire))*
 
 ## Balade
 - Tracé GPS/dessin sur carte/donner parc/BD randonnées publiques?
