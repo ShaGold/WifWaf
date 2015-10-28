@@ -20,7 +20,10 @@
             android:name=".SignUp"
             android:label="@string/title_activity_sign_up" >
         </activity>
-        
+        <activity
+            android:name=".ResultSignUp"
+            android:label="@string/title_activity_result_sign_up" >
+        </activity>
     </application>
 
 </manifest>

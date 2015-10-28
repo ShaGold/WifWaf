@@ -10,5 +10,9 @@
     <string name="birthday">Date of birth</string>
     <string name="title_activity_sign_up">Sign up</string>
     <string name="phone">Phone number</string>
+    <string name="confirm">confirm</string>
     <string name="description">Description</string>
+    <string name="title_activity_result_sign_up">ResultSignUp</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>
