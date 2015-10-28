@@ -37,31 +37,50 @@ public class UserOperations {
         dbHelper.close();
     }
 
+    /**
+     *
+     * @param email
+     * @param nickname
+     * @param password
+     * @param birthday
+     * @param phoneNumber
+     * @param description
+     * @param photo
+     * @return le user créé, null si le login était déjà pris
+     */
     public User addUser(String email, String nickname, String password, String birthday,
                         int phoneNumber, String description, String photo) {
 
-        ContentValues values = new ContentValues();
+        if(getUser(nickname)==null) {
+            ContentValues values = new ContentValues();
 
-        values.put(DataBaseWrapper.USER_EMAIL, email);
-        values.put(DataBaseWrapper.USER_NICKNAME, nickname);
-        values.put(DataBaseWrapper.USER_PASSWORD, password);
-        values.put(DataBaseWrapper.USER_BIRTHDAY, birthday);
-        values.put(DataBaseWrapper.USER_PHONENUMBER, phoneNumber);
-        values.put(DataBaseWrapper.USER_DESCRIPTION, description);
-        values.put(DataBaseWrapper.USER_PHOTO, photo);
+            values.put(DataBaseWrapper.USER_EMAIL, email);
+            values.put(DataBaseWrapper.USER_NICKNAME, nickname);
+            values.put(DataBaseWrapper.USER_PASSWORD, password);
+            values.put(DataBaseWrapper.USER_BIRTHDAY, birthday);
+            values.put(DataBaseWrapper.USER_PHONENUMBER, phoneNumber);
+            values.put(DataBaseWrapper.USER_DESCRIPTION, description);
+            values.put(DataBaseWrapper.USER_PHOTO, photo);
 
-        long userId = database.insert(DataBaseWrapper.USERS, null, values);
+            return getUser(nickname);
+        }
+        else{
+            return null;
+        }
+    }
 
-        // now that the student is created return it ...
-        Cursor cursor = database.query(DataBaseWrapper.USERS,
-                USER_TABLE_COLUMNS, DataBaseWrapper.USER_ID + " = "
-                        + userId, null, null, null, null);
-
+    /**
+     *
+     * @param nickname
+     * @return user, null si user inexistant
+     */
+    public User getUser(String nickname){
+        Cursor cursor = database.query(DataBaseWrapper.USERS, USER_TABLE_COLUMNS,
+                DataBaseWrapper.USER_NICKNAME + " = " + nickname, null, null, null, null);
         cursor.moveToFirst();
-
-        User newComment = parseUser(cursor);
+        User user = parseUser(cursor);
         cursor.close();
-        return newComment;
+        return user;
     }
 
     public void deleteUser(User comment) {
