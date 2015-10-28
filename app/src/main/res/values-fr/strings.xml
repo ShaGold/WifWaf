@@ -1,2 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">WifWaf</string>
+    <string name="welcome">Bienvenue à bord!</string>
+    <string name="nickname">Pseudo</string>
+    <string name="password">Mot de passe</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="connect">connexion</string>
+    <string name="title_activity_sign_up">Inscription</string>
+    <string name="email">Adresse email</string>
+    <string name="phone">Numéro de téléphone</string>
+    <string name="birthday">Anniversaire</string>
+    <string name="description">Description</string>
+</resources>
