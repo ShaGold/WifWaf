@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="shagold.wifwaf" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,11 +19,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignUp"
+            android:name=".SignUpActivity"
             android:label="@string/title_activity_sign_up" >
         </activity>
         <activity
-            android:name=".ResultSignUp"
+            android:name=".ResultSignUpActivity"
             android:label="@string/title_activity_result_sign_up" >
         </activity>
     </application>
