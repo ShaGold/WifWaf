@@ -7,9 +7,21 @@ public class User {
     private String nickname;
     private String password;
     private String birthday;
-    private String phoneNumber;
+    private int phoneNumber;
     private String description;
     private String photo;
+
+    public User(){}
+
+    public User(String email, String nickname, String password, String birthday, int phoneNumber, String description, String photo){
+        this.email = email;
+        this.nickname = nickname;
+        this.password = password;
+        this.birthday = birthday;
+        this.phoneNumber = phoneNumber;
+        this.description = description;
+        this.photo = photo;
+    }
 
     public int getIdUser() {
         return idUser;
@@ -27,7 +39,7 @@ public class User {
         return birthday;
     }
 
-    public String getPhoneNumber() {
+    public int getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -60,7 +72,7 @@ public class User {
         this.birthday = birthday;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

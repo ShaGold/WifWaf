@@ -114,7 +114,7 @@ public class UserOperations {
         user.setNickname(cursor.getString(2));
         user.setPassword(cursor.getString(3));
         user.setBirthday(cursor.getString(4));
-        user.setPhoneNumber(cursor.getString(5));
+        user.setPhoneNumber(cursor.getInt(5));
         user.setDescription(cursor.getString(6));
         user.setPhoto(cursor.getString(7));
         return user;
