@@ -1,5 +1,8 @@
 package shagold.wifwaf.dataBase;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class User {
 
     private int idUser;
@@ -21,6 +24,18 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.description = description;
         this.photo = photo;
+    }
+
+    public JSONObject toJson() throws JSONException {
+        JSONObject userJson = new JSONObject();
+        userJson.put("email", this.email);
+        userJson.put("nickname", this.nickname);
+        userJson.put("password", this.password);
+        userJson.put("birthday", this.birthday);
+        userJson.put("phoneNumber", this.phoneNumber);
+        userJson.put("description", this.description);
+        userJson.put("photo", this.photo);
+        return userJson;
     }
 
     public int getIdUser() {
