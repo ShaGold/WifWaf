@@ -36,7 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         socket.connect();
         socket.on("onTest", onTest);
-        socket.on("onRTryInscription", onRTryInscription);
+        socket.on("RTrySignUp", onRTrySignUp);
     }
 
     @Override
@@ -67,12 +67,10 @@ public class SignUpActivity extends AppCompatActivity {
 
         socket.disconnect();
         // TODO faire socket.off pour chaque event écouté
-        //socket.off("new message", onNewMessage);
+        socket.off("RTrySignUp", onRTrySignUp);
     }
 
     public void trySignUp(View view) throws JSONException {
-        socket.emit("askBeesList");
-
         //Récupération des valeurs
         EditText ETnickname = (EditText) findViewById(R.id.Nickname);
         String Snickname = ETnickname.getText().toString();
@@ -90,8 +88,7 @@ public class SignUpActivity extends AppCompatActivity {
         //Test inscription
         User user = new User(Semail,Snickname,Spassword,Sbirthday,SphoneNumber,Sdescription,"");
         JSONObject jsonUser = user.toJson();
-        socket.emit("TryInscription", jsonUser);
-
+        socket.emit("TrySignUp", jsonUser);
     }
 
     private Emitter.Listener onTest = new Emitter.Listener() {
@@ -107,7 +104,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
     };
 
-    private Emitter.Listener onRTryInscription = new Emitter.Listener() {
+    private Emitter.Listener onRTrySignUp = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
             SignUpActivity.this.runOnUiThread(new Runnable() {
