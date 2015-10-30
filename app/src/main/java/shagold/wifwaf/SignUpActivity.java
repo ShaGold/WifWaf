@@ -22,21 +22,21 @@ import shagold.wifwaf.dataBase.User;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private Socket socket;
+    /*private Socket socket;
     {
         try {
             socket = IO.socket("http://notre.adresse.ici");
         } catch (URISyntaxException e) {}
-    }
+    }*/
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        socket.connect();
+        /*socket.connect();
         socket.on("onTest", onTest);
-        socket.on("RTrySignUp", onRTrySignUp);
+        socket.on("RTrySignUp", onRTrySignUp);*/
     }
 
     @Override
@@ -65,9 +65,9 @@ public class SignUpActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
 
-        socket.disconnect();
+        /*socket.disconnect();
         // TODO faire socket.off pour chaque event écouté
-        socket.off("RTrySignUp", onRTrySignUp);
+        socket.off("RTrySignUp", onRTrySignUp);*/
     }
 
     public void trySignUp(View view) throws JSONException {
@@ -88,10 +88,11 @@ public class SignUpActivity extends AppCompatActivity {
         //Test inscription
         User user = new User(Semail,Snickname,Spassword,Sbirthday,SphoneNumber,Sdescription,"");
         JSONObject jsonUser = user.toJson();
-        socket.emit("TrySignUp", jsonUser);
+        System.out.println(jsonUser);
+        //socket.emit("TrySignUp", jsonUser);
     }
 
-    private Emitter.Listener onTest = new Emitter.Listener() {
+  /*  private Emitter.Listener onTest = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
             SignUpActivity.this.runOnUiThread(new Runnable() {
@@ -130,5 +131,5 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             });
         }
-    };
+    };*/
 }
