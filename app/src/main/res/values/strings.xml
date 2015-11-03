@@ -15,4 +15,10 @@
     <string name="title_activity_result_sign_up">ResultSignUp</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_activity_dog_form">activity_dog_form</string>
+    <string name="title_activity_add_dog">AddDogActivity</string>
+
+    <string name="name">Name</string>
+    <string name="age">Age</string>
+    <string name="breed">Breed</string>
 </resources>
