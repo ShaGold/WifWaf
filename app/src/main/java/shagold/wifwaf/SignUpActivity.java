@@ -29,7 +29,6 @@ public class SignUpActivity extends AppCompatActivity {
         } catch (URISyntaxException e) {}
     }*/
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
