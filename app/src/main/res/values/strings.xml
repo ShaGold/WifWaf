@@ -16,9 +16,16 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_activity_dog_form">activity_dog_form</string>
-    <string name="title_activity_add_dog">AddDogActivity</string>
+    <string name="title_activity_add_dog">Add Dog</string>
 
     <string name="name">Name</string>
     <string name="age">Age</string>
     <string name="breed">Breed</string>
+    <string name="title_activity_user_profile">My Profile</string>
+    <string name="title_activity_home">Home</string>
+    <string name="action_profile">Profile</string>
+    <string name="action_home">Home</string>
+    <string name="title_activity_user_dogs">My Dogs</string>
+    <string name="action_dogs">Dogs</string>
+    <string name="button_add_dog">Add Dog</string>
 </resources>
