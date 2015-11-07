@@ -22,20 +22,20 @@ import shagold.wifwaf.dataBase.User;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    /*private Socket socket;
+    private Socket socket;
     {
         try {
-            socket = IO.socket("http://notre.adresse.ici");
+            socket = IO.socket("http://51.254.124.136:8000");
         } catch (URISyntaxException e) {}
-    }*/
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        /*socket.connect();
+        socket.connect();
         socket.on("onTest", onTest);
-        socket.on("RTrySignUp", onRTrySignUp);*/
+        //socket.on("RTrySignUp", onRTrySignUp);
     }
 
     @Override
@@ -64,9 +64,9 @@ public class SignUpActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
 
-        /*socket.disconnect();
+        socket.disconnect();
         // TODO faire socket.off pour chaque event écouté
-        socket.off("RTrySignUp", onRTrySignUp);*/
+        //socket.off("RTrySignUp", onRTrySignUp);
     }
 
     public void trySignUp(View view) throws JSONException {
@@ -91,20 +91,19 @@ public class SignUpActivity extends AppCompatActivity {
         //socket.emit("TrySignUp", jsonUser);
     }
 
-  /*  private Emitter.Listener onTest = new Emitter.Listener() {
+    private Emitter.Listener onTest = new Emitter.Listener() {
         @Override
-        public void call(final Object... args) {
+        public void call(Object... args) {
             SignUpActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    //JSONObject data = (JSONObject) args[0];
                     System.out.println("je recois onTest");
                 }
             });
         }
     };
 
-    private Emitter.Listener onRTrySignUp = new Emitter.Listener() {
+    /*private Emitter.Listener onRTrySignUp = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
             SignUpActivity.this.runOnUiThread(new Runnable() {
