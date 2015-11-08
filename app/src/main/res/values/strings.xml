@@ -8,7 +8,7 @@
     <string name="email">Email address</string>
     <string name="connect">connection</string>
     <string name="birthday">Date of birth</string>
-    <string name="title_activity_sign_up">Sign up</string>
+    <string name="title_activity_sign_up">Sign In</string>
     <string name="phone">Phone number</string>
     <string name="confirm">confirm</string>
     <string name="description">Description</string>
@@ -28,4 +28,5 @@
     <string name="title_activity_user_dogs">My Dogs</string>
     <string name="action_dogs">Dogs</string>
     <string name="button_add_dog">Add Dog</string>
+    <string name="button_sign_in">Sign In</string>
 </resources>

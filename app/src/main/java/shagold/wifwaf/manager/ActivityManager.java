@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import shagold.wifwaf.AddDogActivity;
 import shagold.wifwaf.HomeActivity;
+import shagold.wifwaf.SignUpActivity;
 import shagold.wifwaf.UserDogsActivity;
 import shagold.wifwaf.UserProfileActivity;
 
@@ -31,6 +32,10 @@ public class ActivityManager {
 
     public static Intent getAddDog(Activity a) {
         return getClass(a, AddDogActivity.class);
+    }
+
+    public static Intent getSignUp(Activity a) {
+        return getClass(a, SignUpActivity.class);
     }
 
     public static boolean isHome(Activity a) {

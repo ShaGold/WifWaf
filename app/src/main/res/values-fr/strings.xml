@@ -20,4 +20,5 @@
     <string name="action_dogs">Chiens</string>
     <string name="title_activity_add_dog">Ajout d\'un Chien</string>
     <string name="button_add_dog">Ajout d\'un Chien</string>
+    <string name="button_sign_in">Inscription</string>
 </resources>
