@@ -39,7 +39,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/connect"
+        android:text="@string/button_connect"
         android:id="@+id/signInButton"
         android:layout_below="@+id/textViewPassword"
         android:layout_alignRight="@+id/textViewNickname"
