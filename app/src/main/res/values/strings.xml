@@ -20,7 +20,12 @@
     <string name="name">Name</string>
     <string name="age">Age</string>
     <string name="breed">Breed</string>
+    <string name="size">Size</string>
     <string name="button_add_dog">Add Dog</string>
+    <string name="getAlongWithMales">Does your dog get along with male dogs?</string>
+    <string name="getAlongWithFemales">Does your dog get along with female dogs?</string>
+    <string name="getAlongWithKids">Does your dog get along with children?</string>
+    <string name="getAlongWithHumans">Does your dog get along with humans in general?</string>
 
     <!-- Strings communes à plusieurs forms -->
     <string name="confirm">confirm</string>
