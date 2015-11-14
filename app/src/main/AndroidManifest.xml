@@ -30,6 +30,18 @@
             android:name=".AddDogActivity"
             android:label="@string/title_activity_add_dog" >
         </activity>
+        <activity
+            android:name=".UserProfileActivity"
+            android:label="@string/title_activity_user_profile" >
+        </activity>
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home" >
+        </activity>
+        <activity
+            android:name=".UserDogsActivity"
+            android:label="@string/title_activity_user_dogs" >
+        </activity>
     </application>
 
 </manifest>

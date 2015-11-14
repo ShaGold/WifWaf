@@ -1,41 +1,37 @@
 package shagold.wifwaf;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputFilter;
-import android.text.Spanned;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import shagold.wifwaf.manager.ActivityManager;
 import shagold.wifwaf.manager.MenuManager;
 
-public class AddDogActivity extends AppCompatActivity {
+/**
+ * Created by jimmy on 07/11/15.
+ */
+public class UserDogsActivity extends AppCompatActivity {
 
     private Activity self;
-    private Button confirmAddDog;
+    private Button addDog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_dog);
+        setContentView(R.layout.activity_user_dogs);
         self = this;
 
-        confirmAddDog = (Button) findViewById(R.id.confirmAddDogButton);
-        confirmAddDog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(ActivityManager.getUserDogs(self));
-
+        addDog = (Button) findViewById(R.id.addDogButton);
+        addDog.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+                startActivity(ActivityManager.getAddDog(self));
             }
         });
-
-        EditText e = (EditText) findViewById(R.id.name);
-
     }
 
     @Override
