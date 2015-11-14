@@ -23,21 +23,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         self = this;
 
-        signInButton = (Button) findViewById(R.id.signInButton);
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(ActivityManager.getHome(self));
-            }
-        });
-
-        signUpButton = (Button) findViewById(R.id.signUpButton);
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(ActivityManager.getSignUp(self));
-            }
-        });
+        initSignInButton();
+        initSignUpButton();
 
     }
 
@@ -50,5 +37,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return MenuManager.emptyMenu(this, item.getItemId()) || super.onOptionsItemSelected(item);
+    }
+
+    private void initSignUpButton() {
+        signInButton = (Button) findViewById(R.id.signInButton);
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(ActivityManager.getHome(self));
+            }
+        });
+    }
+
+    private void initSignInButton() {
+        signUpButton = (Button) findViewById(R.id.signUpButton);
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(ActivityManager.getSignUp(self));
+            }
+        });
     }
 }
