@@ -1,32 +1,40 @@
 <resources>
     <string name="app_name">WifWaf</string>
-
     <string name="action_settings">Settings</string>
     <string name="welcome">Welcome on board!</string>
+
+    <!-- Activity sign up et main activity (connection activity)-->
+    <string name="title_activity_sign_up">Sign Up</string>
     <string name="nickname">Nickname</string>
     <string name="password">Password</string>
     <string name="email">Email address</string>
-    <string name="connect">connection</string>
     <string name="birthday">Date of birth</string>
-    <string name="title_activity_sign_up">Sign In</string>
     <string name="phone">Phone number</string>
-    <string name="confirm">confirm</string>
     <string name="description">Description</string>
     <string name="title_activity_result_sign_up">ResultSignUp</string>
+    <string name="button_sign_up">Sign up</string>
+    <string name="button_connect">connection</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_activity_dog_form">activity_dog_form</string>
+    <!-- Activity add dog -->
     <string name="title_activity_add_dog">Add Dog</string>
-
     <string name="name">Name</string>
     <string name="age">Age</string>
     <string name="breed">Breed</string>
+    <string name="size">Size</string>
+    <string name="button_add_dog">Add Dog</string>
+    <string name="getAlongWithMales">Does your dog get along with male dogs?</string>
+    <string name="getAlongWithFemales">Does your dog get along with female dogs?</string>
+    <string name="getAlongWithKids">Does your dog get along with children?</string>
+    <string name="getAlongWithHumans">Does your dog get along with humans in general?</string>
+
+    <!-- Strings communes à plusieurs forms -->
+    <string name="confirm">confirm</string>
+
+    <!-- Menu -->
     <string name="title_activity_user_profile">My Profile</string>
+    <string name="title_activity_user_dogs">My Dogs</string>
     <string name="title_activity_home">Home</string>
     <string name="action_profile">Profile</string>
     <string name="action_home">Home</string>
-    <string name="title_activity_user_dogs">My Dogs</string>
     <string name="action_dogs">Dogs</string>
-    <string name="button_add_dog">Add Dog</string>
-    <string name="button_sign_in">Sign In</string>
 </resources>

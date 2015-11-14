@@ -32,8 +32,8 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        //socket.connect();
-        //socket.on("onTest", onTest);
+        socket.connect();
+        socket.on("onTest", onTest);
         //socket.on("RTrySignUp", onRTrySignUp);
     }
 
@@ -86,6 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
             SignUpActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                   // String test = (String) args[0];
                     System.out.println("je recois onTest");
                 }
             });

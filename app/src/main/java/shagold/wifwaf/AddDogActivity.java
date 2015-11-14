@@ -34,7 +34,7 @@ public class AddDogActivity extends AppCompatActivity {
             }
         });
 
-        EditText e = (EditText) findViewById(R.id.Name);
+        EditText e = (EditText) findViewById(R.id.name);
 
     }
 
