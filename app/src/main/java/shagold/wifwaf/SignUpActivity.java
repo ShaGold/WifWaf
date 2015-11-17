@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.net.URISyntaxException;
 
@@ -63,6 +64,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void trySignUp(View view) throws JSONException {
         System.out.print("test");
+
         //Récupération des valeurs
         EditText ETnickname = (EditText) findViewById(R.id.Nickname);
         String Snickname = ETnickname.getText().toString();
@@ -76,6 +78,17 @@ public class SignUpActivity extends AppCompatActivity {
         String Sbirthday = ETBirthday.getText().toString();
         EditText ETDescription = (EditText) findViewById(R.id.Description);
         String Sdescription = ETDescription.getText().toString();
+
+        //Vérification champs
+        if (Spassword.length() < 6){
+            Toast.makeText(SignUpActivity.this, "Mot de passe trop court", Toast.LENGTH_LONG).show();
+        }
+        if (Snickname.length() < 3){
+            Toast.makeText(SignUpActivity.this, "Pseudo trop court", Toast.LENGTH_LONG).show();
+        }
+        if (ETPhoneNumber.getText().toString().length() < 10){
+            Toast.makeText(SignUpActivity.this, "Numéro de téléphone trop court", Toast.LENGTH_LONG).show();
+        }
 
         //Test inscription
         User user = new User(Semail,Snickname,Spassword,Sbirthday,SphoneNumber,Sdescription,"");
