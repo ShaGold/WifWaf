@@ -38,7 +38,7 @@ public class SignUpActivity extends AppCompatActivity {
         socket.on("onTestString", onTestString);
         socket.on("onTestJson", onTestJson);
         socket.on("onTestJsonArray", onTestJsonArray);
-        //socket.on("RTrySignUp", onRTrySignUp);
+        socket.on("RTrySignUp", onRTrySignUp);
     }
 
     @Override
@@ -164,14 +164,16 @@ public class SignUpActivity extends AppCompatActivity {
     };
 
 
-    /*private Emitter.Listener onRTrySignUp = new Emitter.Listener() {
+    private Emitter.Listener onRTrySignUp = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
             SignUpActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    JSONObject jsonuser = (JSONObject) args[0];
-                    if (jsonuser == null){
+                    Integer err = (Integer) args[0];
+                    Toast.makeText(SignUpActivity.this,"Inscription impossible, code erreur" + err , Toast.LENGTH_LONG).show();
+
+                    /*if (jsonuser == null){
                         Toast.makeText(SignUpActivity.this,"Inscription impossible", Toast.LENGTH_LONG).show();
                     }
                     else {
@@ -186,9 +188,9 @@ public class SignUpActivity extends AppCompatActivity {
                         resultat.putExtra("Nickname", nickname); // pour pouvoir afficher bienvenue ..
                         startActivity(resultat);
                     }
-                    System.out.println("[Demande inscription]");
+                    System.out.println("[Demande inscription]");*/
                 }
             });
         }
-    };*/
+    };
 }
