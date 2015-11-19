@@ -62,5 +62,11 @@ public class ActivityManager {
         return a.getClass() != UserDogsActivity.class;
     }
 
+    public static boolean isSameActivity(Activity a, Class c) {
+        return a.getClass() == c;
+    }
 
+    public static boolean isNotSameActivity(Activity a, Class c) {
+        return a.getClass() != c;
+    }
 }

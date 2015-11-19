@@ -10,10 +10,11 @@ import android.widget.Button;
 
 import shagold.wifwaf.manager.ActivityManager;
 import shagold.wifwaf.manager.MenuManager;
+import shagold.wifwaf.tool.WifWafActivity;
+import shagold.wifwaf.tool.WifWafColor;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends WifWafActivity {
 
-    private Activity self;
     private Button signUpButton;
     private Button signInButton;
 
@@ -21,11 +22,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        self = this;
+        initBackground();
+        initSimpleToolBar(R.id.toolbarMain);
 
         initSignInButton();
         initSignUpButton();
-
     }
 
     @Override
@@ -41,20 +42,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void initSignUpButton() {
         signInButton = (Button) findViewById(R.id.signInButton);
+        signInButton.setBackgroundColor(WifWafColor.BROWN_DARK);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(ActivityManager.getHome(self));
+                startActivity(ActivityManager.getHome(getSelf()));
             }
         });
     }
 
     private void initSignInButton() {
         signUpButton = (Button) findViewById(R.id.signUpButton);
+        signUpButton.setBackgroundColor(WifWafColor.BROWN_DARK);
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(ActivityManager.getSignUp(self));
+                startActivity(ActivityManager.getSignUp(getSelf()));
             }
         });
     }

@@ -1,5 +1,6 @@
 package shagold.wifwaf;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,8 +19,9 @@ import com.github.nkzawa.emitter.Emitter;
 
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
+import shagold.wifwaf.tool.WifWafActivity;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends WifWafActivity {
 
     private Socket socket;
     {
@@ -32,6 +34,9 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        initBackground();
+        initSimpleToolBar(R.id.toolbarSignUp);
+
         socket.connect();
         socket.on("onTest", onTest);
         //socket.on("RTrySignUp", onRTrySignUp);

@@ -1,5 +1,6 @@
 package shagold.wifwaf;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,7 +8,7 @@ import android.view.MenuItem;
 
 import shagold.wifwaf.manager.MenuManager;
 
-public class ResultSignUpActivity extends AppCompatActivity {
+public class ResultSignUpActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

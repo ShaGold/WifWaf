@@ -13,23 +13,26 @@ import android.widget.EditText;
 
 import shagold.wifwaf.manager.ActivityManager;
 import shagold.wifwaf.manager.MenuManager;
+import shagold.wifwaf.tool.WifWafActivity;
+import shagold.wifwaf.tool.WifWafColor;
 
-public class AddDogActivity extends AppCompatActivity {
+public class AddDogActivity extends WifWafActivity {
 
-    private Activity self;
     private Button confirmAddDog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_dog);
-        self = this;
+        initBackground();
+        initToolBar(R.id.toolbarAddDog);
 
         confirmAddDog = (Button) findViewById(R.id.confirmAddDogButton);
+        confirmAddDog.setBackgroundColor(WifWafColor.BROWN_DARK);
         confirmAddDog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(ActivityManager.getUserDogs(self));
+                startActivity(ActivityManager.getUserDogs(getSelf()));
 
             }
         });
@@ -40,12 +43,12 @@ public class AddDogActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_default, menu);
+        getMenuInflater().inflate(R.menu.menu_empty, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return MenuManager.defaultMenu(this, item.getItemId()) || super.onOptionsItemSelected(item);
+        return MenuManager.emptyMenu(this, item.getItemId()) || super.onOptionsItemSelected(item);
     }
 }
