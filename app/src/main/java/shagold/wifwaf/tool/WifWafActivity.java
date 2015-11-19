@@ -6,8 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+
+import java.util.Objects;
 
 import shagold.wifwaf.AddDogActivity;
 import shagold.wifwaf.HomeActivity;
@@ -49,16 +50,10 @@ public class WifWafActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setBackgroundColor(WifWafColor.BROWN);
 
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
-        final WifWafImageButton home = new WifWafImageButton(this, HomeActivity.class);
-        home.setImageResource(R.drawable.home);
-        home.setLayoutParams(lp);
-        home.initBackground();
-        if(ActivityManager.isNotSameActivity(this, home.getActivity()))
-            home.setBackgroundColor(Color.TRANSPARENT);
-        home.setTag(View.NO_ID);
-        home.setId(View.NO_ID);
+        final WifWafImageButton home =
+                WifWafImageButtonFactory.createImageButton(this, HomeActivity.class, R.drawable.home, lp, null);
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,14 +63,8 @@ public class WifWafActivity extends AppCompatActivity {
         });
         toolbar.addView(home);
 
-        final WifWafImageButton profile = new WifWafImageButton(this, UserProfileActivity.class);
-        profile.setImageResource(R.drawable.user_icon);
-        profile.setLayoutParams(lp);
-        profile.initBackground();
-        if(ActivityManager.isNotSameActivity(this, profile.getActivity()))
-            profile.setBackgroundColor(Color.TRANSPARENT);
-        profile.setTag(View.NO_ID);
-        profile.setId(View.NO_ID);
+        final WifWafImageButton profile =
+                WifWafImageButtonFactory.createImageButton(this, UserProfileActivity.class, R.drawable.user_icon, lp, null);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,16 +74,9 @@ public class WifWafActivity extends AppCompatActivity {
         });
         toolbar.addView(profile);
 
-        final WifWafImageButton dogs = new WifWafImageButton(this, UserDogsActivity.class);
-        dogs.setImageResource(R.drawable.dogi2);
-        dogs.setLayoutParams(lp);
-        dogs.initBackground();
-        if(ActivityManager.isNotSameActivity(this, dogs.getActivity()))
-            dogs.setBackgroundColor(Color.TRANSPARENT);
-        if(ActivityManager.isSameActivity(this, AddDogActivity.class))
-            dogs.setBackground(dogs.getOriginalBackground());
-        dogs.setTag(View.NO_ID);
-        dogs.setId(View.NO_ID);
+        Class[] dogsActivityOther = {AddDogActivity.class};
+        final WifWafImageButton dogs =
+            WifWafImageButtonFactory.createImageButton(this, UserDogsActivity.class, R.drawable.dogi2, lp, dogsActivityOther);
         dogs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,20 +93,11 @@ public class WifWafActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setBackgroundColor(WifWafColor.BROWN);
 
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
-        final WifWafImageButton home = new WifWafImageButton(this, HomeActivity.class);
-        home.setImageResource(R.drawable.home);
-        home.setLayoutParams(lp);
-        home.initBackground();
-        home.setTag(View.NO_ID);
-        home.setId(View.NO_ID);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // nothing
-            }
-        });
+        final WifWafImageButton home =
+                WifWafImageButtonFactory.createImageButton(this, HomeActivity.class, R.drawable.home, lp, null);
+        home.setBackground(home.getOriginalBackground());
         toolbar.addView(home);
 
     }
