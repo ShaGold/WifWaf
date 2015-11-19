@@ -7,9 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.net.URISyntaxException;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,8 +40,10 @@ public class SignUpActivity extends WifWafActivity {
         initSimpleToolBar(R.id.toolbarSignUp);
 
         socket.connect();
-        socket.on("onTest", onTest);
-        //socket.on("RTrySignUp", onRTrySignUp);
+        socket.on("onTestString", onTestString);
+        socket.on("onTestJson", onTestJson);
+        socket.on("onTestJsonArray", onTestJsonArray);
+        socket.on("RTrySignUp", onRTrySignUp);
     }
 
     @Override
@@ -64,6 +68,8 @@ public class SignUpActivity extends WifWafActivity {
     }
 
     public void trySignUp(View view) throws JSONException {
+        System.out.print("test");
+
         //Récupération des valeurs
         EditText ETnickname = (EditText) findViewById(R.id.Nickname);
         String Snickname = ETnickname.getText().toString();
@@ -78,34 +84,101 @@ public class SignUpActivity extends WifWafActivity {
         EditText ETDescription = (EditText) findViewById(R.id.Description);
         String Sdescription = ETDescription.getText().toString();
 
+        //Vérification champs
+        if (Spassword.length() < 6){
+            Toast.makeText(SignUpActivity.this, "Mot de passe trop court", Toast.LENGTH_LONG).show();
+        }
+        if (Snickname.length() < 3){
+            Toast.makeText(SignUpActivity.this, "Pseudo trop court", Toast.LENGTH_LONG).show();
+        }
+        if (ETPhoneNumber.getText().toString().length() < 10){
+            Toast.makeText(SignUpActivity.this, "Numéro de téléphone trop court", Toast.LENGTH_LONG).show();
+        }
+
         //Test inscription
         User user = new User(Semail,Snickname,Spassword,Sbirthday,SphoneNumber,Sdescription,"");
         JSONObject jsonUser = user.toJson();
         System.out.println(jsonUser);
-        //socket.emit("TrySignUp", jsonUser);
+        socket.emit("TrySignUp", jsonUser);
     }
 
-    private Emitter.Listener onTest = new Emitter.Listener() {
-        @Override
-        public void call(Object... args) {
-            SignUpActivity.this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                   // String test = (String) args[0];
-                    System.out.println("je recois onTest");
-                }
-            });
-        }
-    };
-
-    /*private Emitter.Listener onRTrySignUp = new Emitter.Listener() {
+    //Test Réception
+    private Emitter.Listener onTestString = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
             SignUpActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    JSONObject jsonuser = (JSONObject) args[0];
-                    if (jsonuser == null){
+                    String a = (String) args[0];
+                    System.out.println("je recois onTest" + a);
+                    socket.emit("onTestSendString", "unMot");
+                }
+            });
+        }
+    };
+
+    private Emitter.Listener onTestJson = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args)  {
+            SignUpActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject a =  (JSONObject) args[0];
+                    System.out.println("je recois l'objet" + a.toString());
+                    //préparer l'objet et faire l'envoi ici
+                    JSONObject JsonTest = new JSONObject();
+                    try {
+                        JsonTest.put("email", "adr@mail.fr");
+                        JsonTest.put("name", "thisismyname");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.print("JsonObject préparé: " + JsonTest.toString());
+                    socket.emit("onTestSendJson", JsonTest);
+                }
+            });
+        }
+    };
+
+    private Emitter.Listener onTestJsonArray = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            SignUpActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONArray a = (JSONArray) args[0];
+                    System.out.println("je recois l'objet" + a.toString());
+                    //préparer l'objet pour l'envoi*
+                    JSONArray JsonArrayTest = null;
+                    try {
+                        JsonArrayTest = new JSONArray()
+                                .put(new JSONObject()
+                                        .put("prenom", "jimmy")
+                                        .put("nom", "lopez"))
+                                .put(new JSONObject()
+                                        .put("prenom", "marlene")
+                                        .put("nom", "gui"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.print("JsonArray préparé: " + JsonArrayTest.toString());
+                    socket.emit("onTestSendJsonArray", JsonArrayTest);
+                }
+            });
+        }
+    };
+
+
+    private Emitter.Listener onRTrySignUp = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            SignUpActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Integer err = (Integer) args[0];
+                    Toast.makeText(SignUpActivity.this,"Inscription impossible, code erreur" + err , Toast.LENGTH_LONG).show();
+
+                    /*if (jsonuser == null){
                         Toast.makeText(SignUpActivity.this,"Inscription impossible", Toast.LENGTH_LONG).show();
                     }
                     else {
@@ -120,9 +193,9 @@ public class SignUpActivity extends WifWafActivity {
                         resultat.putExtra("Nickname", nickname); // pour pouvoir afficher bienvenue ..
                         startActivity(resultat);
                     }
-                    System.out.println("[Demande inscription]");
+                    System.out.println("[Demande inscription]");*/
                 }
             });
         }
-    };*/
+    };
 }
