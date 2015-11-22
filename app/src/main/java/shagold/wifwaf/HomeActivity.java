@@ -1,22 +1,20 @@
 package shagold.wifwaf;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTabHost;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.TabHost;
-import android.widget.TabHost.TabSpec;
-
-import shagold.wifwaf.manager.ActivityManager;
+import android.widget.Toast;
+import java.util.ArrayList;
+import java.util.List;
+import shagold.wifwaf.dataBase.Walk;
+import shagold.wifwaf.dataBase.WalkDifficulty;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.tool.WifWafActivity;
+import shagold.wifwaf.view.WalkAdapter;
 
 /**
  * Created by jimmy on 07/11/15.
@@ -24,13 +22,6 @@ import shagold.wifwaf.tool.WifWafActivity;
 public class HomeActivity extends WifWafActivity {
 
     private ListView mListView;
-    private String[] prenoms = new String[]{
-            "Antoine", "Benoit", "Cyril", "David", "Eloise", "Florent",
-            "Gerard", "Hugo", "Ingrid", "Jonathan", "Kevin", "Logan",
-            "Mathieu", "Noemie", "Olivia", "Philippe", "Quentin", "Romain",
-            "Sophie", "Tristan", "Ulric", "Vincent", "Willy", "Xavier",
-            "Yann", "Zoé"
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +29,10 @@ public class HomeActivity extends WifWafActivity {
         setContentView(R.layout.activity_home);
         initBackground();
         initToolBar(R.id.toolbarHome);
+        initListView();
 
-        mListView = (ListView) findViewById(R.id.listView);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(HomeActivity.this,
-                android.R.layout.simple_list_item_1, prenoms);
+        List<Walk> walks = generateWalks();
+        WalkAdapter adapter = new WalkAdapter(this, walks);
         mListView.setAdapter(adapter);
     }
 
@@ -56,4 +46,36 @@ public class HomeActivity extends WifWafActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         return MenuManager.emptyMenu(this, item.getItemId()) || super.onOptionsItemSelected(item);
     }
+
+    private List<Walk> generateWalks() {
+        List<Walk> walks = new ArrayList<Walk>();
+
+        walks.add(new Walk("Balade 1", "Ma premiere balade !", WalkDifficulty.VERY_EASY));
+        walks.add(new Walk("Balade 2", "Ma premiere balade !", WalkDifficulty.EASY));
+        walks.add(new Walk("Balade 3", "Ma premiere balade !", WalkDifficulty.MEDIUM));
+        walks.add(new Walk("Balade 4", "Ma premiere balade !", WalkDifficulty.HARD));
+        walks.add(new Walk("Balade 5", "Ma premiere balade !", WalkDifficulty.EASY));
+        walks.add(new Walk("Balade 6", "Ma premiere balade !", WalkDifficulty.MEDIUM));
+        walks.add(new Walk("Balade 1", "Ma premiere balade !", WalkDifficulty.HARD));
+        walks.add(new Walk("Balade 2", "Ma premiere balade !", WalkDifficulty.EASY));
+        walks.add(new Walk("Balade 3", "Ma premiere balade !", WalkDifficulty.MEDIUM));
+        walks.add(new Walk("Balade 4", "Ma premiere balade !", WalkDifficulty.HARD));
+        walks.add(new Walk("Balade 5", "Ma premiere balade !", WalkDifficulty.EASY));
+        walks.add(new Walk("Balade 6", "Ma premiere balade !", WalkDifficulty.VERY_HARD));
+        return walks;
+    }
+
+    private void initListView() {
+        mListView = (ListView) findViewById(R.id.listView);
+
+        mListView.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
+                Walk walk = (Walk) mListView.getItemAtPosition(position);
+                Toast.makeText(getBaseContext(), walk.getTitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }
