@@ -44,4 +44,11 @@ public class Dog {
         return dogJson;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public String getName() {
+        return dogName;
+    }
 }

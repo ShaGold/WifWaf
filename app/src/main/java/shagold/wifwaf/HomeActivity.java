@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 import shagold.wifwaf.dataBase.Walk;
@@ -67,7 +67,7 @@ public class HomeActivity extends WifWafActivity {
     }
 
     private void initListView() {
-        mListView = (ListView) findViewById(R.id.listView);
+        mListView = (ListView) findViewById(R.id.walkListView);
 
         mListView.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
