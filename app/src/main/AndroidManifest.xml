@@ -44,10 +44,13 @@
             android:label="@string/title_activity_user_dogs" >
         </activity>
         <activity
-            android:name=".WalkActivity">
-
+            android:name=".WalkActivity"
+            android:label="">
         </activity>
-
+        <activity
+            android:name=".DogProfileActivity"
+            android:label="">
+        </activity>
     </application>
 
 </manifest>

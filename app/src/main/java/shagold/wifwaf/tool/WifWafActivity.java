@@ -11,6 +11,7 @@ import android.widget.LinearLayout.LayoutParams;
 import java.util.Objects;
 
 import shagold.wifwaf.AddDogActivity;
+import shagold.wifwaf.DogProfileActivity;
 import shagold.wifwaf.HomeActivity;
 import shagold.wifwaf.R;
 import shagold.wifwaf.UserDogsActivity;
@@ -76,7 +77,7 @@ public class WifWafActivity extends AppCompatActivity {
         });
         toolbar.addView(profile);
 
-        Class[] dogsActivityOther = {AddDogActivity.class};
+        Class[] dogsActivityOther = {AddDogActivity.class, DogProfileActivity.class};
         final WifWafImageButton dogs =
             WifWafImageButtonFactory.createImageButton(this, UserDogsActivity.class, R.drawable.dogi2, lp, dogsActivityOther);
         dogs.setOnClickListener(new View.OnClickListener() {

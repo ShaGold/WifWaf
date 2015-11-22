@@ -81,8 +81,8 @@ public class UserDogsActivity extends WifWafActivity {
                                     int position, long id) {
 
                 Dog dog = (Dog) mListView.getItemAtPosition(position);
-                Toast.makeText(getBaseContext(), dog.getName(), Toast.LENGTH_SHORT).show();
-                //startActivity(ActivityManager.getWalk(getSelf()));
+                //Toast.makeText(getBaseContext(), dog.getName(), Toast.LENGTH_SHORT).show();
+                startActivity(ActivityManager.getDogProfile(getSelf()));
             }
         });
     }
