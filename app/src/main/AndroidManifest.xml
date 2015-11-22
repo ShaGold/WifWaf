@@ -51,6 +51,14 @@
             android:name=".DogProfileActivity"
             android:label="">
         </activity>
+        <activity
+            android:name=".AddWalkActivity"
+            android:label="">
+        </activity>
+        <activity
+            android:name=".GPSWalkActivity"
+            android:label="">
+        </activity>
     </application>
 
 </manifest>

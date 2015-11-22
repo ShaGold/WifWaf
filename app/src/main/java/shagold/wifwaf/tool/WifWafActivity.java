@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.LinearLayout.LayoutParams;
 
 import shagold.wifwaf.AddDogActivity;
+import shagold.wifwaf.AddWalkActivity;
 import shagold.wifwaf.DogProfileActivity;
+import shagold.wifwaf.GPSWalkActivity;
 import shagold.wifwaf.HomeActivity;
 import shagold.wifwaf.R;
 import shagold.wifwaf.UserDogsActivity;
@@ -43,7 +45,7 @@ public class WifWafActivity extends AppCompatActivity {
         getWindow().getDecorView().setBackgroundColor(WifWafColor.BROWN_LIGHT);
     }
 
-    public void initToolBar(int id) {
+    public void initToolBar(int id) { // TODO use pattern SINGLETON for creation content of toolbar
         toolbar = (Toolbar) findViewById(id);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -85,6 +87,18 @@ public class WifWafActivity extends AppCompatActivity {
             }
         });
         toolbar.addView(dogs);
+
+        Class[] walkActivityOther = {GPSWalkActivity.class};
+        final WifWafImageButton walk =
+                WifWafImageButtonFactory.createImageButton(this, AddWalkActivity.class, R.drawable.map, lp, walkActivityOther);
+        walk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ActivityManager.isNotSameActivity(self, walk.getActivity()))
+                    startActivity(ActivityManager.getAddWalk(getSelf()));
+            }
+        });
+        toolbar.addView(walk);
     }
 
     public void initSimpleToolBar(int id) {

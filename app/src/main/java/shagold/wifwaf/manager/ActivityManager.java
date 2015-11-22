@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 
 import shagold.wifwaf.AddDogActivity;
+import shagold.wifwaf.AddWalkActivity;
 import shagold.wifwaf.DogProfileActivity;
+import shagold.wifwaf.GPSWalkActivity;
 import shagold.wifwaf.HomeActivity;
 import shagold.wifwaf.SignUpActivity;
 import shagold.wifwaf.UserDogsActivity;
@@ -48,6 +50,14 @@ public class ActivityManager {
         return getClass(a, DogProfileActivity.class);
     }
 
+    public static Intent getAddWalk(Activity a) {
+        return getClass(a, AddWalkActivity.class);
+    }
+
+    public static Intent getGPSWalk(Activity a) {
+        return getClass(a, GPSWalkActivity.class);
+    }
+
     public static boolean isHome(Activity a) {
         return a.getClass() == HomeActivity.class;
     }
@@ -60,12 +70,16 @@ public class ActivityManager {
         return a.getClass() == UserDogsActivity.class;
     }
 
-    public static boolean isWalk(Activity a) {
+    public static boolean isWalkProfile(Activity a) {
         return a.getClass() == WalkProfileActivity.class;
     }
 
     public static boolean isDogProfile(Activity a) {
         return a.getClass() == DogProfileActivity.class;
+    }
+
+    public static boolean isAddWalk(Activity a) {
+        return a.getClass() == AddWalkActivity.class;
     }
 
     public static boolean isNotHome(Activity a) {
@@ -88,11 +102,15 @@ public class ActivityManager {
         return a.getClass() != c;
     }
 
-    public static boolean isNotWalk(Activity a) {
+    public static boolean isNotWalkProfile(Activity a) {
         return a.getClass() != WalkProfileActivity.class;
     }
 
     public static boolean isNotDogProfile(Activity a) {
         return a.getClass() != DogProfileActivity.class;
+    }
+
+    public static boolean isNotAddWalk(Activity a) {
+        return a.getClass() != AddWalkActivity.class;
     }
 }
