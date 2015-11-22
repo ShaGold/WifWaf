@@ -8,6 +8,7 @@ import shagold.wifwaf.HomeActivity;
 import shagold.wifwaf.SignUpActivity;
 import shagold.wifwaf.UserDogsActivity;
 import shagold.wifwaf.UserProfileActivity;
+import shagold.wifwaf.WalkActivity;
 
 /**
  * Created by jimmy on 07/11/15.
@@ -38,6 +39,10 @@ public class ActivityManager {
         return getClass(a, SignUpActivity.class);
     }
 
+    public static Intent getWalk(Activity a) {
+        return getClass(a, WalkActivity.class);
+    }
+
     public static boolean isHome(Activity a) {
         return a.getClass() == HomeActivity.class;
     }
@@ -48,6 +53,10 @@ public class ActivityManager {
 
     public static boolean isUserDogs(Activity a) {
         return a.getClass() == UserDogsActivity.class;
+    }
+
+    public static boolean isWalk(Activity a) {
+        return a.getClass() == WalkActivity.class;
     }
 
     public static boolean isNotHome(Activity a) {
@@ -68,5 +77,9 @@ public class ActivityManager {
 
     public static boolean isNotSameActivity(Activity a, Class c) {
         return a.getClass() != c;
+    }
+
+    public static boolean isNotWalk(Activity a) {
+        return a.getClass() != WalkActivity.class;
     }
 }

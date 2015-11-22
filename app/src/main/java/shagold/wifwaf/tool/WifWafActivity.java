@@ -15,6 +15,7 @@ import shagold.wifwaf.HomeActivity;
 import shagold.wifwaf.R;
 import shagold.wifwaf.UserDogsActivity;
 import shagold.wifwaf.UserProfileActivity;
+import shagold.wifwaf.WalkActivity;
 import shagold.wifwaf.manager.ActivityManager;
 
 /**
@@ -52,8 +53,9 @@ public class WifWafActivity extends AppCompatActivity {
 
         LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
+        Class[] homeActivityOther = {WalkActivity.class};
         final WifWafImageButton home =
-                WifWafImageButtonFactory.createImageButton(this, HomeActivity.class, R.drawable.home, lp, null);
+                WifWafImageButtonFactory.createImageButton(this, HomeActivity.class, R.drawable.home, lp, homeActivityOther);
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

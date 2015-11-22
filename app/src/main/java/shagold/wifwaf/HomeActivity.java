@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.dataBase.WalkDifficulty;
+import shagold.wifwaf.manager.ActivityManager;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.tool.WifWafActivity;
 import shagold.wifwaf.view.WalkAdapter;
@@ -73,7 +74,8 @@ public class HomeActivity extends WifWafActivity {
                                     int position, long id) {
 
                 Walk walk = (Walk) mListView.getItemAtPosition(position);
-                Toast.makeText(getBaseContext(), walk.getTitle(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(), walk.getTitle(), Toast.LENGTH_SHORT).show();
+                startActivity(ActivityManager.getWalk(getSelf()));
             }
         });
     }
