@@ -8,7 +8,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 import shagold.wifwaf.dataBase.Dog;
@@ -16,7 +16,7 @@ import shagold.wifwaf.manager.ActivityManager;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.tool.WifWafActivity;
 import shagold.wifwaf.tool.WifWafColor;
-import shagold.wifwaf.view.DogAdapter;
+import shagold.wifwaf.list.DogAdapter;
 
 /**
  * Created by jimmy on 07/11/15.

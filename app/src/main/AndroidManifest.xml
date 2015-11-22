@@ -44,7 +44,7 @@
             android:label="@string/title_activity_user_dogs" >
         </activity>
         <activity
-            android:name=".WalkActivity"
+            android:name=".WalkProfileActivity"
             android:label="">
         </activity>
         <activity

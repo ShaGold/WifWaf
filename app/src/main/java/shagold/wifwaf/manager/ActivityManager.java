@@ -9,7 +9,7 @@ import shagold.wifwaf.HomeActivity;
 import shagold.wifwaf.SignUpActivity;
 import shagold.wifwaf.UserDogsActivity;
 import shagold.wifwaf.UserProfileActivity;
-import shagold.wifwaf.WalkActivity;
+import shagold.wifwaf.WalkProfileActivity;
 
 /**
  * Created by jimmy on 07/11/15.
@@ -41,7 +41,7 @@ public class ActivityManager {
     }
 
     public static Intent getWalk(Activity a) {
-        return getClass(a, WalkActivity.class);
+        return getClass(a, WalkProfileActivity.class);
     }
 
     public static Intent getDogProfile(Activity a) {
@@ -61,7 +61,7 @@ public class ActivityManager {
     }
 
     public static boolean isWalk(Activity a) {
-        return a.getClass() == WalkActivity.class;
+        return a.getClass() == WalkProfileActivity.class;
     }
 
     public static boolean isDogProfile(Activity a) {
@@ -89,7 +89,7 @@ public class ActivityManager {
     }
 
     public static boolean isNotWalk(Activity a) {
-        return a.getClass() != WalkActivity.class;
+        return a.getClass() != WalkProfileActivity.class;
     }
 
     public static boolean isNotDogProfile(Activity a) {

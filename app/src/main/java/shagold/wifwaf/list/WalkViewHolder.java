@@ -1,4 +1,4 @@
-package shagold.wifwaf.view;
+package shagold.wifwaf.list;
 
 import android.widget.ImageView;
 import android.widget.TextView;

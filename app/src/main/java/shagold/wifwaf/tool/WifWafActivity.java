@@ -1,14 +1,11 @@
 package shagold.wifwaf.tool;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout.LayoutParams;
-
-import java.util.Objects;
 
 import shagold.wifwaf.AddDogActivity;
 import shagold.wifwaf.DogProfileActivity;
@@ -16,7 +13,7 @@ import shagold.wifwaf.HomeActivity;
 import shagold.wifwaf.R;
 import shagold.wifwaf.UserDogsActivity;
 import shagold.wifwaf.UserProfileActivity;
-import shagold.wifwaf.WalkActivity;
+import shagold.wifwaf.WalkProfileActivity;
 import shagold.wifwaf.manager.ActivityManager;
 
 /**
@@ -54,7 +51,7 @@ public class WifWafActivity extends AppCompatActivity {
 
         LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
-        Class[] homeActivityOther = {WalkActivity.class};
+        Class[] homeActivityOther = {WalkProfileActivity.class};
         final WifWafImageButton home =
                 WifWafImageButtonFactory.createImageButton(this, HomeActivity.class, R.drawable.home, lp, homeActivityOther);
         home.setOnClickListener(new View.OnClickListener() {

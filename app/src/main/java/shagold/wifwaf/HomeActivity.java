@@ -15,7 +15,7 @@ import shagold.wifwaf.dataBase.WalkDifficulty;
 import shagold.wifwaf.manager.ActivityManager;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.tool.WifWafActivity;
-import shagold.wifwaf.view.WalkAdapter;
+import shagold.wifwaf.list.WalkAdapter;
 
 /**
  * Created by jimmy on 07/11/15.

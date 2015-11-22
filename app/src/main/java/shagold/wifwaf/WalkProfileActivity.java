@@ -11,16 +11,16 @@ import shagold.wifwaf.tool.WifWafActivity;
 /**
  * Created by jimmy on 22/11/15.
  */
-public class WalkActivity extends WifWafActivity {
+public class WalkProfileActivity extends WifWafActivity {
 
     private Walk walk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_walk);
+        setContentView(R.layout.activity_walk_profile);
         initBackground();
-        initToolBar(R.id.toolbarWalk);
+        initToolBar(R.id.toolbarWalkProfile);
 
     }
 

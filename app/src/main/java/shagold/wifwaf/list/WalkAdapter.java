@@ -1,4 +1,4 @@
-package shagold.wifwaf.view;
+package shagold.wifwaf.list;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
