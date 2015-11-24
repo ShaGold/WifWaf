@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,44 +21,53 @@
         </activity>
         <activity
             android:name=".SignUpActivity"
-            android:label="@string/title_activity_sign_up" >
+            android:label="@string/title_activity_sign_up"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ResultSignUpActivity"
-            android:label="@string/title_activity_result_sign_up" >
+            android:label="@string/title_activity_result_sign_up"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".AddDogActivity"
-            android:label="@string/title_activity_add_dog" >
+            android:label="@string/title_activity_add_dog"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".UserProfileActivity"
             android:label="@string/title_activity_user_profile"
-            >
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:label="@string/title_activity_home" >
+            android:label="@string/title_activity_home"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".UserDogsActivity"
-            android:label="@string/title_activity_user_dogs" >
+            android:label="@string/title_activity_user_dogs"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".WalkProfileActivity"
-            android:label="">
+            android:label="@string/title_activity_walk_profile"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".DogProfileActivity"
-            android:label="">
+            android:label="@string/title_activity_dog_profile"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".AddWalkActivity"
-            android:label="">
+            android:label="@string/title_activity_add_walk"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".GPSWalkActivity"
-            android:label="">
+            android:label=""
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
