@@ -1,5 +1,8 @@
 package shagold.wifwaf;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -193,28 +196,23 @@ public class SignUpActivity extends WifWafActivity {
                 public void run() {
                     Integer err = (Integer) args[0];
                     if (err != 0) {
-                        Toast.makeText(SignUpActivity.this, "Inscription impossible, code erreur" + err, Toast.LENGTH_LONG).show();
+                       AlertDialog alertDialog = new AlertDialog.Builder(SignUpActivity.this).create();
+                        alertDialog.setTitle("Erreur");
+                        alertDialog.setMessage("Erreur " + err );
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
                     }
                     else{
-                        Toast.makeText(SignUpActivity.this, "ok", Toast.LENGTH_LONG).show();
-
-                    }
-                    /*if (jsonuser == null){
-                        Toast.makeText(SignUpActivity.this,"Inscription impossible", Toast.LENGTH_LONG).show();
-                    }
-                    else {
                         Intent resultat = new Intent(SignUpActivity.this, ResultSignUpActivity.class);
-                        String nickname = null;
-                        try {
-                            nickname = jsonuser.getString("nickname");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
                         System.out.println("[Réussite inscription]");
-                        resultat.putExtra("Nickname", nickname); // pour pouvoir afficher bienvenue ..
+                       // resultat.putExtra("Nickname", nickname); // pour pouvoir afficher bienvenue ..
                         startActivity(resultat);
                     }
-                    System.out.println("[Demande inscription]");*/
                 }
             });
         }
