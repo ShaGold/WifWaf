@@ -1,6 +1,7 @@
 package shagold.wifwaf;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,6 +39,9 @@ public class SignUpActivity extends WifWafActivity {
         socket.on("onTestJson", onTestJson);
         socket.on("onTestJsonArray", onTestJsonArray);
         socket.on("RTrySignUp", onRTrySignUp);
+        socket.on("RGetAllMyDogs", onRGetAllMyDogs);
+        socket.emit("getAllMyDogs", 1);
+
     }
 
     @Override
@@ -96,7 +100,7 @@ public class SignUpActivity extends WifWafActivity {
         socket.emit("TrySignUp", jsonUser);
     }
 
-    //Test Réception
+    //Test RéceptiononGetAllMyDogs
     private Emitter.Listener onTestString = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
@@ -127,7 +131,7 @@ public class SignUpActivity extends WifWafActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    System.out.print("JsonObject préparé: " + JsonTest.toString());
+                    System.out.println("JsonObject préparé: " + JsonTest.toString());
                     socket.emit("onTestSendJson", JsonTest);
                 }
             });
@@ -162,6 +166,24 @@ public class SignUpActivity extends WifWafActivity {
         }
     };
 
+    private Emitter.Listener onRGetAllMyDogs = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+
+            SignUpActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    System.out.println(args[0]);
+
+                    //Log.d("LOG", args[0].toString());
+
+                }
+
+            });
+        }
+
+    };
 
     private Emitter.Listener onRTrySignUp = new Emitter.Listener() {
         @Override

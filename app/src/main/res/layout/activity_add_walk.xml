@@ -23,10 +23,36 @@
             android:minHeight="?android:attr/actionBarSize" >
         </android.support.v7.widget.Toolbar>
 
+        <TextView
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/name"
+            android:id="@+id/nameWalk" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:hint="@string/description"
+            android:id="@+id/descriptionWalk" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Button"
+            android:id="@+id/selectDogsForWalk"
+            android:layout_gravity="right" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/confirm"
             android:id="@+id/addWalkButton"
             android:layout_gravity="center_horizontal" />
 
