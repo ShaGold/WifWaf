@@ -5,34 +5,36 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+
+import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.manager.ActivityManager;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.tool.WifWafActivity;
 import shagold.wifwaf.tool.WifWafColor;
 
-public class AddDogActivity extends WifWafActivity {
+/**
+ * Created by jimmy on 22/11/15.
+ */
+public class WalkProfileActivity extends WifWafActivity {
 
-    private Button confirmAddDog;
+    private Walk walk;
+    private Button useWalk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_dog);
+        setContentView(R.layout.activity_walk_profile);
         initBackground();
-        initToolBar(R.id.toolbarAddDog);
+        initToolBar(R.id.toolbarWalkProfile);
 
-        confirmAddDog = (Button) findViewById(R.id.confirmAddDogButton);
-        confirmAddDog.setBackgroundColor(WifWafColor.BROWN_DARK);
-        confirmAddDog.setOnClickListener(new View.OnClickListener() {
+        useWalk = (Button) findViewById(R.id.useWalkButton);
+        useWalk.setBackgroundColor(WifWafColor.BROWN_DARK);
+        useWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(ActivityManager.getUserDogs(getSelf()));
-
+                startActivity(ActivityManager.getGPSWalk(getSelf()));
             }
         });
-
-        EditText e = (EditText) findViewById(R.id.name);
 
     }
 
@@ -46,4 +48,5 @@ public class AddDogActivity extends WifWafActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         return MenuManager.emptyMenu(this, item.getItemId()) || super.onOptionsItemSelected(item);
     }
+
 }
