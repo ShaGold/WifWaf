@@ -13,6 +13,7 @@ public class User {
     private int phoneNumber;
     private String description;
     private String photo;
+    private int flag;
 
     public User(){}
 
@@ -24,6 +25,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.description = description;
         this.photo = photo;
+        this.flag = 0; // TODO gestion flag: niveau de privatisation des données
     }
 
     public JSONObject toJson() throws JSONException {
@@ -66,10 +68,7 @@ public class User {
         return photo;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-
-    }
+    public void setIdUser(int idUser) { this.idUser = idUser; }
 
     public void setEmail(String email) {
         this.email = email;
@@ -98,7 +97,5 @@ public class User {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
-
-
 
 }
