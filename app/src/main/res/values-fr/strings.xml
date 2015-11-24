@@ -24,10 +24,10 @@
     <string name="age">Age</string>
     <string name="breed">Race</string>
     <string name="button_connect">connexion</string>
-    <string name="getAlongWithFemales">Est-ce que votre chien s'entend avec les femelles?</string>
+    <string name="getAlongWithFemales">Est-ce que votre chien s\'entend avec les femelles?</string>
     <string name="getAlongWithHumans">Est-ce que votre chien est sociable avec les humains?</string>
-    <string name="getAlongWithKids">Est-ce que votre chien s'entend avec les enfants?</string>
-    <string name="getAlongWithMales">Est-ce que votre chien s'entend avec les mâles?</string>
+    <string name="getAlongWithKids">Est-ce que votre chien s\'entend avec les enfants?</string>
+    <string name="getAlongWithMales">Est-ce que votre chien s\'entend avec les mâles?</string>
     <string name="name"></string>
     <string name="size">Taille</string>
     <string name="title_activity_add_walk">Ajouter une balade</string>

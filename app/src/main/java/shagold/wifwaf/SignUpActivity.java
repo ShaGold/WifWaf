@@ -170,8 +170,13 @@ public class SignUpActivity extends WifWafActivity {
                 @Override
                 public void run() {
                     Integer err = (Integer) args[0];
-                    Toast.makeText(SignUpActivity.this,"Inscription impossible, code erreur" + err , Toast.LENGTH_LONG).show();
+                    if (err != 0) {
+                        Toast.makeText(SignUpActivity.this, "Inscription impossible, code erreur" + err, Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(SignUpActivity.this, "ok", Toast.LENGTH_LONG).show();
 
+                    }
                     /*if (jsonuser == null){
                         Toast.makeText(SignUpActivity.this,"Inscription impossible", Toast.LENGTH_LONG).show();
                     }
