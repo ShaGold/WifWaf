@@ -42,6 +42,14 @@
             android:hint="@string/description"
             android:id="@+id/descriptionWalk" />
 
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="235dp"
+            android:layout_height="wrap_content"
+            android:entries="@array/user_dogs_arrays"
+            android:prompt="@string/user_dogs_prompt"
+            android:spinnerMode="dropdown"/>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

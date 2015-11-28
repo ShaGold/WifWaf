@@ -42,4 +42,12 @@
     <string name="action_dogs">Dogs</string>
     <string name="connect"></string>
     <string name="button_sign_in"></string>
+
+    <!-- Jimmy add -->
+    <string name="user_dogs_prompt">Choose your dogs</string>
+
+    <string-array name="user_dogs_arrays">
+        <item>No dogs</item>
+    </string-array>
+
 </resources>
