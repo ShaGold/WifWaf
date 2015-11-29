@@ -8,7 +8,7 @@ public enum ErrorMessage {
     BLANK {
         @Override
         public String toString() {
-            return "Not blank message";
+            return "Required field";
         }
     },
 
@@ -24,9 +24,5 @@ public enum ErrorMessage {
         public String toString() {
             return "Wrong size of text";
         }
-    },
-
-
-
-
+    }
 }

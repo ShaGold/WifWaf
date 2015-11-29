@@ -28,6 +28,7 @@ import shagold.wifwaf.view.ValidateMessage;
 import shagold.wifwaf.view.filter.text.BlankFiler;
 import shagold.wifwaf.view.filter.text.EditTextFilter;
 import shagold.wifwaf.view.filter.text.NumberFilter;
+import shagold.wifwaf.view.filter.text.SizeFilter;
 
 /**
  * Created by jimmy on 22/11/15.
@@ -43,6 +44,8 @@ public class AddWalkActivity extends WifWafActivity {
     private EditText descriptionWalk;
     private TextValidator textValidator = new TextValidator();
     private EditTextFilter[] filters = {new BlankFiler(), new NumberFilter()};
+    private SizeFilter sizeTitleFilter = new SizeFilter(1, 25);
+    private SizeFilter sizeDescriptionFilter = new SizeFilter(10, 25);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,16 +86,27 @@ public class AddWalkActivity extends WifWafActivity {
                     nameWalk.setError(vm.getError().toString());
                 }
 
+                vm = textValidator.validate(nameWalk, sizeTitleFilter);
+                if(!vm.getValue()) {
+                    validText = vm.getValue();
+                    nameWalk.setError(vm.getError().toString() + " : min - " + sizeTitleFilter.getMin() + " , max - " + sizeTitleFilter.getMax());
+                }
+
                 vm = textValidator.validate(descriptionWalk, filters);
                 if(!vm.getValue()) {
                     validText = vm.getValue();
                     descriptionWalk.setError(vm.getError().toString());
                 }
 
+                vm = textValidator.validate(descriptionWalk, sizeDescriptionFilter);
+                if(!vm.getValue()) {
+                    validText = vm.getValue();
+                    descriptionWalk.setError(vm.getError().toString() + " : min - " + sizeDescriptionFilter.getMin() + " , max - " + sizeDescriptionFilter.getMax());
+                }
+
                 if (dogsSelectedNumber > 0) {
-                    if (validText) {
+                    if (validText)
                         startActivity(ActivityManager.getGPSWalk(getSelf()));
-                    }
                 }
                 else {
                     ((TextView)dogSpinner.getSelectedView()).setError(ErrorMessage.BLANK.toString());

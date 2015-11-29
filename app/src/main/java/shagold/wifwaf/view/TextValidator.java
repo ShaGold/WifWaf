@@ -26,4 +26,13 @@ public class TextValidator {
         return new ValidateMessage();
     }
 
+    public ValidateMessage validate(EditText text, EditTextFilter filter) {
+        ValidateMessage v = filter.meetFilter(text);
+
+        if(!v.getValue())
+            return v;
+
+        return new ValidateMessage();
+    }
+
 }
