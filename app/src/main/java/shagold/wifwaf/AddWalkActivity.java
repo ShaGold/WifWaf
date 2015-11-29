@@ -9,8 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,19 +22,27 @@ import shagold.wifwaf.manager.ActivityManager;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.tool.WifWafActivity;
 import shagold.wifwaf.tool.WifWafColor;
+import shagold.wifwaf.view.ErrorMessage;
+import shagold.wifwaf.view.TextValidator;
+import shagold.wifwaf.view.ValidateMessage;
+import shagold.wifwaf.view.filter.text.BlankFiler;
+import shagold.wifwaf.view.filter.text.EditTextFilter;
+import shagold.wifwaf.view.filter.text.NumberFilter;
 
 /**
  * Created by jimmy on 22/11/15.
  */
 public class AddWalkActivity extends WifWafActivity {
 
-    private Button selectDogsForWalk;
-    private Button confirmNewWalk;
     private AlertDialog alertSelectDogs;
     private Spinner dogSpinner;
     private int dogsSelectedNumber = 0;
     private List<Dog> dogChoise = new ArrayList<Dog>();
     private List<Dog> userDogs = new ArrayList<Dog>();
+    private EditText nameWalk;
+    private EditText descriptionWalk;
+    private TextValidator textValidator = new TextValidator();
+    private EditTextFilter[] filters = {new BlankFiler(), new NumberFilter()};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +51,60 @@ public class AddWalkActivity extends WifWafActivity {
         initBackground();
         initToolBar(R.id.toolbarAddWalk);
 
-        dogSpinner = (Spinner) findViewById(R.id.spinner1);
+        initEditText();
+        initAlertDialog();
+        initConfirmButton();
+    }
 
-        selectDogsForWalk = (Button) findViewById(R.id.selectDogsForWalk);
+    private void initEditText() {
+        nameWalk = (EditText) findViewById(R.id.nameWalk);
+        descriptionWalk = (EditText) findViewById(R.id.descriptionWalk);
+
+    }
+
+    private void initConfirmButton(){
+        Button confirmNewWalk = (Button) findViewById(R.id.addWalkButton);
+        confirmNewWalk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Long tsLong = System.currentTimeMillis() / 1000;
+                String ts = tsLong.toString();
+                Log.d("Ts", ts);
+
+                for (Dog d : dogChoise)
+                    Log.d("dog", d.getName());
+
+                boolean validText = true;
+
+                ValidateMessage vm = textValidator.validate(nameWalk, filters);
+                if(!vm.getValue()) {
+                    validText = vm.getValue();
+                    nameWalk.setError(vm.getError().toString());
+                }
+
+                vm = textValidator.validate(descriptionWalk, filters);
+                if(!vm.getValue()) {
+                    validText = vm.getValue();
+                    descriptionWalk.setError(vm.getError().toString());
+                }
+
+                if (dogsSelectedNumber > 0) {
+                    if (validText) {
+                        startActivity(ActivityManager.getGPSWalk(getSelf()));
+                    }
+                }
+                else {
+                    ((TextView)dogSpinner.getSelectedView()).setError(ErrorMessage.BLANK.toString());
+                }
+
+            }
+        });
+    }
+
+    private void initAlertDialog() {
+        dogSpinner = (Spinner) findViewById(R.id.spinner1);
+        Button selectDogsForWalk = (Button) findViewById(R.id.selectDogsForWalk);
         selectDogsForWalk.setBackgroundColor(WifWafColor.BROWN_DARK);
         selectDogsForWalk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,29 +152,6 @@ public class AddWalkActivity extends WifWafActivity {
                 alertSelectDogs.show();
             }
         });
-
-        confirmNewWalk = (Button) findViewById(R.id.addWalkButton);
-        confirmNewWalk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Long tsLong = System.currentTimeMillis()/1000;
-                String ts = tsLong.toString();
-                Log.d("Ts", ts);
-
-                for(Dog d : dogChoise)
-                    Log.d("dog", d.getName());
-
-                if(dogsSelectedNumber > 0)
-                    startActivity(ActivityManager.getGPSWalk(getSelf()));
-
-            }
-        });
-
-    }
-
-    private void initAlertDialog() {
-
     }
 
     private List<Dog> generateDogs() {
