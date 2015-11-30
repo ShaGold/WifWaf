@@ -17,12 +17,15 @@ import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.tool.WifWafActivity;
 import shagold.wifwaf.list.WalkAdapter;
 
+import com.github.nkzawa.socketio.client.Socket;
+
 /**
  * Created by jimmy on 07/11/15.
  */
 public class HomeActivity extends WifWafActivity {
 
     private ListView mListView;
+    private Socket mSocket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

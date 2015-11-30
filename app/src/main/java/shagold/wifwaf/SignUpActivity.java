@@ -19,16 +19,12 @@ import com.github.nkzawa.socketio.client.Socket;
 import com.github.nkzawa.emitter.Emitter;
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
+import shagold.wifwaf.manager.SocketManager;
 import shagold.wifwaf.tool.WifWafActivity;
 
 public class SignUpActivity extends WifWafActivity {
 
-    private Socket socket;
-    {
-        try {
-            socket = IO.socket("http://51.254.124.136:8000");
-        } catch (URISyntaxException e) {}
-    }
+    private Socket mSocket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +32,13 @@ public class SignUpActivity extends WifWafActivity {
         setContentView(R.layout.activity_sign_up);
         initBackground();
         initSimpleToolBar(R.id.toolbarSignUp);
-
-        socket.connect();
-        socket.on("onTestString", onTestString);
-        socket.on("onTestJson", onTestJson);
-        socket.on("onTestJsonArray", onTestJsonArray);
-        socket.on("RTrySignUp", onRTrySignUp);
-        socket.on("RGetAllMyDogs", onRGetAllMyDogs);
-        socket.emit("getAllMyDogs", 1);
+        mSocket = SocketManager.getMySocket();
+        mSocket.on("onTestString", onTestString);
+        mSocket.on("onTestJson", onTestJson);
+        mSocket.on("onTestJsonArray", onTestJsonArray);
+        mSocket.on("RTrySignUp", onRTrySignUp);
+        mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
+        mSocket.emit("getAllMyDogs", 1);
 
     }
 
@@ -62,8 +57,6 @@ public class SignUpActivity extends WifWafActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-        socket.disconnect();
         // TODO faire socket.off pour chaque event écouté
         //socket.off("RTrySignUp", onRTrySignUp);
     }
@@ -100,7 +93,7 @@ public class SignUpActivity extends WifWafActivity {
         User user = new User(Semail,Snickname,Spassword,Sbirthday,SphoneNumber,Sdescription,"");
         JSONObject jsonUser = user.toJson();
         System.out.println(jsonUser);
-        socket.emit("TrySignUp", jsonUser);
+        mSocket.emit("TrySignUp", jsonUser);
     }
 
     //Test RéceptiononGetAllMyDogs
@@ -112,7 +105,7 @@ public class SignUpActivity extends WifWafActivity {
                 public void run() {
                     String a = (String) args[0];
                     System.out.println("je recois onTest" + a);
-                    socket.emit("onTestSendString", "unMot");
+                    mSocket.emit("onTestSendString", "unMot");
                 }
             });
         }
@@ -135,7 +128,7 @@ public class SignUpActivity extends WifWafActivity {
                         e.printStackTrace();
                     }
                     System.out.println("JsonObject préparé: " + JsonTest.toString());
-                    socket.emit("onTestSendJson", JsonTest);
+                    mSocket.emit("onTestSendJson", JsonTest);
                 }
             });
         }
@@ -163,7 +156,7 @@ public class SignUpActivity extends WifWafActivity {
                         e.printStackTrace();
                     }
                     System.out.print("JsonArray préparé: " + JsonArrayTest.toString());
-                    socket.emit("onTestSendJsonArray", JsonArrayTest);
+                    mSocket.emit("onTestSendJsonArray", JsonArrayTest);
                 }
             });
         }
