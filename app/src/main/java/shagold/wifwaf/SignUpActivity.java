@@ -4,25 +4,23 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-import java.net.URISyntaxException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 import com.github.nkzawa.emitter.Emitter;
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
-import shagold.wifwaf.tool.WifWafActivity;
 
-public class SignUpActivity extends WifWafActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     private Socket mSocket;
 
@@ -30,8 +28,6 @@ public class SignUpActivity extends WifWafActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        initBackground();
-        initSimpleToolBar(R.id.toolbarSignUp);
         mSocket = SocketManager.getMySocket();
         mSocket.on("onTestString", onTestString);
         mSocket.on("onTestJson", onTestJson);
@@ -51,7 +47,7 @@ public class SignUpActivity extends WifWafActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return MenuManager.emptyMenu(this, item.getItemId()) || super.onOptionsItemSelected(item);
+        return MenuManager.emptyMenu(item) || super.onOptionsItemSelected(item);
     }
 
     @Override

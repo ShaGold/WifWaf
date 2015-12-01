@@ -2,7 +2,9 @@ package shagold.wifwaf;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,9 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import shagold.wifwaf.dataBase.Dog;
-import shagold.wifwaf.manager.ActivityManager;
 import shagold.wifwaf.manager.MenuManager;
-import shagold.wifwaf.tool.WifWafActivity;
 import shagold.wifwaf.tool.WifWafColor;
 import shagold.wifwaf.view.ErrorMessage;
 import shagold.wifwaf.view.TextValidator;
@@ -33,7 +33,7 @@ import shagold.wifwaf.view.filter.text.SizeFilter;
 /**
  * Created by jimmy on 22/11/15.
  */
-public class AddWalkActivity extends WifWafActivity {
+public class AddWalkActivity extends AppCompatActivity {
 
     private AlertDialog alertSelectDogs;
     private Spinner dogSpinner;
@@ -51,8 +51,6 @@ public class AddWalkActivity extends WifWafActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_walk);
-        initBackground();
-        initToolBar(R.id.toolbarAddWalk);
 
         initEditText();
         initAlertDialog();
@@ -104,9 +102,10 @@ public class AddWalkActivity extends WifWafActivity {
                     descriptionWalk.setError(vm.getError().toString() + " : min - " + sizeDescriptionFilter.getMin() + " , max - " + sizeDescriptionFilter.getMax());
                 }
 
+                final Intent actGPSWalk = new Intent(getApplicationContext(), GPSWalkActivity.class);
                 if (dogsSelectedNumber > 0) {
                     if (validText)
-                        startActivity(ActivityManager.getGPSWalk(getSelf()));
+                        startActivity(actGPSWalk);
                 }
                 else {
                     ((TextView)dogSpinner.getSelectedView()).setError(ErrorMessage.BLANK.toString());
@@ -131,7 +130,7 @@ public class AddWalkActivity extends WifWafActivity {
 
                 final CharSequence[] dogsList = dogsName.toArray(new CharSequence[dogsName.size()]);
 
-                AlertDialog.Builder multyChoiceDialog = new AlertDialog.Builder(getSelf());
+                AlertDialog.Builder multyChoiceDialog = new AlertDialog.Builder(getApplicationContext());
 
                 multyChoiceDialog.setTitle("Choice Dogs");
 
@@ -211,12 +210,12 @@ public class AddWalkActivity extends WifWafActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_empty, menu);
+        getMenuInflater().inflate(R.menu.menu_default, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return MenuManager.emptyMenu(this, item.getItemId()) || super.onOptionsItemSelected(item);
+        return MenuManager.defaultMenu(this, item) || super.onOptionsItemSelected(item);
     }
 }

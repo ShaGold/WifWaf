@@ -1,6 +1,7 @@
 package shagold.wifwaf;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -8,13 +9,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import android.content.Intent;
 import java.util.ArrayList;
 import java.util.List;
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.dataBase.WalkDifficulty;
-import shagold.wifwaf.manager.ActivityManager;
 import shagold.wifwaf.manager.MenuManager;
-import shagold.wifwaf.tool.WifWafActivity;
 import shagold.wifwaf.list.WalkAdapter;
 
 import com.github.nkzawa.socketio.client.Socket;
@@ -22,7 +22,7 @@ import com.github.nkzawa.socketio.client.Socket;
 /**
  * Created by jimmy on 07/11/15.
  */
-public class HomeActivity extends WifWafActivity {
+public class HomeActivity extends AppCompatActivity {
 
     private ListView mListView;
     private Socket mSocket;
@@ -31,8 +31,6 @@ public class HomeActivity extends WifWafActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        initBackground();
-        initToolBar(R.id.toolbarHome);
         initListView();
 
         List<Walk> walks = generateWalks();
@@ -42,13 +40,13 @@ public class HomeActivity extends WifWafActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_empty, menu);
+        getMenuInflater().inflate(R.menu.menu_default, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return MenuManager.emptyMenu(this, item.getItemId()) || super.onOptionsItemSelected(item);
+        return MenuManager.defaultMenu(this, item) || super.onOptionsItemSelected(item);
     }
 
     private List<Walk> generateWalks() {
@@ -78,7 +76,8 @@ public class HomeActivity extends WifWafActivity {
 
                 Walk walk = (Walk) mListView.getItemAtPosition(position);
                 //Toast.makeText(getBaseContext(), walk.getTitle(), Toast.LENGTH_SHORT).show();
-                startActivity(ActivityManager.getWalk(getSelf()));
+                final Intent getWalk = new Intent(getApplicationContext(), WalkProfileActivity.class);
+                startActivity(getWalk);
             }
         });
     }

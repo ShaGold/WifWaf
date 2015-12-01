@@ -1,16 +1,19 @@
 package shagold.wifwaf.manager;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.view.MenuItem;
 
+import shagold.wifwaf.HomeActivity;
 import shagold.wifwaf.R;
+import shagold.wifwaf.UserDogsActivity;
+import shagold.wifwaf.UserProfileActivity;
 
-/**
- * Created by jimmy on 07/11/15.
- */
+
 public class MenuManager {
 
-    public static boolean emptyMenu(Activity a, int id) {
-        switch (id) {
+    public static boolean emptyMenu(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.action_settings :
                 return true;
             default:
@@ -18,21 +21,21 @@ public class MenuManager {
         }
     }
 
-    public static boolean defaultMenu(Activity a, int id) {
-        switch (id) {
+    public static boolean defaultMenu(Activity a, MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.action_settings :
                 return true;
             case R.id.action_home :
-                if(ActivityManager.isNotHome(a))
-                    a.startActivity(ActivityManager.getHome(a));
+                final Intent home = new Intent(a.getApplicationContext(), HomeActivity.class);
+                a.startActivity(home);
                 return true;
             case R.id.action_profile :
-                if(ActivityManager.isNotUserProfile(a))
-                    a.startActivity(ActivityManager.getUserProfile(a));
+                final Intent userprofile = new Intent(a.getApplicationContext(), UserProfileActivity.class);
+                a.startActivity(userprofile);
                 return true;
             case R.id.action_dogs :
-                if(ActivityManager.isNotUserDogs(a))
-                    a.startActivity(ActivityManager.getUserDogs(a));
+                final Intent userDogs = new Intent(a.getApplicationContext(), UserDogsActivity.class);
+                a.startActivity(userDogs);
             default:
                 return false;
         }

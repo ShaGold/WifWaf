@@ -8,7 +8,7 @@ import android.view.MenuItem;
 
 import shagold.wifwaf.manager.MenuManager;
 
-public class ResultSignUpActivity extends Activity {
+public class ResultSignUpActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,6 @@ public class ResultSignUpActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return MenuManager.emptyMenu(this, item.getItemId()) || super.onOptionsItemSelected(item);
+        return MenuManager.defaultMenu(this, item) || super.onOptionsItemSelected(item);
     }
 }

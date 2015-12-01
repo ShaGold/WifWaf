@@ -1,6 +1,7 @@
 package shagold.wifwaf;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,12 +10,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
-import shagold.wifwaf.tool.WifWafActivity;
 
 /**
  * Created by jimmy on 07/11/15.
  */
-public class UserProfileActivity extends WifWafActivity {
+public class UserProfileActivity extends AppCompatActivity {
 
     private User defaultUser = new User("toto@gmail.com", "marlene", "toto", "12 Nov", 674560934, "une codeuse", null);
 
@@ -32,9 +32,6 @@ public class UserProfileActivity extends WifWafActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-        initBackground();
-
-        initToolBar(R.id.toolbarUserProfile);
 
         Log.d("CREATE", "USER PROFILE ACTIVITY");
 
@@ -61,12 +58,12 @@ public class UserProfileActivity extends WifWafActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_empty, menu);
+        getMenuInflater().inflate(R.menu.menu_default, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return MenuManager.emptyMenu(this, item.getItemId()) || super.onOptionsItemSelected(item);
+        return MenuManager.defaultMenu(this, item) || super.onOptionsItemSelected(item);
     }
 }

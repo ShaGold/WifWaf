@@ -1,6 +1,8 @@
 package shagold.wifwaf;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,16 +14,14 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 import shagold.wifwaf.dataBase.Dog;
-import shagold.wifwaf.manager.ActivityManager;
 import shagold.wifwaf.manager.MenuManager;
-import shagold.wifwaf.tool.WifWafActivity;
 import shagold.wifwaf.tool.WifWafColor;
 import shagold.wifwaf.list.DogAdapter;
 
 /**
  * Created by jimmy on 07/11/15.
  */
-public class UserDogsActivity extends WifWafActivity {
+public class UserDogsActivity extends AppCompatActivity {
 
     private Button addDog;
     private ListView mListView;
@@ -30,32 +30,32 @@ public class UserDogsActivity extends WifWafActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_dogs);
-        initBackground();
-        initToolBar(R.id.toolbarUserDogs);
         initListView();
 
         List<Dog> dogs = generateDogs();
         DogAdapter adapter = new DogAdapter(this, dogs);
         mListView.setAdapter(adapter);
 
+        final Intent activityAddDog = new Intent(getApplicationContext(), AddDogActivity.class);
+
         addDog = (Button) findViewById(R.id.addDogButton);
         addDog.setBackgroundColor(WifWafColor.BROWN_DARK);
         addDog.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
-                startActivity(ActivityManager.getAddDog(getSelf()));
+                startActivity(activityAddDog);
             }
         });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_empty, menu);
+        getMenuInflater().inflate(R.menu.menu_default, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return MenuManager.emptyMenu(this, item.getItemId()) || super.onOptionsItemSelected(item);
+        return MenuManager.defaultMenu(this, item) || super.onOptionsItemSelected(item);
     }
 
     private List<Dog> generateDogs() {
@@ -82,7 +82,8 @@ public class UserDogsActivity extends WifWafActivity {
 
                 Dog dog = (Dog) mListView.getItemAtPosition(position);
                 //Toast.makeText(getBaseContext(), dog.getName(), Toast.LENGTH_SHORT).show();
-                startActivity(ActivityManager.getDogProfile(getSelf()));
+                Intent actDogProfile = new Intent(getApplicationContext(), DogProfileActivity.class);
+                startActivity(actDogProfile);
             }
         });
     }
