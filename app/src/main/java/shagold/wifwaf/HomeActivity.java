@@ -16,6 +16,7 @@ import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.dataBase.WalkDifficulty;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.list.WalkAdapter;
+import shagold.wifwaf.manager.SocketManager;
 
 import com.github.nkzawa.socketio.client.Socket;
 
@@ -31,6 +32,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        mSocket = SocketManager.getMySocket();
+        mSocket.emit("getAllWalks");
         initListView();
 
         List<Walk> walks = generateWalks();

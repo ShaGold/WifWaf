@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.github.nkzawa.emitter.Emitter;
@@ -17,8 +16,6 @@ import com.github.nkzawa.socketio.client.Socket;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.LineNumberReader;
 
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
@@ -32,14 +29,16 @@ public class AddDogActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Gestion socket
         mSocket = SocketManager.getMySocket();
         mSocket.on("RGetAllBehaviours", onRGetAllBehaviours);
         mSocket.emit("getAllBehaviours");
 
-        System.out.println("je passe là");
+        // Gestion vue + gestion activity's state
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_dog);
 
+        // Gestion click bouton de confirmation
         this.confirmAddDog = (Button) findViewById(R.id.confirmAddDogButton);
         this.confirmAddDog.setBackgroundColor(WifWafColor.BROWN_DARK);
         final Intent getUserDog = new Intent(getApplicationContext(), UserDogsActivity.class);
