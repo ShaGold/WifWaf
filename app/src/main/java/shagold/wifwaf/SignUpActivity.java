@@ -23,6 +23,7 @@ import shagold.wifwaf.manager.SocketManager;
 public class SignUpActivity extends AppCompatActivity {
 
     private Socket mSocket;
+    private int idUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,11 +184,11 @@ public class SignUpActivity extends AppCompatActivity {
             SignUpActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Integer err = (Integer) args[0];
-                    if (err != 0) {
+                    Integer param = (Integer) args[0];
+                    if (param == 1062) {
                        AlertDialog alertDialog = new AlertDialog.Builder(SignUpActivity.this).create();
                         alertDialog.setTitle("Erreur");
-                        alertDialog.setMessage("Erreur " + err );
+                        alertDialog.setMessage("Cette adresse mail est déjà utilisée"); //TODO internationalisation
                         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
@@ -198,8 +199,9 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                     else{
                         Intent resultat = new Intent(SignUpActivity.this, ResultSignUpActivity.class);
-                        System.out.println("[Réussite inscription]");
-                       // resultat.putExtra("Nickname", nickname); // pour pouvoir afficher bienvenue ..
+                        System.out.println("[Réussite inscription]"+param);
+                        SocketManager.setIdUser(param);
+
                         startActivity(resultat);
                     }
                 }
