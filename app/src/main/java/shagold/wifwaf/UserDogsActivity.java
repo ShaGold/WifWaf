@@ -11,18 +11,22 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.socketio.client.Socket;
+
 import java.util.ArrayList;
 import java.util.List;
 import shagold.wifwaf.dataBase.Dog;
+import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
+import shagold.wifwaf.manager.SocketManager;
 import shagold.wifwaf.tool.WifWafColor;
 import shagold.wifwaf.list.DogAdapter;
 
-/**
- * Created by jimmy on 07/11/15.
- */
 public class UserDogsActivity extends AppCompatActivity {
 
+    private Socket mSocket;
+    private User mUser;
     private Button addDog;
     private ListView mListView;
 
@@ -31,6 +35,11 @@ public class UserDogsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_dogs);
         initListView();
+
+        mSocket = SocketManager.getMySocket();
+        mUser = SocketManager.getMyUser();
+        mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
+        mSocket.emit("getAllMyDogs", mUser.getIdUser());
 
         List<Dog> dogs = generateDogs();
         DogAdapter adapter = new DogAdapter(this, dogs);
@@ -87,4 +96,23 @@ public class UserDogsActivity extends AppCompatActivity {
             }
         });
     }
+
+    private Emitter.Listener onRGetAllMyDogs = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+
+            UserDogsActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    System.out.println(args[0]);
+
+                    //Log.d("LOG", args[0].toString());
+
+                }
+
+            });
+        }
+
+    };
 }

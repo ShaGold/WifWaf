@@ -9,13 +9,25 @@ public class User {
     private String email;
     private String nickname;
     private String password;
-    private String birthday;
+    private String birthday; //TODO classe gestion de dates
     private int phoneNumber;
     private String description;
     private String photo;
     private int flag;
 
     public User(){}
+
+    public User(JSONObject userJson) throws JSONException {
+        this.idUser = (int) userJson.get("id");
+        this.email = (String) userJson.get("email");
+        this.nickname = (String) userJson.get("nickname");
+        this.password = (String) userJson.get("password");
+        this.birthday = (String) userJson.get("birthday");
+        this.phoneNumber = (int) userJson.get("phoneNumber");
+        this.description = (String) userJson.get("description");
+        this.photo = (String) userJson.get("photo");
+        this.flag = (int) userJson.get("flag");
+    }
 
     public User(String email, String nickname, String password, String birthday, int phoneNumber, String description, String photo){
         this.email = email;
