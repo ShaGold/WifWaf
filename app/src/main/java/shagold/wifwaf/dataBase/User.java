@@ -6,14 +6,14 @@ import org.json.JSONObject;
 public class User {
 
     private int idUser;
-    private String email;
+    private String email = "";
     private String nickname;
     private String password;
-    private String birthday; //TODO classe gestion de dates
-    private int phoneNumber;
-    private String description;
-    private String photo;
-    private int flag;
+    private String birthday = ""; //TODO classe gestion de dates
+    private int phoneNumber = 0;
+    private String description = "";
+    private String photo = "";
+    private int flag = 0;
 
     public User(){}
 
@@ -38,6 +38,11 @@ public class User {
         this.description = description;
         this.photo = photo;
         this.flag = 0; // TODO gestion flag: niveau de privatisation des données
+    }
+
+    public User(String nickname, String password){
+        this.nickname = nickname;
+        this.password = password;
     }
 
     public JSONObject toJson() throws JSONException {
