@@ -17,6 +17,7 @@ import com.github.nkzawa.socketio.client.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import shagold.wifwaf.dataBase.Dog;
+import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
 import shagold.wifwaf.tool.WifWafColor;
@@ -25,7 +26,7 @@ import shagold.wifwaf.list.DogAdapter;
 public class UserDogsActivity extends AppCompatActivity {
 
     private Socket mSocket;
-    private int midUser;
+    private User mUser;
     private Button addDog;
     private ListView mListView;
 
@@ -36,9 +37,9 @@ public class UserDogsActivity extends AppCompatActivity {
         initListView();
 
         mSocket = SocketManager.getMySocket();
-        midUser = SocketManager.getIdUser();
+        mUser = SocketManager.getMyUser();
         mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
-        mSocket.emit("getAllMyDogs", midUser);
+        mSocket.emit("getAllMyDogs", mUser.getIdUser());
 
         List<Dog> dogs = generateDogs();
         DogAdapter adapter = new DogAdapter(this, dogs);
