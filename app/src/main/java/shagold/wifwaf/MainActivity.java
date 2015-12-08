@@ -7,13 +7,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
 import shagold.wifwaf.tool.WifWafColor;
 
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 
@@ -22,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private Socket mSocket;
     private Button signUpButton;
     private Button signInButton;
+    private EditText ETNickname;
+    private EditText ETPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (URISyntaxException e) {}
         mSocket = SocketManager.getMySocket();
         mSocket.connect();
-        //Pour tous les events qu'on veut écouter il faudra faire: mSocket.on()...
+        //mSocket.on("RTrySignIn", onRTrySignIn);
     }
 
     @Override
@@ -60,6 +68,27 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(home);
             }
         });
+    }
+
+    private void trySignIn(View view) throws JSONException {
+        ETNickname = (EditText) findViewById(R.id.Nickname);
+        String nickname = ETNickname.getText().toString();
+        ETPassword = (EditText) findViewById(R.id.Password);
+        String pass = ETPassword.getText().toString();
+
+        if (nickname.length() < 3){
+            Toast.makeText(MainActivity.this, "Pseudo trop court", Toast.LENGTH_LONG).show();
+        }
+        if (pass.length() < 6){
+            Toast.makeText(MainActivity.this, "Le mot de passe est trop court", Toast.LENGTH_LONG).show();
+        }
+
+        //Test de connexion
+        User user = new User(nickname, pass);
+        JSONObject jsonUser = user.toJson();
+        System.out.println("TrySignIn" + jsonUser);
+        mSocket.emit("TrySignIn", jsonUser);
+
     }
 
     private void initSignInButton() {

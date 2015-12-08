@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:hint="@string/nickname"
-        android:id="@+id/textViewNickname"
+        android:id="@+id/Nickname"
         android:layout_marginTop="166dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -25,8 +25,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:hint="@string/password"
-        android:id="@+id/textViewPassword"
-        android:layout_below="@+id/textViewNickname"
+        android:id="@+id/Password"
+        android:layout_below="@+id/Nickname"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
@@ -37,11 +37,12 @@
         android:layout_height="wrap_content"
         android:text="@string/button_connect"
         android:id="@+id/signInButton"
-        android:layout_below="@+id/textViewPassword"
-        android:layout_alignRight="@+id/textViewNickname"
-        android:layout_alignEnd="@+id/textViewNickname"
+        android:layout_below="@+id/Password"
+        android:layout_alignRight="@+id/Nickname"
+        android:layout_alignEnd="@+id/Nickname"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"/>
+        <!--android:onClick="trySignIn"-->
 
     <Button
         android:layout_width="wrap_content"
