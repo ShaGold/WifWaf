@@ -34,9 +34,6 @@ public class SignUpActivity extends AppCompatActivity {
         mSocket.on("onTestJson", onTestJson);
         mSocket.on("onTestJsonArray", onTestJsonArray);
         mSocket.on("RTrySignUp", onRTrySignUp);
-        mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
-        mSocket.emit("getAllMyDogs", 1);
-
     }
 
     @Override
@@ -55,12 +52,10 @@ public class SignUpActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         // TODO faire socket.off pour chaque event écouté
-        //socket.off("RTrySignUp", onRTrySignUp);
+        mSocket.off("RTrySignUp", onRTrySignUp);
     }
 
     public void trySignUp(View view) throws JSONException {
-        System.out.print("test");
-
         //Récupération des valeurs
         EditText ETnickname = (EditText) findViewById(R.id.Nickname);
         String Snickname = ETnickname.getText().toString();
@@ -89,7 +84,6 @@ public class SignUpActivity extends AppCompatActivity {
         //Test inscription
         User user = new User(Semail,Snickname,Spassword,Sbirthday,SphoneNumber,Sdescription,"");
         JSONObject jsonUser = user.toJson();
-        System.out.println(jsonUser);
         mSocket.emit("TrySignUp", jsonUser);
     }
 
@@ -159,25 +153,6 @@ public class SignUpActivity extends AppCompatActivity {
         }
     };
 
-    private Emitter.Listener onRGetAllMyDogs = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-
-            SignUpActivity.this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
-                    System.out.println(args[0]);
-
-                    //Log.d("LOG", args[0].toString());
-
-                }
-
-            });
-        }
-
-    };
-
     private Emitter.Listener onRTrySignUp = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
@@ -200,7 +175,7 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                         else{
                             User mUser = new User(param);
-                            Intent resultat = new Intent(SignUpActivity.this, ResultSignUpActivity.class);
+                            Intent resultat = new Intent(SignUpActivity.this, HomeActivity.class);
                             System.out.println("[Réussite inscription]"+param);
                             SocketManager.setMyUser(mUser);
 
