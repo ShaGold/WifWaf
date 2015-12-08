@@ -87,7 +87,6 @@ public class SignUpActivity extends AppCompatActivity {
         mSocket.emit("TrySignUp", jsonUser);
     }
 
-    //Test RéceptiononGetAllMyDogs
     private Emitter.Listener onTestString = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {

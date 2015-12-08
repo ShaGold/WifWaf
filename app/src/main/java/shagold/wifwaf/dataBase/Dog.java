@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 public class Dog {
     private int idDog;
+    private int idUser;
     private String dogName;
     private int age;
     private String breed;
@@ -17,8 +18,8 @@ public class Dog {
 
     public Dog(){}
 
-    public Dog(int idDog, String dogName, int age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description){
-        this.idDog = idDog;
+    public Dog(int idUser, String dogName, int age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description){
+        this.idUser = idUser;
         this.dogName = dogName;
         this.age = age;
         this.breed = breed;
@@ -32,6 +33,7 @@ public class Dog {
 
     public JSONObject toJson() throws JSONException {
         JSONObject dogJson = new JSONObject();
+        dogJson.put("idUser", this.idUser);
         dogJson.put("dogName", this.dogName);
         dogJson.put("age", this.age);
         dogJson.put("breed", this.breed);
