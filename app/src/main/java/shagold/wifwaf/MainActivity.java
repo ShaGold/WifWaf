@@ -1,5 +1,7 @@
 package shagold.wifwaf;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
 import shagold.wifwaf.tool.WifWafColor;
 
+import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 
@@ -28,15 +31,16 @@ public class MainActivity extends AppCompatActivity {
     private Socket mSocket;
     private Button signUpButton;
     private Button signInButton;
-    private EditText ETNickname;
+    private EditText Etemail;
     private EditText ETPassword;
+    private String pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initSignInButton();
+        //initSignInButton();
         initSignUpButton();
 
         try {
@@ -44,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (URISyntaxException e) {}
         mSocket = SocketManager.getMySocket();
         mSocket.connect();
-        //mSocket.on("RTrySignIn", onRTrySignIn);
+        mSocket.on("RTrySignIn", onRTrySignIn);
     }
 
     @Override
@@ -58,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         return MenuManager.emptyMenu(item) || super.onOptionsItemSelected(item);
     }
 
-    private void initSignUpButton() {
+    private void initSignInButton() {
         signInButton = (Button) findViewById(R.id.signInButton);
         signInButton.setBackgroundColor(WifWafColor.BROWN_DARK);
         final Intent home = new Intent(getApplicationContext(), HomeActivity.class);
@@ -70,28 +74,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void trySignIn(View view) throws JSONException {
-        ETNickname = (EditText) findViewById(R.id.Nickname);
-        String nickname = ETNickname.getText().toString();
+    public void trySignIn(View view) throws JSONException {
+        Etemail = (EditText) findViewById(R.id.Email);
+        String email = Etemail.getText().toString();
         ETPassword = (EditText) findViewById(R.id.Password);
-        String pass = ETPassword.getText().toString();
+        pass = ETPassword.getText().toString();
 
-        if (nickname.length() < 3){
-            Toast.makeText(MainActivity.this, "Pseudo trop court", Toast.LENGTH_LONG).show();
-        }
         if (pass.length() < 6){
             Toast.makeText(MainActivity.this, "Le mot de passe est trop court", Toast.LENGTH_LONG).show();
+            //return;
         }
 
         //Test de connexion
-        User user = new User(nickname, pass);
+        User user = new User(email, pass);
         JSONObject jsonUser = user.toJson();
         System.out.println("TrySignIn" + jsonUser);
         mSocket.emit("TrySignIn", jsonUser);
 
     }
 
-    private void initSignInButton() {
+    private void initSignUpButton() {
         signUpButton = (Button) findViewById(R.id.signUpButton);
         signUpButton.setBackgroundColor(WifWafColor.BROWN_DARK);
         final Intent signUp = new Intent(getApplicationContext(), SignUpActivity.class);
@@ -102,4 +104,41 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private Emitter.Listener onRTrySignIn = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            MainActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject param = (JSONObject) args[0];
+                    System.out.println(param);
+                    try {
+                        String realpass = (String) param.get("password");
+                        String typedpassencrypt = User.encryptPassword(pass);
+                        if(realpass.equals(typedpassencrypt) && param.get("id") != -1){
+                            User newUser = new User(param);
+                            SocketManager.setMyUser(newUser);
+                            Intent resultat = new Intent(MainActivity.this, HomeActivity.class);
+                            startActivity(resultat);
+                        }
+                        else{
+                            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                            alertDialog.setTitle("Erreur");
+                            alertDialog.setMessage("Mauvais identifiants"); //TODO internationalisation
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    };
 }

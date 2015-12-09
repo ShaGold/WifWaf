@@ -100,6 +100,9 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
+        //Encryptage mdp
+        Spassword = User.encryptPassword(Spassword);
+
         //Test inscription
         User user = new User(Semail,Snickname,Spassword,Sbirthday,SphoneNumber,Sdescription,"");
         JSONObject jsonUser = user.toJson();
