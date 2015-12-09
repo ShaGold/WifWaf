@@ -25,7 +25,7 @@ import shagold.wifwaf.tool.WifWafColor;
 import shagold.wifwaf.view.ErrorMessage;
 import shagold.wifwaf.view.TextValidator;
 import shagold.wifwaf.view.ValidateMessage;
-import shagold.wifwaf.view.filter.text.BlankFiler;
+import shagold.wifwaf.view.filter.text.BlankFilter;
 import shagold.wifwaf.view.filter.text.EditTextFilter;
 import shagold.wifwaf.view.filter.text.NumberFilter;
 import shagold.wifwaf.view.filter.text.SizeFilter;
@@ -43,7 +43,7 @@ public class AddWalkActivity extends AppCompatActivity {
     private EditText nameWalk;
     private EditText descriptionWalk;
     private TextValidator textValidator = new TextValidator();
-    private EditTextFilter[] filters = {new BlankFiler(), new NumberFilter()};
+    private EditTextFilter[] filters = {new BlankFilter(), new NumberFilter()};
     private SizeFilter sizeTitleFilter = new SizeFilter(1, 25);
     private SizeFilter sizeDescriptionFilter = new SizeFilter(10, 25);
 
@@ -99,7 +99,7 @@ public class AddWalkActivity extends AppCompatActivity {
                 vm = textValidator.validate(descriptionWalk, sizeDescriptionFilter);
                 if(!vm.getValue()) {
                     validText = vm.getValue();
-                    descriptionWalk.setError(vm.getError().toString() + " : min - " + sizeDescriptionFilter.getMin() + " , max - " + sizeDescriptionFilter.getMax());
+                    descriptionWalk.setError(vm.getError().toString() + " : min " + sizeDescriptionFilter.getMin() + " , max " + sizeDescriptionFilter.getMax());
                 }
 
                 final Intent actGPSWalk = new Intent(getApplicationContext(), GPSWalkActivity.class);
