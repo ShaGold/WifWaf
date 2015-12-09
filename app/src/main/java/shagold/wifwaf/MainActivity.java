@@ -116,7 +116,8 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         String realpass = (String) param.get("password");
                         String typedpassencrypt = User.encryptPassword(pass);
-                        if(realpass.equals(typedpassencrypt) && param.get("id") != -1){
+                        int id = Integer.parseInt(param.get("id").toString());
+                        if(realpass.equals(typedpassencrypt) && id != -1){
                             User newUser = new User(param);
                             SocketManager.setMyUser(newUser);
                             Intent resultat = new Intent(MainActivity.this, HomeActivity.class);

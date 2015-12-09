@@ -9,10 +9,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +46,6 @@ public class UserDogsActivity extends AppCompatActivity {
         mUser = SocketManager.getMyUser();
         mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
         mSocket.emit("getAllMyDogs", mUser.getIdUser());
-
-        List<Dog> dogs = generateDogs();
-        DogAdapter adapter = new DogAdapter(this, dogs);
-        mListView.setAdapter(adapter);
 
         final Intent activityAddDog = new Intent(getApplicationContext(), AddDogActivity.class);
 
@@ -82,6 +84,37 @@ public class UserDogsActivity extends AppCompatActivity {
         return dogs;
     }
 
+    private List<Dog> generateDogsFromJson(JSONArray dogsJSON) {
+
+        List<Dog> dogs = new ArrayList<Dog>();
+
+        if(dogsJSON != null) {
+            for (int i = 0; i < dogsJSON.length(); i++) {
+                JSONObject currentObj = null;
+                try {
+                    currentObj = dogsJSON.getJSONObject(i);
+                    int idUser = currentObj.getInt("idUser");
+                    String dogName = currentObj.getString("dogName");
+                    int age = currentObj.getInt("age");
+                    String breed = currentObj.getString("breed");
+                    int size = currentObj.getInt("size");
+                    String getAlongWithMales = currentObj.getString("getAlongWithMales");
+                    String getAlongWithFemales = currentObj.getString("getAlongWithFemales");
+                    String getAlongWithKids = currentObj.getString("getAlongWithKids");
+                    String getAlongWithHumans = currentObj.getString("getAlongWithHumans");
+                    String description = currentObj.getString("description");
+
+                    dogs.add(new Dog(idUser, dogName, age, breed, size, getAlongWithMales, getAlongWithFemales, getAlongWithKids, getAlongWithHumans, description));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return dogs;
+    }
+
     private void initListView() {
         mListView = (ListView) findViewById(R.id.dogListView);
 
@@ -104,11 +137,9 @@ public class UserDogsActivity extends AppCompatActivity {
             UserDogsActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-
-                    System.out.println(args[0]);
-
-                    //Log.d("LOG", args[0].toString());
-
+                    List<Dog> dogs = generateDogsFromJson((JSONArray) args[0]);
+                    DogAdapter adapter = new DogAdapter(getApplicationContext(), dogs);
+                    mListView.setAdapter(adapter);
                 }
 
             });
