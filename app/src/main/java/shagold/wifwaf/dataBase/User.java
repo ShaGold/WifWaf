@@ -3,6 +3,10 @@ package shagold.wifwaf.dataBase;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class User {
 
     private int idUser;
@@ -113,6 +117,22 @@ public class User {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public static String encryptPassword(String source) {
+        MessageDigest mdEnc = null;
+        try {
+            mdEnc = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("Exception while encrypting to md5");
+            e.printStackTrace();
+        } // Encryption algorithm
+        mdEnc.update(source.getBytes(), 0, source.length());
+        String md5 = new BigInteger(1, mdEnc.digest()).toString(16);
+        while ( md5.length() < 32 ) {
+            md5 = "0"+md5;
+        }
+        return md5;
     }
 
 }
