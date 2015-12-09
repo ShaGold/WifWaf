@@ -56,7 +56,6 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void trySignUp(View view) throws JSONException {
-
         // Récupération des valeurs
         EditText ETnickname = (EditText) findViewById(R.id.Nickname);
         String Snickname = ETnickname.getText().toString();
@@ -65,11 +64,14 @@ public class SignUpActivity extends AppCompatActivity {
         EditText ETemail = (EditText) findViewById(R.id.Email);
         String Semail = ETemail.getText().toString();
         EditText ETPhoneNumber = (EditText) findViewById(R.id.PhoneNumber);
+        //Vérification que le numéro de téléphone est bien un int
         int SphoneNumber;
         try{
             SphoneNumber = Integer.parseInt(ETPhoneNumber.getText().toString());
         }
         catch(Exception e){
+            System.out.println("Num tel:" + ETPhoneNumber.getText().toString());
+            System.out.print("Ici" + e.getMessage());
             Toast.makeText(SignUpActivity.this, "Le numéro de téléphone doit être un nombre", Toast.LENGTH_LONG).show();
             return;
         }
@@ -78,7 +80,7 @@ public class SignUpActivity extends AppCompatActivity {
         EditText ETDescription = (EditText) findViewById(R.id.Description);
         String Sdescription = ETDescription.getText().toString();
 
-        // Vérification champs (sémantique)
+        // Vérification champs
         if (Spassword.length() < 6){
             Toast.makeText(SignUpActivity.this, "Mot de passe trop court", Toast.LENGTH_LONG).show();
             return;
