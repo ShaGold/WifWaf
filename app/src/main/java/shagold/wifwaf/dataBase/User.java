@@ -40,8 +40,8 @@ public class User {
         this.flag = 0; // TODO gestion flag: niveau de privatisation des données
     }
 
-    public User(String nickname, String password){
-        this.nickname = nickname;
+    public User(String email, String password){
+        this.email = email;
         this.password = password;
     }
 
