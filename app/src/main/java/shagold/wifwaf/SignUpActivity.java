@@ -56,7 +56,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void trySignUp(View view) throws JSONException {
-        //Récupération des valeurs
+
+        // Récupération des valeurs
         EditText ETnickname = (EditText) findViewById(R.id.Nickname);
         String Snickname = ETnickname.getText().toString();
         EditText ETpassword = (EditText) findViewById(R.id.Password);
@@ -64,21 +65,31 @@ public class SignUpActivity extends AppCompatActivity {
         EditText ETemail = (EditText) findViewById(R.id.Email);
         String Semail = ETemail.getText().toString();
         EditText ETPhoneNumber = (EditText) findViewById(R.id.PhoneNumber);
-        int SphoneNumber = Integer.parseInt(ETPhoneNumber.getText().toString());
+        int SphoneNumber;
+        try{
+            SphoneNumber = Integer.parseInt(ETPhoneNumber.getText().toString());
+        }
+        catch(Exception e){
+            Toast.makeText(SignUpActivity.this, "Le numéro de téléphone doit être un nombre", Toast.LENGTH_LONG).show();
+            return;
+        }
         EditText ETBirthday = (EditText) findViewById(R.id.Birthday);
         String Sbirthday = ETBirthday.getText().toString();
         EditText ETDescription = (EditText) findViewById(R.id.Description);
         String Sdescription = ETDescription.getText().toString();
 
-        //Vérification champs
+        // Vérification champs (sémantique)
         if (Spassword.length() < 6){
             Toast.makeText(SignUpActivity.this, "Mot de passe trop court", Toast.LENGTH_LONG).show();
+            return;
         }
         if (Snickname.length() < 3){
             Toast.makeText(SignUpActivity.this, "Pseudo trop court", Toast.LENGTH_LONG).show();
+            return;
         }
         if (ETPhoneNumber.getText().toString().length() < 10){
             Toast.makeText(SignUpActivity.this, "Numéro de téléphone trop court", Toast.LENGTH_LONG).show();
+            return;
         }
 
         //Test inscription

@@ -57,16 +57,29 @@ public class AddDogActivity extends AppCompatActivity {
     }
 
     public void tryAddDog(View view) throws JSONException {
-        System.out.println("Je passe ici");
         //Récupération des valeurs
         EditText ETname = (EditText) findViewById(R.id.name);
         String Sname = ETname.getText().toString();
         EditText ETage = (EditText) findViewById(R.id.age);
-        int age = Integer.parseInt(ETage.getText().toString());
+        int age;
+        try{
+            age = Integer.parseInt(ETage.getText().toString());
+        }
+        catch(Exception e){
+            Toast.makeText(AddDogActivity.this, "L'âge doit être un nombre", Toast.LENGTH_LONG).show();
+            return;
+        }
         EditText ETbreed = (EditText) findViewById(R.id.breed);
         String Sbreed = ETbreed.getText().toString();
         EditText ETsize = (EditText) findViewById(R.id.size);
-        int size = Integer.parseInt(ETsize.getText().toString());
+        int size;
+        try{
+            size = Integer.parseInt(ETsize.getText().toString());
+        }
+        catch(Exception e){
+            Toast.makeText(AddDogActivity.this, "La taille du chien doit être un nombre", Toast.LENGTH_LONG).show();
+            return;
+        }
         EditText ETGetalongwithMales = (EditText) findViewById(R.id.getAlongWithMales);
         String Sgetalongwithmales = ETGetalongwithMales.getText().toString();
         EditText ETGetalongwithFemales = (EditText) findViewById(R.id.getAlongWithFemales);
