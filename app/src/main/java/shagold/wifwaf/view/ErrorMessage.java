@@ -15,14 +15,14 @@ public enum ErrorMessage {
     NUMBER {
         @Override
         public String toString() {
-            return "No number in text";
+            return "This field has to be a number";
         }
     },
 
     SIZE {
         @Override
         public String toString() {
-            return "Wrong size of text";
+            return "Wrong text size";
         }
     }
 }

@@ -24,6 +24,13 @@ import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
 import shagold.wifwaf.tool.WifWafColor;
+import shagold.wifwaf.view.ErrorMessage;
+import shagold.wifwaf.view.TextValidator;
+import shagold.wifwaf.view.ValidateMessage;
+import shagold.wifwaf.view.filter.text.BlankFilter;
+import shagold.wifwaf.view.filter.text.EditTextFilter;
+import shagold.wifwaf.view.filter.text.NumberFilter;
+import shagold.wifwaf.view.filter.text.SizeFilter;
 
 public class AddDogActivity extends AppCompatActivity {
 
@@ -57,44 +64,122 @@ public class AddDogActivity extends AppCompatActivity {
     }
 
     public void tryAddDog(View view) throws JSONException {
+        //Définition des filtres
+        EditTextFilter[] filterNumber = {new SizeFilter(0,3), new NumberFilter()}; //pour les champs age et taille
+        EditTextFilter[] filterSize = {new SizeFilter()};
+
         //Récupération des valeurs
         EditText ETname = (EditText) findViewById(R.id.name);
-        String Sname = ETname.getText().toString();
         EditText ETage = (EditText) findViewById(R.id.age);
-        int age;
-        try{
-            age = Integer.parseInt(ETage.getText().toString());
-        }
-        catch(Exception e){
-            Toast.makeText(AddDogActivity.this, "L'âge doit être un nombre", Toast.LENGTH_LONG).show();
-            return;
-        }
         EditText ETbreed = (EditText) findViewById(R.id.breed);
-        String Sbreed = ETbreed.getText().toString();
         EditText ETsize = (EditText) findViewById(R.id.size);
-        int size;
-        try{
-            size = Integer.parseInt(ETsize.getText().toString());
+        EditText ETGetalongwithMales = (EditText) findViewById(R.id.getAlongWithMales);
+        EditText ETGetalongwithFemales = (EditText) findViewById(R.id.getAlongWithFemales);
+        EditText ETGetalongwithKids = (EditText) findViewById(R.id.getAlongWithKids);
+        EditText ETGetalongwithHumans = (EditText) findViewById(R.id.getAlongWithHumans);
+        EditText ETDescription = (EditText) findViewById(R.id.description);
+
+        //Test validité des champs
+        TextValidator textValidator = new TextValidator();
+        boolean valid = true;
+        //Name
+        ValidateMessage vmName = textValidator.validate(ETname, filterSize);
+        if(!vmName.getValue()) {
+            valid = false;
+            int min = ((SizeFilter) filterSize[0]).getMin();
+            int max = ((SizeFilter) filterSize[0]).getMax();
+            ETname.setError(vmName.getError().toString() + " min: " + min + " max: " + max);
         }
-        catch(Exception e){
-            Toast.makeText(AddDogActivity.this, "La taille du chien doit être un nombre", Toast.LENGTH_LONG).show();
+
+        //Age
+        ValidateMessage vmAge = textValidator.validate(ETage, filterNumber);
+        if(!vmAge.getValue()) {
+            valid = false;
+            if (vmAge.getError().equals(ErrorMessage.SIZE)){
+                int min = ((SizeFilter) filterSize[0]).getMin();
+                int max = ((SizeFilter) filterSize[0]).getMax();
+                ETage.setError(vmAge.getError().toString() + " min: " + min + " max: " + max);
+            }
+            else{
+                ETage.setError(vmAge.getError().toString());
+            }
+        }
+
+        //Breed
+        ValidateMessage vmBreed = textValidator.validate(ETbreed, filterSize);
+        if(!vmBreed.getValue()) {
+            valid = false;
+            int min = ((SizeFilter) filterSize[0]).getMin();
+            int max = ((SizeFilter) filterSize[0]).getMax();
+            ETbreed.setError(vmBreed.getError().toString() + " min: " + min + " max: " + max);
+        }
+
+        //Size
+        ValidateMessage vmSize = textValidator.validate(ETsize, filterNumber);
+        if(!vmSize.getValue()) {
+            valid = false;
+            if (vmSize.getError().equals(ErrorMessage.SIZE)){
+                int min = ((SizeFilter) filterSize[0]).getMin();
+                int max = ((SizeFilter) filterSize[0]).getMax();
+                ETsize.setError(vmSize.getError().toString() + " min: " + min + " max: " + max);
+            }
+            else{
+                ETsize.setError(vmSize.getError().toString());
+            }
+        }
+
+        //Get along...
+        ValidateMessage vmGAWM = textValidator.validate(ETGetalongwithMales, filterSize);
+        if(!vmGAWM.getValue()) {
+            valid = false;
+            int min = ((SizeFilter) filterSize[0]).getMin();
+            int max = ((SizeFilter) filterSize[0]).getMax();
+            ETGetalongwithMales.setError(vmGAWM.getError().toString() + " min: " + min + " max: " + max);
+        }
+        ValidateMessage vmGAWF = textValidator.validate(ETGetalongwithFemales, filterSize);
+        if(!vmGAWM.getValue()) {
+            valid = false;
+            int min = ((SizeFilter) filterSize[0]).getMin();
+            int max = ((SizeFilter) filterSize[0]).getMax();
+            ETGetalongwithFemales.setError(vmGAWF.getError().toString() + " min: " + min + " max: " + max);
+        }
+        ValidateMessage vmGAWH = textValidator.validate(ETGetalongwithHumans, filterSize);
+        if(!vmGAWH.getValue()) {
+            valid = false;
+            int min = ((SizeFilter) filterSize[0]).getMin();
+            int max = ((SizeFilter) filterSize[0]).getMax();
+            ETGetalongwithHumans.setError(vmGAWH.getError().toString() + " min: " + min + " max: " + max);
+        }
+        ValidateMessage vmGAWK = textValidator.validate(ETGetalongwithKids, filterSize);
+        if(!vmGAWK.getValue()) {
+            valid = false;
+            int min = ((SizeFilter) filterSize[0]).getMin();
+            int max = ((SizeFilter) filterSize[0]).getMax();
+            ETGetalongwithKids.setError(vmGAWK.getError().toString() + " min: " + min + " max: " + max);
+        }
+
+        ValidateMessage vmDesc = textValidator.validate(ETDescription, filterSize);
+        if(!vmDesc.getValue()) {
+            valid = false;
+            int min = ((SizeFilter) filterSize[0]).getMin();
+            int max = ((SizeFilter) filterSize[0]).getMax();
+            ETDescription.setError(vmDesc.getError().toString() + " min: " + min + " max: " + max);
+        }
+
+        if (!valid){
             return;
         }
-        EditText ETGetalongwithMales = (EditText) findViewById(R.id.getAlongWithMales);
-        String Sgetalongwithmales = ETGetalongwithMales.getText().toString();
-        EditText ETGetalongwithFemales = (EditText) findViewById(R.id.getAlongWithFemales);
-        String Sgetalongwithfemales = ETGetalongwithFemales.getText().toString();
-        EditText ETGetalongwithKids = (EditText) findViewById(R.id.getAlongWithKids);
-        String Sgetalongwithkids = ETGetalongwithKids.getText().toString();
-        EditText ETGetalongwithHumans = (EditText) findViewById(R.id.getAlongWithHumans);
-        String Sgetalongwithhumans = ETGetalongwithHumans.getText().toString();
-        EditText ETDescription = (EditText) findViewById(R.id.description);
-        String Sdescription = ETDescription.getText().toString();
 
-        //Vérification champs
-        if (Sname.length() < 2){
-            Toast.makeText(AddDogActivity.this, "Le nom du chien est trop court", Toast.LENGTH_LONG).show();
-        }
+        //Récupération valeurs des champs
+        int age = Integer.parseInt(ETage.getText().toString());
+        int size = Integer.parseInt(ETsize.getText().toString());
+        String Sbreed = ETbreed.getText().toString();
+        String Sname = ETname.getText().toString();
+        String Sgetalongwithmales = ETGetalongwithMales.getText().toString();
+        String Sgetalongwithfemales = ETGetalongwithFemales.getText().toString();
+        String Sgetalongwithkids = ETGetalongwithKids.getText().toString();
+        String Sgetalongwithhumans = ETGetalongwithHumans.getText().toString();
+        String Sdescription = ETDescription.getText().toString();
 
         //Test ajout d'un chien
         Dog dog = new Dog(mUser.getIdUser(), Sname, age, Sbreed, size, Sgetalongwithmales, Sgetalongwithfemales, Sgetalongwithkids, Sgetalongwithhumans, Sdescription);
