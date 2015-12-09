@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import com.github.nkzawa.socketio.client.Socket;
 import com.github.nkzawa.emitter.Emitter;
+
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
@@ -34,6 +34,12 @@ public class SignUpActivity extends AppCompatActivity {
         mSocket.on("onTestJson", onTestJson);
         mSocket.on("onTestJsonArray", onTestJsonArray);
         mSocket.on("RTrySignUp", onRTrySignUp);
+
+        String pass1 = "toto";
+        String pass2 = "toto";
+
+        System.out.println("T1 : " + pass1 + " - md5 : " + User.encryptPassword(pass1));
+        System.out.println("T2 : " + pass2 + " - md5 : " + User.encryptPassword(pass2));
     }
 
     @Override
