@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.MenuItem;
 
+import shagold.wifwaf.AddWalkActivity;
 import shagold.wifwaf.HomeActivity;
 import shagold.wifwaf.R;
 import shagold.wifwaf.UserDogsActivity;
@@ -36,6 +37,11 @@ public class MenuManager {
             case R.id.action_dogs :
                 final Intent userDogs = new Intent(a.getApplicationContext(), UserDogsActivity.class);
                 a.startActivity(userDogs);
+                return true;
+            case R.id.action_walks :
+                final Intent userWalks = new Intent(a.getApplicationContext(), AddWalkActivity.class);
+                a.startActivity(userWalks);
+                return true;
             default:
                 return false;
         }
