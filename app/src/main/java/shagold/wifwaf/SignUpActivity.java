@@ -1,9 +1,11 @@
 package shagold.wifwaf;
 
 import android.app.AlertDialog;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +21,7 @@ import com.github.nkzawa.emitter.Emitter;
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
+import shagold.wifwaf.tool.WifWafDatePickerFragment;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -55,6 +58,13 @@ public class SignUpActivity extends AppCompatActivity {
         mSocket.off("RTrySignUp", onRTrySignUp);
     }
 
+    public void showDatePickerDialog(View v) {
+        WifWafDatePickerFragment newFragment = new WifWafDatePickerFragment();
+        EditText ETBirthday = (EditText) findViewById(R.id.Birthday);
+        newFragment.setDateText(ETBirthday);
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
     public void trySignUp(View view) throws JSONException {
         // Récupération des valeurs
         EditText ETnickname = (EditText) findViewById(R.id.Nickname);
@@ -76,6 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
         EditText ETBirthday = (EditText) findViewById(R.id.Birthday);
+        ETBirthday.setFocusable(false);
         String Sbirthday = ETBirthday.getText().toString();
         EditText ETDescription = (EditText) findViewById(R.id.Description);
         String Sdescription = ETDescription.getText().toString();
