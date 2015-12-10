@@ -25,7 +25,7 @@ import shagold.wifwaf.tool.WifWafColor;
 import shagold.wifwaf.view.ErrorMessage;
 import shagold.wifwaf.view.TextValidator;
 import shagold.wifwaf.view.ValidateMessage;
-import shagold.wifwaf.view.filter.text.BlankFiler;
+import shagold.wifwaf.view.filter.text.BlankFilter;
 import shagold.wifwaf.view.filter.text.EditTextFilter;
 import shagold.wifwaf.view.filter.text.EmailFilter;
 import shagold.wifwaf.view.filter.text.NumberFilter;
@@ -101,7 +101,7 @@ public class AddWalkActivity extends AppCompatActivity {
                 vm = textValidator.validate(descriptionWalk, sizeDescriptionFilter);
                 if(!vm.getValue()) {
                     validText = vm.getValue();
-                    descriptionWalk.setError(vm.getError().toString() + " : min - " + sizeDescriptionFilter.getMin() + " , max - " + sizeDescriptionFilter.getMax());
+                    descriptionWalk.setError(vm.getError().toString() + " : min " + sizeDescriptionFilter.getMin() + " , max " + sizeDescriptionFilter.getMax());
                 }
 
                 final Intent actGPSWalk = new Intent(getApplicationContext(), GPSWalkActivity.class);

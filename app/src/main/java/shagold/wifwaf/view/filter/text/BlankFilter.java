@@ -8,7 +8,7 @@ import shagold.wifwaf.view.ValidateMessage;
 /**
  * Created by jimmy on 29/11/15.
  */
-public class BlankFiler extends EditTextFilter {
+public class BlankFilter extends EditTextFilter {
 
     @Override
     public ValidateMessage meetFilter(EditText text) {
