@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,7 +61,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void showDatePickerDialog(View v) {
         WifWafDatePickerFragment newFragment = new WifWafDatePickerFragment();
-        EditText ETBirthday = (EditText) findViewById(R.id.Birthday);
+        TextView ETBirthday = (TextView) findViewById(R.id.Birthday);
         newFragment.setDateText(ETBirthday);
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
@@ -85,7 +86,8 @@ public class SignUpActivity extends AppCompatActivity {
             Toast.makeText(SignUpActivity.this, "Le numéro de téléphone doit être un nombre", Toast.LENGTH_LONG).show();
             return;
         }
-        EditText ETBirthday = (EditText) findViewById(R.id.Birthday);
+
+        TextView ETBirthday = (TextView) findViewById(R.id.Birthday);
         ETBirthday.setFocusable(false);
         String Sbirthday = ETBirthday.getText().toString();
         EditText ETDescription = (EditText) findViewById(R.id.Description);

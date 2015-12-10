@@ -9,15 +9,16 @@ import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
 
 public class WifWafDatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
-    private EditText dateText;
+    private TextView dateText;
 
-    public void setDateText(EditText dateText) {
+    public void setDateText(TextView dateText) {
         this.dateText = dateText;
     }
 
@@ -32,7 +33,7 @@ public class WifWafDatePickerFragment extends DialogFragment implements DatePick
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        String result = year + " - " + month + " - " + day;
+        String result = year + "-" + month + "-" + day;
         if(dateText != null)
             dateText.setText(result);
     }
