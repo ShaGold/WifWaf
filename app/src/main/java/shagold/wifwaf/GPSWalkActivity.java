@@ -1,12 +1,9 @@
 package shagold.wifwaf;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,9 +18,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polygon;
-import com.google.android.gms.maps.model.PolygonOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
@@ -35,13 +29,11 @@ import shagold.wifwaf.manager.MenuManager;
 public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private GoogleMap mMap;
-    private LocationManager locationManager;
     private Location mCurrentLocation;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private Marker myLocation;
     private PolylineOptions lines = new PolylineOptions();
-    private PolylineOptions testLines = new PolylineOptions();
     private LinkedList<LatLng> linesLatLng = new LinkedList<LatLng>();
     private List<PolylineOptions> pl = new ArrayList<PolylineOptions>();
 
@@ -50,37 +42,13 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gps_walk);
         setUpMapIfNeeded();
-        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        String locationProvider = LocationManager.NETWORK_PROVIDER;
+
+        // connexion à l'API
         buildGoogleApiClient();
         mGoogleApiClient.connect();
+
         createLocationRequest();
-        LocationRequest mLocationRequest;
-        mMap.addPolyline(lines);
-
-        PolygonOptions rectOptions = new PolygonOptions()
-                .add(new LatLng(37.35, -122.0),
-                        new LatLng(37.45, -122.0),
-                        new LatLng(37.45, -122.2),
-                        new LatLng(37.35, -122.2),
-                        new LatLng(37.35, -122.0));
-
-        rectOptions.strokeColor(Color.RED);
-        rectOptions.fillColor(Color.BLUE);
-
-        // Get back the mutable Polygon
-        Polygon polygon = mMap.addPolygon(rectOptions);
-
-
-        testLines.add(new LatLng(10, 10));
-        testLines.add(new LatLng(20, 20));
-        testLines.add(new LatLng(30, 30));
-        testLines.add(new LatLng(40, 40));
-        testLines.add(new LatLng(50, 50));
-
-        Polyline pl = mMap.addPolyline(testLines);
-
-        mMap.getUiSettings().setRotateGesturesEnabled(false);
+        //mMap.getUiSettings().setRotateGesturesEnabled(false);
     }
 
     @Override
@@ -90,11 +58,6 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
         if (mGoogleApiClient.isConnected()) {
             startLocationUpdates();
         }
-    }
-
-    protected void startLocationUpdates() {
-        LocationServices.FusedLocationApi.requestLocationUpdates(
-                mGoogleApiClient, mLocationRequest, this);
     }
 
     @Override
@@ -115,6 +78,11 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
         myLocation = mMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).title("Gold"));
         Log.d("TT", "onCreate ..............................." + mLastLocation.toString());
         startLocationUpdates();
+    }
+
+    protected void startLocationUpdates() {
+        LocationServices.FusedLocationApi.requestLocationUpdates(
+                mGoogleApiClient, mLocationRequest, this);
     }
 
     // demande la position courante
@@ -145,12 +113,11 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
                 PolylineOptions temp = new PolylineOptions()
                         .add(linesLatLng.getLast())
                         .add(linesLatLng.get(linesLatLng.size() - 2));
-
                 temp.color(Color.BLUE);
                 temp.visible(true);
                 temp.width(10);
                 pl.add(temp);
-                Polyline t = mMap.addPolyline(temp);
+                mMap.addPolyline(temp);
             }
         }
     }
