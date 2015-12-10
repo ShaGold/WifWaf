@@ -26,38 +26,26 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 import shagold.wifwaf.manager.MenuManager;
 
-/**
- * Created by jimmy on 22/11/15.
- */
 public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
-    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    LocationManager locationManager;
-    Location mCurrentLocation;
+    private GoogleMap mMap;
+    private LocationManager locationManager;
+    private Location mCurrentLocation;
     private GoogleApiClient mGoogleApiClient;
-    LocationRequest mLocationRequest;
-    Marker mo;
+    private LocationRequest mLocationRequest;
+    private Marker myLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gps_walk);
-
         setUpMapIfNeeded();
-
-
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-
         String locationProvider = LocationManager.NETWORK_PROVIDER;
-
         buildGoogleApiClient();
-
         mGoogleApiClient.connect();
-
         createLocationRequest();
-
         LocationRequest mLocationRequest;
-
     }
 
     @Override
@@ -67,15 +55,11 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
         if (mGoogleApiClient.isConnected()) {
             startLocationUpdates();
         }
-
     }
 
     protected void startLocationUpdates() {
         LocationServices.FusedLocationApi.requestLocationUpdates(
                 mGoogleApiClient, mLocationRequest, this);
-
-
-
     }
 
     @Override
@@ -93,22 +77,17 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
     public void onConnected(Bundle bundle) {
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
-
-        mo = mMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).title("Gold"));
-
+        myLocation = mMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).title("Gold"));
         Log.d("TT", "onCreate ..............................." + mLastLocation.toString());
-
-        if (true) {
-            startLocationUpdates();
-        }
-
+        startLocationUpdates();
     }
+
+    // demande la position courante
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(10000);
         mLocationRequest.setFastestInterval(5000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
     }
 
     @Override
@@ -120,10 +99,10 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
     public void onLocationChanged(Location location) {
         mCurrentLocation = location;
 
-        if(mo != null) {
+        if(myLocation != null) {
             LatLng ll = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
             Log.d("POS", "MOVE ..............................." + ll.toString());
-            mo.setPosition(ll);
+            myLocation.setPosition(ll);
             /*lines.add(ll);
             linesLatLng.add(ll);
 
@@ -172,10 +151,7 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
 
     private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
-
-
         Log.d("TTT", "Start ...............................");
-
     }
 
     protected synchronized void buildGoogleApiClient() {
