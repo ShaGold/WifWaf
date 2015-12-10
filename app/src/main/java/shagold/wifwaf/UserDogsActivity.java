@@ -69,21 +69,6 @@ public class UserDogsActivity extends AppCompatActivity {
         return MenuManager.defaultMenu(this, item) || super.onOptionsItemSelected(item);
     }
 
-    private List<Dog> generateDogs() {
-        List<Dog> dogs = new ArrayList<Dog>();
-
-        dogs.add(new Dog(1, "Gold", 23, "Golden", 23, "null", "null", "null", "null", "un chien jaune"));
-        dogs.add(new Dog(2, "Shana", 23, "Epagnol", 23, "null", "null", "null", "null", "un chien passif"));
-        dogs.add(new Dog(3, "Gold", 23, "Golden", 23, "null", "null", "null", "null", "un chien jaune"));
-        dogs.add(new Dog(4, "Shana", 23, "Epagnol", 23, "null", "null", "null", "null", "un chien passif"));
-        dogs.add(new Dog(5, "Gold", 23, "Golden", 23, "null", "null", "null", "null", "un chien jaune"));
-        dogs.add(new Dog(6, "Shana", 23, "Epagnol", 23, "null", "null", "null", "null", "un chien passif"));
-        dogs.add(new Dog(7, "Gold", 23, "Golden", 23, "null", "null", "null", "null", "un chien jaune"));
-        dogs.add(new Dog(8, "Shana", 23, "Epagnol", 23, "null", "null", "null", "null", "un chien passif"));
-
-        return dogs;
-    }
-
     private List<Dog> generateDogsFromJson(JSONArray dogsJSON) {
 
         List<Dog> dogs = new ArrayList<Dog>();

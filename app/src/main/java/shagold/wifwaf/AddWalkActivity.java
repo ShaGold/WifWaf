@@ -53,8 +53,6 @@ public class AddWalkActivity extends AppCompatActivity {
     private int dogsSelectedNumber = 0;
     private List<Dog> dogChoise = new ArrayList<Dog>();
     private List<Dog> userDogs = new ArrayList<Dog>();
-    private EditText nameWalk;
-    private EditText descriptionWalk;
     private TextValidator textValidator = new TextValidator();
     //private EditTextFilter[] filters = {new NumberFilter()};
     private EditTextFilter[] filters = {new EmailFilter()};
@@ -77,14 +75,16 @@ public class AddWalkActivity extends AppCompatActivity {
     }
 
     private void initEditText() {
-        nameWalk = (EditText) findViewById(R.id.nameWalk);
-        descriptionWalk = (EditText) findViewById(R.id.descriptionWalk);
         dogsForWall = (EditText) findViewById(R.id.dogs_for_wal);
         dogsForWall.setText("No dogs");
         dogsForWall.setFocusable(false);
     }
 
     private void initConfirmButton(){
+
+        final EditText nameWalk = (EditText) findViewById(R.id.nameWalk);
+        final EditText descriptionWalk = (EditText) findViewById(R.id.descriptionWalk);
+
         Button confirmNewWalk = (Button) findViewById(R.id.addWalkButton);
         confirmNewWalk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,21 +184,6 @@ public class AddWalkActivity extends AppCompatActivity {
                 alertSelectDogs.show();
             }
         });
-    }
-
-    private List<Dog> generateDogs() {
-        List<Dog> dogs = new ArrayList<Dog>();
-
-        dogs.add(new Dog(1, "Gold1", 23, "Golden", 23, "null", "null", "null", "null", "un chien jaune"));
-        dogs.add(new Dog(2, "Shana2", 23, "Epagnol", 23, "null", "null", "null", "null", "un chien passif"));
-        dogs.add(new Dog(3, "Gold3", 23, "Golden", 23, "null", "null", "null", "null", "un chien jaune"));
-        dogs.add(new Dog(4, "Shana4", 23, "Epagnol", 23, "null", "null", "null", "null", "un chien passif"));
-        dogs.add(new Dog(5, "Gold5", 23, "Golden", 23, "null", "null", "null", "null", "un chien jaune"));
-        dogs.add(new Dog(6, "Shana6", 23, "Epagnol", 23, "null", "null", "null", "null", "un chien passif"));
-        dogs.add(new Dog(7, "Gold7", 23, "Golden", 23, "null", "null", "null", "null", "un chien jaune"));
-        dogs.add(new Dog(8, "Shana8", 23, "Epagnol", 23, "null", "null", "null", "null", "un chien passif"));
-
-        return dogs;
     }
 
     private List<Dog> generateDogsFromJSON() {
