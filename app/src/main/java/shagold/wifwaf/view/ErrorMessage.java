@@ -24,5 +24,12 @@ public enum ErrorMessage {
         public String toString() {
             return "Wrong size of text";
         }
+    },
+
+    EMAIL {
+        @Override
+        public String toString() {
+            return "Wrong email typo";
+        }
     }
 }

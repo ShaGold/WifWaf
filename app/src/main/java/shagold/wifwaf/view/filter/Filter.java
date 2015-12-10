@@ -5,6 +5,6 @@ package shagold.wifwaf.view.filter;
  */
 public interface Filter<U, V> {
 
-    public V meetFilter(U text);
+    V meetFilter(U text);
 
 }
