@@ -38,6 +38,7 @@ import shagold.wifwaf.view.TextValidator;
 import shagold.wifwaf.view.ValidateMessage;
 import shagold.wifwaf.view.filter.text.EditTextFilter;
 import shagold.wifwaf.view.filter.text.EmailFilter;
+import shagold.wifwaf.view.filter.text.NumberFilter;
 import shagold.wifwaf.view.filter.text.SizeFilter;
 
 /**
@@ -54,8 +55,7 @@ public class AddWalkActivity extends AppCompatActivity {
     private List<Dog> dogChoise = new ArrayList<Dog>();
     private List<Dog> userDogs = new ArrayList<Dog>();
     private TextValidator textValidator = new TextValidator();
-    //private EditTextFilter[] filters = {new NumberFilter()};
-    private EditTextFilter[] filters = {new EmailFilter()};
+    private EditTextFilter[] filters = {new NumberFilter()};
     private SizeFilter sizeTitleFilter = new SizeFilter(1, 25);
     private SizeFilter sizeDescriptionFilter = new SizeFilter(10, 25);
 
