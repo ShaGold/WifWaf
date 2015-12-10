@@ -33,13 +33,17 @@
             android:hint="@string/description"
             android:id="@+id/descriptionWalk" />
 
-        <Spinner
-            android:id="@+id/spinner1"
-            android:layout_width="235dp"
+        <EditText
+            android:id="@+id/dogs_for_wal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/user_dogs_arrays"
-            android:prompt="@string/user_dogs_prompt"
-            android:spinnerMode="dropdown"/>
+            android:gravity="left"
+            android:inputType="textMultiLine"
+            android:lines="20"
+            android:minLines="1"
+            android:scrollHorizontally="false"
+            android:scrollbars="vertical"
+            android:singleLine="false" />
 
         <Button
             android:layout_width="wrap_content"

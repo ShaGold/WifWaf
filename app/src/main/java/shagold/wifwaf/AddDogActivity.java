@@ -1,6 +1,5 @@
 package shagold.wifwaf;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -10,7 +9,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
@@ -27,7 +25,6 @@ import shagold.wifwaf.tool.WifWafColor;
 import shagold.wifwaf.view.ErrorMessage;
 import shagold.wifwaf.view.TextValidator;
 import shagold.wifwaf.view.ValidateMessage;
-import shagold.wifwaf.view.filter.text.BlankFilter;
 import shagold.wifwaf.view.filter.text.EditTextFilter;
 import shagold.wifwaf.view.filter.text.NumberFilter;
 import shagold.wifwaf.view.filter.text.SizeFilter;

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,10 +26,8 @@ import shagold.wifwaf.tool.WifWafColor;
 import shagold.wifwaf.view.ErrorMessage;
 import shagold.wifwaf.view.TextValidator;
 import shagold.wifwaf.view.ValidateMessage;
-import shagold.wifwaf.view.filter.text.BlankFilter;
 import shagold.wifwaf.view.filter.text.EditTextFilter;
 import shagold.wifwaf.view.filter.text.EmailFilter;
-import shagold.wifwaf.view.filter.text.NumberFilter;
 import shagold.wifwaf.view.filter.text.SizeFilter;
 
 /**
@@ -37,14 +36,14 @@ import shagold.wifwaf.view.filter.text.SizeFilter;
 public class AddWalkActivity extends AppCompatActivity {
 
     private AlertDialog alertSelectDogs;
-    private Spinner dogSpinner;
+    private EditText dogsForWall;
     private int dogsSelectedNumber = 0;
     private List<Dog> dogChoise = new ArrayList<Dog>();
     private List<Dog> userDogs = new ArrayList<Dog>();
     private EditText nameWalk;
     private EditText descriptionWalk;
     private TextValidator textValidator = new TextValidator();
-    //private EditTextFilter[] filters = {new BlankFiler(), new NumberFilter()};
+    //private EditTextFilter[] filters = {new NumberFilter()};
     private EditTextFilter[] filters = {new EmailFilter()};
     private SizeFilter sizeTitleFilter = new SizeFilter(1, 25);
     private SizeFilter sizeDescriptionFilter = new SizeFilter(10, 25);
@@ -62,7 +61,9 @@ public class AddWalkActivity extends AppCompatActivity {
     private void initEditText() {
         nameWalk = (EditText) findViewById(R.id.nameWalk);
         descriptionWalk = (EditText) findViewById(R.id.descriptionWalk);
-
+        dogsForWall = (EditText) findViewById(R.id.dogs_for_wal);
+        dogsForWall.setText("No dogs");
+        dogsForWall.setFocusable(false);
     }
 
     private void initConfirmButton(){
@@ -81,7 +82,7 @@ public class AddWalkActivity extends AppCompatActivity {
                 boolean validText = true;
 
                 ValidateMessage vm = textValidator.validate(nameWalk, filters);
-                if(!vm.getValue()) {
+                if (!vm.getValue()) {
                     validText = vm.getValue();
                     nameWalk.setError(vm.getError().toString());
                 }
@@ -93,13 +94,13 @@ public class AddWalkActivity extends AppCompatActivity {
                 }*/
 
                 vm = textValidator.validate(descriptionWalk, filters);
-                if(!vm.getValue()) {
+                if (!vm.getValue()) {
                     validText = vm.getValue();
                     descriptionWalk.setError(vm.getError().toString());
                 }
 
                 vm = textValidator.validate(descriptionWalk, sizeDescriptionFilter);
-                if(!vm.getValue()) {
+                if (!vm.getValue()) {
                     validText = vm.getValue();
                     descriptionWalk.setError(vm.getError().toString() + " : min " + sizeDescriptionFilter.getMin() + " , max " + sizeDescriptionFilter.getMax());
                 }
@@ -108,9 +109,8 @@ public class AddWalkActivity extends AppCompatActivity {
                 if (dogsSelectedNumber > 0) {
                     if (validText)
                         startActivity(actGPSWalk);
-                }
-                else {
-                    ((TextView)dogSpinner.getSelectedView()).setError(ErrorMessage.BLANK.toString());
+                } else {
+                    dogsForWall.setError(ErrorMessage.BLANK.toString());
                 }
 
             }
@@ -118,7 +118,6 @@ public class AddWalkActivity extends AppCompatActivity {
     }
 
     private void initAlertDialog() {
-        dogSpinner = (Spinner) findViewById(R.id.spinner1);
         Button selectDogsForWalk = (Button) findViewById(R.id.selectDogsForWalk);
         selectDogsForWalk.setBackgroundColor(WifWafColor.BROWN_DARK);
         selectDogsForWalk.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +131,7 @@ public class AddWalkActivity extends AppCompatActivity {
 
                 final CharSequence[] dogsList = dogsName.toArray(new CharSequence[dogsName.size()]);
 
-                AlertDialog.Builder multyChoiceDialog = new AlertDialog.Builder(getApplicationContext());
+                AlertDialog.Builder multyChoiceDialog = new AlertDialog.Builder(AddWalkActivity.this);
 
                 multyChoiceDialog.setTitle("Choice Dogs");
 
@@ -153,7 +152,7 @@ public class AddWalkActivity extends AppCompatActivity {
                             if (checked)
                                 dogsSelected.add(list.getItemAtPosition(i).toString());
                         }
-                        updateItemSpinner(dogsSelected);
+                        updateItemDogs(dogsSelected);
                     }
                 });
 
@@ -184,10 +183,12 @@ public class AddWalkActivity extends AppCompatActivity {
         return dogs;
     }
 
-    private void updateItemSpinner(List<String> list) {
+    private void updateItemDogs(List<String> list) {
+
+        String result = "";
 
         if(list.size() == 0) {
-            list.add("No dogs");
+           result = "No dogs";
             setDogNumber(0);
         }
         else {
@@ -198,12 +199,12 @@ public class AddWalkActivity extends AppCompatActivity {
                     dogChoise.add(dog);
                 }
             }
+
+            for(String d : list)
+                result += d + "\n";
         }
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dogSpinner.setAdapter(dataAdapter);
+        dogsForWall.setText(result);
     }
 
     private void setDogNumber(int n) {
