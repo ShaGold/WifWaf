@@ -33,12 +33,11 @@
             android:hint="@string/description"
             android:id="@+id/descriptionWalk" />
 
-        <EditText
+        <TextView
             android:id="@+id/dogs_for_wal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:inputType="textMultiLine"
             android:lines="20"
             android:minLines="1"
             android:scrollHorizontally="false"

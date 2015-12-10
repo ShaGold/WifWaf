@@ -49,7 +49,7 @@ public class AddWalkActivity extends AppCompatActivity {
     private User mUser;
     private JSONArray dogsJSON;
     private AlertDialog alertSelectDogs;
-    private EditText dogsForWall;
+    private TextView dogsForWall;
     private int dogsSelectedNumber = 0;
     private List<Dog> dogChoise = new ArrayList<Dog>();
     private List<Dog> userDogs = new ArrayList<Dog>();
@@ -75,7 +75,7 @@ public class AddWalkActivity extends AppCompatActivity {
     }
 
     private void initEditText() {
-        dogsForWall = (EditText) findViewById(R.id.dogs_for_wal);
+        dogsForWall = (TextView) findViewById(R.id.dogs_for_wal);
         dogsForWall.setText("No dogs");
         dogsForWall.setFocusable(false);
     }
