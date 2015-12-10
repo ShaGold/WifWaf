@@ -17,11 +17,21 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.socketio.client.Socket;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import shagold.wifwaf.dataBase.Dog;
+import shagold.wifwaf.dataBase.User;
+import shagold.wifwaf.list.DogAdapter;
 import shagold.wifwaf.manager.MenuManager;
+import shagold.wifwaf.manager.SocketManager;
 import shagold.wifwaf.tool.WifWafColor;
 import shagold.wifwaf.view.ErrorMessage;
 import shagold.wifwaf.view.TextValidator;
@@ -35,6 +45,9 @@ import shagold.wifwaf.view.filter.text.SizeFilter;
  */
 public class AddWalkActivity extends AppCompatActivity {
 
+    private Socket mSocket;
+    private User mUser;
+    private JSONArray dogsJSON;
     private AlertDialog alertSelectDogs;
     private EditText dogsForWall;
     private int dogsSelectedNumber = 0;
@@ -52,6 +65,11 @@ public class AddWalkActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_walk);
+
+        mSocket = SocketManager.getMySocket();
+        mUser = SocketManager.getMyUser();
+        mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
+        mSocket.emit("getAllMyDogs", mUser.getIdUser());
 
         initEditText();
         initAlertDialog();
@@ -123,7 +141,7 @@ public class AddWalkActivity extends AppCompatActivity {
         selectDogsForWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userDogs = generateDogs();
+                userDogs = generateDogsFromJSON();
                 List<String> dogsName = new ArrayList<String>();
 
                 for (Dog dog : userDogs)
@@ -182,6 +200,50 @@ public class AddWalkActivity extends AppCompatActivity {
 
         return dogs;
     }
+
+    private List<Dog> generateDogsFromJSON() {
+        List<Dog> dogs = new ArrayList<Dog>();
+
+        if(dogsJSON != null)
+            for (int i = 0; i < dogsJSON.length(); i++) {
+                JSONObject currentObj = null;
+                try {
+                    currentObj = dogsJSON.getJSONObject(i);
+                    int idUser = currentObj.getInt("idUser");
+                    String dogName = currentObj.getString("dogName");
+                    int age = currentObj.getInt("age");
+                    String breed = currentObj.getString("breed");
+                    int size = currentObj.getInt("size");
+                    String getAlongWithMales = currentObj.getString("getAlongWithMales");
+                    String getAlongWithFemales = currentObj.getString("getAlongWithFemales");
+                    String getAlongWithKids = currentObj.getString("getAlongWithKids");
+                    String getAlongWithHumans = currentObj.getString("getAlongWithHumans");
+                    String description = currentObj.getString("description");
+
+                    dogs.add(new Dog(idUser, dogName, age, breed, size, getAlongWithMales, getAlongWithFemales, getAlongWithKids, getAlongWithHumans, description));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        return dogs;
+    }
+
+    private Emitter.Listener onRGetAllMyDogs = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+
+            AddWalkActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    dogsJSON = (JSONArray) args[0];
+                }
+
+            });
+        }
+
+    };
 
     private void updateItemDogs(List<String> list) {
 
