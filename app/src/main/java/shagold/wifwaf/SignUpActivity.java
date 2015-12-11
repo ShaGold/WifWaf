@@ -23,6 +23,13 @@ import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
 import shagold.wifwaf.tool.WifWafDatePickerFragment;
+import shagold.wifwaf.view.ErrorMessage;
+import shagold.wifwaf.view.TextValidator;
+import shagold.wifwaf.view.ValidateMessage;
+import shagold.wifwaf.view.filter.text.EditTextFilter;
+import shagold.wifwaf.view.filter.text.EmailFilter;
+import shagold.wifwaf.view.filter.text.NumberFilter;
+import shagold.wifwaf.view.filter.text.SizeFilter;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -67,45 +74,89 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void trySignUp(View view) throws JSONException {
+        //Définition des filtres
+        EditTextFilter[] filterNumber = {new SizeFilter(0,9), new NumberFilter()}; //pour le champ numéro de téléphone
+        EditTextFilter[] filterSize = {new SizeFilter()}; // pour les champs texte classiques
+        EditTextFilter[] filterEmail = {new SizeFilter(), new EmailFilter()};
+
         // Récupération des valeurs
         EditText ETnickname = (EditText) findViewById(R.id.Nickname);
-        String Snickname = ETnickname.getText().toString();
         EditText ETpassword = (EditText) findViewById(R.id.Password);
-        String Spassword = ETpassword.getText().toString();
         EditText ETemail = (EditText) findViewById(R.id.Email);
-        String Semail = ETemail.getText().toString();
         EditText ETPhoneNumber = (EditText) findViewById(R.id.PhoneNumber);
-        //Vérification que le numéro de téléphone est bien un int
-        int SphoneNumber;
-        try{
-            SphoneNumber = Integer.parseInt(ETPhoneNumber.getText().toString());
-        }
-        catch(Exception e){
-            System.out.println("Num tel:" + ETPhoneNumber.getText().toString());
-            System.out.print("Ici" + e.getMessage());
-            Toast.makeText(SignUpActivity.this, "Le numéro de téléphone doit être un nombre", Toast.LENGTH_LONG).show();
-            return;
-        }
-
         TextView ETBirthday = (TextView) findViewById(R.id.Birthday);
         ETBirthday.setFocusable(false);
-        String Sbirthday = ETBirthday.getText().toString();
         EditText ETDescription = (EditText) findViewById(R.id.Description);
-        String Sdescription = ETDescription.getText().toString();
 
-        // Vérification champs
-        if (Spassword.length() < 6){
-            Toast.makeText(SignUpActivity.this, "Mot de passe trop court", Toast.LENGTH_LONG).show();
+        //Test validité des champs
+        TextValidator textValidator = new TextValidator();
+        boolean valid = true;
+        //Nickname
+        ValidateMessage vmNickname = textValidator.validate(ETnickname, filterSize);
+        if(!vmNickname.getValue()) {
+            valid = false;
+            int min = ((SizeFilter) filterSize[0]).getMin();
+            int max = ((SizeFilter) filterSize[0]).getMax();
+            ETnickname.setError(vmNickname.getError().toString() + " min: " + min + " max: " + max);
+        }
+
+        //Mot de passe
+        ValidateMessage vmPass = textValidator.validate(ETpassword, filterSize);
+        if(!vmPass.getValue()) {
+            valid = false;
+            int min = ((SizeFilter) filterSize[0]).getMin();
+            int max = ((SizeFilter) filterSize[0]).getMax();
+            ETpassword.setError(vmPass.getError().toString() + " min: " + min + " max: " + max);
+        }
+
+        //Adresse mail
+        ValidateMessage vmMail = textValidator.validate(ETemail, filterEmail);
+        if(!vmMail.getValue()) {
+            valid = false;
+            if (vmMail.getError().equals(ErrorMessage.SIZE)){
+                int min = ((SizeFilter) filterSize[0]).getMin();
+                int max = ((SizeFilter) filterSize[0]).getMax();
+                ETemail.setError(vmMail.getError().toString() + " min: " + min + " max: " + max);
+            }
+            else{
+                ETemail.setError(vmMail.getError().toString());
+            }
+        }
+
+        //Numéro de téléphone
+        ValidateMessage vmNumTel = textValidator.validate(ETPhoneNumber, filterNumber);
+        if(!vmNumTel.getValue()) {
+            valid = false;
+            if (vmNumTel.getError().equals(ErrorMessage.SIZE)){
+                int min = ((SizeFilter) filterSize[0]).getMin();
+                int max = ((SizeFilter) filterSize[0]).getMax();
+                ETPhoneNumber.setError(vmNumTel.getError().toString() + " min: " + min + " max: " + max);
+            }
+            else{
+                ETPhoneNumber.setError(vmNumTel.getError().toString());
+            }
+        }
+
+        //Description
+        ValidateMessage vmDescrip = textValidator.validate(ETDescription, filterSize);
+        if(!vmDescrip.getValue()) {
+            valid = false;
+            int min = ((SizeFilter) filterSize[0]).getMin();
+            int max = ((SizeFilter) filterSize[0]).getMax();
+            ETDescription.setError(vmDescrip.getError().toString() + " min: " + min + " max: " + max);
+        }
+
+        if (!valid){
             return;
         }
-        if (Snickname.length() < 3){
-            Toast.makeText(SignUpActivity.this, "Pseudo trop court", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if (ETPhoneNumber.getText().toString().length() < 10){
-            Toast.makeText(SignUpActivity.this, "Numéro de téléphone trop court", Toast.LENGTH_LONG).show();
-            return;
-        }
+
+        //Récupération valeur des champs
+        String Snickname = ETnickname.getText().toString();
+        String Spassword = ETpassword.getText().toString();
+        String Semail = ETemail.getText().toString();
+        int SphoneNumber = Integer.parseInt(ETPhoneNumber.getText().toString());
+        String Sbirthday = ETBirthday.getText().toString();
+        String Sdescription = ETDescription.getText().toString();
 
         //Encryptage mdp
         Spassword = User.encryptPassword(Spassword);

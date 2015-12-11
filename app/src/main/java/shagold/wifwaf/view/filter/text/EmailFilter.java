@@ -8,9 +8,6 @@ import java.util.regex.Pattern;
 import shagold.wifwaf.view.ErrorMessage;
 import shagold.wifwaf.view.ValidateMessage;
 
-/**
- * Created by jimmy on 09/12/15.
- */
 public class EmailFilter extends EditTextFilter {
 
     @Override
