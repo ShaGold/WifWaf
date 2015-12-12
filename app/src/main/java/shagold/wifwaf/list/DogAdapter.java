@@ -75,7 +75,6 @@ public class DogAdapter extends ArrayAdapter<Dog> {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // TODO send dog id to delete
-                        // Probleme on a pas l'id du chien
                         int id = dog.getIdDog();
                         System.out.println("ID : " + id);
                     }
