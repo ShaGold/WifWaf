@@ -79,6 +79,7 @@ public class UserDogsActivity extends AppCompatActivity {
                 try {
                     currentObj = dogsJSON.getJSONObject(i);
                     int idUser = currentObj.getInt("idUser");
+                    int idDog = currentObj.getInt("idDog");
                     String dogName = currentObj.getString("dogName");
                     int age = currentObj.getInt("age");
                     String breed = currentObj.getString("breed");
@@ -89,7 +90,7 @@ public class UserDogsActivity extends AppCompatActivity {
                     String getAlongWithHumans = currentObj.getString("getAlongWithHumans");
                     String description = currentObj.getString("description");
 
-                    dogs.add(new Dog(idUser, dogName, age, breed, size, getAlongWithMales, getAlongWithFemales, getAlongWithKids, getAlongWithHumans, description));
+                    dogs.add(new Dog(idDog, idUser, dogName, age, breed, size, getAlongWithMales, getAlongWithFemales, getAlongWithKids, getAlongWithHumans, description));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -110,7 +111,6 @@ public class UserDogsActivity extends AppCompatActivity {
                 Dog dog = (Dog) mListView.getItemAtPosition(position);
                 Intent clickedDogProfile = new Intent(getApplicationContext(), DogProfileActivity.class);
                 clickedDogProfile.putExtra("DOG", dog);
-                System.out.println("ID - Dog : " + dog.getIdDog());
                 startActivity(clickedDogProfile);
             }
         });
