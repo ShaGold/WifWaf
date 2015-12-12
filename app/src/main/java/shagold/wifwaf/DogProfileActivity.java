@@ -21,7 +21,7 @@ public class DogProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dog_profile);
 
         dog = (Dog) getIntent().getSerializableExtra("DOG");
- 
+
     }
 
     @Override

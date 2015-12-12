@@ -48,6 +48,10 @@ public class Dog implements Serializable {
         return dogJson;
     }
 
+    public int getIdDog() {
+        return idDog;
+    }
+
     public String getDescription() {
         return description;
     }

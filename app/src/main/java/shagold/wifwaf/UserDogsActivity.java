@@ -110,6 +110,7 @@ public class UserDogsActivity extends AppCompatActivity {
                 Dog dog = (Dog) mListView.getItemAtPosition(position);
                 Intent clickedDogProfile = new Intent(getApplicationContext(), DogProfileActivity.class);
                 clickedDogProfile.putExtra("DOG", dog);
+                System.out.println("ID - Dog : " + dog.getIdDog());
                 startActivity(clickedDogProfile);
             }
         });
@@ -123,7 +124,7 @@ public class UserDogsActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     List<Dog> dogs = generateDogsFromJson((JSONArray) args[0]);
-                    DogAdapter adapter = new DogAdapter(getApplicationContext(), dogs);
+                    DogAdapter adapter = new DogAdapter(UserDogsActivity.this, dogs);
                     mListView.setAdapter(adapter);
                 }
 
