@@ -20,6 +20,20 @@ public class Dog implements Serializable {
 
     public Dog(){}
 
+    public Dog(JSONObject dogJson) throws JSONException {
+        this.idDog = dogJson.getInt("idDog");
+        this.idUser = dogJson.getInt("idUser");
+        this.dogName = dogJson.getString("dogName");
+        this.age = dogJson.getInt("age");
+        this.breed = dogJson.getString("breed");
+        this.size = dogJson.getInt("size");
+        this.getAlongWithMales = dogJson.getString("getAlongWithMales");
+        this.getAlongWithFemales = dogJson.getString("getAlongWithFemales");
+        this.getAlongWithKids = dogJson.getString("getAlongWithKids");
+        this.getAlongWithHumans = dogJson.getString("getAlongWithHumans");
+        this.description = dogJson.getString("description");
+    }
+
     public Dog(int idDog, int idUser, String dogName, int age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description){
         this.idDog = idDog;
         this.idUser = idUser;
@@ -33,7 +47,6 @@ public class Dog implements Serializable {
         this.getAlongWithHumans = getAlongWithHumans;
         this.description = description;
     }
-
 
     public Dog(int idUser, String dogName, int age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description){
         this.idUser = idUser;
