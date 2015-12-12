@@ -3,7 +3,9 @@ package shagold.wifwaf.dataBase;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Dog {
+import java.io.Serializable;
+
+public class Dog implements Serializable {
     private int idDog;
     private int idUser;
     private String dogName;

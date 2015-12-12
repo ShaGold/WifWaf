@@ -108,9 +108,9 @@ public class UserDogsActivity extends AppCompatActivity {
                                     int position, long id) {
 
                 Dog dog = (Dog) mListView.getItemAtPosition(position);
-                //Toast.makeText(getBaseContext(), dog.getName(), Toast.LENGTH_SHORT).show();
-                Intent actDogProfile = new Intent(getApplicationContext(), DogProfileActivity.class);
-                startActivity(actDogProfile);
+                Intent clickedDogProfile = new Intent(getApplicationContext(), DogProfileActivity.class);
+                clickedDogProfile.putExtra("DOG", dog);
+                startActivity(clickedDogProfile);
             }
         });
     }
