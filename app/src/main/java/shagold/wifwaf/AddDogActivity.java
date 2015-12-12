@@ -89,7 +89,7 @@ public class AddDogActivity extends AppCompatActivity {
         }
 
         //Age
-        ValidateMessage vmAge = textValidator.validate(ETage, filterNumber);
+       /* ValidateMessage vmAge = textValidator.validate(ETage, filterNumber);
         if(!vmAge.getValue()) {
             valid = false;
             if (vmAge.getError().equals(ErrorMessage.SIZE)){
@@ -100,7 +100,7 @@ public class AddDogActivity extends AppCompatActivity {
             else{
                 ETage.setError(vmAge.getError().toString());
             }
-        }
+        }*/
 
         //Breed
         ValidateMessage vmBreed = textValidator.validate(ETbreed, filterSize);
@@ -112,7 +112,7 @@ public class AddDogActivity extends AppCompatActivity {
         }
 
         //Size
-        ValidateMessage vmSize = textValidator.validate(ETsize, filterNumber);
+        /*ValidateMessage vmSize = textValidator.validate(ETsize, filterNumber);
         if(!vmSize.getValue()) {
             valid = false;
             if (vmSize.getError().equals(ErrorMessage.SIZE)){
@@ -123,7 +123,7 @@ public class AddDogActivity extends AppCompatActivity {
             else{
                 ETsize.setError(vmSize.getError().toString());
             }
-        }
+        }*/
 
         //Get along...
         ValidateMessage vmGAWM = textValidator.validate(ETGetalongwithMales, filterSize);

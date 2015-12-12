@@ -24,9 +24,6 @@ import shagold.wifwaf.R;
 import shagold.wifwaf.dataBase.Dog;
 import shagold.wifwaf.manager.SocketManager;
 
-/**
- * Created by jimmy on 22/11/15.
- */
 public class DogAdapter extends ArrayAdapter<Dog> {
 
     private Context c;
@@ -64,30 +61,24 @@ public class DogAdapter extends ArrayAdapter<Dog> {
         viewHolder.getButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AlertDialog.Builder dialog = new AlertDialog.Builder(c);
-
-                dialog.setTitle("Delete Dogs");
-
+                dialog.setTitle("Delete Dog");
                 dialog.setMessage("Are you sure to delete the dog : \n\n\t" + dog.getName());
-
                 dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // TODO send dog id to delete
                         int id = dog.getIdDog();
+                        mSocket.emit("deleteDog", id);
                     }
                 });
-
                 dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
-
                 AlertDialog alertDeleteDogs = dialog.create();
                 alertDeleteDogs.show();
-
             }
         });
 
