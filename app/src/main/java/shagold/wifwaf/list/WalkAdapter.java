@@ -42,7 +42,7 @@ public class WalkAdapter extends ArrayAdapter<Walk> {
         Walk walk = getItem(position);
         viewHolder.getTitle().setText(walk.getTitle());
         viewHolder.getDescription().setText(walk.getDescription());
-        viewHolder.getAvatar().setImageDrawable(new ColorDrawable(walk.getDifficulty().getTemplate()));
+        //viewHolder.getAvatar().setImageDrawable();
 
         return convertView;
     }

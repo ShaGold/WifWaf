@@ -13,7 +13,6 @@ import android.content.Intent;
 import java.util.ArrayList;
 import java.util.List;
 import shagold.wifwaf.dataBase.Walk;
-import shagold.wifwaf.dataBase.WalkDifficulty;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.list.WalkAdapter;
 import shagold.wifwaf.manager.SocketManager;
@@ -55,18 +54,18 @@ public class HomeActivity extends AppCompatActivity {
     private List<Walk> generateWalks() {
         List<Walk> walks = new ArrayList<Walk>();
 
-        walks.add(new Walk("Balade 1", "Ma premiere balade !", WalkDifficulty.VERY_EASY));
-        walks.add(new Walk("Balade 2", "Ma premiere balade !", WalkDifficulty.EASY));
-        walks.add(new Walk("Balade 3", "Ma premiere balade !", WalkDifficulty.MEDIUM));
-        walks.add(new Walk("Balade 4", "Ma premiere balade !", WalkDifficulty.HARD));
-        walks.add(new Walk("Balade 5", "Ma premiere balade !", WalkDifficulty.EASY));
-        walks.add(new Walk("Balade 6", "Ma premiere balade !", WalkDifficulty.MEDIUM));
-        walks.add(new Walk("Balade 1", "Ma premiere balade !", WalkDifficulty.HARD));
-        walks.add(new Walk("Balade 2", "Ma premiere balade !", WalkDifficulty.EASY));
-        walks.add(new Walk("Balade 3", "Ma premiere balade !", WalkDifficulty.MEDIUM));
-        walks.add(new Walk("Balade 4", "Ma premiere balade !", WalkDifficulty.HARD));
-        walks.add(new Walk("Balade 5", "Ma premiere balade !", WalkDifficulty.EASY));
-        walks.add(new Walk("Balade 6", "Ma premiere balade !", WalkDifficulty.VERY_HARD));
+        walks.add(new Walk("Balade 1", "Ma premiere balade !"));
+        walks.add(new Walk("Balade 2", "Ma premiere balade !"));
+        walks.add(new Walk("Balade 3", "Ma premiere balade !"));
+        walks.add(new Walk("Balade 4", "Ma premiere balade !"));
+        walks.add(new Walk("Balade 5", "Ma premiere balade !"));
+        walks.add(new Walk("Balade 6", "Ma premiere balade !"));
+        walks.add(new Walk("Balade 1", "Ma premiere balade !"));
+        walks.add(new Walk("Balade 2", "Ma premiere balade !"));
+        walks.add(new Walk("Balade 3", "Ma premiere balade !"));
+        walks.add(new Walk("Balade 4", "Ma premiere balade !"));
+        walks.add(new Walk("Balade 5", "Ma premiere balade !"));
+        walks.add(new Walk("Balade 6", "Ma premiere balade !"));
         return walks;
     }
 

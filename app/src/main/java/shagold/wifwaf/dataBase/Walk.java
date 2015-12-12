@@ -7,12 +7,10 @@ public class Walk {
 
     private String title;
     private String description;
-    private WalkDifficulty difficulty;
 
-    public Walk(String title, String description, WalkDifficulty difficulty) {
+    public Walk(String title, String description) {
         this.title = title;
         this.description = description;
-        this.difficulty = difficulty;
     }
 
     public String getTitle() {
@@ -21,9 +19,5 @@ public class Walk {
 
     public String getDescription() {
         return description;
-    }
-
-    public WalkDifficulty getDifficulty() {
-        return difficulty;
     }
 }
