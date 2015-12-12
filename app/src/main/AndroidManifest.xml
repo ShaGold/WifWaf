@@ -34,11 +34,6 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".ResultSignUpActivity"
-            android:label="@string/title_activity_result_sign_up"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
             android:name=".AddDogActivity"
             android:label="@string/title_activity_add_dog"
             android:screenOrientation="portrait">
