@@ -20,6 +20,21 @@ public class Dog implements Serializable {
 
     public Dog(){}
 
+    public Dog(int idDog, int idUser, String dogName, int age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description){
+        this.idDog = idDog;
+        this.idUser = idUser;
+        this.dogName = dogName;
+        this.age = age;
+        this.breed = breed;
+        this.size = size;
+        this.getAlongWithMales = getAlongWithMales;
+        this.getAlongWithFemales = getAlongWithFemales;
+        this.getAlongWithKids = getAlongWithKids;
+        this.getAlongWithHumans = getAlongWithHumans;
+        this.description = description;
+    }
+
+
     public Dog(int idUser, String dogName, int age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description){
         this.idUser = idUser;
         this.dogName = dogName;
