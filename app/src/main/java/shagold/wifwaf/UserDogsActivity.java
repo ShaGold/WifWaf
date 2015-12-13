@@ -46,6 +46,7 @@ public class UserDogsActivity extends AppCompatActivity {
         mUser = SocketManager.getMyUser();
         mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
         mSocket.emit("getAllMyDogs", mUser.getIdUser());
+        mSocket.on("RdeleteDog", onRDeleteDog);
 
         final Intent activityAddDog = new Intent(getApplicationContext(), AddDogActivity.class);
 
@@ -119,5 +120,17 @@ public class UserDogsActivity extends AppCompatActivity {
             });
         }
 
+    };
+
+    private Emitter.Listener onRDeleteDog = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            UserDogsActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    UserDogsActivity.this.recreate();
+                }
+            });
+        }
     };
 }
