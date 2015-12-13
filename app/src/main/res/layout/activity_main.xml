@@ -49,6 +49,16 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="connexion rapide"
+        android:id="@+id/connexionDebug"
+        android:layout_below="@+id/signInButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="trySignInDebug"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/button_sign_up"
         android:id="@+id/signUpButton"
         android:layout_alignParentBottom="true"
