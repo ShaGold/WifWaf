@@ -16,6 +16,12 @@ import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
 import shagold.wifwaf.tool.WifWafColor;
+import shagold.wifwaf.view.ErrorMessage;
+import shagold.wifwaf.view.TextValidator;
+import shagold.wifwaf.view.ValidateMessage;
+import shagold.wifwaf.view.filter.text.EditTextFilter;
+import shagold.wifwaf.view.filter.text.EmailFilter;
+import shagold.wifwaf.view.filter.text.SizeFilter;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
@@ -72,16 +78,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void trySignIn(View view) throws JSONException {
-        Etemail = (EditText) findViewById(R.id.Email);
-        String email = Etemail.getText().toString();
-        ETPassword = (EditText) findViewById(R.id.Password);
-        pass = ETPassword.getText().toString();
+        //préparation filtres
+        EditTextFilter[] filterSize = {new SizeFilter()};
+        EditTextFilter[] filterEmail = {new SizeFilter(), new EmailFilter()};
 
-        if (pass.length() < 6){
-            Toast.makeText(MainActivity.this, "Le mot de passe est trop court", Toast.LENGTH_LONG).show();
-            //return;
+        Etemail = (EditText) findViewById(R.id.Email);
+        ETPassword = (EditText) findViewById(R.id.Password);
+
+        //Vérification champs
+        TextValidator textValidator = new TextValidator();
+        boolean valid = true;
+        //E-mail
+        ValidateMessage vmMail = textValidator.validate(Etemail, filterEmail);
+        if(!vmMail.getValue()) {
+            valid = false;
+            if (vmMail.getError().equals(ErrorMessage.SIZE)){
+                int min = ((SizeFilter) filterSize[0]).getMin();
+                int max = ((SizeFilter) filterSize[0]).getMax();
+                Etemail.setError(vmMail.getError().toString() + " min: " + min + " max: " + max);
+            }
+            else{
+                Etemail.setError(vmMail.getError().toString());
+            }
         }
 
+        //Mot de passe
+        ValidateMessage vmPass = textValidator.validate(ETPassword, filterSize);
+        if(!vmPass.getValue()) {
+            valid = false;
+            int min = ((SizeFilter) filterSize[0]).getMin();
+            int max = ((SizeFilter) filterSize[0]).getMax();
+            ETPassword.setError(vmPass.getError().toString() + " min: " + min + " max: " + max);
+        }
+
+        if (!valid){
+            return;
+        }
+
+        String email = Etemail.getText().toString();
+        pass = ETPassword.getText().toString();
         //Test de connexion
         User user = new User(email, pass);
         JSONObject jsonUser = user.toJson();
