@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -48,7 +48,7 @@ public class DogAdapter extends ArrayAdapter<Dog> {
             viewHolder.setName((TextView) convertView.findViewById(R.id.nameRowDog));
             viewHolder.setDescription((TextView) convertView.findViewById(R.id.descriptionRowDog));
             viewHolder.setAvatar((ImageView) convertView.findViewById(R.id.avatarRowDog));
-            viewHolder.setButton((Button) convertView.findViewById(R.id.deleteDogButton));
+            viewHolder.setButton((ImageButton) convertView.findViewById(R.id.deleteDogButton));
             convertView.setTag(viewHolder);
         }
 
@@ -56,7 +56,6 @@ public class DogAdapter extends ArrayAdapter<Dog> {
         viewHolder.getName().setText(dog.getName());
         viewHolder.getDescription().setText(dog.getDescription());
         viewHolder.getAvatar().setImageResource(viewHolder.getDefaultAvatar());
-        viewHolder.getButton().setText("delete");
 
         viewHolder.getButton().setOnClickListener(new View.OnClickListener() {
             @Override

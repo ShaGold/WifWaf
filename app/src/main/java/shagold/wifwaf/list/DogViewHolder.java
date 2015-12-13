@@ -1,6 +1,8 @@
 package shagold.wifwaf.list;
 
+import android.media.Image;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,7 +16,7 @@ public class DogViewHolder {
     private TextView name;
     private TextView description;
     private ImageView avatar;
-    private Button button;
+    private ImageButton button;
 
     public DogViewHolder() {
     }
@@ -47,11 +49,11 @@ public class DogViewHolder {
         return R.drawable.dogi2;
     }
 
-    public Button getButton() {
+    public ImageButton getButton() {
         return button;
     }
 
-    public void setButton(Button button) {
+    public void setButton(ImageButton button) {
         this.button = button;
     }
 }
