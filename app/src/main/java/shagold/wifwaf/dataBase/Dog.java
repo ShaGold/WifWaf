@@ -17,6 +17,7 @@ public class Dog implements Serializable {
     private String getAlongWithKids;
     private String getAlongWithHumans;
     private String description;
+    private boolean male; // TODO finish sex of Dog
 
     public Dog(){}
 
@@ -86,5 +87,9 @@ public class Dog implements Serializable {
 
     public String getName() {
         return dogName;
+    }
+
+    public boolean isMale() {
+        return male;
     }
 }

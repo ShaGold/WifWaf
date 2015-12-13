@@ -66,7 +66,6 @@ public class DogAdapter extends ArrayAdapter<Dog> {
                 dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO send dog id to delete
                         int id = dog.getIdDog();
                         mSocket.emit("deleteDog", id);
                     }

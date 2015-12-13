@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Switch;
 
 import shagold.wifwaf.dataBase.Dog;
 import shagold.wifwaf.manager.MenuManager;
@@ -21,6 +24,23 @@ public class DogProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dog_profile);
 
         dog = (Dog) getIntent().getSerializableExtra("DOG");
+
+        EditText dogName = (EditText) findViewById(R.id.dogProfileName);
+        dogName.setText(dog.getName());
+
+        // TODO default image
+
+        ImageView dogProfile = (ImageView) findViewById(R.id.avatarDog);
+        dogProfile.setImageResource(R.drawable.dogi2);
+
+        EditText dogDescription = (EditText) findViewById(R.id.dogProfileDescription);
+        dogDescription.setText(dog.getDescription());
+
+        Switch dogSex = (Switch) findViewById(R.id.dogProfileSex);
+        if(dog.isMale())
+            dogSex.setChecked(true);
+        else
+            dogSex.setChecked(false);
 
     }
 
