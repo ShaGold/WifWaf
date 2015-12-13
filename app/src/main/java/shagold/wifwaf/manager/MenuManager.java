@@ -9,6 +9,7 @@ import shagold.wifwaf.HomeActivity;
 import shagold.wifwaf.R;
 import shagold.wifwaf.UserDogsActivity;
 import shagold.wifwaf.UserProfileActivity;
+import shagold.wifwaf.UserWalksActivity;
 
 
 public class MenuManager {
@@ -39,7 +40,7 @@ public class MenuManager {
                 a.startActivity(userDogs);
                 return true;
             case R.id.action_walks :
-                final Intent userWalks = new Intent(a.getApplicationContext(), AddWalkActivity.class);
+                final Intent userWalks = new Intent(a.getApplicationContext(), UserWalksActivity.class);
                 a.startActivity(userWalks);
                 return true;
             default:

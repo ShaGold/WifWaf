@@ -74,6 +74,11 @@
             android:label=""
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".UserWalksActivity"
+            android:label="@string/title_activity_user_walks"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>
