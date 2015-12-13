@@ -19,6 +19,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/userProfileName" />
 
+    <ImageView
+        android:id="@+id/avatarUserProfile"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        tools:background="#AAA"/>
+
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

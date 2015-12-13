@@ -1,5 +1,6 @@
 package shagold.wifwaf.list;
 
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ public class WalkViewHolder {
     private TextView title;
     private TextView description;
     private ImageView avatar;
+    private ImageButton button;
 
     public WalkViewHolder() {
     }
@@ -37,5 +39,13 @@ public class WalkViewHolder {
 
     public void setAvatar(ImageView avatar) {
         this.avatar = avatar;
+    }
+
+    public ImageButton getButton() {
+        return button;
+    }
+
+    public void setButton(ImageButton button) {
+        this.button = button;
     }
 }

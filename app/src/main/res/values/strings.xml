@@ -47,6 +47,10 @@
     <!-- Jimmy add -->
     <string name="user_dogs_prompt">Choose your dogs</string>
     <string name="new_walk">New Walk</string>
+    <string name="title">Title</string>
+    <string name="contact_creator">Contact creator</string>
+    <string name="userProfile">User Profile</string>
+    <string name="seeProfile">See user profile</string>
 
     <string-array name="user_dogs_arrays">
         <item>No dogs</item>
