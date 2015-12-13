@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -124,7 +123,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         //Numéro de téléphone
-        ValidateMessage vmNumTel = textValidator.validate(ETPhoneNumber, filterNumber);
+        /*ValidateMessage vmNumTel = textValidator.validate(ETPhoneNumber, filterNumber);
         if(!vmNumTel.getValue()) {
             valid = false;
             if (vmNumTel.getError().equals(ErrorMessage.SIZE)){
@@ -135,7 +134,7 @@ public class SignUpActivity extends AppCompatActivity {
             else{
                 ETPhoneNumber.setError(vmNumTel.getError().toString());
             }
-        }
+        }*/
 
         //Description
         ValidateMessage vmDescrip = textValidator.validate(ETDescription, filterSize);
@@ -253,7 +252,7 @@ public class SignUpActivity extends AppCompatActivity {
                             alertDialog.show();
                         }
                         else{
-                            User mUser = new User(param);
+                            mUser = new User(param);
                             Intent resultat = new Intent(SignUpActivity.this, HomeActivity.class);
                             System.out.println("[Réussite inscription]"+param);
                             SocketManager.setMyUser(mUser);

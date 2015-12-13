@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private Socket mSocket;
     private Button signUpButton;
     private Button signInButton;
+    private Button connexionDebug;
     private EditText Etemail;
     private EditText ETPassword;
     private String pass;
@@ -40,15 +41,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //initSignInButton();
-        initSignUpButton();
-
         try {
             SocketManager.setMySocket(IO.socket("http://51.254.124.136:8000"));
         } catch (URISyntaxException e) {}
         mSocket = SocketManager.getMySocket();
         mSocket.connect();
         mSocket.on("RTrySignIn", onRTrySignIn);
+
+        initSignUpButton();
     }
 
     @Override
@@ -62,16 +62,13 @@ public class MainActivity extends AppCompatActivity {
         return MenuManager.emptyMenu(item) || super.onOptionsItemSelected(item);
     }
 
-    private void initSignInButton() {
-        signInButton = (Button) findViewById(R.id.signInButton);
-        signInButton.setBackgroundColor(WifWafColor.BROWN_DARK);
-        final Intent home = new Intent(getApplicationContext(), HomeActivity.class);
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(home);
-            }
-        });
+    public void trySignInDebug(View view) throws JSONException {
+        connexionDebug = (Button) findViewById(R.id.connexionDebug);
+        User user = new User("test@test.fr", "test");
+        JSONObject jsonUser = user.toJson();
+        System.out.println("TrySignIn" + jsonUser);
+        mSocket.emit("TrySignIn", jsonUser);
+        pass = "test";
     }
 
     public void trySignIn(View view) throws JSONException {
