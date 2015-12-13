@@ -19,6 +19,10 @@ import shagold.wifwaf.manager.SocketManager;
 
 import com.github.nkzawa.socketio.client.Socket;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by jimmy on 07/11/15.
  */
@@ -51,10 +55,30 @@ public class HomeActivity extends AppCompatActivity {
         return MenuManager.defaultMenu(this, item) || super.onOptionsItemSelected(item);
     }
 
+    private List<Walk> generateDogsFromJson(JSONArray json) {
+
+        List<Walk> walks = new ArrayList<Walk>();
+
+        if(json != null) {
+            for (int i = 0; i < json.length(); i++) {
+                JSONObject currentObj = null;
+                try {
+                    currentObj = json.getJSONObject(i);
+                    Walk newWalk = new Walk(currentObj);
+                    walks.add(newWalk);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return walks;
+    }
+
     private List<Walk> generateWalks() {
         List<Walk> walks = new ArrayList<Walk>();
 
-        walks.add(new Walk("Balade 1", "Ma premiere balade !"));
+        /*walks.add(new Walk("Balade 1", "Ma premiere balade !"));
         walks.add(new Walk("Balade 2", "Ma premiere balade !"));
         walks.add(new Walk("Balade 3", "Ma premiere balade !"));
         walks.add(new Walk("Balade 4", "Ma premiere balade !"));
@@ -65,7 +89,7 @@ public class HomeActivity extends AppCompatActivity {
         walks.add(new Walk("Balade 3", "Ma premiere balade !"));
         walks.add(new Walk("Balade 4", "Ma premiere balade !"));
         walks.add(new Walk("Balade 5", "Ma premiere balade !"));
-        walks.add(new Walk("Balade 6", "Ma premiere balade !"));
+        walks.add(new Walk("Balade 6", "Ma premiere balade !"));*/
         return walks;
     }
 
@@ -75,11 +99,10 @@ public class HomeActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
                 Walk walk = (Walk) mListView.getItemAtPosition(position);
-                //Toast.makeText(getBaseContext(), walk.getTitle(), Toast.LENGTH_SHORT).show();
-                final Intent getWalk = new Intent(getApplicationContext(), WalkProfileActivity.class);
-                startActivity(getWalk);
+                Intent clickedWalkProfile = new Intent(getApplicationContext(), WalkProfileActivity.class);
+                clickedWalkProfile.putExtra("WALK", walk);
+                startActivity(clickedWalkProfile);
             }
         });
     }

@@ -25,6 +25,10 @@ public class WalkProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walk_profile);
 
+        walk = (Walk) getIntent().getSerializableExtra("WALK");
+
+        System.out.println("WALK : " + walk.getTitle());
+
         useWalk = (Button) findViewById(R.id.useWalkButton);
         useWalk.setBackgroundColor(WifWafColor.BROWN_DARK);
         final Intent actGPSWalk = new Intent(getApplicationContext(), GPSWalkActivity.class);

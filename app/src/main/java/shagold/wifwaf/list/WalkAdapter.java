@@ -9,18 +9,26 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.github.nkzawa.socketio.client.Socket;
+
 import java.util.List;
 
 import shagold.wifwaf.R;
 import shagold.wifwaf.dataBase.Walk;
+import shagold.wifwaf.manager.SocketManager;
 
 /**
  * Created by jimmy on 22/11/15.
  */
 public class WalkAdapter extends ArrayAdapter<Walk> {
 
+    private Context c;
+    private Socket mSocket;
+
     public WalkAdapter(Context context, List<Walk> walks) {
         super(context, 0, walks);
+        c = context;
+        mSocket = SocketManager.getMySocket();
     }
 
     @Override
