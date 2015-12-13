@@ -213,8 +213,7 @@ public class AddDogActivity extends AppCompatActivity {
                             CheckBox cb = new CheckBox(getApplicationContext());
                             cb.setText(description);
                             cb.setId(idBehaviour);
-                            //TODO gestion correcte des couleurs via les ressources
-                            cb.setTextColor(0xAA000000);
+                            cb.setTextColor(WifWafColor.BLACK);
                             actlayout = (LinearLayout) findViewById(R.id.layout);
                             actlayout.addView(cb, 9);
                         } catch (JSONException e) {
