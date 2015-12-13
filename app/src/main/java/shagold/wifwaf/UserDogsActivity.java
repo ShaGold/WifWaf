@@ -96,7 +96,6 @@ public class UserDogsActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
                 Dog dog = (Dog) mListView.getItemAtPosition(position);
                 Intent clickedDogProfile = new Intent(getApplicationContext(), DogProfileActivity.class);
                 clickedDogProfile.putExtra("DOG", dog);
@@ -108,7 +107,6 @@ public class UserDogsActivity extends AppCompatActivity {
     private Emitter.Listener onRGetAllMyDogs = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
-
             UserDogsActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
