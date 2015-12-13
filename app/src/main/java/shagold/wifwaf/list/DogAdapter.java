@@ -56,7 +56,7 @@ public class DogAdapter extends ArrayAdapter<Dog> {
         viewHolder.getName().setText(dog.getName());
         viewHolder.getDescription().setText(dog.getDescription());
         viewHolder.getAvatar().setImageResource(viewHolder.getDefaultAvatar());
-
+        viewHolder.getButton().setFocusable(false);
         viewHolder.getButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
