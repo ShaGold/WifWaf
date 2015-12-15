@@ -82,6 +82,10 @@
             android:name=".PublicUserProfileActivity"
             android:label="@string/title_activity_public_user_profile" >
         </activity>
+        <activity
+            android:name=".PublicWalkProfileActivity"
+            android:label="@string/title_activity_public_walk_profile" >
+        </activity>
     </application>
 
 </manifest>
