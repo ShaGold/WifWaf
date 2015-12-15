@@ -17,14 +17,23 @@ public class Walk implements Serializable {
     private String departure; //TODO Timestamp?
     private ArrayList<Location> parcours = new ArrayList<Location>();
 
-    public Walk(int id, int idDog, int idUser, String wN, String description, String city, String desc) {
+    public Walk(int id, int idDog, int idUser, String wN, String description, String city, String dep) {
         this.idWalk = id;
         this.idDog = idDog;
         this.idUser = idUser;
         this.walkName = wN;
         this.description = description;
         this.city = city;
-        this.departure = desc;
+        this.departure = dep;
+    }
+
+    public Walk(int idDog, int idUser, String wN, String description, String city, String dep) {
+        this.idDog = idDog;
+        this.idUser = idUser;
+        this.walkName = wN;
+        this.description = description;
+        this.city = city;
+        this.departure = dep;
     }
 
     public void addLocationToWalk(double latitude, double longitude){
@@ -35,6 +44,17 @@ public class Walk implements Serializable {
 
     public Walk(JSONObject jsonWalk) throws JSONException {
         //TODO check with server
+    }
+
+    public JSONObject toJson() throws JSONException {
+        JSONObject walkJson = new JSONObject();
+        walkJson.put("idDog", this.idDog);
+        walkJson.put("idUser", this.idUser);
+        walkJson.put("walkName", this.walkName);
+        walkJson.put("description", this.description);
+        walkJson.put("city", this.city);
+        walkJson.put("departure", this.departure);
+        return walkJson;
     }
 
     public int getIdWalk() {
