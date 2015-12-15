@@ -10,7 +10,6 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -28,6 +27,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.manager.MenuManager;
 
 public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
@@ -43,6 +43,8 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
 
     private AddressResultReceiver mResultReceiver;
 
+    private Walk walk;
+
     class AddressResultReceiver extends ResultReceiver {
         public AddressResultReceiver(Handler handler) {
             super(handler);
@@ -50,23 +52,17 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
 
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
-
-            // Display the address string
-            // or an error message sent from the intent service.
-            System.out.println(resultData.getString(Constants.RESULT_DATA_KEY));
-
-            // Show a toast message if an address was found.
-            if (resultCode == Constants.SUCCESS_RESULT) {
-                showToast(getString(R.string.address_found));
-
-            }
-
+           // if (resultCode == Constants.SUCCESS_RESULT)
+                //walk.setCity(resultData.getString(Constants.RESULT_DATA_KEY));
         }
     }
 
+    private Walk finalWalk() {
+        for(LatLng p : linesLatLng) {
+            //walk.addLocationToWalk(p.latitude, p.longitude);
+        }
 
-    private void showToast(String s) {
-        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+        return walk;
     }
 
     @Override
@@ -81,6 +77,8 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
 
         createLocationRequest();
         //mMap.getUiSettings().setRotateGesturesEnabled(false);
+
+        walk = (Walk) getIntent().getSerializableExtra("WALK");
     }
 
     @Override
