@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.github.nkzawa.socketio.client.Socket;
 import com.google.android.gms.common.ConnectionResult;
@@ -24,6 +25,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -61,12 +64,18 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
         }
     }
 
-    public void finishWalk() {
+    public void finishWalk(View view) {
         for(LatLng p : linesLatLng) {
             walk.addLocationToWalk(p.latitude, p.longitude);
         }
 
         //TODO send json walk
+
+        try {
+            walk.toJson();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         Intent resultat = new Intent(GPSWalkActivity.this, UserWalksActivity.class);
         startActivity(resultat);

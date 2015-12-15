@@ -127,8 +127,8 @@ public class AddWalkActivity extends AppCompatActivity {
                 final Intent actGPSWalk = new Intent(getApplicationContext(), GPSWalkActivity.class);
                 if (dogsSelectedNumber > 0) {
                     if (validText) {
-                        //Walk walk = new Walk(nameWalk, descriptionWalk, "null", "");
-                        //actGPSWalk.putExtra("WALK", walk);
+                        Walk walk = new Walk(dogChoise.get(0).getIdDog(), mUser.getIdUser(),nameWalk.getText().toString(), descriptionWalk.getText().toString(), "null", "");
+                        actGPSWalk.putExtra("WALK", walk);
                         startActivity(actGPSWalk);
                     }
                 } else {
