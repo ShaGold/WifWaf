@@ -37,6 +37,17 @@ public class Walk implements Serializable {
         //TODO check with server
     }
 
+    public JSONObject toJson() throws JSONException {
+        JSONObject walkJson = new JSONObject();
+        walkJson.put("idDog", this.idDog);
+        walkJson.put("idUser", this.idUser);
+        walkJson.put("walkName", this.walkName);
+        walkJson.put("description", this.description);
+        walkJson.put("city", this.city);
+        walkJson.put("departure", this.departure);
+        return walkJson;
+    }
+
     public int getIdWalk() {
         return idWalk;
     }
