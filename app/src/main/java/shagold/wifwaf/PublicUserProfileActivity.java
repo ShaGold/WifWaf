@@ -30,7 +30,7 @@ public class PublicUserProfileActivity extends AppCompatActivity {
         userProfileName.setText(defUser.getNickname());
 
         userProfileMail = (TextView) findViewById(R.id.userProfileMail);
-        userProfileMail.setText(Html.fromHtml("<a href=" + defUser.getEmail() + ">" + defUser.getEmail() + "</a>"));
+        userProfileMail.setText(Html.fromHtml("<a href=mailto:" + defUser.getEmail() + ">" + defUser.getEmail() + "</a>"));
 
         userProfileBirthday = (TextView) findViewById(R.id.userProfileBirthday);
         userProfileBirthday.setText(defUser.getBirthday());
