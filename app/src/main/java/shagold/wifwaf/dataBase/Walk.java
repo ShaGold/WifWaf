@@ -27,6 +27,15 @@ public class Walk implements Serializable {
         this.departure = desc;
     }
 
+    public Walk(int idDog, int idUser, String wN, String description, String city, String desc) {
+        this.idDog = idDog;
+        this.idUser = idUser;
+        this.walkName = wN;
+        this.description = description;
+        this.city = city;
+        this.departure = desc;
+    }
+
     public void addLocationToWalk(double latitude, double longitude){
         int order = parcours.size() + 1;
         Location newLoc = new Location(latitude, longitude, order);
