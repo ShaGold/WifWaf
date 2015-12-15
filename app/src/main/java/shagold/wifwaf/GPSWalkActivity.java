@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -27,6 +28,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -69,16 +71,12 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
             walk.addLocationToWalk(p.latitude, p.longitude);
         }
 
-        //TODO send json walk
-
         try {
-            walk.toJson();
+            JSONObject walkJson = walk.toJson();
+            mSocket.emit("TryAddWalk", walkJson);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        Intent resultat = new Intent(GPSWalkActivity.this, UserWalksActivity.class);
-        startActivity(resultat);
     }
 
     @Override
@@ -96,7 +94,7 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
 
         walk = (Walk) getIntent().getSerializableExtra("WALK");
         mSocket = SocketManager.getMySocket();
-
+        mSocket.on("RTryAddWalk", onRTryAddWalk);
     }
 
     @Override
@@ -216,4 +214,17 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
                 .addApi(LocationServices.API)
                 .build();
     }
+
+    private Emitter.Listener onRTryAddWalk = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            GPSWalkActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Intent resultat = new Intent(GPSWalkActivity.this, UserWalksActivity.class);
+                    startActivity(resultat);
+                }
+            });
+        }
+    };
 }
