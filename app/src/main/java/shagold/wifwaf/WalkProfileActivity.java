@@ -81,7 +81,6 @@ public class WalkProfileActivity extends AppCompatActivity {
     }
 
     public void redirectUserProfile(View view){
-        System.out.println("Je passe ici");
         Intent resultat = new Intent(WalkProfileActivity.this, PublicUserProfileActivity.class);
         startActivity(resultat);
     }

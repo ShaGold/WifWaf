@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.github.nkzawa.socketio.client.Socket;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -23,12 +24,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.manager.MenuManager;
+import shagold.wifwaf.manager.SocketManager;
 
 public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -43,6 +46,7 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
 
     private AddressResultReceiver mResultReceiver;
 
+    private Socket mSocket;
     private Walk walk;
 
     class AddressResultReceiver extends ResultReceiver {
@@ -52,17 +56,20 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
 
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
-           // if (resultCode == Constants.SUCCESS_RESULT)
-                //walk.setCity(resultData.getString(Constants.RESULT_DATA_KEY));
+            if (resultCode == Constants.SUCCESS_RESULT)
+                walk.setCity(resultData.getString(Constants.RESULT_DATA_KEY));
         }
     }
 
-    private Walk finalWalk() {
+    public void finishWalk() {
         for(LatLng p : linesLatLng) {
-            //walk.addLocationToWalk(p.latitude, p.longitude);
+            walk.addLocationToWalk(p.latitude, p.longitude);
         }
 
-        return walk;
+        //TODO send json walk
+
+        Intent resultat = new Intent(GPSWalkActivity.this, UserWalksActivity.class);
+        startActivity(resultat);
     }
 
     @Override
@@ -79,6 +86,8 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
         //mMap.getUiSettings().setRotateGesturesEnabled(false);
 
         walk = (Walk) getIntent().getSerializableExtra("WALK");
+        mSocket = SocketManager.getMySocket();
+
     }
 
     @Override
