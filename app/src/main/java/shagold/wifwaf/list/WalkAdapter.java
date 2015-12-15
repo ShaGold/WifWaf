@@ -65,6 +65,8 @@ public class WalkAdapter extends ArrayAdapter<Walk> {
             viewHolder.getButton().setVisibility(View.INVISIBLE);
         }*/
 
+        viewHolder.getButton().setVisibility(View.INVISIBLE);
+
         viewHolder.getButton().setFocusable(false);
         viewHolder.getButton().setOnClickListener(new View.OnClickListener() {
             @Override

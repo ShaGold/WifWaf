@@ -51,6 +51,7 @@
     <string name="contact_creator">Contact creator</string>
     <string name="userProfile">User Profile</string>
     <string name="seeProfile">See user profile</string>
+    <string name="save">Save</string>
 
     <string-array name="user_dogs_arrays">
         <item>No dogs</item>
