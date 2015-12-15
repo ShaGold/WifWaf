@@ -59,5 +59,6 @@
     <string name="title_activity_public_user_profile">PublicUserProfileActivity</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_public_walk_profile">PublicWalkProfileActivity</string>
 
 </resources>
