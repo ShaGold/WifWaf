@@ -101,7 +101,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 Walk walk = (Walk) mListView.getItemAtPosition(position);
-                Intent clickedWalkProfile = new Intent(getApplicationContext(), WalkProfileActivity.class);
+                Intent clickedWalkProfile = new Intent(getApplicationContext(), PublicWalkProfileActivity.class);
                 clickedWalkProfile.putExtra("WALK", walk);
                 startActivity(clickedWalkProfile);
             }
