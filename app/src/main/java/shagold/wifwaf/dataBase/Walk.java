@@ -1,5 +1,6 @@
 package shagold.wifwaf.dataBase;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,7 +16,7 @@ public class Walk implements Serializable {
     private String description;
     private String city;
     private String departure; //TODO Timestamp?
-    private ArrayList<Location> parcours = new ArrayList<Location>();
+    private ArrayList<Location> path = new ArrayList<Location>();
 
     public Walk(int id, int idDog, int idUser, String wN, String description, String city, String dep) {
         this.idWalk = id;
@@ -37,9 +38,9 @@ public class Walk implements Serializable {
     }
 
     public void addLocationToWalk(double latitude, double longitude){
-        int order = parcours.size() + 1;
+        int order = path.size() + 1;
         Location newLoc = new Location(latitude, longitude, order);
-        parcours.add(newLoc);
+        path.add(newLoc);
     }
 
     public Walk(JSONObject jsonWalk) throws JSONException {
@@ -54,6 +55,12 @@ public class Walk implements Serializable {
         walkJson.put("description", this.description);
         walkJson.put("city", this.city);
         walkJson.put("departure", this.departure);
+        JSONArray mylocations = new JSONArray();
+        for (Location l : path){
+            mylocations.put(l.toJson());
+        }
+        walkJson.put("location", mylocations);
+        System.out.println("Résultat" + walkJson);
         return walkJson;
     }
 
