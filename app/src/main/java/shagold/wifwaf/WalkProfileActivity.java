@@ -53,7 +53,7 @@ public class WalkProfileActivity extends AppCompatActivity {
                 dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        int id = walk.getId();
+                        int id = walk.getIdWalk();
                         //mSocket.emit("deleteWalk", id);
                     }
                 });
