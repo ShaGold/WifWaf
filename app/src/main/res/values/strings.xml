@@ -56,5 +56,8 @@
     <string-array name="user_dogs_arrays">
         <item>No dogs</item>
     </string-array>
+    <string name="title_activity_public_user_profile">PublicUserProfileActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

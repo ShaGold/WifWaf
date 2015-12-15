@@ -80,4 +80,9 @@ public class WalkProfileActivity extends AppCompatActivity {
         return MenuManager.defaultMenu(this, item) || super.onOptionsItemSelected(item);
     }
 
+    public void redirectUserProfile(View view){
+        System.out.println("Je passe ici");
+        Intent resultat = new Intent(WalkProfileActivity.this, PublicUserProfileActivity.class);
+        startActivity(resultat);
+    }
 }
