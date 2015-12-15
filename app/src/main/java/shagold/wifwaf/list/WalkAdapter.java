@@ -50,7 +50,9 @@ public class WalkAdapter extends ArrayAdapter<Walk> {
             viewHolder.setTitle((TextView) convertView.findViewById(R.id.titleRowWalk));
             viewHolder.setDescription((TextView) convertView.findViewById(R.id.descriptionRowWalk));
             viewHolder.setAvatar((ImageView) convertView.findViewById(R.id.avatarRowWalk));
-            viewHolder.setButton((ImageButton) convertView.findViewById(R.id.deleteWalkButton));
+            //viewHolder.setButton((ImageButton) convertView.findViewById(R.id.deleteWalkButton));
+            viewHolder.setCity((TextView) convertView.findViewById(R.id.cityRowWalk));
+            viewHolder.setLength((TextView) convertView.findViewById(R.id.lengthRowWalk));
             convertView.setTag(viewHolder);
         }
 
@@ -59,16 +61,17 @@ public class WalkAdapter extends ArrayAdapter<Walk> {
         viewHolder.getDescription().setText(walk.getDescription());
         //viewHolder.getAvatar().setImageDrawable();
 
+        viewHolder.getCity().setText(walk.getCity());
+        viewHolder.getLength().setText(String.valueOf(walk.getLength()));
+
         /* // TODO need fix probleme
         if(!walk.isCreator(mUser.getIdUser())) {
             System.out.println("INV : " + walk.getTitle());
             viewHolder.getButton().setVisibility(View.INVISIBLE);
         }*/
 
-        viewHolder.getButton().setVisibility(View.INVISIBLE);
-
-        viewHolder.getButton().setFocusable(false);
-        viewHolder.getButton().setOnClickListener(new View.OnClickListener() {
+        // viewHolder.getButton().setFocusable(false);
+        /*viewHolder.getButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(c);
@@ -90,7 +93,7 @@ public class WalkAdapter extends ArrayAdapter<Walk> {
                 alertDeleteWalk.show();
             }
         });
-
+*/
         return convertView;
     }
 

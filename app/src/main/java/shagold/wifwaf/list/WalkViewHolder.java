@@ -13,6 +13,8 @@ public class WalkViewHolder {
     private TextView description;
     private ImageView avatar;
     private ImageButton button;
+    private TextView city;
+    private TextView length;
 
     public WalkViewHolder() {
     }
@@ -47,5 +49,21 @@ public class WalkViewHolder {
 
     public void setButton(ImageButton button) {
         this.button = button;
+    }
+
+    public TextView getCity() {
+        return city;
+    }
+
+    public TextView getLength() {
+        return length;
+    }
+
+    public void setCity(TextView city) {
+        this.city = city;
+    }
+
+    public void setLength(TextView length) {
+        this.length = length;
     }
 }

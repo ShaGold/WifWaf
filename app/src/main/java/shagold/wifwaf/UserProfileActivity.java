@@ -19,8 +19,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
     private User mUser;
 
-    //private User defaultUser = new User("toto@gmail.com", "marlene", "toto", "12 Nov", 674560934, "une codeuse", null);
-
     private EditText userProfileName;
     private EditText userProfileMail;
     private EditText userProfileBirthday;
