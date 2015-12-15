@@ -62,7 +62,8 @@ public class WalkAdapter extends ArrayAdapter<Walk> {
         //viewHolder.getAvatar().setImageDrawable();
 
         viewHolder.getCity().setText(walk.getCity());
-        viewHolder.getLength().setText(String.valueOf(walk.getLength()));
+        //viewHolder.getLength().setText(String.valueOf(walk.getLength()));
+        //TODO enlever length de la vue
 
         /* // TODO need fix probleme
         if(!walk.isCreator(mUser.getIdUser())) {
