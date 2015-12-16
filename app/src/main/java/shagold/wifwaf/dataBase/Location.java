@@ -22,6 +22,13 @@ public class Location {
         this.ordering = o;
     }
 
+    public Location(JSONObject jsonLocation) throws JSONException {
+        this.idLocation = (int) jsonLocation.get("idLocation");
+        this.lattitude = (double) jsonLocation.get("lattitude");
+        this.longitude = (double) jsonLocation.get("longitude");
+        this.ordering = (int) jsonLocation.get("ordering");
+    }
+
     public JSONObject toJson() throws JSONException {
         JSONObject locationJson = new JSONObject();
         locationJson.put("latitude", this.lattitude);

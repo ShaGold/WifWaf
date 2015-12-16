@@ -37,14 +37,34 @@ public class Walk implements Serializable {
         this.departure = dep;
     }
 
+    public Walk(JSONObject jsonWalk) throws JSONException{
+        this.idWalk = (int) jsonWalk.get("idWalk");
+        this.idDog = (int) jsonWalk.get("idDog");
+        this.idUser = (int) jsonWalk.get("idUser");
+        this.walkName = (String) jsonWalk.get("walkName");
+        this.description = (String) jsonWalk.get("description");
+        this.city = (String) jsonWalk.get("city");
+        this.departure = (String) jsonWalk.get("departure");
+        JSONArray trace= (JSONArray) jsonWalk.get("path");
+        if (trace != null){
+            for (int i = 0; i < trace.length(); i++) {
+                JSONObject currentLoc = null;
+                try{
+                    currentLoc = trace.getJSONObject(i);
+                    Location newLoc = new Location(currentLoc);
+                    this.path.add(newLoc);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
     public void addLocationToWalk(double latitude, double longitude){
         int order = path.size() + 1;
         Location newLoc = new Location(latitude, longitude, order);
         path.add(newLoc);
-    }
-
-    public Walk(JSONObject jsonWalk) throws JSONException {
-        //TODO check with server
     }
 
     public JSONObject toJson() throws JSONException {
