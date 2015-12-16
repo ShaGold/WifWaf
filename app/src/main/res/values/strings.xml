@@ -62,5 +62,6 @@
     <string name="title_activity_public_walk_profile">PublicWalkProfileActivity</string>
     <string name="no_address_found">no address found</string>
     <string name="address_found">address found</string>
+    <string name="city">City</string>
 
 </resources>

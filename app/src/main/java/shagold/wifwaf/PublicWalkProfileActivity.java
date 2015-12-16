@@ -6,13 +6,31 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import shagold.wifwaf.dataBase.Walk;
 
 public class PublicWalkProfileActivity extends AppCompatActivity {
+
+    private Walk walk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_public_walk_profile);
+
+        walk = (Walk) getIntent().getSerializableExtra("WALK");
+
+        TextView titleWalk = (TextView) findViewById(R.id.walkPublicTitle);
+        titleWalk.setText(walk.getTitle());
+
+        // TODO défault
+        ImageView creatorWalk = (ImageView) findViewById(R.id.avatarCreatorPublicWalk);
+        creatorWalk.setImageResource(R.drawable.user);
+
+
+
     }
 
     @Override

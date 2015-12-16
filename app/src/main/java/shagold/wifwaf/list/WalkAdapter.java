@@ -52,49 +52,17 @@ public class WalkAdapter extends ArrayAdapter<Walk> {
             viewHolder.setAvatar((ImageView) convertView.findViewById(R.id.avatarRowWalk));
             //viewHolder.setButton((ImageButton) convertView.findViewById(R.id.deleteWalkButton));
             viewHolder.setCity((TextView) convertView.findViewById(R.id.cityRowWalk));
-            viewHolder.setLength((TextView) convertView.findViewById(R.id.lengthRowWalk));
             convertView.setTag(viewHolder);
         }
 
         final Walk walk = getItem(position);
         viewHolder.getTitle().setText(walk.getTitle());
         viewHolder.getDescription().setText(walk.getDescription());
-        //viewHolder.getAvatar().setImageDrawable();
+        //TODO default value
+        viewHolder.getAvatar().setImageResource(R.drawable.user);
 
-        viewHolder.getCity().setText(walk.getCity());
-        //viewHolder.getLength().setText(String.valueOf(walk.getLength()));
-        //TODO enlever length de la vue
+        viewHolder.getCity().setText("City " + " : " + walk.getCity());
 
-        /* // TODO need fix probleme
-        if(!walk.isCreator(mUser.getIdUser())) {
-            System.out.println("INV : " + walk.getTitle());
-            viewHolder.getButton().setVisibility(View.INVISIBLE);
-        }*/
-
-        // viewHolder.getButton().setFocusable(false);
-        /*viewHolder.getButton().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(c);
-                dialog.setTitle("Delete Walk");
-                dialog.setMessage("Are you sure to delete the walk : \n\n\t" + walk.getTitle());
-                dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        int id = walk.getId();
-                        //mSocket.emit("deleteWalk", id);
-                    }
-                });
-                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                AlertDialog alertDeleteWalk = dialog.create();
-                alertDeleteWalk.show();
-            }
-        });
-*/
         return convertView;
     }
 
