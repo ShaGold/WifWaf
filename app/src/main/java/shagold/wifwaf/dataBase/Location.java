@@ -24,8 +24,10 @@ public class Location {
 
     public Location(JSONObject jsonLocation) throws JSONException {
         this.idLocation = (int) jsonLocation.get("idLocation");
-        this.lattitude = (double) jsonLocation.get("lattitude");
-        this.longitude = (double) jsonLocation.get("longitude");
+        String lat = (String) jsonLocation.get("lattitude");
+        this.lattitude = Double.parseDouble(lat);
+        String longi = (String) jsonLocation.get("longitude");
+        this.longitude = Double.parseDouble(longi);
         this.ordering = (int) jsonLocation.get("ordering");
     }
 

@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import shagold.wifwaf.tool.Constants;
+
 public class AddressLocationService extends IntentService {
 
     protected ResultReceiver mReceiver;

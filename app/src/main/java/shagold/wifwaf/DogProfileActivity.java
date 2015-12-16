@@ -11,9 +11,6 @@ import android.widget.Switch;
 import shagold.wifwaf.dataBase.Dog;
 import shagold.wifwaf.manager.MenuManager;
 
-/**
- * Created by jimmy on 22/11/15.
- */
 public class DogProfileActivity extends AppCompatActivity {
 
     private Dog dog;

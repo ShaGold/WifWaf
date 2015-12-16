@@ -1,8 +1,5 @@
-package shagold.wifwaf;
+package shagold.wifwaf.tool;
 
-/**
- * Created by jimmy on 15/12/15.
- */
 public class Constants {
 
         public static final int SUCCESS_RESULT = 0;
