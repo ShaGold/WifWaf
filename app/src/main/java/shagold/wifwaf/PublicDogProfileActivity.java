@@ -7,9 +7,6 @@ import android.view.MenuItem;
 
 import shagold.wifwaf.manager.MenuManager;
 
-/**
- * Created by jimmy on 16/12/15.
- */
 public class PublicDogProfileActivity extends AppCompatActivity {
 
     @Override

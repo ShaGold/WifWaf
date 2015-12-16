@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Walk implements Serializable {
 
@@ -58,6 +59,19 @@ public class Walk implements Serializable {
                 }
             }
         }
+        /*if(dogsJSON != null) {
+            for (int i = 0; i < dogsJSON.length(); i++) {
+                JSONObject currentObj = null;
+                try {
+                    currentObj = dogsJSON.getJSONObject(i);
+                    Dog newDog = new Dog(currentObj);
+                    dogs.add(newDog);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }*/
+
     }
 
 
@@ -108,5 +122,25 @@ public class Walk implements Serializable {
         this.city = city;
     }
 
+    public static List<Walk> generateWalksFromJSON(JSONArray json) {
+
+        List<Walk> walks = new ArrayList<Walk>();
+        System.out.println("Mes balades" + json);
+
+        if(json != null) {
+            for (int i = 0; i < json.length(); i++) {
+                JSONObject currentObj = null;
+                try {
+                    currentObj = json.getJSONObject(i);
+                    Walk newWalk = new Walk(currentObj);
+                    walks.add(newWalk);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return walks;
+    }
 
 }

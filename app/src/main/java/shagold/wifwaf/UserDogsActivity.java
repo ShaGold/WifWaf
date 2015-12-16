@@ -70,26 +70,6 @@ public class UserDogsActivity extends AppCompatActivity {
         return MenuManager.defaultMenu(this, item) || super.onOptionsItemSelected(item);
     }
 
-    private List<Dog> generateDogsFromJson(JSONArray dogsJSON) {
-
-        List<Dog> dogs = new ArrayList<Dog>();
-
-        if(dogsJSON != null) {
-            for (int i = 0; i < dogsJSON.length(); i++) {
-                JSONObject currentObj = null;
-                try {
-                    currentObj = dogsJSON.getJSONObject(i);
-                    Dog newDog = new Dog(currentObj);
-                    dogs.add(newDog);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return dogs;
-    }
-
     private void initListView() {
         mListView = (ListView) findViewById(R.id.dogListView);
 
@@ -110,7 +90,7 @@ public class UserDogsActivity extends AppCompatActivity {
             UserDogsActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    List<Dog> dogs = generateDogsFromJson((JSONArray) args[0]);
+                    List<Dog> dogs = Dog.generateDogsFromJson((JSONArray) args[0]);
                     DogAdapter adapter = new DogAdapter(UserDogsActivity.this, dogs);
                     mListView.setAdapter(adapter);
                 }

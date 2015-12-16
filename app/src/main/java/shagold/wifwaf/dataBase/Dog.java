@@ -1,9 +1,12 @@
 package shagold.wifwaf.dataBase;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Dog implements Serializable {
     private int idDog;
@@ -91,5 +94,25 @@ public class Dog implements Serializable {
 
     public boolean isMale() {
         return male;
+    }
+
+    public static List<Dog> generateDogsFromJson(JSONArray dogsJSON) {
+
+        List<Dog> dogs = new ArrayList<Dog>();
+
+        if(dogsJSON != null) {
+            for (int i = 0; i < dogsJSON.length(); i++) {
+                JSONObject currentObj = null;
+                try {
+                    currentObj = dogsJSON.getJSONObject(i);
+                    Dog newDog = new Dog(currentObj);
+                    dogs.add(newDog);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return dogs;
     }
 }

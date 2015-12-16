@@ -19,13 +19,6 @@ import shagold.wifwaf.manager.SocketManager;
 
 import com.github.nkzawa.socketio.client.Socket;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-/**
- * Created by jimmy on 07/11/15.
- */
 public class HomeActivity extends AppCompatActivity {
 
     private ListView mListView;
@@ -53,26 +46,6 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return MenuManager.defaultMenu(this, item) || super.onOptionsItemSelected(item);
-    }
-
-    private List<Walk> generateDogsFromJson(JSONArray json) {
-
-        List<Walk> walks = new ArrayList<Walk>();
-
-        if(json != null) {
-            for (int i = 0; i < json.length(); i++) {
-                JSONObject currentObj = null;
-                try {
-                    currentObj = json.getJSONObject(i);
-                    Walk newWalk = new Walk(currentObj);
-                    walks.add(newWalk);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return walks;
     }
 
     private List<Walk> generateWalks() {

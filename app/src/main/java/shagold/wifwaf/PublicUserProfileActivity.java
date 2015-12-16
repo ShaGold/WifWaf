@@ -100,25 +100,7 @@ public class PublicUserProfileActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private List<Dog> generateDogsFromJson(JSONArray dogsJSON) {
 
-        List<Dog> dogs = new ArrayList<Dog>();
-
-        if(dogsJSON != null) {
-            for (int i = 0; i < dogsJSON.length(); i++) {
-                JSONObject currentObj = null;
-                try {
-                    currentObj = dogsJSON.getJSONObject(i);
-                    Dog newDog = new Dog(currentObj);
-                    dogs.add(newDog);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return dogs;
-    }
 
     public void userDogs(View view) {
         AlertDialog.Builder userDogsDialog = new AlertDialog.Builder(PublicUserProfileActivity.this);
@@ -140,7 +122,7 @@ public class PublicUserProfileActivity extends AppCompatActivity {
             PublicUserProfileActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    List<Dog> dogs = generateDogsFromJson((JSONArray) args[0]);
+                    List<Dog> dogs = Dog.generateDogsFromJson((JSONArray) args[0]);
                     System.out.println("DOGS PUBLIC " + dogs);
                     adapter = new DogAdapter(PublicUserProfileActivity.this, dogs);
                 }

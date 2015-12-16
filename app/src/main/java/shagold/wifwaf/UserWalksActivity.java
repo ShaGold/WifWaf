@@ -66,27 +66,6 @@ public class UserWalksActivity extends AppCompatActivity {
         });
     }
 
-    private List<Walk> generateWalksFromJSON(JSONArray json) {
-
-        List<Walk> walks = new ArrayList<Walk>();
-        System.out.println("Mes balades" + json);
-
-        if(json != null) {
-            for (int i = 0; i < json.length(); i++) {
-                JSONObject currentObj = null;
-                try {
-                    currentObj = json.getJSONObject(i);
-                    Walk newWalk = new Walk(currentObj);
-                    walks.add(newWalk);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return walks;
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_default, menu);
@@ -109,7 +88,7 @@ public class UserWalksActivity extends AppCompatActivity {
             UserWalksActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    List<Walk> walks = generateWalksFromJSON((JSONArray) args[0]);
+                    List<Walk> walks = Walk.generateWalksFromJSON((JSONArray) args[0]);
                     WalkAdapter adapter = new WalkAdapter(UserWalksActivity.this, walks);
                     mListView.setAdapter(adapter);
                 }
