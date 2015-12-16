@@ -70,10 +70,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/userProfileDescription" />
 
-        <ListView
-            android:id="@+id/dogsPublicUserListView"
+        <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/userDogs"
+            android:onClick="userDogs"/>
 
     </LinearLayout>
 

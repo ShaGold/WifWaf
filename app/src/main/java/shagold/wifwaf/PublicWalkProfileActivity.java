@@ -74,4 +74,8 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
         startActivity(resultat);
 
     }
+
+    public void walkDogs(View view) {
+
+    }
 }

@@ -62,6 +62,12 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/walkDogs"
+            android:onClick="walkDogs"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/useWalk"
             android:id="@+id/useWalkButton"
             android:onClick="useWalk"/>

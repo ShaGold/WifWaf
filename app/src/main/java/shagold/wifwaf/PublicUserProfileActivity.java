@@ -1,11 +1,14 @@
 package shagold.wifwaf;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,14 +35,12 @@ public class PublicUserProfileActivity extends AppCompatActivity {
     private User mUser;
     private User defUser =  new User("adresse@gmail.com", "A", "B", "2001-10-12", 123, "J'aime beaucoup les animaux!", null);
     private Socket mSocket;
-    private ListView mListView;
+    private DogAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_public_user_profile);
-
-
 
         mSocket = SocketManager.getMySocket();
         mUser = SocketManager.getMyUser();
@@ -70,8 +71,6 @@ public class PublicUserProfileActivity extends AppCompatActivity {
         // TODO default image
         ImageView userAvatar = (ImageView) findViewById(R.id.avatarPublicUserProfile);
         userAvatar.setImageResource(R.drawable.user);
-
-        mListView = (ListView) findViewById(R.id.dogsPublicUserListView);
 
         // TODO send to public dog profile
 
@@ -121,6 +120,20 @@ public class PublicUserProfileActivity extends AppCompatActivity {
         return dogs;
     }
 
+    public void userDogs(View view) {
+        AlertDialog.Builder userDogsDialog = new AlertDialog.Builder(PublicUserProfileActivity.this);
+
+        userDogsDialog.setTitle("User Dogs");
+
+        ListView modeList = new ListView(PublicUserProfileActivity.this);
+        modeList.setAdapter(adapter);
+
+        userDogsDialog.setView(modeList);
+
+        AlertDialog alertDogs = userDogsDialog.create();
+        alertDogs.show();
+    }
+
     private Emitter.Listener onRGetAllMyDogs = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
@@ -129,8 +142,7 @@ public class PublicUserProfileActivity extends AppCompatActivity {
                 public void run() {
                     List<Dog> dogs = generateDogsFromJson((JSONArray) args[0]);
                     System.out.println("DOGS PUBLIC " + dogs);
-                    DogAdapter adapter = new DogAdapter(PublicUserProfileActivity.this, dogs);
-                    mListView.setAdapter(adapter);
+                    adapter = new DogAdapter(PublicUserProfileActivity.this, dogs);
                 }
 
             });
