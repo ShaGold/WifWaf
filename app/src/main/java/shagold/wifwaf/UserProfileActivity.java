@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
@@ -18,14 +20,6 @@ import shagold.wifwaf.manager.SocketManager;
 public class UserProfileActivity extends AppCompatActivity {
 
     private User mUser;
-
-    private EditText userProfileName;
-    private EditText userProfileMail;
-    private EditText userProfileBirthday;
-    private EditText userProfilePhoneNumber;
-    private EditText userProfileDescription;
-
-    private Button applyChangeUserProfile;
 
     private ImageButton imageButton;
 
@@ -38,22 +32,26 @@ public class UserProfileActivity extends AppCompatActivity {
 
         Log.d("CREATE", "USER PROFILE ACTIVITY");
 
-        userProfileName = (EditText) findViewById(R.id.userProfileName);
+        EditText userProfileName = (EditText) findViewById(R.id.userProfileName);
         userProfileName.setText(mUser.getNickname());
 
-        userProfileMail = (EditText) findViewById(R.id.userProfileMail);
+        EditText userProfileMail = (EditText) findViewById(R.id.userProfileMail);
         userProfileMail.setText(mUser.getEmail());
 
-        userProfileBirthday = (EditText) findViewById(R.id.userProfileBirthday);
+        EditText userProfileBirthday = (EditText) findViewById(R.id.userProfileBirthday);
         userProfileBirthday.setText(mUser.getBirthday());
 
-        userProfileDescription = (EditText) findViewById(R.id.userProfileDescription);
+        EditText userProfileDescription = (EditText) findViewById(R.id.userProfileDescription);
         userProfileDescription.setText(mUser.getDescription());
 
-        userProfilePhoneNumber = (EditText) findViewById(R.id.userProfilePhoneNumber);
+        EditText userProfilePhoneNumber = (EditText) findViewById(R.id.userProfilePhoneNumber);
         userProfilePhoneNumber.setText(Integer.toString(mUser.getPhoneNumber()));
 
-        applyChangeUserProfile = (Button) findViewById(R.id.applyChangeUserProfile);
+        // TODO défault
+        ImageView creatorWalk = (ImageView) findViewById(R.id.avatarUserProfile);
+        creatorWalk.setImageResource(R.drawable.user);
+
+        Button applyChangeUserProfile = (Button) findViewById(R.id.applyChangeUserProfile);
         applyChangeUserProfile.setEnabled(false);
 
 

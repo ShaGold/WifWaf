@@ -86,7 +86,10 @@
             android:name=".PublicWalkProfileActivity"
             android:label="@string/title_activity_public_walk_profile" >
         </activity>
-
+        <activity
+            android:name=".PublicDogProfileActivity"
+            android:label="@string/title_activity_dog_profile" >
+        </activity>
         <service
             android:name=".FetchAddressIntentService"
             android:exported="false"/>

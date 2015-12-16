@@ -57,13 +57,18 @@ public class AddWalkActivity extends AppCompatActivity {
     private List<Dog> userDogs = new ArrayList<Dog>();
     private TextValidator textValidator = new TextValidator();
     private EditTextFilter[] filters = {new NumberFilter()};
-    private SizeFilter sizeTitleFilter = new SizeFilter(1, 25);
-    private SizeFilter sizeDescriptionFilter = new SizeFilter(10, 25);
+    private SizeFilter sizeTitleFilter = new SizeFilter();
+    private SizeFilter sizeDescriptionFilter = new SizeFilter();
+
+    private Walk walk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_walk);
+
+        walk = (Walk) getIntent().getSerializableExtra("WALK");
+        initUseWalk();
 
         mSocket = SocketManager.getMySocket();
         mUser = SocketManager.getMyUser();
@@ -73,6 +78,15 @@ public class AddWalkActivity extends AppCompatActivity {
         initEditText();
         initAlertDialog();
         initConfirmButton();
+    }
+
+    private void initUseWalk() {
+        if(walk != null) {
+            EditText title = (EditText) findViewById(R.id.nameWalk);
+            title.setText(walk.getTitle());
+            EditText description = (EditText) findViewById(R.id.descriptionWalk);
+            description.setText(walk.getDescription());
+        }
     }
 
     private void initEditText() {
@@ -198,18 +212,7 @@ public class AddWalkActivity extends AppCompatActivity {
                 JSONObject currentObj = null;
                 try {
                     currentObj = dogsJSON.getJSONObject(i);
-                    int idUser = currentObj.getInt("idUser");
-                    String dogName = currentObj.getString("dogName");
-                    int age = currentObj.getInt("age");
-                    String breed = currentObj.getString("breed");
-                    int size = currentObj.getInt("size");
-                    String getAlongWithMales = currentObj.getString("getAlongWithMales");
-                    String getAlongWithFemales = currentObj.getString("getAlongWithFemales");
-                    String getAlongWithKids = currentObj.getString("getAlongWithKids");
-                    String getAlongWithHumans = currentObj.getString("getAlongWithHumans");
-                    String description = currentObj.getString("description");
-
-                    dogs.add(new Dog(idUser, dogName, age, breed, size, getAlongWithMales, getAlongWithFemales, getAlongWithKids, getAlongWithHumans, description));
+                    dogs.add(new Dog(currentObj));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
