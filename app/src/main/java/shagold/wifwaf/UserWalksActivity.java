@@ -28,9 +28,6 @@ import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
 import shagold.wifwaf.tool.WifWafColor;
 
-/**
- * Created by jimmy on 13/12/15.
- */
 public class UserWalksActivity extends AppCompatActivity {
 
     private Socket mSocket;
@@ -48,20 +45,8 @@ public class UserWalksActivity extends AppCompatActivity {
         mSocket = SocketManager.getMySocket();
         mUser = SocketManager.getMyUser();
 
-        //TODO fix in server
         mSocket.on("RGetAllMyWalks", onRGetAllMyWalks);
         mSocket.emit("getAllMyWalks", mUser.getIdUser());
-        manualEvent();
-
-        final Intent activityAddWalk = new Intent(getApplicationContext(), AddWalkActivity.class);
-
-        Button addNewWalk = (Button) findViewById(R.id.addNewWalkButton);
-        addNewWalk.setBackgroundColor(WifWafColor.BROWN_DARK);
-        addNewWalk.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-                startActivity(activityAddWalk);
-            }
-        });
 
     }
 
@@ -81,19 +66,7 @@ public class UserWalksActivity extends AppCompatActivity {
         });
     }
 
-    private List<Walk> generateWalks(){
-        List<Walk> walks = new ArrayList<Walk>();
-
-        //(int id, int idDog, int idUser, String wN, String description, String city, String dep)
-        walks.add(new Walk(0, 1, mUser.getIdUser(), "T1", "D1", "Montpellier", "desc"));
-        walks.add(new Walk(1, 1, mUser.getIdUser(), "T2", "D2", "Montpellier", "desc"));
-        walks.add(new Walk(2, 1, mUser.getIdUser(), "T3", "D3", "Montpellier", "desc"));
-        walks.add(new Walk(3, 1, mUser.getIdUser(), "T4", "D4", "Montpellier", "desc"));
-
-        return walks;
-    }
-
-    private List<Walk> generateDogsFromJson(JSONArray json) {
+    private List<Walk> generateWalksFromJSON(JSONArray json) {
 
         List<Walk> walks = new ArrayList<Walk>();
         System.out.println("Mes balades" + json);
@@ -114,28 +87,6 @@ public class UserWalksActivity extends AppCompatActivity {
         return walks;
     }
 
-    private Emitter.Listener onRGetAllMyWalks = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-            UserWalksActivity.this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    List<Walk> walks = generateDogsFromJson((JSONArray) args[0]);
-                    WalkAdapter adapter = new WalkAdapter(UserWalksActivity.this, walks);
-                    mListView.setAdapter(adapter);
-                }
-
-            });
-        }
-
-    };
-
-    private void manualEvent() {
-        List<Walk> walks = generateWalks();
-        WalkAdapter adapter = new WalkAdapter(UserWalksActivity.this, walks);
-        mListView.setAdapter(adapter);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_default, menu);
@@ -147,5 +98,22 @@ public class UserWalksActivity extends AppCompatActivity {
         return MenuManager.defaultMenu(this, item) || super.onOptionsItemSelected(item);
     }
 
+    public void newWalk(View view){
+        final Intent activityAddWalk = new Intent(getApplicationContext(), AddWalkActivity.class);
+        startActivity(activityAddWalk);
+    }
 
+    private Emitter.Listener onRGetAllMyWalks = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            UserWalksActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    List<Walk> walks = generateWalksFromJSON((JSONArray) args[0]);
+                    WalkAdapter adapter = new WalkAdapter(UserWalksActivity.this, walks);
+                    mListView.setAdapter(adapter);
+                }
+            });
+        }
+    };
 }
