@@ -198,18 +198,7 @@ public class AddWalkActivity extends AppCompatActivity {
                 JSONObject currentObj = null;
                 try {
                     currentObj = dogsJSON.getJSONObject(i);
-                    int idUser = currentObj.getInt("idUser");
-                    String dogName = currentObj.getString("dogName");
-                    int age = currentObj.getInt("age");
-                    String breed = currentObj.getString("breed");
-                    int size = currentObj.getInt("size");
-                    String getAlongWithMales = currentObj.getString("getAlongWithMales");
-                    String getAlongWithFemales = currentObj.getString("getAlongWithFemales");
-                    String getAlongWithKids = currentObj.getString("getAlongWithKids");
-                    String getAlongWithHumans = currentObj.getString("getAlongWithHumans");
-                    String description = currentObj.getString("description");
-
-                    dogs.add(new Dog(idUser, dogName, age, breed, size, getAlongWithMales, getAlongWithFemales, getAlongWithKids, getAlongWithHumans, description));
+                    dogs.add(new Dog(currentObj));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
