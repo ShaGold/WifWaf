@@ -49,8 +49,8 @@ public class UserWalksActivity extends AppCompatActivity {
         mUser = SocketManager.getMyUser();
 
         //TODO fix in server
-        //mSocket.on("RGetAllMyWalks", onRGetAllMyWalks);
-        //mSocket.emit("getAllMyWalks", mUser.getIdUser());
+        mSocket.on("RGetAllMyWalks", onRGetAllMyWalks);
+        mSocket.emit("getAllMyWalks", mUser.getIdUser());
         manualEvent();
 
         final Intent activityAddWalk = new Intent(getApplicationContext(), AddWalkActivity.class);
@@ -96,6 +96,7 @@ public class UserWalksActivity extends AppCompatActivity {
     private List<Walk> generateDogsFromJson(JSONArray json) {
 
         List<Walk> walks = new ArrayList<Walk>();
+        System.out.println("Mes balades" + json);
 
         if(json != null) {
             for (int i = 0; i < json.length(); i++) {
