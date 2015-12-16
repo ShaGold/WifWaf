@@ -25,7 +25,7 @@
             android:id="@+id/userProfileName" />
 
         <ImageView
-            android:id="@+id/avatarUserProfile"
+            android:id="@+id/avatarPublicUserProfile"
             android:layout_width="200dp"
             android:layout_height="200dp"
             tools:background="#AAA"/>

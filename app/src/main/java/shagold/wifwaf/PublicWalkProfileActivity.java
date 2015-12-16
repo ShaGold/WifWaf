@@ -29,7 +29,11 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
         ImageView creatorWalk = (ImageView) findViewById(R.id.avatarCreatorPublicWalk);
         creatorWalk.setImageResource(R.drawable.user);
 
+        TextView cityWalk = (TextView) findViewById(R.id.walkPublicCity);
+        cityWalk.setText(walk.getCity());
 
+        TextView descriptionWalk = (TextView) findViewById(R.id.walkPublicDescription);
+        descriptionWalk.setText(walk.getDescription());
 
     }
 
@@ -59,5 +63,14 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
         System.out.println("Je passe ici");
         Intent resultat = new Intent(PublicWalkProfileActivity.this, PublicUserProfileActivity.class);
         startActivity(resultat);
+    }
+
+    public void useWalk(View view) {
+
+
+        Intent resultat = new Intent(PublicWalkProfileActivity.this, AddWalkActivity.class);
+        resultat.putExtra("WALK", walk);
+        startActivity(resultat);
+
     }
 }
