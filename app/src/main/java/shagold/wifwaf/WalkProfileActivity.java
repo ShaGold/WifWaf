@@ -15,9 +15,6 @@ import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.tool.WifWafColor;
 
-/**
- * Created by jimmy on 22/11/15.
- */
 public class WalkProfileActivity extends AppCompatActivity {
 
     private Walk walk;

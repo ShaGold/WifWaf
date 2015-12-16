@@ -91,7 +91,7 @@
             android:label="@string/title_activity_dog_profile" >
         </activity>
         <service
-            android:name=".FetchAddressIntentService"
+            android:name=".AddressLocationService"
             android:exported="false"/>
 
     </application>

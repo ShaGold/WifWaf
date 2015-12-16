@@ -55,14 +55,14 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
     private Walk walk;
 
     class AddressResultReceiver extends ResultReceiver {
-        public AddressResultReceiver(Handler handler) {
-            super(handler);
+        public AddressResultReceiver(Handler h) {
+            super(h);
         }
 
         @Override
-        protected void onReceiveResult(int resultCode, Bundle resultData) {
-            if (resultCode == Constants.SUCCESS_RESULT)
-                walk.setCity(resultData.getString(Constants.RESULT_DATA_KEY));
+        protected void onReceiveResult(int codeResultat, Bundle donneesResult) {
+            if (codeResultat == Constants.SUCCESS_RESULT)
+                walk.setCity(donneesResult.getString(Constants.RESULT_DATA_KEY));
         }
     }
 
@@ -125,7 +125,7 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
         Log.d("TT", "onCreate ..............................." + mLastLocation.toString());
         startLocationUpdates();
 
-        Intent intent = new Intent(this, FetchAddressIntentService.class);
+        Intent intent = new Intent(this, AddressLocationService.class);
         mResultReceiver = new AddressResultReceiver(new Handler());
         intent.putExtra(Constants.RECEIVER, mResultReceiver);
         intent.putExtra(Constants.LOCATION_DATA_EXTRA, mLastLocation);
