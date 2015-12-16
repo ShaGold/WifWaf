@@ -62,6 +62,7 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
     public void redirectUserProfile(View view){
         System.out.println("Je passe ici");
         Intent resultat = new Intent(PublicWalkProfileActivity.this, PublicUserProfileActivity.class);
+        resultat.putExtra("USER", walk.getIdUser());
         startActivity(resultat);
     }
 
