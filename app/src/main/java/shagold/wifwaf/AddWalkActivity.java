@@ -45,7 +45,7 @@ public class AddWalkActivity extends AppCompatActivity {
     private AlertDialog alertSelectDogs;
     private TextView dogsForWall;
     private int dogsSelectedNumber = 0;
-    private List<Dog> dogChoise = new ArrayList<Dog>();
+    private ArrayList<Dog> dogChoise = new ArrayList<Dog>();
     private List<Dog> userDogs = new ArrayList<Dog>();
     private TextValidator textValidator = new TextValidator();
     private EditTextFilter[] filters = {new NumberFilter()};
@@ -131,8 +131,7 @@ public class AddWalkActivity extends AppCompatActivity {
                 final Intent actGPSWalk = new Intent(getApplicationContext(), GPSWalkActivity.class);
                 if (dogsSelectedNumber > 0) {
                     if (validText) {
-                        Walk walk = new Walk(dogChoise.get(0).getIdDog(), mUser.getIdUser(),nameWalk.getText().toString(), descriptionWalk.getText().toString(), "null", "");
-                        //walk.setDogs(dogChoise);
+                        Walk walk = new Walk(dogChoise.get(0).getIdDog(), mUser.getIdUser(),nameWalk.getText().toString(), descriptionWalk.getText().toString(), "null", "", dogChoise);
                         actGPSWalk.putExtra("WALK", walk);
                         startActivity(actGPSWalk);
                     }
