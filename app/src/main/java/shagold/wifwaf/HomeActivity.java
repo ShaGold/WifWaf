@@ -12,6 +12,8 @@ import android.widget.ListView;
 import android.content.Intent;
 import java.util.ArrayList;
 import java.util.List;
+
+import shagold.wifwaf.dataBase.Dog;
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.list.WalkAdapter;
@@ -69,7 +71,6 @@ public class HomeActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     List<Walk> walks = Walk.generateWalksFromJSON((JSONArray) args[0]);
-                    System.out.println(walks);
                     WalkAdapter adapter = new WalkAdapter(HomeActivity.this, walks);
                     mListView.setAdapter(adapter);
                 }
