@@ -70,5 +70,6 @@
     <string name="viewPath">View Path</string>
     <string name="departure">Departure</string>
     <string name="timeStamp">TimeStamp</string>
+    <string name="date">Date</string>
 
 </resources>
