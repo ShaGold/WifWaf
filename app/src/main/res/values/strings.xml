@@ -26,6 +26,7 @@
     <string name="getAlongWithFemales">Does your dog get along with female dogs?</string>
     <string name="getAlongWithKids">Does your dog get along with children?</string>
     <string name="getAlongWithHumans">Does your dog get along with humans in general?</string>
+    <string name="gender">Gender</string>
 
     <!-- Strings communes à plusieurs forms -->
     <string name="confirm">confirm</string>
