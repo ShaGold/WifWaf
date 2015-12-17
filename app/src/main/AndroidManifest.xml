@@ -80,15 +80,18 @@
         </activity>
         <activity
             android:name=".PublicUserProfileActivity"
-            android:label="@string/title_activity_public_user_profile" >
+            android:label="@string/title_activity_public_user_profile"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".PublicWalkProfileActivity"
-            android:label="@string/title_activity_public_walk_profile" >
+            android:label="@string/title_activity_public_walk_profile"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".PublicDogProfileActivity"
-            android:label="@string/title_activity_dog_profile" >
+            android:label="@string/title_activity_dog_profile"
+            android:screenOrientation="portrait">
         </activity>
         <service
             android:name=".AddressLocationService"
@@ -96,7 +99,7 @@
         <activity
             android:name=".UseWalkActivity"
             android:label=""
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
