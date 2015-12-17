@@ -120,7 +120,7 @@ public class AddWalkActivity extends AppCompatActivity {
                 final Intent actGPSWalk = new Intent(getApplicationContext(), GPSWalkActivity.class);
                 if (dogsSelectedNumber > 0) {
                     if (validText) {
-                        Walk walk = new Walk(dogChoise.get(0).getIdDog(), mUser.getIdUser(), nameWalk.getText().toString(), descriptionWalk.getText().toString(), "null", "", dogChoise);
+                        Walk walk = new Walk(mUser.getIdUser(), nameWalk.getText().toString(), descriptionWalk.getText().toString(), "null", "", dogChoise);
                         TextView timeText = (TextView) findViewById(R.id.timeStampAddWalk);
                         String time = timeText.getText().toString();
                         TextView dateText = (TextView) findViewById(R.id.dateAddWalk);
@@ -278,7 +278,19 @@ public class AddWalkActivity extends AppCompatActivity {
 
         Intent drawingWalk = new Intent(AddWalkActivity.this, DrawingWalkActivity.class);
 
-        //drawingWalk.putExtra("WALK", walk);
+        EditText nameWalk = (EditText) findViewById(R.id.nameWalk);
+        String nameW = nameWalk.getText().toString();
+        EditText descriptionWalk = (EditText) findViewById(R.id.descriptionWalk);
+        String descriptionW = descriptionWalk.getText().toString();
+        TextView timeText = (TextView) findViewById(R.id.timeStampAddWalk);
+        String time = timeText.getText().toString();
+        TextView dateText = (TextView) findViewById(R.id.dateAddWalk);
+        String date = dateText.getText().toString();
+        String departure = date + " " + time;
 
+        Walk walk = new Walk(mUser.getIdUser(), nameW, descriptionW, "null", departure, dogChoise);
+
+        drawingWalk.putExtra("WALK", walk);
+        startActivity(drawingWalk);
     }
 }
