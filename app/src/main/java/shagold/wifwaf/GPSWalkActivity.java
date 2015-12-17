@@ -92,7 +92,6 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
         mGoogleApiClient.connect();
 
         createLocationRequest();
-        //mMap.getUiSettings().setRotateGesturesEnabled(false);
 
         walk = (Walk) getIntent().getSerializableExtra("WALK");
         mSocket = SocketManager.getMySocket();

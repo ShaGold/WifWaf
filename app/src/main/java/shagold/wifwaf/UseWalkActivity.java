@@ -13,11 +13,14 @@ import com.github.nkzawa.socketio.client.Socket;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
@@ -28,13 +31,13 @@ import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
 
-/**
- * Created by jimmy on 17/12/15.
- */
 public class UseWalkActivity extends FragmentActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
+    private Marker myLocation;
+    private Location mCurrentLocation;
+    private LocationRequest mLocationRequest;
 
     private Walk walk;
     private User mUser;
@@ -71,6 +74,13 @@ public class UseWalkActivity extends FragmentActivity implements GoogleApiClient
         }
     }
 
+    protected void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
     @Override
     public void onConnected(Bundle bundle) {
 
@@ -80,6 +90,22 @@ public class UseWalkActivity extends FragmentActivity implements GoogleApiClient
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(path.get(0).transform(), 16));
 
             System.out.println("Path " + path.size());
+
+            shagold.wifwaf.dataBase.Location start = path.get(0);
+
+            mMap.addMarker(new MarkerOptions().position(start.transform()).title("Start walk"));
+
+            //TODO just for test
+            if(path.size() < 2) {
+
+                path.add(new shagold.wifwaf.dataBase.Location(2, 10, 10, 2));
+                path.add(new shagold.wifwaf.dataBase.Location(3, 20, 20, 3));
+                path.add(new shagold.wifwaf.dataBase.Location(4, 30, 30, 4));
+                path.add(new shagold.wifwaf.dataBase.Location(5, 40, 40, 5));
+                path.add(new shagold.wifwaf.dataBase.Location(6, 50, 50, 6));
+
+                path.add(0, start);
+            }
 
             for(int i = 0; i < path.size() - 1; i++) {
                 PolylineOptions temp = new PolylineOptions()
@@ -101,7 +127,14 @@ public class UseWalkActivity extends FragmentActivity implements GoogleApiClient
 
     @Override
     public void onLocationChanged(Location location) {
+        mCurrentLocation = location;
 
+        if(myLocation != null) {
+            LatLng ll = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
+            myLocation.setPosition(ll);
+
+
+        }
     }
 
     @Override
@@ -120,8 +153,41 @@ public class UseWalkActivity extends FragmentActivity implements GoogleApiClient
         return MenuManager.defaultMenu(this, item) || super.onOptionsItemSelected(item);
     }
 
-    public void useWalk(View view) {
+    public void whereAmI(View view) {
 
+        createLocationRequest();
+
+        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+
+        myLocation = mMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).title("Gold"));
+
+        startLocationUpdates();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopLocationUpdates();
+    }
+
+    protected void stopLocationUpdates() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(
+                mGoogleApiClient, this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUpMapIfNeeded();
+        if (mGoogleApiClient.isConnected()) {
+            startLocationUpdates();
+        }
+    }
+
+    protected void startLocationUpdates() {
+        LocationServices.FusedLocationApi.requestLocationUpdates(
+                mGoogleApiClient, mLocationRequest, this);
     }
 
     public void closeWalk(View view) {
