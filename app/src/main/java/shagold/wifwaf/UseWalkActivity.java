@@ -1,5 +1,6 @@
 package shagold.wifwaf;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
@@ -22,8 +23,10 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.manager.MenuManager;
+import shagold.wifwaf.manager.SocketManager;
 
 /**
  * Created by jimmy on 17/12/15.
@@ -34,6 +37,7 @@ public class UseWalkActivity extends FragmentActivity implements GoogleApiClient
     private GoogleApiClient mGoogleApiClient;
 
     private Walk walk;
+    private User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,7 @@ public class UseWalkActivity extends FragmentActivity implements GoogleApiClient
         mGoogleApiClient.connect();
 
         walk = (Walk) getIntent().getSerializableExtra("WALK");
+        mUser = SocketManager.getMyUser();
 
     }
 
@@ -120,6 +125,19 @@ public class UseWalkActivity extends FragmentActivity implements GoogleApiClient
     }
 
     public void closeWalk(View view) {
+        if(walk!= null) {
 
+            Intent walkProfile;
+
+            if(walk.getIdUser() == mUser.getIdUser()) {
+                walkProfile = new Intent(UseWalkActivity.this, WalkProfileActivity.class);
+            }
+            else {
+                walkProfile = new Intent(UseWalkActivity.this, PublicWalkProfileActivity.class);
+            }
+
+            walkProfile.putExtra("WALK", walk);
+            startActivity(walkProfile);
+        }
     }
 }
