@@ -33,12 +33,26 @@ public class DogProfileActivity extends AppCompatActivity {
         EditText dogDescription = (EditText) findViewById(R.id.dogProfileDescription);
         dogDescription.setText(dog.getDescription());
 
-        /*Switch dogSex = (Switch) findViewById(R.id.dogProfileSex);
-        if(dog.isMale())
-            dogSex.setChecked(true);
-        else
-            dogSex.setChecked(false);*/
+        EditText dogAge = (EditText) findViewById(R.id.dogProfileAge);
+        dogAge.setText(Integer.toString(dog.getAge()));
 
+        EditText dogBreed = (EditText) findViewById(R.id.dogProfilebreed);
+        dogBreed.setText(dog.getBreed());
+
+        EditText dogSize = (EditText) findViewById(R.id.dogProfileSize);
+        dogSize.setText(Integer.toString(dog.getSize()));
+
+        EditText dogGAWM = (EditText) findViewById(R.id.dogProfilegetAlongWithMales);
+        dogGAWM.setText(dog.getGetAlongWithMales());
+
+        EditText dogGAWF = (EditText) findViewById(R.id.dogProfilegetAlongWithFemales);
+        dogGAWF.setText(dog.getGetAlongWithFemales());
+
+        EditText dogGAWH = (EditText) findViewById(R.id.dogProfilegetAlongWithHumans);
+        dogGAWH.setText(dog.getGetAlongWithHumans());
+
+        EditText dogGAWK = (EditText) findViewById(R.id.dogProfilegetAlongWithKids);
+        dogGAWK.setText(dog.getGetAlongWithKids());
     }
 
     @Override
