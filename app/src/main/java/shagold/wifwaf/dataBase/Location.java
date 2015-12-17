@@ -3,7 +3,9 @@ package shagold.wifwaf.dataBase;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Location {
+import java.io.Serializable;
+
+public class Location implements Serializable {
     private int idLocation;
     private double lattitude;
     private double longitude;
