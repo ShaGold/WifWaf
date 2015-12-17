@@ -44,7 +44,7 @@ public class PublicPathProfileActivity extends FragmentActivity implements Googl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_use_walk);
+        setContentView(R.layout.activity_public_path_profile);
         setUpMapIfNeeded();
 
         // connexion à l'API

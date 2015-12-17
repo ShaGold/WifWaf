@@ -28,6 +28,7 @@ import shagold.wifwaf.dataBase.Dog;
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.list.DogAdapter;
+import shagold.wifwaf.list.DogPublicAdapter;
 import shagold.wifwaf.manager.SocketManager;
 
 public class PublicUserProfileActivity extends AppCompatActivity {
@@ -35,7 +36,7 @@ public class PublicUserProfileActivity extends AppCompatActivity {
     private User mUser;
     private User defUser =  new User("adresse@gmail.com", "A", "B", "2001-10-12", 123, "J'aime beaucoup les animaux!", null);
     private Socket mSocket;
-    private DogAdapter adapter;
+    private DogPublicAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +125,7 @@ public class PublicUserProfileActivity extends AppCompatActivity {
                 public void run() {
                     List<Dog> dogs = Dog.generateDogsFromJson((JSONArray) args[0]);
                     System.out.println("DOGS PUBLIC " + dogs);
-                    adapter = new DogAdapter(PublicUserProfileActivity.this, dogs);
+                    adapter = new DogPublicAdapter(PublicUserProfileActivity.this, dogs);
                 }
 
             });

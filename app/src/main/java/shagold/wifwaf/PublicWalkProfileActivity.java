@@ -1,5 +1,6 @@
 package shagold.wifwaf;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,13 +8,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import shagold.wifwaf.dataBase.Dog;
 import shagold.wifwaf.dataBase.Walk;
+import shagold.wifwaf.list.DogPublicAdapter;
 
 public class PublicWalkProfileActivity extends AppCompatActivity {
 
     private Walk walk;
+    private DogPublicAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,16 +74,37 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
         startActivity(resultat);
     }
 
-    public void useWalk(View view) {
-
-
+    public void viewPath(View view) {
         Intent resultat = new Intent(PublicWalkProfileActivity.this, AddWalkActivity.class);
         resultat.putExtra("WALK", walk);
         startActivity(resultat);
+    }
 
+    public void useWalk(View view) {
+
+        Intent resultat = new Intent(PublicWalkProfileActivity.this, UserWalksActivity.class);
+        resultat.putExtra("WALK", walk);
+        startActivity(resultat);
     }
 
     public void walkDogs(View view) {
+
+        AlertDialog.Builder userDogsDialog = new AlertDialog.Builder(PublicWalkProfileActivity.this);
+
+        userDogsDialog.setTitle("Walk Dogs");
+
+        //TODO need fix
+        List<Dog> dogs = new ArrayList<Dog>();
+
+        adapter = new DogPublicAdapter(PublicWalkProfileActivity.this, dogs);
+
+        ListView modeList = new ListView(PublicWalkProfileActivity.this);
+        modeList.setAdapter(adapter);
+
+        userDogsDialog.setView(modeList);
+
+        AlertDialog alertDogs = userDogsDialog.create();
+        alertDogs.show();
 
     }
 }
