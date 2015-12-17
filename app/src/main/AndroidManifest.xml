@@ -106,6 +106,11 @@
             android:label=""
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".DrawingWalkActivity"
+            android:label=""
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package shagold.wifwaf;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -21,8 +22,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import shagold.wifwaf.dataBase.Walk;
@@ -35,6 +38,9 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private Marker myLocation;
+    private PolylineOptions lines = new PolylineOptions();
+    private LinkedList<LatLng> linesLatLng = new LinkedList<LatLng>();
+    private List<PolylineOptions> pl = new ArrayList<PolylineOptions>();
 
     private Socket mSocket;
 
@@ -54,6 +60,27 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
         walk = (Walk) getIntent().getSerializableExtra("WALK");
         mSocket = SocketManager.getMySocket();
         mSocket.on("RTryAddWalk", onRTryAddWalk);
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+
+            @Override
+            public void onMapClick(LatLng point) {
+                linesLatLng.add(point);
+
+                if(linesLatLng.size() > 1) {
+                    PolylineOptions temp = new PolylineOptions()
+                            .add(linesLatLng.getLast())
+                            .add(linesLatLng.get(linesLatLng.size() - 2));
+                    temp.color(Color.BLUE);
+                    temp.visible(true);
+                    temp.width(10);
+                    pl.add(temp);
+                    mMap.addPolyline(temp);
+                }
+            }
+        });
+
+
     }
 
     protected void createLocationRequest() {
@@ -90,9 +117,9 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()), 16));
 
-
-
+        linesLatLng.add(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
     }
+
 
     @Override
     public void onConnectionSuspended(int i) {
