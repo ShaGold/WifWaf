@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -30,6 +31,8 @@ import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
 import shagold.wifwaf.tool.WifWafColor;
+import shagold.wifwaf.tool.WifWafDatePickerFragment;
+import shagold.wifwaf.tool.WifWafTimePickerFragment;
 import shagold.wifwaf.view.ErrorMessage;
 import shagold.wifwaf.view.TextValidator;
 import shagold.wifwaf.view.ValidateMessage;
@@ -50,15 +53,11 @@ public class AddWalkActivity extends AppCompatActivity {
     private TextValidator textValidator = new TextValidator();
     private EditTextFilter[] filters = {new NumberFilter()};
     private SizeFilter sizeDescriptionFilter = new SizeFilter();
-    private Walk walk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_walk);
-
-        walk = (Walk) getIntent().getSerializableExtra("WALK");
-        initUseWalk();
 
         mSocket = SocketManager.getMySocket();
         mUser = SocketManager.getMyUser();
@@ -68,15 +67,6 @@ public class AddWalkActivity extends AppCompatActivity {
         initEditText();
         initAlertDialog();
         initConfirmButton();
-    }
-
-    private void initUseWalk() {
-        if(walk != null) {
-            EditText title = (EditText) findViewById(R.id.nameWalk);
-            title.setText(walk.getTitle());
-            EditText description = (EditText) findViewById(R.id.descriptionWalk);
-            description.setText(walk.getDescription());
-        }
     }
 
     private void initEditText() {
@@ -131,7 +121,12 @@ public class AddWalkActivity extends AppCompatActivity {
                 final Intent actGPSWalk = new Intent(getApplicationContext(), GPSWalkActivity.class);
                 if (dogsSelectedNumber > 0) {
                     if (validText) {
-                        Walk walk = new Walk(dogChoise.get(0).getIdDog(), mUser.getIdUser(),nameWalk.getText().toString(), descriptionWalk.getText().toString(), "null", "", dogChoise);
+                        Walk walk = new Walk(dogChoise.get(0).getIdDog(), mUser.getIdUser(), nameWalk.getText().toString(), descriptionWalk.getText().toString(), "null", "", dogChoise);
+                        TextView timeText = (TextView) findViewById(R.id.timeStampAddWalk);
+                        String time = timeText.getText().toString();
+                        TextView dateText = (TextView) findViewById(R.id.dateAddWalk);
+                        String date = dateText.getText().toString();
+                        walk.setDeparture(date + " " + time);
                         actGPSWalk.putExtra("WALK", walk);
                         startActivity(actGPSWalk);
                     }
@@ -141,6 +136,13 @@ public class AddWalkActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void choseTimeStamp(View view) {
+        WifWafTimePickerFragment newFragment = new WifWafTimePickerFragment();
+        TextView textView = (TextView) findViewById(R.id.timeStampAddWalk);
+        newFragment.setTimeText(textView);
+        newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
     private void initAlertDialog() {
@@ -264,5 +266,12 @@ public class AddWalkActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return MenuManager.defaultMenu(this, item) || super.onOptionsItemSelected(item);
+    }
+
+    public void choseDate(View view) {
+        WifWafDatePickerFragment newFragment = new WifWafDatePickerFragment();
+        TextView textView = (TextView) findViewById(R.id.dateAddWalk);
+        newFragment.setDateText(textView);
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 }
