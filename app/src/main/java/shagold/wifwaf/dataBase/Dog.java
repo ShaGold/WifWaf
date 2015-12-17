@@ -100,6 +100,28 @@ public class Dog implements Serializable {
         return dogJson;
     }
 
+    public JSONObject toJsonWithId() throws JSONException {
+        JSONObject dogJson = new JSONObject();
+        dogJson.put("idDog", this.idDog);
+        dogJson.put("idUser", this.idUser);
+        dogJson.put("dogName", this.dogName);
+        dogJson.put("age", this.age);
+        dogJson.put("breed", this.breed);
+        dogJson.put("size", this.size);
+        dogJson.put("getAlongWithMales", this.getAlongWithMales);
+        dogJson.put("getAlongWithFemales", this.getAlongWithFemales);
+        dogJson.put("getAlongWithKids", this.getAlongWithKids);
+        dogJson.put("getAlongWithHumans", this.getAlongWithHumans);
+        dogJson.put("description", this.description);
+        if(isMale()){
+            dogJson.put("gender", "male");
+        }
+        else{
+            dogJson.put("gender", "female");
+        }
+        return dogJson;
+    }
+
     public int getIdDog() {
         return idDog;
     }

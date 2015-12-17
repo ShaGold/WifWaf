@@ -82,7 +82,6 @@ public class Walk implements Serializable {
 
     public JSONObject toJson() throws JSONException {
         JSONObject walkJson = new JSONObject();
-        walkJson.put("idDog", this.idDog);
         walkJson.put("idUser", this.idUser);
         walkJson.put("walkName", this.walkName);
         walkJson.put("description", this.description);
@@ -95,7 +94,7 @@ public class Walk implements Serializable {
         walkJson.put("location", mylocations);
         JSONArray mydogs = new JSONArray();
         for (Dog d : dogs){
-            mydogs.put(d.toJson());
+            mydogs.put(d.toJsonWithId());
         }
         walkJson.put("dogs", mydogs);
         System.out.println("Résultat" + walkJson);
