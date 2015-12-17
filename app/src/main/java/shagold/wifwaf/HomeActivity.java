@@ -69,7 +69,6 @@ public class HomeActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     List<Walk> walks = Walk.generateWalksFromJSON((JSONArray) args[0]);
-                    System.out.println(walks);
                     WalkAdapter adapter = new WalkAdapter(HomeActivity.this, walks);
                     mListView.setAdapter(adapter);
                 }
