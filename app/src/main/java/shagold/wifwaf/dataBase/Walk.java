@@ -5,14 +5,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Walk implements Serializable {
 
     private int idWalk;
-    private int idDog;
     private int idUser;
     private String walkName;
     private String description;
@@ -21,9 +19,8 @@ public class Walk implements Serializable {
     private ArrayList<Location> path = new ArrayList<Location>();
     private ArrayList<Dog> dogs = new ArrayList<Dog>();
 
-    public Walk(int id, int idDog, int idUser, String wN, String description, String city, String dep, ArrayList<Dog> dogs) {
+    public Walk(int id, int idUser, String wN, String description, String city, String dep, ArrayList<Dog> dogs) {
         this.idWalk = id;
-        this.idDog = idDog;
         this.idUser = idUser;
         this.walkName = wN;
         this.description = description;
@@ -32,8 +29,7 @@ public class Walk implements Serializable {
         this.dogs = dogs;
     }
 
-    public Walk(int idDog, int idUser, String wN, String description, String city, String dep, ArrayList<Dog> dogs) {
-        this.idDog = idDog;
+    public Walk(int idUser, String wN, String description, String city, String dep, ArrayList<Dog> dogs) {
         this.idUser = idUser;
         this.walkName = wN;
         this.description = description;
