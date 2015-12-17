@@ -24,6 +24,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -137,9 +140,15 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
     }
 
     public void finishWalk(View view) {
-
-
-
+        for(LatLng p : linesLatLng) {
+            walk.addLocationToWalk(p.latitude, p.longitude);
+        }
+        try {
+            JSONObject walkJson = walk.toJson();
+            mSocket.emit("TryAddWalk", walkJson);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private Emitter.Listener onRTryAddWalk = new Emitter.Listener() {
