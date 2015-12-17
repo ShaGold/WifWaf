@@ -24,6 +24,10 @@ public class Dog implements Serializable {
 
     public Dog(){}
 
+    public Dog(int id){
+        this.idDog = idDog;
+    }
+
     public Dog(JSONObject dogJson) throws JSONException {
         this.idDog = dogJson.getInt("idDog");
         this.idUser = dogJson.getInt("idUser");

@@ -44,7 +44,6 @@ public class Walk implements Serializable {
 
     public Walk(JSONObject jsonWalk) throws JSONException{
         this.idWalk = (int) jsonWalk.get("idWalk");
-        this.idDog = (int) jsonWalk.get("idDog");
         this.idUser = (int) jsonWalk.get("idUser");
         this.walkName = (String) jsonWalk.get("walkName");
         this.description = (String) jsonWalk.get("description");
@@ -65,15 +64,12 @@ public class Walk implements Serializable {
         }
         JSONArray dogs= (JSONArray) jsonWalk.get("dogs");
         if (dogs != null){
+            JSONObject currentDog;
             for (int i = 0; i < dogs.length(); i++) {
-                JSONObject currentDog = null;
-                try{
-                    currentDog = dogs.getJSONObject(i);
-                    Dog newDog = new Dog(currentDog);
-                    this.dogs.add(newDog);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                currentDog = dogs.getJSONObject(i);
+                int id = currentDog.getInt("idDog");
+                Dog newDog = new Dog(id);
+                this.dogs.add(newDog);
             }
         }
     }
