@@ -49,9 +49,7 @@ public class AddWalkActivity extends AppCompatActivity {
     private List<Dog> userDogs = new ArrayList<Dog>();
     private TextValidator textValidator = new TextValidator();
     private EditTextFilter[] filters = {new NumberFilter()};
-    private SizeFilter sizeTitleFilter = new SizeFilter();
     private SizeFilter sizeDescriptionFilter = new SizeFilter();
-
     private Walk walk;
 
     @Override

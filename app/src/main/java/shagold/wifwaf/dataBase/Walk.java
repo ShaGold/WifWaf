@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +19,9 @@ public class Walk implements Serializable {
     private String city;
     private String departure; //TODO Timestamp?
     private ArrayList<Location> path = new ArrayList<Location>();
+    private ArrayList<Dog> dogs = new ArrayList<Dog>();
 
-    public Walk(int id, int idDog, int idUser, String wN, String description, String city, String dep) {
+    public Walk(int id, int idDog, int idUser, String wN, String description, String city, String dep, ArrayList<Dog> dogs) {
         this.idWalk = id;
         this.idDog = idDog;
         this.idUser = idUser;
@@ -27,15 +29,17 @@ public class Walk implements Serializable {
         this.description = description;
         this.city = city;
         this.departure = dep;
+        this.dogs = dogs;
     }
 
-    public Walk(int idDog, int idUser, String wN, String description, String city, String dep) {
+    public Walk(int idDog, int idUser, String wN, String description, String city, String dep, ArrayList<Dog> dogs) {
         this.idDog = idDog;
         this.idUser = idUser;
         this.walkName = wN;
         this.description = description;
         this.city = city;
         this.departure = dep;
+        this.dogs = dogs;
     }
 
     public Walk(JSONObject jsonWalk) throws JSONException{
@@ -59,21 +63,20 @@ public class Walk implements Serializable {
                 }
             }
         }
-        /*if(dogsJSON != null) {
-            for (int i = 0; i < dogsJSON.length(); i++) {
-                JSONObject currentObj = null;
-                try {
-                    currentObj = dogsJSON.getJSONObject(i);
-                    Dog newDog = new Dog(currentObj);
-                    dogs.add(newDog);
+        JSONArray dogs= (JSONArray) jsonWalk.get("dogs");
+        if (dogs != null){
+            for (int i = 0; i < dogs.length(); i++) {
+                JSONObject currentDog = null;
+                try{
+                    currentDog = dogs.getJSONObject(i);
+                    Dog newDog = new Dog(currentDog);
+                    this.dogs.add(newDog);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-        }*/
-
+        }
     }
-
 
     public void addLocationToWalk(double latitude, double longitude){
         int order = path.size() + 1;
@@ -94,6 +97,11 @@ public class Walk implements Serializable {
             mylocations.put(l.toJson());
         }
         walkJson.put("location", mylocations);
+        JSONArray mydogs = new JSONArray();
+        for (Dog d : dogs){
+            mydogs.put(d.toJson());
+        }
+        walkJson.put("dogs", mydogs);
         System.out.println("Résultat" + walkJson);
         return walkJson;
     }
@@ -105,6 +113,8 @@ public class Walk implements Serializable {
     public int getIdUser() {
         return idUser;
     }
+
+    public ArrayList<Dog> getDogs(){ return this.dogs; }
 
     public String getTitle() {
         return walkName;
@@ -118,12 +128,19 @@ public class Walk implements Serializable {
         return city;
     };
 
+    public void setDogs(ArrayList<Dog> dogs){
+        this.dogs = dogs;
+    }
+
     public void setCity(String city) {
         this.city = city;
     }
 
-    public static List<Walk> generateWalksFromJSON(JSONArray json) {
+    public ArrayList<Location> getPath() {
+        return path;
+    }
 
+    public static List<Walk> generateWalksFromJSON(JSONArray json) {
         List<Walk> walks = new ArrayList<Walk>();
         System.out.println("Mes balades" + json);
 
@@ -141,9 +158,5 @@ public class Walk implements Serializable {
         }
 
         return walks;
-    }
-
-    public ArrayList<Location> getPath() {
-        return path;
     }
 }

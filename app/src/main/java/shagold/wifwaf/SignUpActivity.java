@@ -256,8 +256,8 @@ public class SignUpActivity extends AppCompatActivity {
                             Intent resultat = new Intent(SignUpActivity.this, HomeActivity.class);
                             System.out.println("[Réussite inscription]"+param);
                             SocketManager.setMyUser(mUser);
-
                             startActivity(resultat);
+                            finish();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
