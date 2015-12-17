@@ -13,7 +13,6 @@ import android.widget.ImageButton;
 
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.manager.MenuManager;
-import shagold.wifwaf.tool.WifWafColor;
 
 public class WalkProfileActivity extends AppCompatActivity {
 
@@ -57,7 +56,7 @@ public class WalkProfileActivity extends AppCompatActivity {
     }
 
     public void viewPathWalk(View view) {
-        Intent useWalk = new Intent(getApplicationContext(), UseWalkActivity.class);
+        Intent useWalk = new Intent(getApplicationContext(), PublicPathProfileActivity.class);
         useWalk.putExtra("WALK", walk);
         startActivity(useWalk);
     }

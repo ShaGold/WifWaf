@@ -94,7 +94,7 @@
             android:name=".AddressLocationService"
             android:exported="false"/>
         <activity
-            android:name=".UseWalkActivity"
+            android:name=".PublicPathProfileActivity"
             android:label=""
             android:screenOrientation="portrait" >
         </activity>

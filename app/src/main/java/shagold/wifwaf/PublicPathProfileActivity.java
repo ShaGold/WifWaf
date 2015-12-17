@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.github.nkzawa.socketio.client.Socket;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -31,7 +30,7 @@ import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
 
-public class UseWalkActivity extends FragmentActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class PublicPathProfileActivity extends FragmentActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
@@ -196,10 +195,10 @@ public class UseWalkActivity extends FragmentActivity implements GoogleApiClient
             Intent walkProfile;
 
             if(walk.getIdUser() == mUser.getIdUser()) {
-                walkProfile = new Intent(UseWalkActivity.this, WalkProfileActivity.class);
+                walkProfile = new Intent(PublicPathProfileActivity.this, WalkProfileActivity.class);
             }
             else {
-                walkProfile = new Intent(UseWalkActivity.this, PublicWalkProfileActivity.class);
+                walkProfile = new Intent(PublicPathProfileActivity.this, PublicWalkProfileActivity.class);
             }
 
             walkProfile.putExtra("WALK", walk);
