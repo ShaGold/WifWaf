@@ -29,16 +29,6 @@ public class WalkProfileActivity extends AppCompatActivity {
 
         System.out.println("WALK : " + walk.getTitle());
 
-        useWalk = (Button) findViewById(R.id.useWalkButton);
-        useWalk.setBackgroundColor(WifWafColor.BROWN_DARK);
-        final Intent actGPSWalk = new Intent(getApplicationContext(), GPSWalkActivity.class);
-        useWalk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(actGPSWalk);
-            }
-        });
-
         ImageButton deleteWalkButton = (ImageButton) findViewById(R.id.deleteWalkButton);
         deleteWalkButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +54,12 @@ public class WalkProfileActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void viewPathWalk(View view) {
+        Intent useWalk = new Intent(getApplicationContext(), UseWalkActivity.class);
+        useWalk.putExtra("WALK", walk);
+        startActivity(useWalk);
     }
 
     @Override

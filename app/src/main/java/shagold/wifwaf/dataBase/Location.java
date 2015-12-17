@@ -1,9 +1,13 @@
 package shagold.wifwaf.dataBase;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Location {
+import java.io.Serializable;
+
+public class Location implements Serializable {
     private int idLocation;
     private double lattitude;
     private double longitude;
@@ -39,4 +43,15 @@ public class Location {
         return locationJson;
     }
 
+    public double getLattitude() {
+        return lattitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public LatLng transform() {
+        return new LatLng(lattitude, longitude);
+    }
 }

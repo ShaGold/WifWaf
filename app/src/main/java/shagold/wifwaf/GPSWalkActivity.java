@@ -19,6 +19,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -91,7 +92,6 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
         mGoogleApiClient.connect();
 
         createLocationRequest();
-        //mMap.getUiSettings().setRotateGesturesEnabled(false);
 
         walk = (Walk) getIntent().getSerializableExtra("WALK");
         mSocket = SocketManager.getMySocket();
@@ -125,6 +125,8 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
         myLocation = mMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).title("Gold"));
         Log.d("TT", "onCreate ..............................." + mLastLocation.toString());
         startLocationUpdates();
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()), 16));
 
         Intent intent = new Intent(this, AddressLocationService.class);
         mResultReceiver = new AddressResultReceiver(new Handler());
@@ -197,15 +199,7 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
-            // Check if we were successful in obtaining the map.
-            if (mMap != null) {
-                setUpMap();
-            }
         }
-    }
-
-    private void setUpMap() {
-        Log.d("TTT", "Start ...............................");
     }
 
     protected synchronized void buildGoogleApiClient() {

@@ -93,7 +93,11 @@
         <service
             android:name=".AddressLocationService"
             android:exported="false"/>
-
+        <activity
+            android:name=".UseWalkActivity"
+            android:label=""
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>
