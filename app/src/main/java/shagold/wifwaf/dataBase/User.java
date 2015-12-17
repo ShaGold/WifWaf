@@ -44,6 +44,18 @@ public class User {
         this.flag = 0; // TODO gestion flag: niveau de privatisation des données
     }
 
+    public User(int idUser, String email, String nickname, String password, String birthday, int phoneNumber, String description, String photo){
+        this.idUser = idUser;
+        this.email = email;
+        this.nickname = nickname;
+        this.password = password;
+        this.birthday = birthday;
+        this.phoneNumber = phoneNumber;
+        this.description = description;
+        this.photo = photo;
+        this.flag = 0; // TODO gestion flag: niveau de privatisation des données
+    }
+
     public User(String email, String password){
         this.email = email;
         this.password = password;
