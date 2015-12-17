@@ -138,6 +138,13 @@ public class Dog implements Serializable {
         return male;
     }
 
+    public String getSexe() {
+        if(isMale())
+            return "male";
+        else
+            return "female";
+    }
+
     public static List<Dog> generateDogsFromJson(JSONArray dogsJSON) {
 
         List<Dog> dogs = new ArrayList<Dog>();
