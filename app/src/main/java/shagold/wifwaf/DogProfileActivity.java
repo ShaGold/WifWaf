@@ -30,15 +30,15 @@ public class DogProfileActivity extends AppCompatActivity {
         ImageView dogProfile = (ImageView) findViewById(R.id.avatarDog);
         dogProfile.setImageResource(R.drawable.dogi2);
 
-        EditText dogDescription = (EditText) findViewById(R.id.dogProfileDescription);
+        EditText dogDescription = (EditText) findViewById(R.id.dogProfiledescription);
         dogDescription.setText(dog.getDescription());
 
-        Switch dogSex = (Switch) findViewById(R.id.dogProfileSex);
+        /*Switch dogSex = (Switch) findViewById(R.id.dogProfileSex);
         if(dog.isMale())
             dogSex.setChecked(true);
         else
             dogSex.setChecked(false);
-
+        */
     }
 
     @Override
