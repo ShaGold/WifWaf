@@ -92,9 +92,10 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TODO Saved"
+            android:text="@string/save"
             android:id="@+id/applyChangeDogProfile"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="saveChangeDog"/>
 
     </LinearLayout>
 </ScrollView>

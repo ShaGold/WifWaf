@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Switch;
 
 import shagold.wifwaf.dataBase.Dog;
 import shagold.wifwaf.manager.MenuManager;
@@ -64,5 +64,9 @@ public class DogProfileActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return MenuManager.defaultMenu(this, item) || super.onOptionsItemSelected(item);
+    }
+
+    public void saveChange(View view){
+
     }
 }

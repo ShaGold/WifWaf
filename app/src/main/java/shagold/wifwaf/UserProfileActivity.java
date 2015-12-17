@@ -14,9 +14,6 @@ import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
 
-/**
- * Created by jimmy on 07/11/15.
- */
 public class UserProfileActivity extends AppCompatActivity {
 
     private User mUser;
