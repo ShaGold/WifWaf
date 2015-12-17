@@ -92,9 +92,7 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
 
         userDogsDialog.setTitle("Walk Dogs");
 
-        //TODO need fix
-        List<Dog> dogs = new ArrayList<Dog>();
-
+        List<Dog> dogs = new ArrayList<Dog>(walk.getDogs());
         adapter = new DogPublicAdapter(PublicWalkProfileActivity.this, dogs);
 
         ListView modeList = new ListView(PublicWalkProfileActivity.this);
