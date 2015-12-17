@@ -134,6 +134,20 @@ public class Dog implements Serializable {
         return dogName;
     }
 
+    public String getGetAlongWithMales(){ return getAlongWithMales; }
+
+    public String getGetAlongWithFemales(){ return getAlongWithFemales; }
+
+    public String getGetAlongWithKids(){ return getAlongWithKids; }
+
+    public String getGetAlongWithHumans(){ return getAlongWithHumans; }
+
+    public int getAge() { return age; }
+
+    public String getBreed() { return breed; }
+
+    public int getSize() { return size; }
+
     public boolean isMale() {
         return male;
     }
