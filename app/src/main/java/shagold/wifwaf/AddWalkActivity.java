@@ -79,7 +79,7 @@ public class AddWalkActivity extends AppCompatActivity {
         final EditText nameWalk = (EditText) findViewById(R.id.nameWalk);
         final EditText descriptionWalk = (EditText) findViewById(R.id.descriptionWalk);
 
-        Button confirmNewWalk = (Button) findViewById(R.id.addWalkButton);
+        Button confirmNewWalk = (Button) findViewById(R.id.addWalkWalkingButton);
         confirmNewWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,7 +147,7 @@ public class AddWalkActivity extends AppCompatActivity {
     private void initAlertDialog() {
         Button selectDogsForWalk = (Button) findViewById(R.id.selectDogsForWalk);
         selectDogsForWalk.setBackgroundColor(WifWafColor.BROWN_DARK);
-        selectDogsForWalk.setOnClickListener(new View.OnClickListener() {
+        selectDogsForWalk.setOnClickListener(new View.OnClickListener() { // TODO send with onclick
             @Override
             public void onClick(View v) {
                 userDogs = generateDogsFromJSON();
@@ -272,5 +272,13 @@ public class AddWalkActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.dateAddWalk);
         newFragment.setDateText(textView);
         newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    public void drawingWalk(View view) {
+
+        Intent drawingWalk = new Intent(AddWalkActivity.this, DrawingWalkActivity.class);
+
+        //drawingWalk.putExtra("WALK", walk);
+
     }
 }

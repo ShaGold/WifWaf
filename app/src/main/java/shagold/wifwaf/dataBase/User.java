@@ -144,6 +144,10 @@ public class User {
         this.photo = photo;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public static String encryptPassword(String source) {
         MessageDigest mdEnc = null;
         try {

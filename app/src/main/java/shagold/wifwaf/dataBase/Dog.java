@@ -25,7 +25,7 @@ public class Dog implements Serializable {
     public Dog(){}
 
     public Dog(int id){
-        this.idDog = idDog;
+        this.idDog = id;
     }
 
     public Dog(JSONObject dogJson) throws JSONException {
@@ -150,6 +150,13 @@ public class Dog implements Serializable {
 
     public boolean isMale() {
         return male;
+    }
+
+    public String getSexe() {
+        if(isMale())
+            return "male";
+        else
+            return "female";
     }
 
     public static List<Dog> generateDogsFromJson(JSONArray dogsJSON) {

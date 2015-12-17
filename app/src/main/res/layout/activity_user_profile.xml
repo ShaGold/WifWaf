@@ -75,7 +75,8 @@
         android:layout_height="wrap_content"
         android:text="@string/save"
         android:id="@+id/applyChangeUserProfile"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:onClick="saveProfileUser"/>
 
     </LinearLayout>
 

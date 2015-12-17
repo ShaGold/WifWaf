@@ -59,8 +59,6 @@ public class UserWalksActivity extends AppCompatActivity {
                 Walk walk = (Walk) mListView.getItemAtPosition(position);
                 Intent clickedWalkProfile = new Intent(getApplicationContext(), WalkProfileActivity.class);
                 clickedWalkProfile.putExtra("WALK", walk);
-                System.out.println("IDC : " + walk.getIdUser() + " - IDU : " + mUser.getIdUser());
-
                 startActivity(clickedWalkProfile);
             }
         });

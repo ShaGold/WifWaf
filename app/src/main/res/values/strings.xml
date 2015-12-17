@@ -73,5 +73,7 @@
     <string name="departure">Departure</string>
     <string name="timeStamp">TimeStamp</string>
     <string name="date">Date</string>
+    <string name="TraceByWalking">Trace by walking</string>
+    <string name="TraceByDrawing">Trace by drawing</string>
 
 </resources>

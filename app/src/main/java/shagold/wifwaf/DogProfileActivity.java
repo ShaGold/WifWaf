@@ -30,7 +30,7 @@ public class DogProfileActivity extends AppCompatActivity {
         ImageView dogProfile = (ImageView) findViewById(R.id.avatarDog);
         dogProfile.setImageResource(R.drawable.dogi2);
 
-        EditText dogDescription = (EditText) findViewById(R.id.dogProfiledescription);
+        EditText dogDescription = (EditText) findViewById(R.id.dogProfileDescription);
         dogDescription.setText(dog.getDescription());
 
         EditText dogAge = (EditText) findViewById(R.id.dogProfileAge);

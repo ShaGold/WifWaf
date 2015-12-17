@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:hint="@string/description"
-            android:id="@+id/dogProfiledescription" />
+            android:id="@+id/dogProfileDescription" />
 
         <Button
             android:layout_width="match_parent"

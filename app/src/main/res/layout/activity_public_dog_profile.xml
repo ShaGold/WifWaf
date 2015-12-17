@@ -15,24 +15,35 @@
         tools:context="shagold.wifwaf.DogProfileActivity">
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/name"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/namePublicDog"/>
+
+        <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/dogProfileName"
-            android:inputType="text" />
+            android:id="@+id/dogPublicProfileName" />
 
         <ImageView
-            android:id="@+id/avatarDog"
+            android:id="@+id/avatarPublicDog"
             android:layout_width="200dp"
             android:layout_height="200dp"
             tools:background="#AAA" />
 
-        <Switch
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sex"
-            android:textOff="male"
-            android:textOn="female"
-            android:id="@+id/dogProfileSex" />
+            android:text="@string/gender"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/genderDogPublicProfile"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -42,15 +53,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/dogProfileDescription"
-            android:inputType="text" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TODO Saved"
-            android:id="@+id/applyChangeDogProfile"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/dogPublicProfileDescription" />
 
     </LinearLayout>
 </ScrollView>
