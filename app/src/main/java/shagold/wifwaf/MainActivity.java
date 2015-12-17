@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
@@ -36,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Socket mSocket;
     private Button signUpButton;
-    private Button signInButton;
     private Button connexionDebug;
     private EditText Etemail;
     private EditText ETPassword;
@@ -49,7 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             SocketManager.setMySocket(IO.socket("http://51.254.124.136:8000"));
-        } catch (URISyntaxException e) {}
+        }
+        catch (URISyntaxException e) {}
+
+        // Gestion socket
         mSocket = SocketManager.getMySocket();
         mSocket.connect();
         mSocket.on("RTrySignIn", onRTrySignIn);
