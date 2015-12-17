@@ -66,5 +66,6 @@
     <string name="useWalk">Use Walk</string>
     <string name="userDogs">User Dogs</string>
     <string name="walkDogs">Walk Dogs</string>
+    <string name="viewPath">View Path</string>
 
 </resources>

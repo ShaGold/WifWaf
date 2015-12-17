@@ -143,4 +143,7 @@ public class Walk implements Serializable {
         return walks;
     }
 
+    public ArrayList<Location> getPath() {
+        return path;
+    }
 }

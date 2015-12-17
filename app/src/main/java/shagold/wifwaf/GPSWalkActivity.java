@@ -200,15 +200,7 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
-            // Check if we were successful in obtaining the map.
-            if (mMap != null) {
-                setUpMap();
-            }
         }
-    }
-
-    private void setUpMap() {
-        Log.d("TTT", "Start ...............................");
     }
 
     protected synchronized void buildGoogleApiClient() {
