@@ -6,10 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.Switch;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
@@ -52,6 +56,16 @@ public class AddDogActivity extends AppCompatActivity {
         // Gestion click bouton de confirmation
         this.confirmAddDog = (Button) findViewById(R.id.confirmAddDogButton);
         this.confirmAddDog.setBackgroundColor(WifWafColor.BROWN_DARK);
+
+        // Gestion gender
+        Spinner Ssex = (Spinner) findViewById(R.id.gender);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.gender_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        Ssex.setAdapter(adapter);
     }
 
     public void tryAddDog(View view) throws JSONException {
@@ -69,6 +83,15 @@ public class AddDogActivity extends AppCompatActivity {
         EditText ETGetalongwithKids = (EditText) findViewById(R.id.getAlongWithKids);
         EditText ETGetalongwithHumans = (EditText) findViewById(R.id.getAlongWithHumans);
         EditText ETDescription = (EditText) findViewById(R.id.description);
+        Spinner Ssex = (Spinner) findViewById(R.id.gender);
+        String gender = Ssex.getSelectedItem().toString();
+        boolean sGender;
+        if (gender.equals("Male")){
+            sGender = true;
+        }
+        else{
+            sGender = false;
+        }
 
         //Test validité des champs
         TextValidator textValidator = new TextValidator();
@@ -173,7 +196,7 @@ public class AddDogActivity extends AppCompatActivity {
         String Sdescription = ETDescription.getText().toString();
 
         //Test ajout d'un chien
-        Dog dog = new Dog(mUser.getIdUser(), Sname, age, Sbreed, size, Sgetalongwithmales, Sgetalongwithfemales, Sgetalongwithkids, Sgetalongwithhumans, Sdescription);
+        Dog dog = new Dog(mUser.getIdUser(), Sname, age, Sbreed, size, Sgetalongwithmales, Sgetalongwithfemales, Sgetalongwithkids, Sgetalongwithhumans, Sdescription, sGender);
         JSONObject jsonDog = dog.toJson();
         System.out.println("TryAddDog" + jsonDog);
         mSocket.emit("TryAddDog", jsonDog);
