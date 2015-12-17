@@ -122,6 +122,11 @@ public class AddWalkActivity extends AppCompatActivity {
                 if (dogsSelectedNumber > 0) {
                     if (validText) {
                         Walk walk = new Walk(dogChoise.get(0).getIdDog(), mUser.getIdUser(), nameWalk.getText().toString(), descriptionWalk.getText().toString(), "null", "", dogChoise);
+                        TextView timeText = (TextView) findViewById(R.id.timeStampAddWalk);
+                        String time = timeText.getText().toString();
+                        TextView dateText = (TextView) findViewById(R.id.dateAddWalk);
+                        String date = dateText.getText().toString();
+                        walk.setDeparture(date + " " + time);
                         actGPSWalk.putExtra("WALK", walk);
                         startActivity(actGPSWalk);
                     }

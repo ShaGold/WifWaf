@@ -140,6 +140,10 @@ public class Walk implements Serializable {
         return path;
     }
 
+    public void setDeparture(String departure) {
+        this.departure = departure;
+    }
+
     public static List<Walk> generateWalksFromJSON(JSONArray json) {
         List<Walk> walks = new ArrayList<Walk>();
         System.out.println("Mes balades" + json);

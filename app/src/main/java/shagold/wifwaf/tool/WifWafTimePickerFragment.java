@@ -28,7 +28,7 @@ public class WifWafTimePickerFragment extends DialogFragment implements TimePick
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        String result = hourOfDay + "-" + minute;
+        String result = hourOfDay + ":" + minute + ":00";
         if(timeText != null)
             timeText.setText(result);
     }
