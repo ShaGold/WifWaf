@@ -154,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
                             SocketManager.setMyUser(newUser);
                             Intent resultat = new Intent(MainActivity.this, HomeActivity.class);
                             startActivity(resultat);
+                            finish();
                         }
                         else{
                             AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
