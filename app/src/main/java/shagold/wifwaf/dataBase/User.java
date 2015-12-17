@@ -61,6 +61,19 @@ public class User {
         return userJson;
     }
 
+    public JSONObject toJsonWithId() throws JSONException {
+        JSONObject userJson = new JSONObject();
+        userJson.put("idUser", this.idUser);
+        userJson.put("email", this.email);
+        userJson.put("nickname", this.nickname);
+        userJson.put("password", this.password);
+        userJson.put("birthday", this.birthday);
+        userJson.put("phoneNumber", this.phoneNumber);
+        userJson.put("description", this.description);
+        userJson.put("photo", this.photo);
+        return userJson;
+    }
+
     public int getIdUser() {
         return idUser;
     }
