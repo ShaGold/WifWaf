@@ -16,6 +16,7 @@ import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.List;
 
@@ -70,7 +71,7 @@ public class UserProfileActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_default, menu);
         return true;
-    }onRUpdateUser
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -95,8 +96,13 @@ public class UserProfileActivity extends AppCompatActivity {
         int phoneU = Integer.parseInt(userProfilePhoneNumber.getText().toString());
 
         User u = new User(mailU, nameU, mUser.getPassword(), birthday, phoneU, descriptionU, "");
+        SocketManager.setMyUser(u);
 
-        //mSocket.emit("updateUser", u.to);
+        try {
+            mSocket.emit("updateUser", u.toJsonWithId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 
