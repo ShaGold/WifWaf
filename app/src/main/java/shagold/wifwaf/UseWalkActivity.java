@@ -1,5 +1,6 @@
 package shagold.wifwaf;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -66,4 +67,8 @@ public class UseWalkActivity extends AppCompatActivity {
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
+    public void saveUseWalk(View view) {
+        Intent result = new Intent(UseWalkActivity.this, UserWalksActivity.class);
+        startActivity(result);
+    }
 }
