@@ -36,9 +36,17 @@ public class Dog implements Serializable {
         this.getAlongWithKids = dogJson.getString("getAlongWithKids");
         this.getAlongWithHumans = dogJson.getString("getAlongWithHumans");
         this.description = dogJson.getString("description");
+        if(dogJson.getString("gender") == "male"){
+            this.male = true;
+        }
+        else{
+            if(dogJson.getString("gender") == "female"){
+                this.male = false;
+            }
+        }
     }
 
-    public Dog(int idDog, int idUser, String dogName, int age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description){
+    public Dog(int idDog, int idUser, String dogName, int age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description, boolean male){
         this.idDog = idDog;
         this.idUser = idUser;
         this.dogName = dogName;
@@ -50,9 +58,10 @@ public class Dog implements Serializable {
         this.getAlongWithKids = getAlongWithKids;
         this.getAlongWithHumans = getAlongWithHumans;
         this.description = description;
+        this.male = male;
     }
 
-    public Dog(int idUser, String dogName, int age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description){
+    public Dog(int idUser, String dogName, int age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description, boolean male){
         this.idUser = idUser;
         this.dogName = dogName;
         this.age = age;
@@ -63,6 +72,7 @@ public class Dog implements Serializable {
         this.getAlongWithKids = getAlongWithKids;
         this.getAlongWithHumans = getAlongWithHumans;
         this.description = description;
+        this.male = male;
     }
 
     public JSONObject toJson() throws JSONException {
@@ -77,6 +87,12 @@ public class Dog implements Serializable {
         dogJson.put("getAlongWithKids", this.getAlongWithKids);
         dogJson.put("getAlongWithHumans", this.getAlongWithHumans);
         dogJson.put("description", this.description);
+        if(isMale()){
+            dogJson.put("gender", "male");
+        }
+        else{
+            dogJson.put("gender", "female");
+        }
         return dogJson;
     }
 

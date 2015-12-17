@@ -13,9 +13,6 @@ public class PublicDogProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_public_dog_profile);
-
-
-
     }
 
     @Override
