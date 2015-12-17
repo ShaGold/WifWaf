@@ -91,9 +91,17 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/confirm"
-            android:id="@+id/addWalkButton"
+            android:text="@string/TraceByWalking"
+            android:id="@+id/addWalkWalkingButton"
             android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/TraceByDrawing"
+            android:id="@+id/addWalkDrawingButton"
+            android:layout_gravity="center_horizontal"
+            android:onClick="drawingWalk"/>
 
 
     </LinearLayout>

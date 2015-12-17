@@ -95,7 +95,7 @@ public class UserProfileActivity extends AppCompatActivity {
         userProfilePhoneNumber.setText(Integer.toString(mUser.getPhoneNumber()));
         int phoneU = Integer.parseInt(userProfilePhoneNumber.getText().toString());
 
-        User u = new User(mailU, nameU, mUser.getPassword(), birthday, phoneU, descriptionU, "");
+        User u = new User(mUser.getIdUser(), mailU, nameU, mUser.getPassword(), birthday, phoneU, descriptionU, "");
         SocketManager.setMyUser(u);
 
         try {

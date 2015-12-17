@@ -33,11 +33,11 @@ public class DogProfileActivity extends AppCompatActivity {
         EditText dogDescription = (EditText) findViewById(R.id.dogProfileDescription);
         dogDescription.setText(dog.getDescription());
 
-        Switch dogSex = (Switch) findViewById(R.id.dogProfileSex);
+        /*Switch dogSex = (Switch) findViewById(R.id.dogProfileSex);
         if(dog.isMale())
             dogSex.setChecked(true);
         else
-            dogSex.setChecked(false);
+            dogSex.setChecked(false);*/
 
     }
 

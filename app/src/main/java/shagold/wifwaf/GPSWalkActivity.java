@@ -122,7 +122,7 @@ public class GPSWalkActivity extends FragmentActivity implements GoogleApiClient
     public void onConnected(Bundle bundle) {
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
-        myLocation = mMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).title("Gold"));
+        myLocation = mMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).title("Start walk"));
         Log.d("TT", "onCreate ..............................." + mLastLocation.toString());
         startLocationUpdates();
 

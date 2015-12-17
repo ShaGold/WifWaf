@@ -15,9 +15,6 @@ import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.tool.WifWafDatePickerFragment;
 import shagold.wifwaf.tool.WifWafTimePickerFragment;
 
-/**
- * Created by jimmy on 17/12/15.
- */
 public class UseWalkActivity extends AppCompatActivity {
 
     private Walk walk;
