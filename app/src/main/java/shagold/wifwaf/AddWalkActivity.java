@@ -134,6 +134,7 @@ public class AddWalkActivity extends AppCompatActivity {
                 if (dogsSelectedNumber > 0) {
                     if (validText) {
                         Walk walk = new Walk(dogChoise.get(0).getIdDog(), mUser.getIdUser(),nameWalk.getText().toString(), descriptionWalk.getText().toString(), "null", "");
+                        //walk.setDogs(dogChoise);
                         actGPSWalk.putExtra("WALK", walk);
                         startActivity(actGPSWalk);
                     }

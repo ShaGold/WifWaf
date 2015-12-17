@@ -15,7 +15,7 @@
         tools:context="shagold.wifwaf.AddWalkActivity">
 
         <TextView
-            android:text=""
+            android:text="@string/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -26,12 +26,22 @@
             android:hint="@string/name"
             android:id="@+id/nameWalk" />
 
+        <TextView
+            android:text="@string/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:hint="@string/description"
             android:id="@+id/descriptionWalk" />
+
+        <TextView
+            android:text="@string/timeStamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/dogs_for_wal"

@@ -69,5 +69,6 @@
     <string name="walkDogs">Walk Dogs</string>
     <string name="viewPath">View Path</string>
     <string name="departure">Departure</string>
+    <string name="timeStamp">TimeStamp</string>
 
 </resources>

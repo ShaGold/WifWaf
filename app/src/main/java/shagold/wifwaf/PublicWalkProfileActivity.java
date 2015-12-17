@@ -68,21 +68,20 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
     }
 
     public void redirectUserProfile(View view){
-        System.out.println("Je passe ici");
         Intent resultat = new Intent(PublicWalkProfileActivity.this, PublicUserProfileActivity.class);
         resultat.putExtra("USER", walk.getIdUser());
         startActivity(resultat);
     }
 
     public void viewPath(View view) {
-        Intent resultat = new Intent(PublicWalkProfileActivity.this, AddWalkActivity.class);
+        Intent resultat = new Intent(PublicWalkProfileActivity.this, PublicPathProfileActivity.class);
         resultat.putExtra("WALK", walk);
         startActivity(resultat);
     }
 
     public void useWalk(View view) {
 
-        Intent resultat = new Intent(PublicWalkProfileActivity.this, UserWalksActivity.class);
+        Intent resultat = new Intent(PublicWalkProfileActivity.this, UseWalkActivity.class);
         resultat.putExtra("WALK", walk);
         startActivity(resultat);
     }
