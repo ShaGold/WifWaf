@@ -240,7 +240,7 @@ public class AddWalkActivity extends AppCompatActivity {
             setDogNumber(list.size());
             dogChoise.clear();
             for(Dog dog : userDogs) {
-                if(list.contains(dog.getName())) {
+                if(list.contains(dog.getName())) { // TODO need fix
                     dogChoise.add(dog);
                 }
             }

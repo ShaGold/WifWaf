@@ -30,8 +30,6 @@ import shagold.wifwaf.manager.SocketManager;
 public class PublicWalkProfileActivity extends AppCompatActivity {
 
     private Walk walk;
-    private DogPublicAdapter adapter;
-    private Socket mSocket;
     private ArrayList<Dog> dogWalk = new ArrayList<Dog>();
 
     @Override
@@ -41,7 +39,7 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
 
         walk = (Walk) getIntent().getSerializableExtra("WALK");
 
-        mSocket = SocketManager.getMySocket();
+        Socket mSocket = SocketManager.getMySocket();
 
         for(Dog d : walk.getDogs()) {
             mSocket = SocketManager.getMySocket();
@@ -63,6 +61,9 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
 
         TextView descriptionWalk = (TextView) findViewById(R.id.walkPublicDescription);
         descriptionWalk.setText(walk.getDescription());
+
+        TextView departureWalk = (TextView) findViewById(R.id.walkPublicDeparture);
+        departureWalk.setText(walk.getDeparture());
 
     }
 
@@ -114,7 +115,7 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
         userDogsDialog.setTitle("Walk Dogs");
 
         List<Dog> dogs = new ArrayList<Dog>(dogWalk);
-        adapter = new DogPublicAdapter(PublicWalkProfileActivity.this, dogs);
+        DogPublicAdapter adapter = new DogPublicAdapter(PublicWalkProfileActivity.this, dogs);
 
         final ListView modeList = new ListView(PublicWalkProfileActivity.this);
         modeList.setAdapter(adapter);
