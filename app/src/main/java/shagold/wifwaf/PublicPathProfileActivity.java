@@ -195,15 +195,7 @@ public class PublicPathProfileActivity extends FragmentActivity implements Googl
     public void closeWalk(View view) {
         if(walk!= null) {
 
-            Intent walkProfile;
-
-            if(walk.getIdUser() == mUser.getIdUser()) {
-                walkProfile = new Intent(PublicPathProfileActivity.this, WalkProfileActivity.class);
-            }
-            else {
-                walkProfile = new Intent(PublicPathProfileActivity.this, PublicWalkProfileActivity.class);
-            }
-
+            Intent walkProfile = new Intent(PublicPathProfileActivity.this, PublicWalkProfileActivity.class);
             walkProfile.putExtra("WALK", walk);
             startActivity(walkProfile);
         }
