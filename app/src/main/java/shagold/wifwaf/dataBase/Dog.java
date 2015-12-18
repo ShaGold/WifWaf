@@ -126,6 +126,10 @@ public class Dog implements Serializable {
         return idDog;
     }
 
+    public int getIdUser() {
+        return idUser;
+    }
+
     public String getDescription() {
         return description;
     }

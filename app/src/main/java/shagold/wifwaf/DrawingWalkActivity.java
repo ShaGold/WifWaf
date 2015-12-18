@@ -142,7 +142,6 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
         for(LatLng p : linesLatLng) {
             walk.addLocationToWalk(p.latitude, p.longitude);
         }
-
         try {
             JSONObject walkJson = walk.toJson();
             mSocket.emit("TryAddWalk", walkJson);
