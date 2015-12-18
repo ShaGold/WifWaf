@@ -63,6 +63,7 @@ public class AddWalkActivity extends AppCompatActivity {
         mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
         mSocket.emit("getAllMyDogs", mUser.getIdUser());
 
+
         initEditText();
         initAlertDialog();
         initConfirmButton();
@@ -240,7 +241,7 @@ public class AddWalkActivity extends AppCompatActivity {
             setDogNumber(list.size());
             dogChoise.clear();
             for(Dog dog : userDogs) {
-                if(list.contains(dog.getName())) { // TODO need fix
+                if(list.contains(dog.getName())) { // TODO compare with id
                     dogChoise.add(dog);
                 }
             }
