@@ -11,7 +11,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
@@ -64,6 +67,47 @@ public class AddDogActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         Ssex.setAdapter(adapter);
+
+        SeekBar ageControl = (SeekBar) findViewById(R.id.ageDogSeek);
+        SeekBar sizeControl = (SeekBar) findViewById(R.id.sizeDogSeek);
+
+        final TextView ETage = (TextView) findViewById(R.id.age);
+        ETage.setText("0");
+
+        final TextView ETsize = (TextView) findViewById(R.id.size);
+        ETsize.setText("1");
+
+        ageControl.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            double progressChanged = 0;
+
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progressChanged = ((double) progress) / 10;
+                ETage.setText(String.valueOf(progressChanged));
+            }
+
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+        sizeControl.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            int progressChanged = 0;
+
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progressChanged = progress + 1;
+                ETsize.setText(String.valueOf(progressChanged));
+            }
+
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
     }
 
     public void tryAddDog(View view) throws JSONException {
@@ -73,9 +117,9 @@ public class AddDogActivity extends AppCompatActivity {
 
         //Récupération des valeurs
         EditText ETname = (EditText) findViewById(R.id.name);
-        EditText ETage = (EditText) findViewById(R.id.age);
+        TextView ETage = (TextView) findViewById(R.id.age);
         EditText ETbreed = (EditText) findViewById(R.id.breed);
-        EditText ETsize = (EditText) findViewById(R.id.size);
+        TextView ETsize = (TextView) findViewById(R.id.size);
         EditText ETGetalongwithMales = (EditText) findViewById(R.id.getAlongWithMales);
         EditText ETGetalongwithFemales = (EditText) findViewById(R.id.getAlongWithFemales);
         EditText ETGetalongwithKids = (EditText) findViewById(R.id.getAlongWithKids);
