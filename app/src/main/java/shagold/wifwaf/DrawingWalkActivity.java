@@ -49,10 +49,7 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
     private List<PolylineOptions> pl = new ArrayList<PolylineOptions>();
     private AddressResultReceiver mResultReceiver;
     private boolean startPoint = true;
-
-
     private Socket mSocket;
-
     private Walk walk;
 
     class AddressResultReceiver extends ResultReceiver {
@@ -92,7 +89,10 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
                     Intent intent = new Intent(DrawingWalkActivity.this, AddressLocationService.class);
                     mResultReceiver = new AddressResultReceiver(new Handler());
                     intent.putExtra(Constants.RECEIVER, mResultReceiver);
-                    intent.putExtra(Constants.LOCATION_DATA_EXTRA, point);
+                    Location loc = new Location("Dep");
+                    loc.setLatitude(point.latitude);
+                    loc.setLongitude(point.longitude);
+                    intent.putExtra(Constants.LOCATION_DATA_EXTRA, loc);
                     startService(intent);
                     startPoint = false;
                 }
