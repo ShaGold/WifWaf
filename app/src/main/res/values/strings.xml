@@ -75,5 +75,6 @@
     <string name="date">Date</string>
     <string name="TraceByWalking">Trace by walking</string>
     <string name="TraceByDrawing">Trace by drawing</string>
+    <string name="selectDog">Select dogs</string>
 
 </resources>

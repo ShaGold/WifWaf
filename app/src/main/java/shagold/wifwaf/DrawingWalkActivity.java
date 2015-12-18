@@ -142,8 +142,15 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
         for(LatLng p : linesLatLng) {
             walk.addLocationToWalk(p.latitude, p.longitude);
         }
+
+        for (shagold.wifwaf.dataBase.Location l : walk.getPath()) {
+            System.out.println("PATH TITI " + l);
+
+        }
+
         try {
             JSONObject walkJson = walk.toJson();
+            System.out.println("JSON WALK : " + walkJson);
             mSocket.emit("TryAddWalk", walkJson);
         } catch (JSONException e) {
             e.printStackTrace();

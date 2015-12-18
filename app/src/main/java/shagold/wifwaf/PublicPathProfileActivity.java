@@ -52,6 +52,9 @@ public class PublicPathProfileActivity extends FragmentActivity implements Googl
         mGoogleApiClient.connect();
 
         walk = (Walk) getIntent().getSerializableExtra("WALK");
+
+
+
         mUser = SocketManager.getMyUser();
 
     }
@@ -94,7 +97,7 @@ public class PublicPathProfileActivity extends FragmentActivity implements Googl
 
             mMap.addMarker(new MarkerOptions().position(start.transform()).title("Start walk"));
 
-            //TODO just for test
+            /*//TODO just for test
             if(path.size() < 2) {
 
                 path.add(new shagold.wifwaf.dataBase.Location(2, 10, 10, 2));
@@ -104,7 +107,7 @@ public class PublicPathProfileActivity extends FragmentActivity implements Googl
                 path.add(new shagold.wifwaf.dataBase.Location(6, 50, 50, 6));
 
                 path.add(0, start);
-            }
+            }*/
 
             for(int i = 0; i < path.size() - 1; i++) {
                 PolylineOptions temp = new PolylineOptions()
