@@ -154,10 +154,4 @@ public class WalkProfileActivity extends AppCompatActivity {
         }
 
     };
-
-    public void useWalk(View view) {
-
-
-
-    }
 }
