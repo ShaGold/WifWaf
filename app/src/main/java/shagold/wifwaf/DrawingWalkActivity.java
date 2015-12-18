@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +36,7 @@ import java.util.List;
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
+import shagold.wifwaf.tool.Constants;
 
 public class DrawingWalkActivity extends FragmentActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -44,10 +47,25 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
     private PolylineOptions lines = new PolylineOptions();
     private LinkedList<LatLng> linesLatLng = new LinkedList<LatLng>();
     private List<PolylineOptions> pl = new ArrayList<PolylineOptions>();
+    private AddressResultReceiver mResultReceiver;
+    private boolean startPoint = true;
+
 
     private Socket mSocket;
 
     private Walk walk;
+
+    class AddressResultReceiver extends ResultReceiver {
+        public AddressResultReceiver(Handler h) {
+            super(h);
+        }
+
+        @Override
+        protected void onReceiveResult(int codeResultat, Bundle donneesResult) {
+            if (codeResultat == Constants.SUCCESS_RESULT)
+                walk.setCity(donneesResult.getString(Constants.RESULT_DATA_KEY));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +87,15 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
             @Override
             public void onMapClick(LatLng point) {
                 linesLatLng.add(point);
+
+                if(startPoint) {
+                    Intent intent = new Intent(DrawingWalkActivity.this, AddressLocationService.class);
+                    mResultReceiver = new AddressResultReceiver(new Handler());
+                    intent.putExtra(Constants.RECEIVER, mResultReceiver);
+                    intent.putExtra(Constants.LOCATION_DATA_EXTRA, point);
+                    startService(intent);
+                    startPoint = false;
+                }
 
                 if(linesLatLng.size() > 1) {
                     PolylineOptions temp = new PolylineOptions()
@@ -119,7 +146,6 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
         myLocation = mMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).title("Start walk"));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()), 16));
-
     }
 
 
@@ -142,15 +168,8 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
         for(LatLng p : linesLatLng) {
             walk.addLocationToWalk(p.latitude, p.longitude);
         }
-
-        for (shagold.wifwaf.dataBase.Location l : walk.getPath()) {
-            System.out.println("PATH TITI " + l);
-
-        }
-
         try {
             JSONObject walkJson = walk.toJson();
-            System.out.println("JSON WALK : " + walkJson);
             mSocket.emit("TryAddWalk", walkJson);
         } catch (JSONException e) {
             e.printStackTrace();
