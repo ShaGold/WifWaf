@@ -54,10 +54,6 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
         TextView titleWalk = (TextView) findViewById(R.id.walkPublicTitle);
         titleWalk.setText(walk.getTitle());
 
-        // TODO défault
-        ImageView creatorWalk = (ImageView) findViewById(R.id.avatarCreatorPublicWalk);
-        creatorWalk.setImageResource(R.drawable.user);
-
         TextView cityWalk = (TextView) findViewById(R.id.walkPublicCity);
         cityWalk.setText(walk.getCity());
 
