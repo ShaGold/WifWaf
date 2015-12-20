@@ -10,10 +10,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import android.content.Intent;
-import java.util.ArrayList;
 import java.util.List;
 
-import shagold.wifwaf.dataBase.Dog;
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.list.WalkAdapter;

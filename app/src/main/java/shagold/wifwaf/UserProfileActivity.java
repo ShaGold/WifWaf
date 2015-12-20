@@ -7,18 +7,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.util.List;
 
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
@@ -29,8 +24,6 @@ public class UserProfileActivity extends AppCompatActivity {
     private User mUser;
     private Socket mSocket;
 
-    private ImageButton imageButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +33,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
         mSocket = SocketManager.getMySocket();
         mSocket.on("RUpdateUser", onRUpdateUser);
-
-        Log.d("CREATE", "USER PROFILE ACTIVITY");
 
         EditText userProfileName = (EditText) findViewById(R.id.userProfileName);
         userProfileName.setText(mUser.getNickname());

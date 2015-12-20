@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,8 +55,6 @@ public class MainActivity extends AppCompatActivity {
         mSocket = SocketManager.getMySocket();
         mSocket.connect();
         mSocket.on("RTrySignIn", onRTrySignIn);
-
-        initSignUpButton();
     }
 
     @Override
@@ -73,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         connexionDebug = (Button) findViewById(R.id.connexionDebug);
         User user = new User("test@test.fr", "test");
         JSONObject jsonUser = user.toJson();
-        System.out.println("TrySignIn" + jsonUser);
+        Log.d("login", "TrySignIn : " + jsonUser);
         mSocket.emit("TrySignIn", jsonUser);
         pass = "test";
     }
@@ -121,21 +120,14 @@ public class MainActivity extends AppCompatActivity {
         //Test de connexion
         User user = new User(email, pass);
         JSONObject jsonUser = user.toJson();
-        System.out.println("TrySignIn" + jsonUser);
+        Log.d("login", "TrySignIn : " + jsonUser);
         mSocket.emit("TrySignIn", jsonUser);
 
     }
 
-    private void initSignUpButton() {
-        signUpButton = (Button) findViewById(R.id.signUpButton);
-        signUpButton.setBackgroundColor(WifWafColor.BROWN_DARK);
+    public void signup(View view){
         final Intent signUp = new Intent(getApplicationContext(), SignUpActivity.class);
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(signUp);
-            }
-        });
+        startActivity(signUp);
     }
 
     private Emitter.Listener onRTrySignIn = new Emitter.Listener() {
@@ -145,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     JSONObject param = (JSONObject) args[0];
-                    System.out.println(param);
                     try {
                         String realpass = (String) param.get("password");
                         String typedpassencrypt = User.encryptPassword(pass);

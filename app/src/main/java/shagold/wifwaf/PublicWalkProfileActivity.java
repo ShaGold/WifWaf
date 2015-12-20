@@ -17,7 +17,6 @@ import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,14 +101,12 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
     }
 
     public void useWalk(View view) {
-
         Intent resultat = new Intent(PublicWalkProfileActivity.this, UseWalkActivity.class);
         resultat.putExtra("WALK", walk);
         startActivity(resultat);
     }
 
     public void walkDogs(View view) {
-
         AlertDialog.Builder userDogsDialog = new AlertDialog.Builder(PublicWalkProfileActivity.this);
 
         userDogsDialog.setTitle("Walk Dogs");

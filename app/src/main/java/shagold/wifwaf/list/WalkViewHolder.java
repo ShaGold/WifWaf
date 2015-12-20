@@ -4,9 +4,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by jimmy on 22/11/15.
- */
 public class WalkViewHolder {
 
     private TextView title;
@@ -16,8 +13,7 @@ public class WalkViewHolder {
     private TextView city;
     private TextView length;
 
-    public WalkViewHolder() {
-    }
+    public WalkViewHolder() {}
 
     public TextView getDescription() {
         return description;

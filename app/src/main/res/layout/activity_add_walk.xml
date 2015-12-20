@@ -63,7 +63,7 @@
             android:onClick="choseTimeStamp" />
 
         <TextView
-            android:id="@+id/dogs_for_wal"
+            android:id="@+id/dogs_for_walk"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="left"

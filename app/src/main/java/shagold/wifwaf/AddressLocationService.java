@@ -21,8 +21,8 @@ public class AddressLocationService extends IntentService {
     protected ResultReceiver mReceiver;
     public AddressLocationService(){
         super("AddressLocationService");
-
     }
+
     public AddressLocationService(String name) {
         super(name);
     }

@@ -1,7 +1,6 @@
 package shagold.wifwaf;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -17,17 +16,10 @@ import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import shagold.wifwaf.dataBase.Dog;
 import shagold.wifwaf.dataBase.User;
-import shagold.wifwaf.dataBase.Walk;
-import shagold.wifwaf.list.DogAdapter;
 import shagold.wifwaf.list.DogPublicAdapter;
 import shagold.wifwaf.manager.SocketManager;
 

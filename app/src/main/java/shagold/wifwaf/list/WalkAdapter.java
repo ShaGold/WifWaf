@@ -1,14 +1,10 @@
 package shagold.wifwaf.list;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,9 +17,6 @@ import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.manager.SocketManager;
 
-/**
- * Created by jimmy on 22/11/15.
- */
 public class WalkAdapter extends ArrayAdapter<Walk> {
 
     private Context c;
@@ -65,5 +58,4 @@ public class WalkAdapter extends ArrayAdapter<Walk> {
 
         return convertView;
     }
-
 }

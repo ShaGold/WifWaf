@@ -1,16 +1,11 @@
 package shagold.wifwaf.list;
 
-import android.media.Image;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import shagold.wifwaf.R;
 
-/**
- * Created by jimmy on 22/11/15.
- */
 public class DogViewHolder {
 
     private TextView name;
@@ -18,8 +13,7 @@ public class DogViewHolder {
     private ImageView avatar;
     private ImageButton button;
 
-    public DogViewHolder() {
-    }
+    public DogViewHolder() {}
 
     public TextView getName() {
         return name;

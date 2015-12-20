@@ -77,16 +77,19 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
 
         createLocationRequest();
 
+        //Récup balade crée
         walk = (Walk) getIntent().getSerializableExtra("WALK");
+
+        //Gestion socket
         mSocket = SocketManager.getMySocket();
         mSocket.on("RTryAddWalk", onRTryAddWalk);
 
+        //Sélection des points
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
             public void onMapClick(LatLng point) {
                 linesLatLng.add(point);
-
                 if(startPoint) {
                     Intent intent = new Intent(DrawingWalkActivity.this, AddressLocationService.class);
                     mResultReceiver = new AddressResultReceiver(new Handler());
@@ -111,8 +114,6 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
                 }
             }
         });
-
-
     }
 
     protected void createLocationRequest() {
@@ -145,9 +146,12 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
 
-        myLocation = mMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).title("My position"));
+        //Ajout marqueur avec position courante
+        LatLng mapos = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        myLocation = mMap.addMarker(new MarkerOptions().position(mapos).title("My position"));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()), 16));
+        //On se centre sur la position courante
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mapos, 16));
 
         //Affichage 1er toast d'instructions
         Context context = getApplicationContext();
@@ -161,17 +165,14 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
 
     @Override
     public void onConnectionSuspended(int i) {
-
     }
 
     @Override
     public void onLocationChanged(Location location) {
-
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-
     }
 
     public void finishWalk(View view) {

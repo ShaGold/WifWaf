@@ -52,11 +52,7 @@ public class PublicPathProfileActivity extends FragmentActivity implements Googl
         mGoogleApiClient.connect();
 
         walk = (Walk) getIntent().getSerializableExtra("WALK");
-
-
-
         mUser = SocketManager.getMyUser();
-
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -95,7 +91,7 @@ public class PublicPathProfileActivity extends FragmentActivity implements Googl
 
             shagold.wifwaf.dataBase.Location start = path.get(0);
 
-            mMap.addMarker(new MarkerOptions().position(start.transform()).title("Start walk"));
+            mMap.addMarker(new MarkerOptions().position(start.transform()).title("Beginning"));
 
             /*//TODO just for test
             if(path.size() < 2) {
@@ -162,8 +158,11 @@ public class PublicPathProfileActivity extends FragmentActivity implements Googl
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
 
-        myLocation = mMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).title("Gold"));
-
+        //On récupère la position du user et on zoom
+        LatLng usrposition = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        myLocation = mMap.addMarker(new MarkerOptions().position(usrposition).title("Here you are!"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(usrposition, 16));
+        
         startLocationUpdates();
     }
 
@@ -194,7 +193,6 @@ public class PublicPathProfileActivity extends FragmentActivity implements Googl
 
     public void closeWalk(View view) {
         if(walk!= null) {
-
             Intent walkProfile = new Intent(PublicPathProfileActivity.this, PublicWalkProfileActivity.class);
             walkProfile.putExtra("WALK", walk);
             startActivity(walkProfile);

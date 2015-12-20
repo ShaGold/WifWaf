@@ -5,17 +5,13 @@ import android.widget.TextView;
 
 import shagold.wifwaf.R;
 
-/**
- * Created by jimmy on 17/12/15.
- */
 public class DogPublicViewHolder {
 
     private TextView name;
     private TextView description;
     private ImageView avatar;
 
-    public DogPublicViewHolder() {
-    }
+    public DogPublicViewHolder() {}
 
     public TextView getName() {
         return name;

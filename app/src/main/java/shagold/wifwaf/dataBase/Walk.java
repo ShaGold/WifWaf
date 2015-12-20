@@ -142,7 +142,6 @@ public class Walk implements Serializable {
     public static List<Walk> generateWalksFromJSON(JSONArray json) {
         List<Walk> walks = new ArrayList<Walk>();
         System.out.println("Mes balades" + json);
-
         if(json != null) {
             for (int i = 0; i < json.length(); i++) {
                 JSONObject currentObj = null;
@@ -155,9 +154,6 @@ public class Walk implements Serializable {
                 }
             }
         }
-
         return walks;
     }
-
-
 }

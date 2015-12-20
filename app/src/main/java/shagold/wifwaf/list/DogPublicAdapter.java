@@ -16,9 +16,6 @@ import shagold.wifwaf.R;
 import shagold.wifwaf.dataBase.Dog;
 import shagold.wifwaf.manager.SocketManager;
 
-/**
- * Created by jimmy on 17/12/15.
- */
 public class DogPublicAdapter extends ArrayAdapter<Dog> {
 
     private Context c;
@@ -53,5 +50,4 @@ public class DogPublicAdapter extends ArrayAdapter<Dog> {
 
         return convertView;
     }
-
 }

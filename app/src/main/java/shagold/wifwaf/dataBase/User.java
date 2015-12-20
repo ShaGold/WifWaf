@@ -13,7 +13,7 @@ public class User {
     private String email = "";
     private String nickname;
     private String password;
-    private String birthday = ""; //TODO classe gestion de dates
+    private String birthday = "";
     private int phoneNumber = 0;
     private String description = "";
     private String photo = "";
@@ -53,7 +53,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.description = description;
         this.photo = photo;
-        this.flag = 0; // TODO gestion flag: niveau de privatisation des données
+        this.flag = 0;
     }
 
     public User(String email, String password){
@@ -153,9 +153,9 @@ public class User {
         try {
             mdEnc = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
-            System.out.println("Exception while encrypting to md5");
+            System.out.println("Exception lors de l'encryptage en md5");
             e.printStackTrace();
-        } // Encryption algorithm
+        } // Algo de cryptage
         mdEnc.update(source.getBytes(), 0, source.length());
         String md5 = new BigInteger(1, mdEnc.digest()).toString(16);
         while ( md5.length() < 32 ) {

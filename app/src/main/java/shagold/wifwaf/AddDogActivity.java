@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
@@ -60,12 +59,9 @@ public class AddDogActivity extends AppCompatActivity {
 
         // Gestion gender
         Spinner Ssex = (Spinner) findViewById(R.id.gender);
-        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.gender_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
         Ssex.setAdapter(adapter);
 
         SeekBar ageControl = (SeekBar) findViewById(R.id.ageDogSeek);

@@ -27,7 +27,6 @@ public class UserDogsActivity extends AppCompatActivity {
 
     private Socket mSocket;
     private User mUser;
-    private Button addDog;
     private ListView mListView;
 
     @Override
@@ -41,16 +40,6 @@ public class UserDogsActivity extends AppCompatActivity {
         mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
         mSocket.emit("getAllMyDogs", mUser.getIdUser());
         mSocket.on("RdeleteDog", onRDeleteDog);
-
-        final Intent activityAddDog = new Intent(getApplicationContext(), AddDogActivity.class);
-
-        addDog = (Button) findViewById(R.id.addDogButton);
-        addDog.setBackgroundColor(WifWafColor.BROWN_DARK);
-        addDog.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-                startActivity(activityAddDog);
-            }
-        });
     }
 
     @Override
@@ -76,6 +65,11 @@ public class UserDogsActivity extends AppCompatActivity {
                 startActivity(clickedDogProfile);
             }
         });
+    }
+
+    public void addDog(View view){
+        final Intent activityAddDog = new Intent(getApplicationContext(), AddDogActivity.class);
+        startActivity(activityAddDog);
     }
 
     private Emitter.Listener onRGetAllMyDogs = new Emitter.Listener() {

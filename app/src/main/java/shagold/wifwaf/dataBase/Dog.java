@@ -20,7 +20,7 @@ public class Dog implements Serializable {
     private String getAlongWithKids;
     private String getAlongWithHumans;
     private String description;
-    private boolean male; // TODO finish sex of Dog
+    private boolean male;
 
     public Dog(){}
 
@@ -164,9 +164,7 @@ public class Dog implements Serializable {
     }
 
     public static List<Dog> generateDogsFromJson(JSONArray dogsJSON) {
-
         List<Dog> dogs = new ArrayList<Dog>();
-
         if(dogsJSON != null) {
             for (int i = 0; i < dogsJSON.length(); i++) {
                 JSONObject currentObj = null;
@@ -179,7 +177,6 @@ public class Dog implements Serializable {
                 }
             }
         }
-
         return dogs;
     }
 }

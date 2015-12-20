@@ -2,9 +2,6 @@ package shagold.wifwaf.tool;
 
 import android.graphics.Color;
 
-/**
- * Created by jimmy on 19/11/15.
- */
 public class WifWafColor {
 
     public static int BROWN = Color.rgb(129, 84, 39);

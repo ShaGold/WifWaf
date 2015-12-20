@@ -18,8 +18,6 @@ import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +43,7 @@ public class AddWalkActivity extends AppCompatActivity {
     private User mUser;
     private JSONArray dogsJSON;
     private AlertDialog alertSelectDogs;
-    private TextView dogsForWall;
+    private TextView dogsForWalk;
     private int dogsSelectedNumber = 0;
     private ArrayList<Dog> dogChoise = new ArrayList<Dog>();
     private List<Dog> userDogs = new ArrayList<Dog>();
@@ -63,20 +61,18 @@ public class AddWalkActivity extends AppCompatActivity {
         mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
         mSocket.emit("getAllMyDogs", mUser.getIdUser());
 
-
         initEditText();
         initAlertDialog();
         initConfirmButton();
     }
 
     private void initEditText() {
-        dogsForWall = (TextView) findViewById(R.id.dogs_for_wal);
-        dogsForWall.setText("No dogs");
-        dogsForWall.setFocusable(false);
+        dogsForWalk = (TextView) findViewById(R.id.dogs_for_walk);
+        dogsForWalk.setText("No dogs");
+        dogsForWalk.setFocusable(false);
     }
 
     private void initConfirmButton(){
-
         final EditText nameWalk = (EditText) findViewById(R.id.nameWalk);
         final EditText descriptionWalk = (EditText) findViewById(R.id.descriptionWalk);
 
@@ -84,7 +80,6 @@ public class AddWalkActivity extends AppCompatActivity {
         confirmNewWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Long tsLong = System.currentTimeMillis() / 1000;
                 String ts = tsLong.toString();
                 Log.d("Ts", ts);
@@ -131,7 +126,7 @@ public class AddWalkActivity extends AppCompatActivity {
                         startActivity(actGPSWalk);
                     }
                 } else {
-                    dogsForWall.setError(ErrorMessage.BLANK.toString());
+                    dogsForWalk.setError(ErrorMessage.BLANK.toString());
                 }
 
             }
@@ -151,7 +146,7 @@ public class AddWalkActivity extends AppCompatActivity {
         selectDogsForWalk.setOnClickListener(new View.OnClickListener() { // TODO send with onclick
             @Override
             public void onClick(View v) {
-                userDogs = generateDogsFromJSON();
+                userDogs = Dog.generateDogsFromJson(dogsJSON);
                 List<String> dogsName = new ArrayList<String>();
 
                 for (Dog dog : userDogs)
@@ -196,24 +191,6 @@ public class AddWalkActivity extends AppCompatActivity {
         });
     }
 
-    private List<Dog> generateDogsFromJSON() {
-        List<Dog> dogs = new ArrayList<Dog>();
-
-        if(dogsJSON != null)
-            for (int i = 0; i < dogsJSON.length(); i++) {
-                JSONObject currentObj = null;
-                try {
-                    currentObj = dogsJSON.getJSONObject(i);
-                    dogs.add(new Dog(currentObj));
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        return dogs;
-    }
-
     private Emitter.Listener onRGetAllMyDogs = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
@@ -250,7 +227,7 @@ public class AddWalkActivity extends AppCompatActivity {
                 result += d + "\n";
         }
 
-        dogsForWall.setText(result);
+        dogsForWalk.setText(result);
     }
 
     private void setDogNumber(int n) {
