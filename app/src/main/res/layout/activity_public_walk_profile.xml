@@ -62,12 +62,22 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/departure"/>
+            android:text="@string/date"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/walkPublicDeparture"/>
+            android:id="@+id/walkPublicDateDeparture"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/time"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/walkPublicTimeDeparture"/>
 
         <Button
             android:layout_width="wrap_content"

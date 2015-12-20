@@ -78,5 +78,6 @@
     <string name="promptGender">Gender</string>
     <string name="selectDog">Select dogs</string>
     <string name="modify">modify</string>
+    <string name="time">Time</string>
 
 </resources>

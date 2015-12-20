@@ -25,7 +25,9 @@ import java.util.List;
 import shagold.wifwaf.dataBase.Dog;
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.list.DogPublicAdapter;
+import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
+import shagold.wifwaf.tool.WifWafWalkDeparture;
 
 public class PublicWalkProfileActivity extends AppCompatActivity {
 
@@ -62,31 +64,24 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
         TextView descriptionWalk = (TextView) findViewById(R.id.walkPublicDescription);
         descriptionWalk.setText(walk.getDescription());
 
-        TextView departureWalk = (TextView) findViewById(R.id.walkPublicDeparture);
-        departureWalk.setText(walk.getDeparture());
+        WifWafWalkDeparture departure = new WifWafWalkDeparture(walk.getDeparture());
 
+        TextView dateDepartureWalk = (TextView) findViewById(R.id.walkPublicDateDeparture);
+        dateDepartureWalk.setText(departure.getFormattedDate());
+
+        TextView timeDepartureWalk = (TextView) findViewById(R.id.walkPublicTimeDeparture);
+        timeDepartureWalk.setText(departure.getFormattedTime());
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_default, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return MenuManager.defaultMenu(this, item) || super.onOptionsItemSelected(item);
     }
 
     public void redirectUserProfile(View view){
