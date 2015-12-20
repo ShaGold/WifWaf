@@ -39,22 +39,6 @@
             android:id="@+id/descriptionUseWalk" />
 
         <TextView
-            android:text="@string/timeStamp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/timeStampUseWalk"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/timeStamp"
-            android:onClick="choseTimeStamp" />
-
-        <TextView
             android:text="@string/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -71,6 +55,22 @@
             android:onClick="choseDate" />
 
         <TextView
+            android:text="@string/timeStamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timeStampUseWalk"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/timeStamp"
+            android:onClick="choseTimeStamp" />
+
+        <TextView
             android:id="@+id/dogs_for_walk_use"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -80,8 +80,6 @@
             android:scrollHorizontally="false"
             android:scrollbars="vertical"
             android:singleLine="false" />
-
-
 
         <Button
             android:layout_width="wrap_content"

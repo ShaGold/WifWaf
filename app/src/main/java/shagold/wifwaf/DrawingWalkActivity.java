@@ -1,5 +1,6 @@
 package shagold.wifwaf;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
@@ -143,9 +145,17 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
 
-        myLocation = mMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).title("Start walk"));
+        myLocation = mMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).title("My position"));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()), 16));
+
+        //Affichage 1er toast d'instructions
+        Context context = getApplicationContext();
+        CharSequence text = "Please select where your walk should start";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
 
