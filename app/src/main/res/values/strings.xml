@@ -59,10 +59,10 @@
     <string-array name="user_dogs_arrays">
         <item>No dogs</item>
     </string-array>
-    <string name="title_activity_public_user_profile">PublicUserProfileActivity</string>
+    <string name="title_activity_public_user_profile">User Profile</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_public_walk_profile">PublicWalkProfileActivity</string>
+    <string name="title_activity_public_walk_profile">Walk</string>
     <string name="no_address_found">no address found</string>
     <string name="address_found">address found</string>
     <string name="city">City</string>
@@ -79,5 +79,6 @@
     <string name="selectDog">Select dogs</string>
     <string name="modify">modify</string>
     <string name="time">Time</string>
+    <string name="title_activity_gps_walk">Walk Path</string>
 
 </resources>
