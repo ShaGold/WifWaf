@@ -71,8 +71,8 @@
     <string name="walkDogs">Walk Dogs</string>
     <string name="viewPath">View Path</string>
     <string name="departure">Departure</string>
-    <string name="timeStamp">TimeStamp</string>
-    <string name="date">Date</string>
+    <string name="timeStamp">At what time?</string>
+    <string name="date">Which day?</string>
     <string name="TraceByWalking">Trace by walking</string>
     <string name="TraceByDrawing">Trace by drawing</string>
     <string name="promptGender">Gender</string>
@@ -81,4 +81,9 @@
     <string name="time">Time</string>
     <string name="title_activity_gps_walk">Walk Path</string>
 
+
+    <string name="cancel">Cancel</string>
+    <string name="title_prompt_select_dogs">Select the dogs participating to this walk</string>
+    <string name="no_dogs_selected">No dogs selected</string>
+    <string name="selected_dogs">Dogs selected :</string>
 </resources>

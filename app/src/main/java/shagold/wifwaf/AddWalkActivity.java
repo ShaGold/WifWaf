@@ -68,7 +68,6 @@ public class AddWalkActivity extends AppCompatActivity {
 
     private void initEditText() {
         dogsForWalk = (TextView) findViewById(R.id.dogs_for_walk);
-        dogsForWalk.setText("No dogs");
         dogsForWalk.setFocusable(false);
     }
 
@@ -80,9 +79,6 @@ public class AddWalkActivity extends AppCompatActivity {
         confirmNewWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Long tsLong = System.currentTimeMillis() / 1000;
-                String ts = tsLong.toString();
-                Log.d("Ts", ts);
 
                 for (Dog d : dogChoise)
                     Log.d("dog", d.getName());
@@ -142,7 +138,6 @@ public class AddWalkActivity extends AppCompatActivity {
 
     private void initAlertDialog() {
         Button selectDogsForWalk = (Button) findViewById(R.id.selectDogsForWalk);
-        selectDogsForWalk.setBackgroundColor(WifWafColor.BROWN_DARK);
         selectDogsForWalk.setOnClickListener(new View.OnClickListener() { // TODO send with onclick
             @Override
             public void onClick(View v) {
@@ -156,7 +151,7 @@ public class AddWalkActivity extends AppCompatActivity {
 
                 AlertDialog.Builder multyChoiceDialog = new AlertDialog.Builder(AddWalkActivity.this);
 
-                multyChoiceDialog.setTitle("Choice Dogs");
+                multyChoiceDialog.setTitle(getString(R.string.title_prompt_select_dogs));
 
                 boolean[] _selections = new boolean[dogsList.length];
 
@@ -165,7 +160,8 @@ public class AddWalkActivity extends AppCompatActivity {
                     }
                 });
 
-                multyChoiceDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                String confirm = getString(R.string.confirm);
+                multyChoiceDialog.setPositiveButton(confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ListView list = ((AlertDialog) dialog).getListView();
@@ -179,7 +175,8 @@ public class AddWalkActivity extends AppCompatActivity {
                     }
                 });
 
-                multyChoiceDialog.setNegativeButton("Cancel",
+                String cancel = getString(R.string.cancel);
+                multyChoiceDialog.setNegativeButton(cancel,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -211,7 +208,7 @@ public class AddWalkActivity extends AppCompatActivity {
         String result = "";
 
         if(list.size() == 0) {
-           result = "No dogs";
+            result = getString(R.string.no_dogs_selected);
             setDogNumber(0);
         }
         else {
@@ -222,7 +219,7 @@ public class AddWalkActivity extends AppCompatActivity {
                     dogChoise.add(dog);
                 }
             }
-
+            result = getString(R.string.selected_dogs);
             for(String d : list)
                 result += d + "\n";
         }
