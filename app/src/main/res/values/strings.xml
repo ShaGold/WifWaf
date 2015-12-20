@@ -77,5 +77,6 @@
     <string name="TraceByDrawing">Trace by drawing</string>
     <string name="promptGender">Gender</string>
     <string name="selectDog">Select dogs</string>
+    <string name="modify">modify</string>
 
 </resources>

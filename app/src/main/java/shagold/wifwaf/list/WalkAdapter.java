@@ -1,14 +1,10 @@
 package shagold.wifwaf.list;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +16,7 @@ import shagold.wifwaf.R;
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.manager.SocketManager;
+import shagold.wifwaf.tool.WifWafWalkDeparture;
 
 /**
  * Created by jimmy on 22/11/15.
@@ -52,16 +49,21 @@ public class WalkAdapter extends ArrayAdapter<Walk> {
             viewHolder.setAvatar((ImageView) convertView.findViewById(R.id.avatarRowWalk));
             //viewHolder.setButton((ImageButton) convertView.findViewById(R.id.deleteWalkButton));
             viewHolder.setCity((TextView) convertView.findViewById(R.id.cityRowWalk));
+            viewHolder.setDate((TextView) convertView.findViewById(R.id.dateRowWalk));
+            viewHolder.setTime((TextView) convertView.findViewById(R.id.timeRowWalk));
             convertView.setTag(viewHolder);
         }
 
+        // TODO fix warning with resource android
         final Walk walk = getItem(position);
         viewHolder.getTitle().setText(walk.getTitle());
-        viewHolder.getDescription().setText(walk.getDescription());
+        viewHolder.getDescription().setText("Description : " + walk.getDescription());
         //TODO default value
         viewHolder.getAvatar().setImageResource(R.drawable.user);
-
         viewHolder.getCity().setText("City " + " : " + walk.getCity());
+        WifWafWalkDeparture departure = new WifWafWalkDeparture(walk.getDeparture());
+        viewHolder.getDate().setText("Date : " + departure.getFormattedDate());
+        viewHolder.getTime().setText("Time : " + departure.getFormattedTime());
 
         return convertView;
     }
