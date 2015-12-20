@@ -34,8 +34,7 @@ import shagold.wifwaf.manager.SocketManager;
 
 public class PublicUserProfileActivity extends AppCompatActivity {
 
-    private User mUser;
-    private User defUser =  new User("adresse@gmail.com", "A", "B", "2001-10-12", 123, "J'aime beaucoup les animaux!", null);
+    private User user;
     private Socket mSocket;
     private DogPublicAdapter adapter;
 
@@ -45,39 +44,15 @@ public class PublicUserProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_public_user_profile);
 
         mSocket = SocketManager.getMySocket();
-        mUser = SocketManager.getMyUser();
         mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
 
-        //TODO recup vrai user id, need text
-        int idUser = (int) getIntent().getIntExtra("USER", -1);
+        int idUser = getIntent().getIntExtra("USER", -1);
+        System.out.println("ID U : " + idUser);
+        mSocket.emit("getUserById", idUser);
+        mSocket.on("RGetUser", onRGetUser);
 
         // TODO besoin de l'user que lon veut
-        //mSocket.emit("getAllMyDogs", defUser.getIdUser());
-        mSocket.emit("getAllMyDogs", mUser.getIdUser());
-
-        TextView userProfileName = (TextView) findViewById(R.id.userProfileName);
-        userProfileName.setText(defUser.getNickname());
-
-        TextView userProfileMail = (TextView) findViewById(R.id.userProfileMail);
-        userProfileMail.setText(Html.fromHtml("<a href=mailto:" + defUser.getEmail() + ">" + defUser.getEmail() + "</a>"));
-
-        TextView userProfileBirthday = (TextView) findViewById(R.id.userProfileBirthday);
-        userProfileBirthday.setText(defUser.getBirthday());
-
-        TextView userProfileDescription = (TextView) findViewById(R.id.userProfileDescription);
-        userProfileDescription.setText(defUser.getDescription());
-
-        TextView userProfilePhoneNumber = (TextView) findViewById(R.id.userProfilePhoneNumber);
-        userProfilePhoneNumber.setText(Html.fromHtml("<a href=tel:" + Integer.toString(defUser.getPhoneNumber()) + ">" + Integer.toString(defUser.getPhoneNumber()) + "</a>"));
-
-        // TODO default image
-        ImageView userAvatar = (ImageView) findViewById(R.id.avatarPublicUserProfile);
-        userAvatar.setImageResource(R.drawable.user);
-
-        // TODO send to public dog profile
-
-        userProfileMail.setMovementMethod(LinkMovementMethod.getInstance());
-        userProfilePhoneNumber.setMovementMethod(LinkMovementMethod.getInstance());
+        mSocket.emit("getAllMyDogs", idUser);
     }
 
     @Override
@@ -112,8 +87,52 @@ public class PublicUserProfileActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     List<Dog> dogs = Dog.generateDogsFromJson((JSONArray) args[0]);
-                    System.out.println("DOGS PUBLIC " + dogs);
                     adapter = new DogPublicAdapter(PublicUserProfileActivity.this, dogs);
+                }
+
+            });
+        }
+
+    };
+
+    private Emitter.Listener onRGetUser = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            PublicUserProfileActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println("USER P - " + args[0]);
+                    try {
+                        user = new User((JSONObject) args[0]);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    System.out.println("USER - " + user);
+
+                    TextView userProfileName = (TextView) findViewById(R.id.userProfileName);
+                    userProfileName.setText(user.getNickname());
+
+                    TextView userProfileMail = (TextView) findViewById(R.id.userProfileMail);
+                    userProfileMail.setText(Html.fromHtml("<a href=mailto:" + user.getEmail() + ">" + user.getEmail() + "</a>"));
+
+                    TextView userProfileBirthday = (TextView) findViewById(R.id.userProfileBirthday);
+                    userProfileBirthday.setText(user.getBirthday());
+
+                    TextView userProfileDescription = (TextView) findViewById(R.id.userProfileDescription);
+                    userProfileDescription.setText(user.getDescription());
+
+                    TextView userProfilePhoneNumber = (TextView) findViewById(R.id.userProfilePhoneNumber);
+                    userProfilePhoneNumber.setText(Html.fromHtml("<a href=tel:" + Integer.toString(user.getPhoneNumber()) + ">" + Integer.toString(user.getPhoneNumber()) + "</a>"));
+
+                    // TODO default image
+                    ImageView userAvatar = (ImageView) findViewById(R.id.avatarPublicUserProfile);
+                    userAvatar.setImageResource(R.drawable.user);
+
+                    // TODO send to public dog profile
+
+                    userProfileMail.setMovementMethod(LinkMovementMethod.getInstance());
+                    userProfilePhoneNumber.setMovementMethod(LinkMovementMethod.getInstance());
                 }
 
             });
