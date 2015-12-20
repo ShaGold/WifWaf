@@ -53,10 +53,6 @@ public class AddDogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_dog);
 
-        // Gestion click bouton de confirmation
-        this.confirmAddDog = (Button) findViewById(R.id.confirmAddDogButton);
-        this.confirmAddDog.setBackgroundColor(WifWafColor.BROWN_DARK);
-
         // Gestion gender
         Spinner Ssex = (Spinner) findViewById(R.id.gender);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -259,7 +255,6 @@ public class AddDogActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     JSONArray listBehaviour =  (JSONArray) args[0];
-                    System.out.println("je recois l'objet" + listBehaviour.toString());
                     for (int i = 0; i < listBehaviour.length(); i++) {
                         JSONObject currentObj = null;
                         try {
