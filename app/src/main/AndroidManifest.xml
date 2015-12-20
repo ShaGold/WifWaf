@@ -70,7 +70,7 @@
         </activity>
         <activity
             android:name=".GPSWalkActivity"
-            android:label=""
+            android:label="@string/title_activity_gps_walk"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -98,17 +98,17 @@
             android:exported="false"/>
         <activity
             android:name=".PublicPathProfileActivity"
-            android:label=""
+            android:label="@string/title_activity_gps_walk"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".UseWalkActivity"
-            android:label=""
+            android:label="@string/title_activity_add_walk"
             android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".DrawingWalkActivity"
-            android:label=""
+            android:label="@string/title_activity_gps_walk"
             android:screenOrientation="portrait">
         </activity>
     </application>

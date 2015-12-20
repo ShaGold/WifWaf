@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import shagold.wifwaf.tool.WifWafWalkDeparture;
+
 public class Walk implements Serializable {
 
     private int idWalk;

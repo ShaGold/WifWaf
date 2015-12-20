@@ -162,7 +162,7 @@ public class PublicPathProfileActivity extends FragmentActivity implements Googl
         LatLng usrposition = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
         myLocation = mMap.addMarker(new MarkerOptions().position(usrposition).title("Here you are!"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(usrposition, 16));
-        
+
         startLocationUpdates();
     }
 

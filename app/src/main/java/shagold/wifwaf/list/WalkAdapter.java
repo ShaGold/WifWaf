@@ -16,6 +16,8 @@ import shagold.wifwaf.R;
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.manager.SocketManager;
+import shagold.wifwaf.tool.WifWafColor;
+import shagold.wifwaf.tool.WifWafWalkDeparture;
 
 public class WalkAdapter extends ArrayAdapter<Walk> {
 
@@ -45,16 +47,21 @@ public class WalkAdapter extends ArrayAdapter<Walk> {
             viewHolder.setAvatar((ImageView) convertView.findViewById(R.id.avatarRowWalk));
             //viewHolder.setButton((ImageButton) convertView.findViewById(R.id.deleteWalkButton));
             viewHolder.setCity((TextView) convertView.findViewById(R.id.cityRowWalk));
+            viewHolder.setDate((TextView) convertView.findViewById(R.id.dateRowWalk));
+            viewHolder.setTime((TextView) convertView.findViewById(R.id.timeRowWalk));
             convertView.setTag(viewHolder);
         }
 
+        // TODO fix warning with resource android
         final Walk walk = getItem(position);
         viewHolder.getTitle().setText(walk.getTitle());
-        viewHolder.getDescription().setText(walk.getDescription());
+        viewHolder.getDescription().setText("Description : " + walk.getDescription());
         //TODO default value
         viewHolder.getAvatar().setImageResource(R.drawable.user);
-
         viewHolder.getCity().setText("City " + " : " + walk.getCity());
+        WifWafWalkDeparture departure = new WifWafWalkDeparture(walk.getDeparture());
+        viewHolder.getDate().setText("Date : " + departure.getFormattedDate());
+        viewHolder.getTime().setText("Time : " + departure.getFormattedTime());
 
         return convertView;
     }
