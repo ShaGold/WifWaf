@@ -1,6 +1,5 @@
 package shagold.wifwaf.tool;
 
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class WifWafWalkDeparture {
@@ -34,7 +33,7 @@ public class WifWafWalkDeparture {
 
     public String getTime() {
         String s = getValues()[1];
-        if(s.contains(".") && s.contains("Z"))
+        if(s.contains("."))
             return s.split(Pattern.quote("."))[0];
 
         return s;

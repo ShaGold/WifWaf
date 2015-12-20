@@ -16,6 +16,7 @@ import shagold.wifwaf.R;
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.manager.SocketManager;
+import shagold.wifwaf.tool.WifWafColor;
 import shagold.wifwaf.tool.WifWafWalkDeparture;
 
 /**
