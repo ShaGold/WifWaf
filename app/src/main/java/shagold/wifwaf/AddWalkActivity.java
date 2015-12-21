@@ -1,27 +1,22 @@
 package shagold.wifwaf;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
-
 import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import shagold.wifwaf.dataBase.Dog;
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.dataBase.Walk;
@@ -30,7 +25,6 @@ import shagold.wifwaf.manager.SocketManager;
 import shagold.wifwaf.tool.WifWafColor;
 import shagold.wifwaf.tool.WifWafDatePickerFragment;
 import shagold.wifwaf.tool.WifWafTimePickerFragment;
-import shagold.wifwaf.view.ErrorMessage;
 import shagold.wifwaf.view.TextValidator;
 import shagold.wifwaf.view.ValidateMessage;
 import shagold.wifwaf.view.filter.text.EditTextFilter;
@@ -39,13 +33,8 @@ import shagold.wifwaf.view.filter.text.SizeFilter;
 
 public class AddWalkActivity extends AppCompatActivity {
 
-    private Socket mSocket;
     private User mUser;
-    private JSONArray dogsJSON;
-    private AlertDialog alertSelectDogs;
-    private TextView dogsForWalk;
-    private int dogsSelectedNumber = 0;
-    private ArrayList<Dog> dogChoise = new ArrayList<Dog>();
+    private ArrayList<Dog> dogChoice = new ArrayList<Dog>();
     private List<Dog> userDogs = new ArrayList<Dog>();
     private TextValidator textValidator = new TextValidator();
     private EditTextFilter[] filters = {new NumberFilter()};
@@ -56,79 +45,12 @@ public class AddWalkActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_walk);
 
-        mSocket = SocketManager.getMySocket();
+        Socket mSocket = SocketManager.getMySocket();
         mUser = SocketManager.getMyUser();
         mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
         mSocket.emit("getAllMyDogs", mUser.getIdUser());
-
-        initEditText();
-        initAlertDialog();
-        initConfirmButton();
     }
-
-    private void initEditText() {
-        dogsForWalk = (TextView) findViewById(R.id.dogs_for_walk);
-        dogsForWalk.setFocusable(false);
-    }
-
-    private void initConfirmButton(){
-        final EditText nameWalk = (EditText) findViewById(R.id.nameWalk);
-        final EditText descriptionWalk = (EditText) findViewById(R.id.descriptionWalk);
-
-        Button confirmNewWalk = (Button) findViewById(R.id.addWalkWalkingButton);
-        confirmNewWalk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                for (Dog d : dogChoise)
-                    Log.d("dog", d.getName());
-
-                boolean validText = true;
-
-                ValidateMessage vm = textValidator.validate(nameWalk, filters);
-                if (!vm.getValue()) {
-                    validText = vm.getValue();
-                    nameWalk.setError(vm.getError().toString());
-                }
-/*
-                vm = textValidator.validate(nameWalk, sizeTitleFilter);
-                if(!vm.getValue()) {
-                    validText = vm.getValue();
-                    nameWalk.setError(vm.getError().toString() + " : min - " + sizeTitleFilter.getMin() + " , max - " + sizeTitleFilter.getMax());
-                }*/
-
-                vm = textValidator.validate(descriptionWalk, filters);
-                if (!vm.getValue()) {
-                    validText = vm.getValue();
-                    descriptionWalk.setError(vm.getError().toString());
-                }
-
-                vm = textValidator.validate(descriptionWalk, sizeDescriptionFilter);
-                if (!vm.getValue()) {
-                    validText = vm.getValue();
-                    descriptionWalk.setError(vm.getError().toString() + " : min " + sizeDescriptionFilter.getMin() + " , max " + sizeDescriptionFilter.getMax());
-                }
-
-                final Intent actGPSWalk = new Intent(getApplicationContext(), GPSWalkActivity.class);
-                if (dogsSelectedNumber > 0) {
-                    if (validText) {
-                        Walk walk = new Walk(mUser.getIdUser(), nameWalk.getText().toString(), descriptionWalk.getText().toString(), "null", "", dogChoise);
-                        TextView timeText = (TextView) findViewById(R.id.timeStampAddWalk);
-                        String time = timeText.getText().toString();
-                        TextView dateText = (TextView) findViewById(R.id.dateAddWalk);
-                        String date = dateText.getText().toString();
-                        walk.setDeparture(date + " " + time);
-                        actGPSWalk.putExtra("WALK", walk);
-                        startActivity(actGPSWalk);
-                    }
-                } else {
-                    dogsForWalk.setError(ErrorMessage.BLANK.toString());
-                }
-
-            }
-        });
-    }
-
+    
     public void choseTimeStamp(View view) {
         WifWafTimePickerFragment newFragment = new WifWafTimePickerFragment();
         TextView textView = (TextView) findViewById(R.id.timeStampAddWalk);
@@ -136,100 +58,38 @@ public class AddWalkActivity extends AppCompatActivity {
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
-    private void initAlertDialog() {
-        Button selectDogsForWalk = (Button) findViewById(R.id.selectDogsForWalk);
-        selectDogsForWalk.setOnClickListener(new View.OnClickListener() { // TODO send with onclick
-            @Override
-            public void onClick(View v) {
-                userDogs = Dog.generateDogsFromJson(dogsJSON);
-                List<String> dogsName = new ArrayList<String>();
-
-                for (Dog dog : userDogs)
-                    dogsName.add(dog.getName());
-
-                final CharSequence[] dogsList = dogsName.toArray(new CharSequence[dogsName.size()]);
-
-                AlertDialog.Builder multyChoiceDialog = new AlertDialog.Builder(AddWalkActivity.this);
-
-                multyChoiceDialog.setTitle(getString(R.string.title_prompt_select_dogs));
-
-                boolean[] _selections = new boolean[dogsList.length];
-
-                multyChoiceDialog.setMultiChoiceItems(dogsList, _selections, new DialogInterface.OnMultiChoiceClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton, boolean isChecked) {
-                    }
-                });
-
-                String confirm = getString(R.string.confirm);
-                multyChoiceDialog.setPositiveButton(confirm, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ListView list = ((AlertDialog) dialog).getListView();
-                        List<String> dogsSelected = new ArrayList<String>();
-                        for (int i = 0; i < list.getCount(); i++) {
-                            boolean checked = list.isItemChecked(i);
-                            if (checked)
-                                dogsSelected.add(list.getItemAtPosition(i).toString());
-                        }
-                        updateItemDogs(dogsSelected);
-                    }
-                });
-
-                String cancel = getString(R.string.cancel);
-                multyChoiceDialog.setNegativeButton(cancel,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        });
-                alertSelectDogs = multyChoiceDialog.create();
-                alertSelectDogs.show();
-            }
-        });
-    }
-
     private Emitter.Listener onRGetAllMyDogs = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
-
             AddWalkActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    dogsJSON = (JSONArray) args[0];
-                }
+                    JSONArray dogsJSON = (JSONArray) args[0];
+                    userDogs = Dog.generateDogsFromJson(dogsJSON);
+                    int index = 9;
+                    for (Dog dog : userDogs) {
+                        CheckBox cb = new CheckBox(AddWalkActivity.this);
+                        cb.setText(dog.getName());
+                        cb.setTextColor(WifWafColor.BLACK);
+                        
+                        final Dog dogCB = dog;
+                        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                if (isChecked)
+                                    dogChoice.add(dogCB);
+                                else 
+                                    dogChoice.remove(dogCB);
+                            }
+                        });
 
+                        LinearLayout layout = (LinearLayout) findViewById(R.id.addWalkLayout);
+                        layout.addView(cb, index);
+                        index++;
+                    }
+                }
             });
         }
-
     };
-
-    private void updateItemDogs(List<String> list) {
-
-        String result = "";
-
-        if(list.size() == 0) {
-            result = getString(R.string.no_dogs_selected);
-            setDogNumber(0);
-        }
-        else {
-            setDogNumber(list.size());
-            dogChoise.clear();
-            for(Dog dog : userDogs) {
-                if(list.contains(dog.getName())) { // TODO compare with id
-                    dogChoise.add(dog);
-                }
-            }
-            result = getString(R.string.selected_dogs);
-            for(String d : list)
-                result += d + "\n";
-        }
-
-        dogsForWalk.setText(result);
-    }
-
-    private void setDogNumber(int n) {
-        dogsSelectedNumber = n;
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -263,9 +123,56 @@ public class AddWalkActivity extends AppCompatActivity {
         String date = dateText.getText().toString();
         String departure = date + " " + time;
 
-        Walk walk = new Walk(mUser.getIdUser(), nameW, descriptionW, "null", departure, dogChoise);
-
+        Walk walk = new Walk(mUser.getIdUser(), nameW, descriptionW, "null", departure, dogChoice);
         drawingWalk.putExtra("WALK", walk);
         startActivity(drawingWalk);
+    }
+
+    public void walkingWalk(View view) {
+        final EditText nameWalk = (EditText) findViewById(R.id.nameWalk);
+        final EditText descriptionWalk = (EditText) findViewById(R.id.descriptionWalk);
+
+        boolean validText = true;
+
+        ValidateMessage vm = textValidator.validate(nameWalk, filters);
+        if (!vm.getValue()) {
+            validText = vm.getValue();
+            nameWalk.setError(vm.getError().toString());
+        }
+/*
+        vm = textValidator.validate(nameWalk, sizeTitleFilter);
+        if(!vm.getValue()) {
+                    validText = vm.getValue();
+                    nameWalk.setError(vm.getError().toString() + " : min - " + sizeTitleFilter.getMin() + " , max - " + sizeTitleFilter.getMax());
+                }*/
+
+        vm = textValidator.validate(descriptionWalk, filters);
+        if (!vm.getValue()) {
+            validText = vm.getValue();
+            descriptionWalk.setError(vm.getError().toString());
+        }
+
+        vm = textValidator.validate(descriptionWalk, sizeDescriptionFilter);
+        if (!vm.getValue()) {
+            validText = vm.getValue();
+            descriptionWalk.setError(vm.getError().toString() + " : min " + sizeDescriptionFilter.getMin() + " , max " + sizeDescriptionFilter.getMax());
+        }
+
+        final Intent actGPSWalk = new Intent(getApplicationContext(), GPSWalkActivity.class);
+        if (dogChoice.size() > 0) {
+            if (validText) {
+                Walk walk = new Walk(mUser.getIdUser(), nameWalk.getText().toString(), descriptionWalk.getText().toString(), "null", "", dogChoice);
+                TextView timeText = (TextView) findViewById(R.id.timeStampAddWalk);
+                String time = timeText.getText().toString();
+                TextView dateText = (TextView) findViewById(R.id.dateAddWalk);
+                String date = dateText.getText().toString();
+                walk.setDeparture(date + " " + time);
+                actGPSWalk.putExtra("WALK", walk);
+                startActivity(actGPSWalk);
+            }
+        } else {
+            TextView dogs = (TextView) findViewById(R.id.selectDogs);
+            dogs.setError("Need least one"); // TODO string res
+        }
     }
 }
