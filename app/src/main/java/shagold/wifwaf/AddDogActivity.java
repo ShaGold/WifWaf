@@ -283,12 +283,7 @@ public class AddDogActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     final Intent getUserDog = new Intent(getApplicationContext(), UserDogsActivity.class);
-                    confirmAddDog.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(getUserDog);
-                        }
-                    });
+                    startActivity(getUserDog);
                 }
             });
         }

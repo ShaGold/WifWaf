@@ -77,7 +77,6 @@
     <string name="TraceByDrawing">Trace by drawing</string>
     <string name="promptGender">Gender</string>
     <string name="selectDog">Select dogs</string>
-    <string name="modify">modify</string>
     <string name="time">Time</string>
     <string name="title_activity_gps_walk">Walk Path</string>
 
@@ -86,4 +85,5 @@
     <string name="title_prompt_select_dogs">Select the dogs participating to this walk</string>
     <string name="no_dogs_selected">No dogs selected</string>
     <string name="selected_dogs">Dogs selected :</string>
+    <string name="select_date">Select date</string>
 </resources>
