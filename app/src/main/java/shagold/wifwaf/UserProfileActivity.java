@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
@@ -18,6 +19,7 @@ import org.json.JSONException;
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
+import shagold.wifwaf.tool.WifWafUserBirthday;
 
 public class UserProfileActivity extends AppCompatActivity {
 
@@ -40,8 +42,9 @@ public class UserProfileActivity extends AppCompatActivity {
         EditText userProfileMail = (EditText) findViewById(R.id.userProfileMail);
         userProfileMail.setText(mUser.getEmail());
 
-        EditText userProfileBirthday = (EditText) findViewById(R.id.userProfileBirthday);
-        userProfileBirthday.setText(mUser.getBirthday());
+        TextView userProfileBirthday = (TextView) findViewById(R.id.userProfileBirthday);
+        WifWafUserBirthday birthday = new WifWafUserBirthday(mUser.getBirthday());
+        userProfileBirthday.setText(birthday.getDate());
 
         EditText userProfileDescription = (EditText) findViewById(R.id.userProfileDescription);
         userProfileDescription.setText(mUser.getDescription());
@@ -73,7 +76,7 @@ public class UserProfileActivity extends AppCompatActivity {
         EditText userProfileMail = (EditText) findViewById(R.id.userProfileMail);
         String mailU = userProfileMail.getText().toString();
 
-        EditText userProfileBirthday = (EditText) findViewById(R.id.userProfileBirthday);
+        TextView userProfileBirthday = (TextView) findViewById(R.id.userProfileBirthday);
         String birthday = userProfileBirthday.getText().toString();
 
         EditText userProfileDescription = (EditText) findViewById(R.id.userProfileDescription);

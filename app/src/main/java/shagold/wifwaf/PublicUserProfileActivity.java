@@ -26,6 +26,7 @@ import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.list.DogPublicAdapter;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
+import shagold.wifwaf.tool.WifWafUserBirthday;
 
 public class PublicUserProfileActivity extends AppCompatActivity {
 
@@ -113,7 +114,8 @@ public class PublicUserProfileActivity extends AppCompatActivity {
                     userProfileMail.setText(Html.fromHtml("<a href=mailto:" + user.getEmail() + ">" + user.getEmail() + "</a>"));
 
                     TextView userProfileBirthday = (TextView) findViewById(R.id.userProfileBirthday);
-                    userProfileBirthday.setText(user.getBirthday());
+                    WifWafUserBirthday birthday = new WifWafUserBirthday(user.getBirthday());
+                    userProfileBirthday.setText(birthday.getDate());
 
                     TextView userProfileDescription = (TextView) findViewById(R.id.userProfileDescription);
                     userProfileDescription.setText(user.getDescription());
