@@ -1,6 +1,7 @@
 package shagold.wifwaf.list;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +25,22 @@ public class WalkAdapter extends ArrayAdapter<Walk> {
     private Context c;
     private Socket mSocket;
     private User mUser;
+    private boolean privateRow;
 
     public WalkAdapter(Context context, List<Walk> walks) {
         super(context, 0, walks);
         c = context;
         mSocket = SocketManager.getMySocket();
         mUser = SocketManager.getMyUser();
+        privateRow = false;
+    }
+
+    public WalkAdapter(Context context, List<Walk> walks, boolean privateRow) {
+        super(context, 0, walks);
+        c = context;
+        mSocket = SocketManager.getMySocket();
+        mUser = SocketManager.getMyUser();
+        this.privateRow = privateRow;
     }
 
     @Override
@@ -62,6 +73,13 @@ public class WalkAdapter extends ArrayAdapter<Walk> {
         WifWafWalkDeparture departure = new WifWafWalkDeparture(walk.getDeparture());
         viewHolder.getDate().setText("Date : " + departure.getFormattedDate());
         viewHolder.getTime().setText("Time : " + departure.getFormattedTime());
+
+        if(privateRow) {
+            if(departure.isTooLate())
+                convertView.setBackgroundColor(WifWafColor.GRAY_LIGHT);
+            else
+                convertView.setBackgroundColor(WifWafColor.WHITE);
+        }
 
         return convertView;
     }
