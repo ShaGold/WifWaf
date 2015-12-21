@@ -67,14 +67,7 @@ public class WifWafWalkDeparture {
         try {
             current.setTime(sdf.parse(currentS));
             dep.setTime(sdf.parse(depS));
-
-            System.out.println("C : " + current.getTime());
-            System.out.println("D : " + dep.getTime());
-
-            System.out.println(dep.before(current));
-
             return dep.before(current);
-
         } catch (ParseException e) {
             e.printStackTrace();
         }
