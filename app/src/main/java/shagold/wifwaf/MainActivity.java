@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         String realpass = (String) param.get("password");
                         String typedpassencrypt = User.encryptPassword(pass);
-                        int id = Integer.parseInt(param.get("id").toString());
+                        int id = Integer.parseInt(param.get("idUser").toString());
                         if(realpass.equals(typedpassencrypt) && id != -1){
                             User newUser = new User(param);
                             SocketManager.setMyUser(newUser);

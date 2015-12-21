@@ -22,7 +22,7 @@ public class User {
     public User(){}
 
     public User(JSONObject userJson) throws JSONException {
-        this.idUser = (int) userJson.get("id");
+        this.idUser = (int) userJson.get("idUser");
         this.email = (String) userJson.get("email");
         this.nickname = (String) userJson.get("nickname");
         this.password = (String) userJson.get("password");

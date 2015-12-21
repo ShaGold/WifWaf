@@ -99,6 +99,7 @@ public class PublicUserProfileActivity extends AppCompatActivity {
                     System.out.println("USER P - " + args[0]);
                     try {
                         user = new User((JSONObject) args[0]);
+                        System.out.println(user);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

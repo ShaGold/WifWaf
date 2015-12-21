@@ -234,7 +234,7 @@ public class SignUpActivity extends AppCompatActivity {
                 public void run() {
                     JSONObject param = (JSONObject) args[0];
                     try {
-                        if((int)param.get("id") < 0) { //TODO faire un traitement spécifique pour chaque erreur?
+                        if((int)param.get("idUser") < 0) { //TODO faire un traitement spécifique pour chaque erreur?
                            AlertDialog alertDialog = new AlertDialog.Builder(SignUpActivity.this).create();
                             alertDialog.setTitle("Erreur");
                             alertDialog.setMessage("Cette adresse mail est déjà utilisée"); //TODO internationalisation
