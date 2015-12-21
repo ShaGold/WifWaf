@@ -1,7 +1,6 @@
 package shagold.wifwaf.list;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,24 +21,28 @@ import shagold.wifwaf.tool.WifWafWalkDeparture;
 
 public class WalkAdapter extends ArrayAdapter<Walk> {
 
-    private Context c;
-    private Socket mSocket;
-    private User mUser;
+   // private Context c;
+   // private Socket mSocket;
+   // private User mUser;
     private boolean privateRow;
 
     public WalkAdapter(Context context, List<Walk> walks) {
         super(context, 0, walks);
+        /*
         c = context;
         mSocket = SocketManager.getMySocket();
         mUser = SocketManager.getMyUser();
+         */
         privateRow = false;
     }
 
     public WalkAdapter(Context context, List<Walk> walks, boolean privateRow) {
         super(context, 0, walks);
+        /*
         c = context;
         mSocket = SocketManager.getMySocket();
         mUser = SocketManager.getMyUser();
+        */
         this.privateRow = privateRow;
     }
 
@@ -47,7 +50,7 @@ public class WalkAdapter extends ArrayAdapter<Walk> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if(convertView == null)
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_walk,parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_walk, parent, false);
 
         WalkViewHolder viewHolder = (WalkViewHolder) convertView.getTag();
 
@@ -63,11 +66,11 @@ public class WalkAdapter extends ArrayAdapter<Walk> {
             convertView.setTag(viewHolder);
         }
 
-        // TODO fix warning with resource android
+        // TODO fix warning with resource android <-- ??
         final Walk walk = getItem(position);
         viewHolder.getTitle().setText(walk.getTitle());
         viewHolder.getDescription().setText("Description : " + walk.getDescription());
-        //TODO default value
+        //TODO default value <-- ?
         viewHolder.getAvatar().setImageResource(R.drawable.user);
         viewHolder.getCity().setText("City " + " : " + walk.getCity());
         WifWafWalkDeparture departure = new WifWafWalkDeparture(walk.getDeparture());
