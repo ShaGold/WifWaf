@@ -6,18 +6,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.socketio.client.Socket;
+
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import shagold.wifwaf.dataBase.Dog;
+import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.manager.MenuManager;
+import shagold.wifwaf.manager.SocketManager;
+import shagold.wifwaf.tool.WifWafColor;
 import shagold.wifwaf.tool.WifWafDatePickerFragment;
 import shagold.wifwaf.tool.WifWafTimePickerFragment;
 
 public class UseWalkActivity extends AppCompatActivity {
 
     private Walk walk;
-
+    private User mUser;
+    private ArrayList<Dog> dogChoice = new ArrayList<Dog>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +42,11 @@ public class UseWalkActivity extends AppCompatActivity {
 
         walk = (Walk) getIntent().getSerializableExtra("WALK");
         initUseWalk();
+
+        Socket mSocket = SocketManager.getMySocket();
+        mUser = SocketManager.getMyUser();
+        mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
+        mSocket.emit("getAllMyDogs", mUser.getIdUser());
 
     }
 
@@ -37,6 +58,39 @@ public class UseWalkActivity extends AppCompatActivity {
             description.setText(walk.getDescription());
         }
     }
+
+    private Emitter.Listener onRGetAllMyDogs = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            UseWalkActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONArray dogsJSON = (JSONArray) args[0];
+                    List<Dog> userDogs = Dog.generateDogsFromJson(dogsJSON);
+                    int index = 11;
+                    for (Dog dog : userDogs) {
+                        CheckBox cb = new CheckBox(UseWalkActivity.this);
+                        cb.setText(dog.getName());
+                        cb.setTextColor(WifWafColor.BLACK);
+
+                        final Dog dogCB = dog;
+                        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                if (isChecked)
+                                    dogChoice.add(dogCB);
+                                else
+                                    dogChoice.remove(dogCB);
+                            }
+                        });
+
+                        LinearLayout layout = (LinearLayout) findViewById(R.id.useWalkLayout);
+                        layout.addView(cb, index);
+                        index++;
+                    }
+                }
+            });
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -65,6 +119,9 @@ public class UseWalkActivity extends AppCompatActivity {
 
     public void saveUseWalk(View view) {
         Intent result = new Intent(UseWalkActivity.this, UserWalksActivity.class);
+
+        // TODO create WALK
+
         startActivity(result);
     }
 }
