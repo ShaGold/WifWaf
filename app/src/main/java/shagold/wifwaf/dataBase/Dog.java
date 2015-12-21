@@ -12,7 +12,7 @@ public class Dog implements Serializable {
     private int idDog;
     private int idUser;
     private String dogName;
-    private int age;
+    private String age;
     private String breed;
     private int size;
     private String getAlongWithMales;
@@ -32,7 +32,7 @@ public class Dog implements Serializable {
         this.idDog = dogJson.getInt("idDog");
         this.idUser = dogJson.getInt("idUser");
         this.dogName = dogJson.getString("dogName");
-        this.age = dogJson.getInt("age");
+        this.age = dogJson.getString("age");
         this.breed = dogJson.getString("breed");
         this.size = dogJson.getInt("size");
         this.getAlongWithMales = dogJson.getString("getAlongWithMales");
@@ -50,7 +50,7 @@ public class Dog implements Serializable {
         }
     }
 
-    public Dog(int idDog, int idUser, String dogName, int age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description, boolean male){
+    public Dog(int idDog, int idUser, String dogName, String age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description, boolean male){
         this.idDog = idDog;
         this.idUser = idUser;
         this.dogName = dogName;
@@ -65,7 +65,7 @@ public class Dog implements Serializable {
         this.male = male;
     }
 
-    public Dog(int idUser, String dogName, int age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description, boolean male){
+    public Dog(int idUser, String dogName, String age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description, boolean male){
         this.idUser = idUser;
         this.dogName = dogName;
         this.age = age;
@@ -146,7 +146,7 @@ public class Dog implements Serializable {
 
     public String getGetAlongWithHumans(){ return getAlongWithHumans; }
 
-    public int getAge() { return age; }
+    public String getAge() { return age; }
 
     public String getBreed() { return breed; }
 
@@ -156,7 +156,7 @@ public class Dog implements Serializable {
         return male;
     }
 
-    public String getSexe() {
+    public String getSex() {
         if(isMale())
             return "male";
         else

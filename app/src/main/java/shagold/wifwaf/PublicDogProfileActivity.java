@@ -31,7 +31,7 @@ public class PublicDogProfileActivity extends AppCompatActivity {
         avatar.setImageResource(R.drawable.dogi2);
 
         TextView gender = (TextView) findViewById(R.id.genderDogPublicProfile);
-        gender.setText(dog.getSexe());
+        gender.setText(dog.getSex());
 
     }
 
