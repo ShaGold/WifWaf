@@ -19,6 +19,7 @@ import org.json.JSONException;
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
+import shagold.wifwaf.tool.WifWafDatePickerFragment;
 import shagold.wifwaf.tool.WifWafUserBirthday;
 
 public class UserProfileActivity extends AppCompatActivity {
@@ -110,4 +111,11 @@ public class UserProfileActivity extends AppCompatActivity {
         }
 
     };
+
+    public void showDatePickerBirthdayDialog(View view) {
+        WifWafDatePickerFragment newFragment = new WifWafDatePickerFragment();
+        TextView ETBirthday = (TextView) findViewById(R.id.userProfileBirthday);
+        newFragment.setDateText(ETBirthday);
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
 }

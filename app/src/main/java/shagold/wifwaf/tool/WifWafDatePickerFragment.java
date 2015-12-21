@@ -26,7 +26,8 @@ public class WifWafDatePickerFragment extends DialogFragment implements DatePick
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        String result = year + "-" + month + "-" + day;
+        int realMonth = month + 1;
+        String result = year + "-" + realMonth + "-" + day;
         if(dateText != null)
             dateText.setText(result);
     }

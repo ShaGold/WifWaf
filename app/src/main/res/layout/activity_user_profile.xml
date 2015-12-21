@@ -51,6 +51,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/userProfileBirthday" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/modify_date"
+        android:onClick="showDatePickerBirthdayDialog" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
