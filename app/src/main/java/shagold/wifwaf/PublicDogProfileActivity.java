@@ -25,7 +25,8 @@ public class PublicDogProfileActivity extends AppCompatActivity {
         nameDog.setText(dog.getName());
 
         TextView ageDog = (TextView) findViewById(R.id.dogPublicProfileAge);
-        ageDog.setText(dog.getAge());
+        String age = String.valueOf(Double.parseDouble(dog.getAge()));
+        ageDog.setText(age);
 
         TextView sizeDog = (TextView) findViewById(R.id.dogPublicProfileSize);
         sizeDog.setText(Integer.toString(dog.getSize()));

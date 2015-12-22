@@ -80,7 +80,8 @@ public class DogProfileActivity extends AppCompatActivity {
         dogBreed.setText(dog.getBreed());
 
         final TextView dogAgeValue = (TextView) findViewById(R.id.dogAgeProfileValue);
-        dogAgeValue.setText(dog.getAge());
+        String age = String.valueOf(Double.parseDouble(dog.getAge()));
+        dogAgeValue.setText(age);
         SeekBar ageControl = (SeekBar) findViewById(R.id.ageDogProfileSeek);
         int ageV = (int) (Double.parseDouble(dog.getAge()) * 10);
         ageControl.setProgress(ageV);
