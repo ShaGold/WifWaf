@@ -1,4 +1,4 @@
-package shagold.wifwaf.list;
+package shagold.wifwaf.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,14 +8,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.nkzawa.socketio.client.Socket;
-
 import java.util.List;
 
 import shagold.wifwaf.R;
-import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.dataBase.Walk;
-import shagold.wifwaf.manager.SocketManager;
 import shagold.wifwaf.tool.WifWafColor;
 import shagold.wifwaf.tool.WifWafWalkDeparture;
 

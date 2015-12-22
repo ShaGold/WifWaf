@@ -8,14 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.github.nkzawa.emitter.Emitter;
@@ -30,14 +26,14 @@ import java.util.List;
 import shagold.wifwaf.dataBase.Dog;
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.dataBase.Walk;
-import shagold.wifwaf.list.DogPublicAdapter;
+import shagold.wifwaf.fragment.WifWafWalkChangeFragment;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
 import shagold.wifwaf.tool.WifWafColor;
-import shagold.wifwaf.tool.WifWafDatePickerFragment;
-import shagold.wifwaf.tool.WifWafTimePickerFragment;
+import shagold.wifwaf.fragment.WifWafDatePickerFragment;
+import shagold.wifwaf.fragment.WifWafTimePickerFragment;
+import shagold.wifwaf.tool.WifWafWalkComparator;
 import shagold.wifwaf.tool.WifWafWalkDeparture;
-import shagold.wifwaf.view.filter.text.EditTextFilter;
 
 public class WalkProfileActivity extends AppCompatActivity {
 
@@ -195,8 +191,21 @@ public class WalkProfileActivity extends AppCompatActivity {
 
     public void useWalk(View view) {
         Intent result = new Intent(WalkProfileActivity.this, UseWalkActivity.class);
-        result.putExtra("WALK", walk);
-        startActivity(result);
+
+        WifWafWalkComparator wc = new WifWafWalkComparator(walk);
+
+        //TODO need recup newWalk
+        Walk newWalk = walk;
+
+        if(wc.isSameWalk(newWalk)) {
+            result.putExtra("WALK", walk);
+            startActivity(result);
+        }
+        else {
+            WifWafWalkChangeFragment newFragment = new WifWafWalkChangeFragment();
+            newFragment.setWalk(newWalk);
+            newFragment.show(getSupportFragmentManager(), "useWalk");
+        }
     }
 
     public void showDatePickerDialog(View view) {

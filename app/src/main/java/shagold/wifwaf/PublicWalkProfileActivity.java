@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,7 +22,7 @@ import java.util.List;
 
 import shagold.wifwaf.dataBase.Dog;
 import shagold.wifwaf.dataBase.Walk;
-import shagold.wifwaf.list.DogPublicAdapter;
+import shagold.wifwaf.adapter.DogPublicAdapter;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
 import shagold.wifwaf.tool.WifWafWalkDeparture;

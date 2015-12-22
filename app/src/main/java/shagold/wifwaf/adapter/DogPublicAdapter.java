@@ -1,4 +1,4 @@
-package shagold.wifwaf.list;
+package shagold.wifwaf.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

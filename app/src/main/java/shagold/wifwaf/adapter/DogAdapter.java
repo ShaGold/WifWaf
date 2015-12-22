@@ -1,4 +1,4 @@
-package shagold.wifwaf.list;
+package shagold.wifwaf.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
