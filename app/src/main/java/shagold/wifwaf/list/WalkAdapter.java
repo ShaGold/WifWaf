@@ -66,10 +66,20 @@ public class WalkAdapter extends ArrayAdapter<Walk> {
         viewHolder.getTime().setText("Time : " + departure.getFormattedTime());
 
         if(privateRow) {
-            if(departure.isTooLate())
-                convertView.setBackgroundColor(WifWafColor.GRAY_LIGHT);
-            else
-                convertView.setBackgroundColor(WifWafColor.WHITE);
+            if(departure.isTooLate()) {
+                viewHolder.getTitle().setTextColor(WifWafColor.GRAY_LIGHT);
+                viewHolder.getDescription().setTextColor(WifWafColor.GRAY_LIGHT);
+                viewHolder.getCity().setTextColor(WifWafColor.GRAY_LIGHT);
+                viewHolder.getDate().setTextColor(WifWafColor.GRAY_LIGHT);
+                viewHolder.getTime().setTextColor(WifWafColor.GRAY_LIGHT);
+            }
+            else {
+                viewHolder.getTitle().setTextColor(WifWafColor.BLACK);
+                viewHolder.getDescription().setTextColor(WifWafColor.BLACK);
+                viewHolder.getCity().setTextColor(WifWafColor.BLACK);
+                viewHolder.getDate().setTextColor(WifWafColor.BLACK);
+                viewHolder.getTime().setTextColor(WifWafColor.BLACK);
+            }
         }
 
         return convertView;
