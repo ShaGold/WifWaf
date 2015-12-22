@@ -153,7 +153,7 @@ public class DogProfileActivity extends AppCompatActivity {
         Spinner Ssex = (Spinner) findViewById(R.id.dogProfileGender);
         String gender = Ssex.getSelectedItem().toString();
 
-        boolean sGender = gender.equals("Male");
+        boolean sGender = gender.equals("male");
 
         //Test validité des champs
         TextValidator textValidator = new TextValidator();
