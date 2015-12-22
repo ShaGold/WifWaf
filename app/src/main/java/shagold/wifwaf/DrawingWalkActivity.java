@@ -53,6 +53,7 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
     private boolean startPoint = true;
     private Socket mSocket;
     private Walk walk;
+    Context context;
 
     class AddressResultReceiver extends ResultReceiver {
         public AddressResultReceiver(Handler h) {
@@ -100,6 +101,15 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
                     intent.putExtra(Constants.LOCATION_DATA_EXTRA, loc);
                     startService(intent);
                     startPoint = false;
+                    LatLng pos = new LatLng(loc.getLatitude(), loc.getLongitude());
+
+                    //Gestion marker point de départ
+                    myLocation = mMap.addMarker(new MarkerOptions().position(pos).title("Starting point"));
+                    //Gestion toast sélection de pts
+                    CharSequence text = "Please add points to create your walk";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                 }
 
                 if(linesLatLng.size() > 1) {
@@ -154,7 +164,7 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mapos, 16));
 
         //Affichage 1er toast d'instructions
-        Context context = getApplicationContext();
+        context = getApplicationContext();
         CharSequence text = "Please select where your walk should start";
         int duration = Toast.LENGTH_SHORT;
 
