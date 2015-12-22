@@ -31,6 +31,13 @@
             android:id="@+id/viewUserProfile"
             android:onClick="redirectUserProfile"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/like_to_come"
+            android:id="@+id/likeToCome"
+            android:onClick="sendNotif"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
