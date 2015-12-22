@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import shagold.wifwaf.dataBase.Dog;
+import shagold.wifwaf.dataBase.Location;
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.fragment.WifWafWalkChangeFragment;
@@ -194,8 +195,7 @@ public class WalkProfileActivity extends AppCompatActivity {
 
         WifWafWalkComparator wc = new WifWafWalkComparator(walk);
 
-        //TODO need recup newWalk
-        Walk newWalk = walk;
+        Walk newWalk = getWalk();
 
         if(wc.isSameWalk(newWalk)) {
             result.putExtra("WALK", walk);
@@ -224,7 +224,40 @@ public class WalkProfileActivity extends AppCompatActivity {
 
     public void saveChangeWalk(View view) {
 
-        // TODO save change
+        WifWafWalkComparator wc = new WifWafWalkComparator(walk);
 
+        Walk newWalk = getWalk();
+
+        if(!wc.isSameWalk(newWalk)) {
+            // TODO emit save
+        }
+        else {
+            Intent result = new Intent(WalkProfileActivity.this, UserWalksActivity.class);
+            startActivity(result);
+        }
+    }
+
+    private Walk getWalk() {
+
+        EditText walkTitle = (EditText) findViewById(R.id.walkTitle);
+        String name = walkTitle.getText().toString();
+
+        EditText walkDescription = (EditText) findViewById(R.id.walkDescription);
+        String description = walkDescription.getText().toString();
+
+        TextView dateDepartureWalk = (TextView) findViewById(R.id.walkDateDeparture);
+        String date = dateDepartureWalk.getText().toString();
+
+        TextView timeDepartureWalk = (TextView) findViewById(R.id.walkTimeDeparture);
+        String time = timeDepartureWalk.getText().toString();
+
+        String departure = date + " " + time;
+
+        Walk newWalk = new Walk(walk.getIdUser(), name, description, walk.getCity(), departure, dogWalk);
+
+        for(Location location : walk.getPath())
+            newWalk.addLocationToWalk(location.getLattitude(), location.getLongitude());
+
+        return newWalk;
     }
 }
