@@ -1,5 +1,8 @@
 package shagold.wifwaf;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
 import org.json.JSONArray;
@@ -39,16 +43,21 @@ public class AddWalkActivity extends AppCompatActivity {
     private TextValidator textValidator = new TextValidator();
     private EditTextFilter[] filters = {new NumberFilter()};
     private SizeFilter sizeDescriptionFilter = new SizeFilter();
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_walk);
 
+        //gestion de sockets
         Socket mSocket = SocketManager.getMySocket();
         mUser = SocketManager.getMyUser();
         mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
         mSocket.emit("getAllMyDogs", mUser.getIdUser());
+
+        //pour la création des intent
+        context = this.getApplicationContext();
     }
     
     public void choseTimeStamp(View view) {
@@ -66,7 +75,7 @@ public class AddWalkActivity extends AppCompatActivity {
                 public void run() {
                     JSONArray dogsJSON = (JSONArray) args[0];
                     userDogs = Dog.generateDogsFromJson(dogsJSON);
-                    int index = 9;
+                    int positioncheckbox = 9;
                     for (Dog dog : userDogs) {
                         CheckBox cb = new CheckBox(AddWalkActivity.this);
                         cb.setText(dog.getName());
@@ -83,8 +92,21 @@ public class AddWalkActivity extends AppCompatActivity {
                         });
 
                         LinearLayout layout = (LinearLayout) findViewById(R.id.addWalkLayout);
-                        layout.addView(cb, index);
-                        index++;
+                        layout.addView(cb, positioncheckbox);
+                        positioncheckbox++;
+                    }
+                    if (userDogs.isEmpty()) {
+                        //cet usr n'a aucun chien
+                        new AlertDialog.Builder(AddWalkActivity.this)
+                                .setTitle("Oups...")
+                                .setMessage("You have no dogs for the moment! Please add a dog to WifWaf before adding a walk.")
+                                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        Intent intent = new Intent(AddWalkActivity.this, AddDogActivity.class);
+                                        startActivity(intent);
+                                    }
+                                })
+                                .show();
                     }
                 }
             });
@@ -172,7 +194,7 @@ public class AddWalkActivity extends AppCompatActivity {
             }
         } else {
             TextView dogs = (TextView) findViewById(R.id.selectDogs);
-            dogs.setError("Need least one"); // TODO string res
+            dogs.setError("Please select at least one dog"); // TODO string res
         }
     }
 }

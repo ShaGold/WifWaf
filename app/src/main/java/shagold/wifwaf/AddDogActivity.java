@@ -261,3 +261,4 @@ public class AddDogActivity extends AppCompatActivity {
         }
     };
 }
+
