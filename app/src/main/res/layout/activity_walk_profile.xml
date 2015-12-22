@@ -31,11 +31,10 @@
             android:layout_height="match_parent"
             android:text="@string/city"/>
 
-        <EditText
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/walkCity"
-            android:inputType="text" />
+            android:id="@+id/walkCity"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -59,6 +58,12 @@
             android:layout_height="wrap_content"
             android:text="@string/viewPath"
             android:onClick="viewPathWalk"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/useWalk"
+            android:onClick="useWalk"/>
 
         <ImageButton
             android:layout_width="wrap_content"

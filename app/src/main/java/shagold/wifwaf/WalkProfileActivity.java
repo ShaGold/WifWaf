@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
@@ -50,7 +51,7 @@ public class WalkProfileActivity extends AppCompatActivity {
         EditText walkDescription = (EditText) findViewById(R.id.walkDescription);
         walkDescription.setText(walk.getDescription());
 
-        EditText walkCity = (EditText) findViewById(R.id.walkCity);
+        TextView walkCity = (TextView) findViewById(R.id.walkCity);
         walkCity.setText(walk.getCity());
 
         for(Dog d : walk.getDogs()) {
@@ -154,4 +155,10 @@ public class WalkProfileActivity extends AppCompatActivity {
         }
 
     };
+
+    public void useWalk(View view) {
+        Intent result = new Intent(WalkProfileActivity.this, UseWalkActivity.class);
+        result.putExtra("WALK", walk);
+        startActivity(result);
+    }
 }
