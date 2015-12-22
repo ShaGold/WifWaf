@@ -88,4 +88,5 @@
     <string name="select_date">Select date</string>
     <string name="modify_date">Modify date</string>
     <string name="like_to_come">I\\\'d like to come!</string>
+    <string name="modify_time">Modify time</string>
 </resources>

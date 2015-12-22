@@ -40,13 +40,11 @@ public class Dog implements Serializable {
         this.getAlongWithKids = dogJson.getString("getAlongWithKids");
         this.getAlongWithHumans = dogJson.getString("getAlongWithHumans");
         this.description = dogJson.getString("description");
-        if(dogJson.getString("gender") == "male"){
+        if("male".equals(dogJson.getString("gender"))) {
             this.male = true;
         }
-        else{
-            if(dogJson.getString("gender") == "female"){
-                this.male = false;
-            }
+        else if("female".equals(dogJson.getString("gender"))) {
+            this.male = false;
         }
     }
 

@@ -61,9 +61,9 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
         }
 
         @Override
-        protected void onReceiveResult(int codeResultat, Bundle donneesResult) {
-            if (codeResultat == Constants.SUCCESS_RESULT)
-                walk.setCity(donneesResult.getString(Constants.RESULT_DATA_KEY));
+        protected void onReceiveResult(int codeResult, Bundle dataResult) {
+            if (codeResult == Constants.SUCCESS_RESULT)
+                walk.setCity(dataResult.getString(Constants.RESULT_DATA_KEY));
         }
     }
 

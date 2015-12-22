@@ -80,7 +80,8 @@ public class DogProfileActivity extends AppCompatActivity {
         dogBreed.setText(dog.getBreed());
 
         final TextView dogAgeValue = (TextView) findViewById(R.id.dogAgeProfileValue);
-        dogAgeValue.setText(dog.getAge());
+        String age = String.valueOf(Double.parseDouble(dog.getAge()));
+        dogAgeValue.setText(age);
         SeekBar ageControl = (SeekBar) findViewById(R.id.ageDogProfileSeek);
         int ageV = (int) (Double.parseDouble(dog.getAge()) * 10);
         ageControl.setProgress(ageV);
@@ -152,7 +153,7 @@ public class DogProfileActivity extends AppCompatActivity {
         Spinner Ssex = (Spinner) findViewById(R.id.dogProfileGender);
         String gender = Ssex.getSelectedItem().toString();
 
-        boolean sGender = gender.equals("Male");
+        boolean sGender = gender.equals("male");
 
         //Test validité des champs
         TextValidator textValidator = new TextValidator();
