@@ -16,11 +16,14 @@ import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import shagold.wifwaf.dataBase.Dog;
+import shagold.wifwaf.dataBase.Location;
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.manager.MenuManager;
@@ -31,6 +34,7 @@ import shagold.wifwaf.tool.WifWafTimePickerFragment;
 
 public class UseWalkActivity extends AppCompatActivity {
 
+    private Socket mSocket;
     private Walk walk;
     private User mUser;
     private ArrayList<Dog> dogChoice = new ArrayList<Dog>();
@@ -43,10 +47,11 @@ public class UseWalkActivity extends AppCompatActivity {
         walk = (Walk) getIntent().getSerializableExtra("WALK");
         initUseWalk();
 
-        Socket mSocket = SocketManager.getMySocket();
+        mSocket = SocketManager.getMySocket();
         mUser = SocketManager.getMyUser();
         mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
         mSocket.emit("getAllMyDogs", mUser.getIdUser());
+        mSocket.on("RTryAddWalk", onRTryAddWalk);
 
     }
 
@@ -118,10 +123,39 @@ public class UseWalkActivity extends AppCompatActivity {
     }
 
     public void saveUseWalk(View view) {
-        Intent result = new Intent(UseWalkActivity.this, UserWalksActivity.class);
+        EditText titleET = (EditText) findViewById(R.id.nameUseWalk);
+        String name = titleET.getText().toString();
+        EditText descriptionET = (EditText) findViewById(R.id.descriptionUseWalk);
+        String description = descriptionET.getText().toString();
+        TextView timeTV = (TextView) findViewById(R.id.timeStampUseWalk);
+        String time = timeTV.getText().toString();
+        TextView dateTV = (TextView) findViewById(R.id.dateUseWalk);
+        String date = dateTV.getText().toString();
+        String departure = date + " " + time;
 
-        // TODO create WALK
+        Walk newWalk = new Walk(mUser.getIdUser(), name, description, walk.getCity(), departure, dogChoice);
 
-        startActivity(result);
+        for(Location location : walk.getPath())
+            newWalk.addLocationToWalk(location.getLattitude(), location.getLongitude());
+
+        try {
+            JSONObject walkJson = newWalk.toJson();
+            mSocket.emit("TryAddWalk", walkJson);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
+
+    private Emitter.Listener onRTryAddWalk = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            UseWalkActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Intent result = new Intent(UseWalkActivity.this, UserWalksActivity.class);
+                    startActivity(result);
+                }
+            });
+        }
+    };
 }
