@@ -19,7 +19,8 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/name" />
+            android:text="@string/name"
+            style="@style/Title.TextView"/>
 
         <EditText
             android:layout_width="fill_parent"
@@ -36,7 +37,8 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/age" />
+            android:text="@string/age"
+            style="@style/Title.TextView"/>
 
         <TextView
             android:layout_width="fill_parent"
@@ -56,7 +58,8 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/gender" />
+            android:text="@string/gender"
+            style="@style/Title.TextView"/>
 
         <Spinner
             android:layout_width="match_parent"
@@ -67,7 +70,8 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/breed" />
+            android:text="@string/breed"
+            style="@style/Title.TextView"/>
 
         <EditText
             android:layout_width="fill_parent"
@@ -79,7 +83,8 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/size" />
+            android:text="@string/size"
+            style="@style/Title.TextView"/>
 
         <TextView
             android:layout_width="fill_parent"
@@ -99,7 +104,8 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/getAlongWithMales" />
+            android:text="@string/getAlongWithMales"
+            style="@style/Title.TextView"/>
 
         <EditText
             android:layout_width="fill_parent"
@@ -111,7 +117,8 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/getAlongWithFemales" />
+            android:text="@string/getAlongWithFemales"
+            style="@style/Title.TextView"/>
 
         <EditText
             android:layout_width="fill_parent"
@@ -123,7 +130,8 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/getAlongWithKids" />
+            android:text="@string/getAlongWithKids"
+            style="@style/Title.TextView"/>
 
         <EditText
             android:layout_width="fill_parent"
@@ -135,7 +143,8 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/getAlongWithHumans" />
+            android:text="@string/getAlongWithHumans"
+            style="@style/Title.TextView"/>
 
         <EditText
             android:layout_width="fill_parent"
@@ -147,7 +156,8 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/description" />
+            android:text="@string/description"
+            style="@style/Title.TextView"/>
 
         <EditText
             android:layout_width="fill_parent"
