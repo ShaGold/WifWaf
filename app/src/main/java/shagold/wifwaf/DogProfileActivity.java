@@ -244,7 +244,7 @@ public class DogProfileActivity extends AppCompatActivity {
         String Sdescription = ETDescription.getText().toString();
 
         //Update d'un chien
-        Dog updatedDog = new Dog(dog.getIdDog(), dog.getIdUser(), Sname, age, Sbreed, size, Sgetalongwithmales, Sgetalongwithfemales, Sgetalongwithkids, Sgetalongwithhumans, Sdescription, sGender, null);
+        Dog updatedDog = new Dog(dog.getIdDog(), dog.getIdUser(), Sname, age, Sbreed, size, Sgetalongwithmales, Sgetalongwithfemales, Sgetalongwithkids, Sgetalongwithhumans, Sdescription, sGender, selectedBehaviours);
         JSONObject jsonDog = updatedDog.toJsonWithId();
         mSocket.emit("updateDog", jsonDog);
         System.out.println("jsondog" + jsonDog);
