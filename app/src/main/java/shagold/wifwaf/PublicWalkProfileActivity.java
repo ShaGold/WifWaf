@@ -45,7 +45,7 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
 
         //on veut récupérer les infos du user propriétaire de la balade pour pouvoir lui envoyer un sms
         mSocket = SocketManager.getMySocket();
-        mSocket.emit("getUserById", walk.getIdUser());
+//        mSocket.emit("getUserById", walk.getIdUser());
         mUser = SocketManager.getMyUser();
         mSocket.on("RGetUser", onRGetUser);
 
