@@ -98,8 +98,8 @@ public class AddWalkActivity extends AppCompatActivity {
                     if (userDogs.isEmpty()) {
                         //cet usr n'a aucun chien
                         new AlertDialog.Builder(AddWalkActivity.this)
-                                .setTitle("Oups...")
-                                .setMessage("You have no dogs for the moment! Please add a dog to WifWaf before adding a walk.")
+                                .setTitle(getString(R.string.oups))
+                                .setMessage(getString(R.string.no_dogs_for_now))
                                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         Intent intent = new Intent(AddWalkActivity.this, AddDogActivity.class);
@@ -194,7 +194,7 @@ public class AddWalkActivity extends AppCompatActivity {
             }
         } else {
             TextView dogs = (TextView) findViewById(R.id.selectDogs);
-            dogs.setError("Please select at least one dog"); // TODO string res
+            dogs.setError(getString(R.string.not_enough_dogs));
         }
     }
 }

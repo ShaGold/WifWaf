@@ -62,4 +62,12 @@
     <string name="user_dogs_prompt">Sélectionnez vos chiens</string>
     <string name="viewPath">Voir le tracé</string>
     <string name="walkDogs">Voir les chiens participant à cette balade</string>
+    <string name="like_to_come">J\'aimerais participer!</string>
+    <string name="new_walk">Nouvelle balade</string>
+    <string name="no_dogs_for_now">Vous n\'avez aucun chien pour l\'instant! Ajoutez un chien à WifWaf avant de créer une balade.</string>
+    <string name="not_enough_dogs">Vous devez sélectionner au moins un chien.</string>
+    <string name="oups">Oups...</string>
+    <string name="title_activity_gps_walk">Tracé</string>
+    <string name="title_activity_public_user_profile">Profil de l\'utilisateur</string>
+    <string name="userProfile"></string>
 </resources>
