@@ -70,4 +70,6 @@
     <string name="title_activity_gps_walk">Tracé</string>
     <string name="title_activity_public_user_profile">Profil de l\'utilisateur</string>
     <string name="userProfile"></string>
+    <string name="bad_id_pass">Mauvais identifiants</string>
+    <string name="error">Erreur</string>
 </resources>
