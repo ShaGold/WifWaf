@@ -20,7 +20,7 @@
         android:layout_toRightOf="@+id/avatarPublicRowDog"
         android:layout_alignTop="@+id/avatarPublicRowDog"
         android:textStyle="bold"
-        tools:text="Name"
+        tools:text="@string/name"
         />
 
     <TextView
@@ -30,7 +30,7 @@
         android:textColor="@android:color/black"
         android:layout_alignLeft="@+id/namePublicRowDog"
         android:layout_below="@+id/namePublicRowDog"
-        tools:text="default description"
+        tools:text="@string/description"
         />
 
 </RelativeLayout>
