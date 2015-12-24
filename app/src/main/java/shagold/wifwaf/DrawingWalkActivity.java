@@ -43,8 +43,10 @@ import shagold.wifwaf.tool.Constants;
 public class DrawingWalkActivity extends FragmentActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private GoogleMap mMap;
+    private Marker lastAddedM = null;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
+    private PolylineOptions temp;
     private Marker myLocation;
     private PolylineOptions lines = new PolylineOptions();
     private LinkedList<LatLng> linesLatLng = new LinkedList<LatLng>();
@@ -113,14 +115,22 @@ public class DrawingWalkActivity extends FragmentActivity implements GoogleApiCl
                 }
 
                 if(linesLatLng.size() > 1) {
-                    PolylineOptions temp = new PolylineOptions()
+                    if (lastAddedM != null && temp != null){
+                        lastAddedM.remove();
+                        //ancien point en bleu
+                        temp.color(Color.BLUE);
+                        mMap.addPolyline(temp);
+                    }
+                    temp = new PolylineOptions()
                             .add(linesLatLng.getLast())
                             .add(linesLatLng.get(linesLatLng.size() - 2));
-                    temp.color(Color.BLUE);
+                    temp.color(Color.RED);
                     temp.visible(true);
                     temp.width(10);
                     pl.add(temp);
                     mMap.addPolyline(temp);
+                    LatLng last = linesLatLng.get(linesLatLng.size() -1);
+                    lastAddedM = mMap.addMarker(new MarkerOptions().position(last).title("End"));
                 }
             }
         });
