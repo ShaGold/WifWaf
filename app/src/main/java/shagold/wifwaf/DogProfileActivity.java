@@ -40,7 +40,7 @@ import shagold.wifwaf.view.filter.text.SizeFilter;
 public class DogProfileActivity extends AppCompatActivity {
 
     private Dog dog;
-    private ArrayList<Behaviour> selectedBehaviours;
+    private ArrayList<Behaviour> selectedBehaviours = new ArrayList<Behaviour>();
     private Socket mSocket;
     private LinearLayout actlayout;
 
@@ -277,9 +277,10 @@ public class DogProfileActivity extends AppCompatActivity {
                             cb.setText(currentB.getDescription());
                             cb.setId(currentB.getIdBehaviour());
                             cb.setTextColor(WifWafColor.BLACK);
-                            if (dog.getBehaviours().contains(currentB)){
-                                cb.setChecked(true);
-                                System.out.println("ici");
+                            for(Behaviour b:dog.getBehaviours()){
+                                if (b.getIdBehaviour() == currentB.getIdBehaviour()){
+                                    cb.setChecked(true);
+                                }
                             }
                             actlayout = (LinearLayout) findViewById(R.id.layoutDogProfile);
                             actlayout.addView(cb, 13);
