@@ -132,6 +132,18 @@
             android:hint="@string/getAlongWithHumans"
             android:id="@+id/getAlongWithHumans" />
 
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageviewNewDog"/>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/take_picture"
+            android:id="@+id/selectImage"
+            android:onClick="takePic"/>
+
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private Socket mSocket;
     private User mUser;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

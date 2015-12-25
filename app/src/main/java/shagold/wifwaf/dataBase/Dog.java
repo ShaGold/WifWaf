@@ -22,6 +22,7 @@ public class Dog implements Serializable {
     private String description;
     private boolean male;
     private ArrayList<Behaviour> behaviours = new ArrayList<Behaviour>();
+    private byte[] photo;
 
     public Dog(){}
 
@@ -41,6 +42,9 @@ public class Dog implements Serializable {
         this.getAlongWithKids = dogJson.getString("getAlongWithKids");
         this.getAlongWithHumans = dogJson.getString("getAlongWithHumans");
         this.description = dogJson.getString("description");
+        //Traitement photo
+        String photo = dogJson.getString("photo"); // pour récupérer la photo il faut ensuite
+        this.photo = photo.getBytes();
         if("male".equals(dogJson.getString("gender"))) {
             this.male = true;
         }
@@ -81,7 +85,7 @@ public class Dog implements Serializable {
         this.behaviours = b;
     }
 
-    public Dog(int idUser, String dogName, String age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description, boolean male, ArrayList<Behaviour> b){
+    public Dog(int idUser, String dogName, String age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description, boolean male, ArrayList<Behaviour> b, byte[] photo){
         this.idUser = idUser;
         this.dogName = dogName;
         this.age = age;
@@ -94,6 +98,7 @@ public class Dog implements Serializable {
         this.description = description;
         this.male = male;
         this.behaviours = b;
+        this.photo = photo;
     }
 
     public JSONObject toJson() throws JSONException {
@@ -119,6 +124,7 @@ public class Dog implements Serializable {
             myBehaviours.put(b.toJson());
         }
         dogJson.put("behaviours", myBehaviours);
+        dogJson.put("photo", photo);
         return dogJson;
     }
 
@@ -135,6 +141,7 @@ public class Dog implements Serializable {
         dogJson.put("getAlongWithKids", this.getAlongWithKids);
         dogJson.put("getAlongWithHumans", this.getAlongWithHumans);
         dogJson.put("description", this.description);
+        dogJson.put("photo", photo);
         if(isMale()){
             dogJson.put("gender", "male");
         }
