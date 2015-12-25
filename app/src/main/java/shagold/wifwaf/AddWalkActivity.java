@@ -75,7 +75,7 @@ public class AddWalkActivity extends AppCompatActivity {
                 public void run() {
                     JSONArray dogsJSON = (JSONArray) args[0];
                     userDogs = Dog.generateDogsFromJson(dogsJSON);
-                    int positioncheckbox = 9;
+                    int positionCheckbox = 5;
                     for (Dog dog : userDogs) {
                         CheckBox cb = new CheckBox(AddWalkActivity.this);
                         cb.setText(dog.getName());
@@ -92,8 +92,8 @@ public class AddWalkActivity extends AppCompatActivity {
                         });
 
                         LinearLayout layout = (LinearLayout) findViewById(R.id.addWalkLayout);
-                        layout.addView(cb, positioncheckbox);
-                        positioncheckbox++;
+                        layout.addView(cb, positionCheckbox);
+                        positionCheckbox++;
                     }
                     if (userDogs.isEmpty()) {
                         //cet usr n'a aucun chien
