@@ -283,7 +283,7 @@ public class DogProfileActivity extends AppCompatActivity {
                                 }
                             }
                             actlayout = (LinearLayout) findViewById(R.id.layoutDogProfile);
-                            actlayout.addView(cb, 13);
+                            actlayout.addView(cb, 16);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
