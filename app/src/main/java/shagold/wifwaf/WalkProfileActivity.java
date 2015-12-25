@@ -138,7 +138,7 @@ public class WalkProfileActivity extends AppCompatActivity {
 
                     JSONArray dogsJSON = (JSONArray) args[0];
                     userDogs = Dog.generateDogsFromJson(dogsJSON);
-                    int index = 9;
+                    int index = 13;
                     for (Dog dog : userDogs) {
                         CheckBox cb = new CheckBox(WalkProfileActivity.this);
                         cb.setText(dog.getName());

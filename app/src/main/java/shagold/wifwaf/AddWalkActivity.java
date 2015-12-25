@@ -75,7 +75,7 @@ public class AddWalkActivity extends AppCompatActivity {
                 public void run() {
                     JSONArray dogsJSON = (JSONArray) args[0];
                     userDogs = Dog.generateDogsFromJson(dogsJSON);
-                    int positionCheckbox = 5;
+                    int positionCheckbox = 9;
                     for (Dog dog : userDogs) {
                         CheckBox cb = new CheckBox(AddWalkActivity.this);
                         cb.setText(dog.getName());

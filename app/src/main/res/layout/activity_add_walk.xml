@@ -30,67 +30,45 @@
             android:hint="@string/description"
             android:id="@+id/descriptionWalk" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:text="@string/date"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            style="@style/Title.TextView"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"/>
 
-            <TextView
-                android:text="@string/date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Title.TextView"
-                android:textStyle="bold"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/dateAddWalk"
-                style="@style/Title.TextView"
-                android:layout_centerInParent="true"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/select_date"
-                android:layout_alignParentRight="true"
-                android:onClick="choseDate" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:id="@+id/dateAddWalk"
+            style="@style/Title.TextView" />
 
-            <TextView
-                android:text="@string/timeStamp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Title.TextView"
-                android:textStyle="bold"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_date"
+            android:onClick="choseDate" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/timeStampAddWalk"
-                style="@style/Title.TextView"
-                android:layout_centerInParent="true"/>
+        <TextView
+            android:text="@string/timeStamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Title.TextView"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/timeStamp"
-                android:layout_alignParentRight="true"
-                android:onClick="choseTimeStamp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timeStampAddWalk"
+            style="@style/Title.TextView"/>
 
-         </RelativeLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/timeStamp"
+            android:onClick="choseTimeStamp" />
 
         <TextView
             android:layout_width="wrap_content"
