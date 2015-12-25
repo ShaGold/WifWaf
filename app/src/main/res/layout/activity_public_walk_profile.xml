@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/title"
+            android:textStyle="bold"
             style="@style/Title.TextView"/>
 
         <TextView
@@ -30,32 +31,36 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/city"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
             style="@style/Title.TextView"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/walkPublicCity"
-            style="@style/Title.TextView"
-            />
+            style="@style/Title.TextView" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/description"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
             style="@style/Title.TextView"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/walkPublicDescription"
-            style="@style/Title.TextView"
-           />
+            style="@style/Title.TextView" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/date"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
             style="@style/Title.TextView"/>
 
         <TextView
@@ -68,6 +73,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/time"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
             style="@style/Title.TextView"/>
 
         <TextView
@@ -78,7 +85,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
             <Button
                 android:layout_width="wrap_content"
