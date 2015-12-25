@@ -22,6 +22,7 @@
         android:layout_toRightOf="@+id/avatarRowWalk"
         android:layout_alignTop="@+id/avatarRowWalk"
         android:textStyle="bold"
+        android:textSize="18sp"
         tools:text="@string/name"
         />
 
