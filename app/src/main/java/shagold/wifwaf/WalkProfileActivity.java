@@ -138,7 +138,7 @@ public class WalkProfileActivity extends AppCompatActivity {
 
                     JSONArray dogsJSON = (JSONArray) args[0];
                     userDogs = Dog.generateDogsFromJson(dogsJSON);
-                    int index = 12;
+                    int index = 9;
                     for (Dog dog : userDogs) {
                         CheckBox cb = new CheckBox(WalkProfileActivity.this);
                         cb.setText(dog.getName());
@@ -154,9 +154,13 @@ public class WalkProfileActivity extends AppCompatActivity {
                                 if (isChecked)
                                     dogWalk.add(dogCB);
                                 else {
-                                    for(Dog d : dogWalk) {
-                                        if(d.getIdDog() == dogCB.getIdDog()) {
-                                            dogWalk.remove(d);
+                                    Dog[] dw = new Dog[dogWalk.size()];
+                                    for(int i = 0; i < dogWalk.size(); i++)
+                                        dw[i] = dogWalk.get(i);
+
+                                    for(int j = 0; j < dw.length; j++) {
+                                        if(dw[j].getIdDog() == dogCB.getIdDog()) {
+                                            dogWalk.remove(j);
                                         }
                                     }
                                 }
