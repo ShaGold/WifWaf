@@ -71,6 +71,7 @@ public class PublicUserProfileActivity extends AppCompatActivity {
 
         final ListView modeList = new ListView(PublicUserProfileActivity.this);
         modeList.setAdapter(adapter);
+        modeList.setDividerHeight(modeList.getDividerHeight()*3);
 
         userDogsDialog.setView(modeList);
 

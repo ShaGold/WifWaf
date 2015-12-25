@@ -127,6 +127,7 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
 
         final ListView modeList = new ListView(PublicWalkProfileActivity.this);
         modeList.setAdapter(adapter);
+        modeList.setDividerHeight(modeList.getDividerHeight()*3);
 
         modeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,

@@ -94,4 +94,6 @@
     <string name="no_dogs_for_now">You have no dogs for the moment! Please add a dog to WifWaf before adding a walk.</string>
     <string name="bad_id_pass">Incorrect ID/Password</string>
     <string name="error">Error</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
 </resources>

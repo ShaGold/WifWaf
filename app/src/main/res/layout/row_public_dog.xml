@@ -33,4 +33,14 @@
         tools:text="@string/description"
         />
 
+    <TextView
+        android:id="@+id/genderPublicRowDog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_alignLeft="@+id/descriptionPublicRowDog"
+        android:layout_below="@+id/descriptionPublicRowDog"
+        tools:text="@string/gender"
+        />
+
 </RelativeLayout>
