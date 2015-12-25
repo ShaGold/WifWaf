@@ -252,7 +252,7 @@ public class AddDogActivity extends AppCompatActivity {
                             cb.setId(currentB.getIdBehaviour());
                             cb.setTextColor(WifWafColor.BLACK);
                             actlayout = (LinearLayout) findViewById(R.id.layout);
-                            actlayout.addView(cb, 9);
+                            actlayout.addView(cb, 12);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
