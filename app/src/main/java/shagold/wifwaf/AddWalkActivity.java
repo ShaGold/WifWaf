@@ -183,12 +183,12 @@ public class AddWalkActivity extends AppCompatActivity {
         final Intent actGPSWalk = new Intent(getApplicationContext(), GPSWalkActivity.class);
         if (dogChoice.size() > 0) {
             if (validText) {
-                Walk walk = new Walk(mUser.getIdUser(), nameWalk.getText().toString(), descriptionWalk.getText().toString(), "null", "", dogChoice);
                 TextView timeText = (TextView) findViewById(R.id.timeStampAddWalk);
                 String time = timeText.getText().toString();
                 TextView dateText = (TextView) findViewById(R.id.dateAddWalk);
                 String date = dateText.getText().toString();
-                walk.setDeparture(date + " " + time);
+                String departure = date + " " + time;
+                Walk walk = new Walk(mUser.getIdUser(), nameWalk.getText().toString(), descriptionWalk.getText().toString(), "null", departure, dogChoice);
                 actGPSWalk.putExtra("WALK", walk);
                 startActivity(actGPSWalk);
             }
