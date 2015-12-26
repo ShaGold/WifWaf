@@ -33,7 +33,6 @@ import shagold.wifwaf.manager.SocketManager;
 import shagold.wifwaf.tool.WifWafColor;
 import shagold.wifwaf.fragment.WifWafDatePickerFragment;
 import shagold.wifwaf.fragment.WifWafTimePickerFragment;
-import shagold.wifwaf.tool.WifWafWalkComparator;
 import shagold.wifwaf.tool.WifWafWalkDeparture;
 
 public class WalkProfileActivity extends AppCompatActivity {
@@ -105,7 +104,6 @@ public class WalkProfileActivity extends AppCompatActivity {
     }
 
     public void deleteWalk(View view) {
-
         AlertDialog.Builder dialog = new AlertDialog.Builder(WalkProfileActivity.this);
         dialog.setTitle("Delete Walk");
         dialog.setMessage("Are you sure to delete the walk : \n\n\t" + walk.getTitle());
@@ -210,12 +208,9 @@ public class WalkProfileActivity extends AppCompatActivity {
 
     public void useWalk(View view) {
         Intent result = new Intent(WalkProfileActivity.this, UseWalkActivity.class);
-
-        WifWafWalkComparator wc = new WifWafWalkComparator(walk);
-
         Walk newWalk = getWalk();
 
-        if(wc.isSameWalk(newWalk)) {
+        if(walk.equals(newWalk)) {
             result.putExtra("WALK", walk);
             startActivity(result);
         }
@@ -242,11 +237,8 @@ public class WalkProfileActivity extends AppCompatActivity {
 
     public void saveChangeWalk(View view) {
 
-        WifWafWalkComparator wc = new WifWafWalkComparator(walk);
-
         Walk newWalk = getWalk();
-
-        if(!wc.isSameWalk(newWalk)) {
+        if(!walk.equals(newWalk)) {
             // TODO emit save
         }
         else {
