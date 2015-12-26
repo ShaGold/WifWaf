@@ -1,5 +1,9 @@
 package shagold.wifwaf.dataBase;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,6 +27,7 @@ public class Dog implements Serializable {
     private boolean male;
     private ArrayList<Behaviour> behaviours = new ArrayList<Behaviour>();
     private byte[] photo;
+    private Bitmap photoBitmap;
 
     public Dog(){}
 
@@ -44,7 +49,12 @@ public class Dog implements Serializable {
         this.description = dogJson.getString("description");
         //Traitement photo
         String photo = dogJson.getString("photo"); // pour récupérer la photo il faut ensuite
+        System.out.println("val de photo " + photo);
         this.photo = photo.getBytes();
+        System.out.println("val de photo attribut" + this.photo);
+        this.photoBitmap = decodeBase64(photo);
+        System.out.println("val de photo bitmap" + this.photoBitmap);
+
         if("male".equals(dogJson.getString("gender"))) {
             this.male = true;
         }
@@ -196,6 +206,10 @@ public class Dog implements Serializable {
             return "female";
     }
 
+    public Bitmap getPhotoBitmap(){
+        return this.photoBitmap;
+    }
+
     public static List<Dog> generateDogsFromJson(JSONArray dogsJSON) {
         List<Dog> dogs = new ArrayList<Dog>();
         if(dogsJSON != null) {
@@ -212,4 +226,11 @@ public class Dog implements Serializable {
         }
         return dogs;
     }
+
+    public static Bitmap decodeBase64(String input)
+    {
+        byte[] decodedByte = Base64.decode(input, 0);
+        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+    }
+
 }
