@@ -2,7 +2,9 @@ package shagold.wifwaf;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +28,10 @@ public class UserProfileActivity extends AppCompatActivity {
 
     private User mUser;
     private Socket mSocket;
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    Bitmap imageBitmap;
+    String bitmapImagedata = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +93,7 @@ public class UserProfileActivity extends AppCompatActivity {
         userProfilePhoneNumber.setText(Integer.toString(mUser.getPhoneNumber()));
         int phoneU = Integer.parseInt(userProfilePhoneNumber.getText().toString());
 
-        User u = new User(mUser.getIdUser(), mailU, nameU, mUser.getPassword(), birthday, phoneU, descriptionU, "");
+        User u = new User(mUser.getIdUser(), mailU, nameU, mUser.getPassword(), birthday, phoneU, descriptionU, bitmapImagedata);
         SocketManager.setMyUser(u);
 
         try {
@@ -96,6 +102,36 @@ public class UserProfileActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+
+    public void takePic(View view){
+        dispatchTakePictureIntent();
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, 1);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            imageBitmap = (Bitmap) extras.get("data");
+            ImageView mImageView = (ImageView) findViewById(R.id.avatarUserProfile);
+            mImageView.setImageBitmap(imageBitmap);
+            preparePhoto();
+        }
+    }
+
+    public void preparePhoto(){
+        BitmapFactory.Options bfOptions = new BitmapFactory.Options();
+        bfOptions.inTempStorage = new byte[32 * 1024];
+
+        // On convertit l'image en tableau de BYTE
+        bitmapImagedata = User.encodeTobase64(imageBitmap);
     }
 
     private Emitter.Listener onRUpdateUser = new Emitter.Listener() {
