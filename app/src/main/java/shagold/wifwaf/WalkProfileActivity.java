@@ -75,8 +75,11 @@ public class WalkProfileActivity extends AppCompatActivity {
         }
 
         mSocket.on("RGetDogById", onRGetDogById);
-        mSocket.on("RdeleteWalk", onRdeleteWalk);
+        mSocket.on("RdeleteWalk", onRredirect);
         mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
+        // redirection en cas de suppression ou de màj
+        mSocket.on("RdeleteWalk", onRredirect);
+        mSocket.on("RUpdateWalk", onRredirect);
         mSocket.emit("getAllMyDogs", mUser.getIdUser());
 
     }
@@ -129,6 +132,7 @@ public class WalkProfileActivity extends AppCompatActivity {
             WalkProfileActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    mSocket.off("RGetAllMyDogs");
 
                     List<Integer> dogWalkId = new ArrayList<Integer>();
                     for (Dog d : walk.getDogs()) {
@@ -193,7 +197,7 @@ public class WalkProfileActivity extends AppCompatActivity {
         }
     };
 
-    private Emitter.Listener onRdeleteWalk = new Emitter.Listener() {
+    private Emitter.Listener onRredirect = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
             WalkProfileActivity.this.runOnUiThread(new Runnable() {
@@ -235,11 +239,14 @@ public class WalkProfileActivity extends AppCompatActivity {
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
-    public void saveChangeWalk(View view) {
+    public void saveChangeWalk(View view) throws JSONException {
 
+        System.out.println("ici");
         Walk newWalk = getWalk();
         if(!walk.equals(newWalk)) {
-            // TODO emit save
+            System.out.println("emission");
+            System.out.println(newWalk);
+            mSocket.emit("updateWalk", newWalk.toJsonWithId());
         }
         else {
             Intent result = new Intent(WalkProfileActivity.this, UserWalksActivity.class);
@@ -248,6 +255,8 @@ public class WalkProfileActivity extends AppCompatActivity {
     }
 
     private Walk getWalk() {
+
+
 
         EditText walkTitle = (EditText) findViewById(R.id.walkTitle);
         String name = walkTitle.getText().toString();
@@ -263,7 +272,7 @@ public class WalkProfileActivity extends AppCompatActivity {
 
         String departure = date + " " + time;
 
-        Walk newWalk = new Walk(walk.getIdUser(), name, description, walk.getCity(), departure, dogWalk);
+        Walk newWalk = new Walk(walk.getIdWalk(), walk.getIdUser(), name, description, walk.getCity(), departure, dogWalk);
 
         for(Location location : walk.getPath())
             newWalk.addLocationToWalk(location.getLattitude(), location.getLongitude());
