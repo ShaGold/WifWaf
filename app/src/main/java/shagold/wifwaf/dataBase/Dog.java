@@ -28,11 +28,6 @@ public class Dog implements Serializable {
     private String description;
     private boolean male;
     private ArrayList<Behaviour> behaviours = new ArrayList<Behaviour>();
-
-    public String getPhoto() {
-        return photo;
-    }
-
     private String photo;
 
     public Dog(){}
@@ -196,6 +191,10 @@ public class Dog implements Serializable {
     public String getBreed() { return breed; }
 
     public int getSize() { return size; }
+
+    public String getPhoto() {
+        return photo;
+    }
 
     public ArrayList<Behaviour> getBehaviours(){
         return this.behaviours;

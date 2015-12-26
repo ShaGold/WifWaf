@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,6 +21,7 @@ import org.json.JSONObject;
 import com.github.nkzawa.socketio.client.Socket;
 import com.github.nkzawa.emitter.Emitter;
 
+import shagold.wifwaf.dataBase.Dog;
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
@@ -35,7 +38,10 @@ public class SignUpActivity extends AppCompatActivity {
 
     private Socket mSocket;
     private User mUser;
+
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    Bitmap imageBitmap;
+    String bitmapImagedata = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +74,36 @@ public class SignUpActivity extends AppCompatActivity {
         TextView ETBirthday = (TextView) findViewById(R.id.Birthday);
         newFragment.setDateText(ETBirthday);
         newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    public void takePic(View view){
+        dispatchTakePictureIntent();
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, 1);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            imageBitmap = (Bitmap) extras.get("data");
+            ImageView mImageView = (ImageView) findViewById(R.id.imageviewSignUp);
+            mImageView.setImageBitmap(imageBitmap);
+            preparePhoto();
+        }
+    }
+
+    public void preparePhoto(){
+        BitmapFactory.Options bfOptions = new BitmapFactory.Options();
+        bfOptions.inTempStorage = new byte[32 * 1024];
+
+        // On convertit l'image en tableau de BYTE
+        bitmapImagedata = Dog.encodeTobase64(imageBitmap);
     }
 
     public void trySignUp(View view) throws JSONException {
@@ -159,7 +195,7 @@ public class SignUpActivity extends AppCompatActivity {
         Spassword = User.encryptPassword(Spassword);
 
         //Test inscription
-        User user = new User(Semail,Snickname,Spassword,Sbirthday,SphoneNumber,Sdescription,"");
+        User user = new User(Semail,Snickname,Spassword,Sbirthday,SphoneNumber,Sdescription,bitmapImagedata);
         JSONObject jsonUser = user.toJson();
         mSocket.emit("TrySignUp", jsonUser);
     }

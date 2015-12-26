@@ -1,6 +1,7 @@
 package shagold.wifwaf;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -52,9 +53,9 @@ public class UserProfileActivity extends AppCompatActivity {
         EditText userProfilePhoneNumber = (EditText) findViewById(R.id.userProfilePhoneNumber);
         userProfilePhoneNumber.setText(Integer.toString(mUser.getPhoneNumber()));
 
-        // TODO défault
         ImageView creatorWalk = (ImageView) findViewById(R.id.avatarUserProfile);
-        creatorWalk.setImageResource(R.drawable.user);
+        Bitmap myphoto = mUser.getPhotoBitmap();
+        creatorWalk.setImageBitmap(myphoto);
 
     }
 
