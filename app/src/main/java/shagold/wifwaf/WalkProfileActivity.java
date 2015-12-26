@@ -76,6 +76,7 @@ public class WalkProfileActivity extends AppCompatActivity {
         }
 
         mSocket.on("RGetDogById", onRGetDogById);
+        mSocket.on("RdeleteWalk", onRdeleteWalk);
         mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
         mSocket.emit("getAllMyDogs", mUser.getIdUser());
 
@@ -112,7 +113,7 @@ public class WalkProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 int id = walk.getIdWalk();
-                //mSocket.emit("deleteWalk", id);
+                mSocket.emit("deleteWalk", id);
             }
         });
         dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -189,6 +190,19 @@ public class WalkProfileActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                }
+            });
+        }
+    };
+
+    private Emitter.Listener onRdeleteWalk = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            WalkProfileActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    final Intent getWalks = new Intent(getApplicationContext(), UserWalksActivity.class);
+                    startActivity(getWalks);
                 }
             });
         }
