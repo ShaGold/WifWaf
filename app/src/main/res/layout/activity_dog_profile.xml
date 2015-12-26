@@ -37,6 +37,13 @@
             android:layout_marginTop="10dp"
             tools:background="#AAA" />
 
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/take_picture"
+            android:id="@+id/selectImage"
+            android:onClick="takePic"/>
+
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

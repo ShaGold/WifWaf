@@ -28,6 +28,11 @@ public class Dog implements Serializable {
     private String description;
     private boolean male;
     private ArrayList<Behaviour> behaviours = new ArrayList<Behaviour>();
+
+    public String getPhoto() {
+        return photo;
+    }
+
     private String photo;
 
     public Dog(){}
@@ -49,7 +54,7 @@ public class Dog implements Serializable {
         this.getAlongWithHumans = dogJson.getString("getAlongWithHumans");
         this.description = dogJson.getString("description");
         //Traitement photo
-        String photo = dogJson.getString("photo"); // pour récupérer la photo il faut ensuite
+        String photo = dogJson.getString("photo");
         System.out.println("val de photo " + photo);
         this.photo = photo;
 
@@ -79,7 +84,7 @@ public class Dog implements Serializable {
         }
     }
 
-    public Dog(int idDog, int idUser, String dogName, String age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description, boolean male, ArrayList<Behaviour> b){
+    public Dog(int idDog, int idUser, String dogName, String age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description, boolean male, ArrayList<Behaviour> b, String photo){
         this.idDog = idDog;
         this.idUser = idUser;
         this.dogName = dogName;
@@ -93,6 +98,7 @@ public class Dog implements Serializable {
         this.description = description;
         this.male = male;
         this.behaviours = b;
+        this.photo = photo;
     }
 
     public Dog(int idUser, String dogName, String age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description, boolean male, ArrayList<Behaviour> b, String photo){
@@ -235,9 +241,9 @@ public class Dog implements Serializable {
 
     public static String encodeTobase64(Bitmap image)
     {
-        Bitmap immagex = image;
+        Bitmap monImg = image;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        immagex.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        monImg.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] b = baos.toByteArray();
         String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
 
