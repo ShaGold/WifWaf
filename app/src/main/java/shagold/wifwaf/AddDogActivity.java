@@ -54,7 +54,7 @@ public class AddDogActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     Bitmap imageBitmap;
-    byte[] bitmapImagedata = null;
+    String bitmapImagedata = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -251,9 +251,7 @@ public class AddDogActivity extends AppCompatActivity {
         bfOptions.inTempStorage = new byte[32 * 1024];
 
         // On convertit l'image en tableau de BYTE
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        bitmapImagedata = baos.toByteArray();
+        bitmapImagedata = Dog.encodeTobase64(imageBitmap);
     }
 
     @Override

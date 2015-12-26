@@ -85,7 +85,7 @@ public class DogProfileActivity extends AppCompatActivity {
         // TODO default image
 
         ImageView dogProfile = (ImageView) findViewById(R.id.avatarDog);
-        dogProfile.setImageResource(R.drawable.dogi2);
+        dogProfile.setImageBitmap(dog.getPhotoBitmap());
 
         EditText dogDescription = (EditText) findViewById(R.id.dogProfileDescription);
         dogDescription.setText(dog.getDescription());

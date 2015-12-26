@@ -8,7 +8,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +28,7 @@ public class Dog implements Serializable {
     private String description;
     private boolean male;
     private ArrayList<Behaviour> behaviours = new ArrayList<Behaviour>();
-    private byte[] photo;
-    private Bitmap photoBitmap;
+    private String photo;
 
     public Dog(){}
 
@@ -50,10 +51,7 @@ public class Dog implements Serializable {
         //Traitement photo
         String photo = dogJson.getString("photo"); // pour récupérer la photo il faut ensuite
         System.out.println("val de photo " + photo);
-        this.photo = photo.getBytes();
-        System.out.println("val de photo attribut" + this.photo);
-        this.photoBitmap = decodeBase64(photo);
-        System.out.println("val de photo bitmap" + this.photoBitmap);
+        this.photo = photo;
 
         if("male".equals(dogJson.getString("gender"))) {
             this.male = true;
@@ -61,19 +59,21 @@ public class Dog implements Serializable {
         else if("female".equals(dogJson.getString("gender"))) {
             this.male = false;
         }
-        JSONArray trace= (JSONArray) dogJson.get("behaviours");
-        System.out.println(trace);
-        if (trace != null){
-            for (int i = 0; i < trace.length(); i++) {
-                JSONObject currentBehaviour = null;
-                try{
-                    currentBehaviour = trace.getJSONObject(i);
-                    System.out.println(currentBehaviour);
-                    Behaviour newBehaviour = new Behaviour(currentBehaviour);
-                    this.behaviours.add(newBehaviour);
-                    System.out.println("Ajouté dans l'arraylist" + newBehaviour);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+        if (dogJson.has("behaviours")) {
+            JSONArray trace = (JSONArray) dogJson.get("behaviours");
+            System.out.println("trace vaut:" + trace);
+            if (trace != null) {
+                for (int i = 0; i < trace.length(); i++) {
+                    JSONObject currentBehaviour = null;
+                    try {
+                        currentBehaviour = trace.getJSONObject(i);
+                        System.out.println(currentBehaviour);
+                        Behaviour newBehaviour = new Behaviour(currentBehaviour);
+                        this.behaviours.add(newBehaviour);
+                        System.out.println("Ajouté dans l'arraylist" + newBehaviour);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -95,7 +95,7 @@ public class Dog implements Serializable {
         this.behaviours = b;
     }
 
-    public Dog(int idUser, String dogName, String age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description, boolean male, ArrayList<Behaviour> b, byte[] photo){
+    public Dog(int idUser, String dogName, String age, String breed, int size, String getAlongWithMales, String getAlongWithFemales, String getAlongWithKids, String getAlongWithHumans, String description, boolean male, ArrayList<Behaviour> b, String photo){
         this.idUser = idUser;
         this.dogName = dogName;
         this.age = age;
@@ -206,8 +206,8 @@ public class Dog implements Serializable {
             return "female";
     }
 
-    public Bitmap getPhotoBitmap(){
-        return this.photoBitmap;
+    public Bitmap getPhotoBitmap() {
+        return decodeBase64(this.photo);
     }
 
     public static List<Dog> generateDogsFromJson(JSONArray dogsJSON) {
@@ -231,6 +231,17 @@ public class Dog implements Serializable {
     {
         byte[] decodedByte = Base64.decode(input, 0);
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+    }
+
+    public static String encodeTobase64(Bitmap image)
+    {
+        Bitmap immagex = image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        immagex.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+
+        return imageEncoded;
     }
 
 }
