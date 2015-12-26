@@ -72,6 +72,11 @@ public class DogProfileActivity extends AppCompatActivity {
                 R.array.gender_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Ssex.setAdapter(adapter);
+
+        if(dog.isMale())
+            Ssex.setSelection(adapter.getPosition("Male"));
+        else
+            Ssex.setSelection(adapter.getPosition("Female"));
     }
 
     @Override
