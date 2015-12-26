@@ -98,4 +98,9 @@
     <string name="female">Female</string>
     <string name="dogsWalk">Dogs as the walk</string>
     <string name="take_picture">Take a picture</string>
+    <string name="starting_point">Starting point</string>
+    <string name="add_point">Please add points to create your walk</string>
+    <string name="end">End</string>
+    <string name="my_position">My position</string>
+    <string name="first_instruction_draw">Please select where your walk should start</string>
 </resources>
