@@ -238,6 +238,21 @@ public class WalkProfileActivity extends AppCompatActivity {
     public void saveChangeWalk(View view) {
 
         Walk newWalk = getWalk();
+
+        if(newWalk.getDogs().size() == 0) {
+
+            AlertDialog alertDialog = new AlertDialog.Builder(WalkProfileActivity.this).create();
+            alertDialog.setTitle(getString(R.string.save));
+            alertDialog.setMessage("Vous n'avez pas sélectionné de chien pour la balade !");
+            alertDialog.setButton(android.app.AlertDialog.BUTTON_NEGATIVE, "Cancel",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+            alertDialog.show();
+            return;
+        }
+
         if(!walk.equals(newWalk)) {
             // TODO emit save
         }
