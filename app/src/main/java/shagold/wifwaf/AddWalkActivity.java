@@ -37,6 +37,7 @@ import shagold.wifwaf.view.filter.text.SizeFilter;
 
 public class AddWalkActivity extends AppCompatActivity {
 
+    private Socket mSocket;
     private User mUser;
     private ArrayList<Dog> dogChoice = new ArrayList<Dog>();
     private List<Dog> userDogs = new ArrayList<Dog>();
@@ -51,7 +52,7 @@ public class AddWalkActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_walk);
 
         //gestion de sockets
-        Socket mSocket = SocketManager.getMySocket();
+        mSocket = SocketManager.getMySocket();
         mUser = SocketManager.getMyUser();
         mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
         mSocket.emit("getAllMyDogs", mUser.getIdUser());
@@ -70,6 +71,7 @@ public class AddWalkActivity extends AppCompatActivity {
     private Emitter.Listener onRGetAllMyDogs = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
+            mSocket.off("RGetAllMyDogs");
             AddWalkActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

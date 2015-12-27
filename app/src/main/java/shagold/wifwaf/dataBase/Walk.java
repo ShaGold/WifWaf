@@ -99,6 +99,28 @@ public class Walk implements Serializable {
         return walkJson;
     }
 
+    public JSONObject toJsonWithId() throws JSONException {
+        JSONObject walkJson = new JSONObject();
+        walkJson.put("idWalk", this.idWalk);
+        walkJson.put("idUser", this.idUser);
+        walkJson.put("walkName", this.walkName);
+        walkJson.put("description", this.description);
+        walkJson.put("city", this.city);
+        walkJson.put("departure", this.departure);
+        JSONArray mylocations = new JSONArray();
+        for (Location l : path){
+            mylocations.put(l.toJson());
+        }
+        walkJson.put("location", mylocations);
+        JSONArray mydogs = new JSONArray();
+        for (Dog d : dogs){
+            mydogs.put(d.toJsonWithId());
+        }
+        walkJson.put("dogs", mydogs);
+        System.out.println("Résultat" + walkJson);
+        return walkJson;
+    }
+
     public int getIdWalk() {
         return idWalk;
     }

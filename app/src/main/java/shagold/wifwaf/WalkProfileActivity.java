@@ -241,7 +241,6 @@ public class WalkProfileActivity extends AppCompatActivity {
 
     public void saveChangeWalk(View view) throws JSONException {
 
-        System.out.println("ici");
         Walk newWalk = getWalk();
 
         if(newWalk.getDogs().size() == 0) {
