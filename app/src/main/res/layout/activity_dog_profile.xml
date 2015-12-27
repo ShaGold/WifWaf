@@ -40,7 +40,7 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/take_picture"
+            android:text="@string/change_picture"
             android:id="@+id/selectImage"
             android:onClick="takePic"/>
 

@@ -28,7 +28,7 @@
     <string name="getAlongWithHumans">Est-ce que votre chien est sociable avec les humains?</string>
     <string name="getAlongWithKids">Est-ce que votre chien s\'entend avec les enfants?</string>
     <string name="getAlongWithMales">Est-ce que votre chien s\'entend avec les mâles?</string>
-    <string name="name"></string>
+    <string name="name">Nom</string>
     <string name="size">Taille</string>
     <string name="title_activity_add_walk">Ajouter une balade</string>
     <string name="title_activity_dog_profile">Profil du chien</string>
@@ -69,7 +69,15 @@
     <string name="oups">Oups...</string>
     <string name="title_activity_gps_walk">Tracé</string>
     <string name="title_activity_public_user_profile">Profil de l\'utilisateur</string>
-    <string name="userProfile"></string>
+    <string name="userProfile">Profil de l'utilisateur</string>
     <string name="bad_id_pass">Mauvais identifiants</string>
     <string name="error">Erreur</string>
+    <string name="add_point">Ajoutez des points afin de former votre balade</string>
+    <string name="female">Femelle</string>
+    <string name="first_instruction_draw">Sélectionnez le point de départ de votre balade</string>
+    <string name="male">Mâle</string>
+    <string name="my_position">Vous êtes ici</string>
+    <string name="starting_point">Point de départ</string>
+    <string name="take_picture">Prendre une photo</string>
+    <string name="change_picture">Modifier la photo</string>
 </resources>

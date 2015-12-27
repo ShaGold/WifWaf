@@ -103,4 +103,5 @@
     <string name="end">End</string>
     <string name="my_position">My position</string>
     <string name="first_instruction_draw">Please select where your walk should start</string>
+    <string name="change_picture">Change picture</string>
 </resources>
