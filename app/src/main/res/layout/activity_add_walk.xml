@@ -35,6 +35,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Title.TextView"
+            android:focusable="true"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:id="@+id/dateAddWalkMaster"
             android:layout_marginTop="10dp"
             android:textStyle="bold"/>
 
@@ -55,6 +59,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Title.TextView"
+            android:focusable="true"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:id="@+id/timeStampAddWalkMaster"
             android:layout_marginTop="10dp"
             android:textStyle="bold"/>
 
@@ -74,6 +82,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/title_prompt_select_dogs"
+            android:focusable="true"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
             android:id="@+id/selectDogs"
             style="@style/Title.TextView"
             android:layout_marginTop="10dp"
