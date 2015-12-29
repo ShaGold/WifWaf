@@ -50,7 +50,6 @@ public class Dog implements Serializable {
         this.description = dogJson.getString("description");
         //Traitement photo
         String photo = dogJson.getString("photo");
-        System.out.println("val de photo " + photo);
         this.photo = photo;
 
         if("male".equals(dogJson.getString("gender"))) {
@@ -61,16 +60,13 @@ public class Dog implements Serializable {
         }
         if (dogJson.has("behaviours")) {
             JSONArray trace = (JSONArray) dogJson.get("behaviours");
-            System.out.println("trace vaut:" + trace);
             if (trace != null) {
                 for (int i = 0; i < trace.length(); i++) {
                     JSONObject currentBehaviour = null;
                     try {
                         currentBehaviour = trace.getJSONObject(i);
-                        System.out.println(currentBehaviour);
                         Behaviour newBehaviour = new Behaviour(currentBehaviour);
                         this.behaviours.add(newBehaviour);
-                        System.out.println("Ajouté dans l'arraylist" + newBehaviour);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -159,6 +155,11 @@ public class Dog implements Serializable {
         else{
             dogJson.put("gender", "female");
         }
+        JSONArray myBehaviours = new JSONArray();
+        for (Behaviour b : behaviours){
+            myBehaviours.put(b.toJson());
+        }
+        dogJson.put("behaviours", myBehaviours);
         return dogJson;
     }
 
