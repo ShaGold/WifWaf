@@ -69,7 +69,7 @@
     <string name="oups">Oups...</string>
     <string name="title_activity_gps_walk">Tracé</string>
     <string name="title_activity_public_user_profile">Profil de l\'utilisateur</string>
-    <string name="userProfile">Profil de l'utilisateur</string>
+    <string name="userProfile">Profil de l\'utilisateur</string>
     <string name="bad_id_pass">Mauvais identifiants</string>
     <string name="error">Erreur</string>
     <string name="add_point">Ajoutez des points afin de former votre balade</string>

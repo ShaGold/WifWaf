@@ -84,6 +84,13 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:text="@string/select_picture_from_explorer"
+            android:id="@+id/selectPic_SU"
+            android:onClick="selectPic"/>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:text="@string/confirm"
             android:id="@+id/Confirm"
             android:onClick="trySignUp"/>
