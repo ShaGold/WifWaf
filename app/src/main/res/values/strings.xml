@@ -105,4 +105,6 @@
     <string name="first_instruction_draw">Please select where your walk should start</string>
     <string name="change_picture">Change picture</string>
     <string name="select_picture_from_explorer">Select picture from explorer</string>
+    <string name="change_picture_take">Take a new picture</string>
+    <string name="change_picture_gallery">Select a picture from the gallery</string>
 </resources>
