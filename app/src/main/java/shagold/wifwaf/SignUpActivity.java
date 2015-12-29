@@ -37,6 +37,8 @@ import shagold.wifwaf.view.filter.text.EditTextFilter;
 import shagold.wifwaf.view.filter.text.EmailFilter;
 import shagold.wifwaf.view.filter.text.NumberFilter;
 import shagold.wifwaf.view.filter.text.SizeFilter;
+import shagold.wifwaf.view.filter.textview.PersonalizedBlankFilter;
+import shagold.wifwaf.view.filter.textview.TextViewFilter;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -155,6 +157,7 @@ public class SignUpActivity extends AppCompatActivity {
         EditTextFilter[] filterNumber = {new SizeFilter(0,9), new NumberFilter()}; //pour le champ numéro de téléphone
         EditTextFilter[] filterSize = {new SizeFilter()}; // pour les champs texte classiques
         EditTextFilter[] filterEmail = {new SizeFilter(), new EmailFilter()};
+        TextViewFilter filterDate = new PersonalizedBlankFilter(ErrorMessage.DATE);
 
         // Récupération des valeurs
         EditText ETnickname = (EditText) findViewById(R.id.Nickname);
@@ -221,6 +224,16 @@ public class SignUpActivity extends AppCompatActivity {
             int min = ((SizeFilter) filterSize[0]).getMin();
             int max = ((SizeFilter) filterSize[0]).getMax();
             ETDescription.setError(vmDescrip.getError().toString() + " min: " + min + " max: " + max);
+        }
+
+        ValidateMessage vmBirthday = textValidator.validate(ETBirthday, filterDate);
+        TextView birthday = (TextView) findViewById(R.id.BirthdayMaster);
+        if(!vmBirthday.getValue()) {
+            valid = false;
+            birthday.setError(vmBirthday.getError().toString());
+        }
+        else {
+            birthday.setError(null);
         }
 
         if (!valid){

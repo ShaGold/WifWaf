@@ -63,6 +63,10 @@
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             style="@style/Title.TextView"
+            android:focusable="true"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:id="@+id/walkDateDepartureMaster"
             android:text="@string/date" />
 
         <TextView
@@ -83,6 +87,10 @@
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             style="@style/Title.TextView"
+            android:focusable="true"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:id="@+id/walkTimeDepartureMaster"
             android:text="@string/time"/>
 
         <TextView
@@ -103,6 +111,10 @@
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             style="@style/Title.TextView"
+            android:focusable="true"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:id="@+id/walkSelectDogs"
             android:text="@string/dogsWalk"/>
 
         <Button

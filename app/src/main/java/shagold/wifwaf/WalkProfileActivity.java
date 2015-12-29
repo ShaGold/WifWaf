@@ -34,6 +34,12 @@ import shagold.wifwaf.tool.WifWafColor;
 import shagold.wifwaf.fragment.WifWafDatePickerFragment;
 import shagold.wifwaf.fragment.WifWafTimePickerFragment;
 import shagold.wifwaf.tool.WifWafWalkDeparture;
+import shagold.wifwaf.view.ErrorMessage;
+import shagold.wifwaf.view.TextValidator;
+import shagold.wifwaf.view.ValidateMessage;
+import shagold.wifwaf.view.filter.text.SizeFilter;
+import shagold.wifwaf.view.filter.textview.PersonalizedBlankFilter;
+import shagold.wifwaf.view.filter.textview.TextViewFilter;
 
 public class WalkProfileActivity extends AppCompatActivity {
 
@@ -210,7 +216,75 @@ public class WalkProfileActivity extends AppCompatActivity {
         }
     };
 
+    private boolean filter() {
+
+        boolean result = true;
+
+        TextValidator textValidator = new TextValidator();
+
+        SizeFilter sizeFilter = new SizeFilter();
+
+        TextViewFilter filterDate = new PersonalizedBlankFilter(ErrorMessage.DATE);
+        TextViewFilter filterTime = new PersonalizedBlankFilter(ErrorMessage.TIME);
+
+        EditText nameWalk = (EditText) findViewById(R.id.walkTitle);
+        EditText descriptionWalk = (EditText) findViewById(R.id.walkDescription);
+
+        TextView dateText = (TextView) findViewById(R.id.walkDateDeparture);
+        TextView timeText = (TextView) findViewById(R.id.walkTimeDeparture);
+        TextView date = (TextView) findViewById(R.id.walkDateDepartureMaster);
+        TextView time = (TextView) findViewById(R.id.walkTimeDepartureMaster);
+        TextView dogs = (TextView) findViewById(R.id.walkSelectDogs);
+
+        ValidateMessage vm = textValidator.validate(nameWalk, sizeFilter);
+        if (!vm.getValue()) {
+            int min = sizeFilter.getMin();
+            int max = sizeFilter.getMax();
+            nameWalk.setError(vm.getError().toString() + " min: " + min + " max: " + max);
+            result = false;
+        }
+
+        vm = textValidator.validate(descriptionWalk, sizeFilter);
+        if (!vm.getValue()) {
+            int min = sizeFilter.getMin();
+            int max = sizeFilter.getMax();
+            descriptionWalk.setError(vm.getError().toString() + " min: " + min + " max: " + max);
+            result =  false;
+        }
+
+        vm = textValidator.validate(dateText, filterDate);
+        if(!vm.getValue()) {
+            date.setError(vm.getError().toString());
+            result =  false;
+        }
+        else {
+            date.setError(null);
+        }
+
+        vm = textValidator.validate(timeText, filterTime);
+        if(!vm.getValue()) {
+            time.setError(vm.getError().toString());
+            result =  false;
+        }
+        else {
+            time.setError(null);
+        }
+
+        if (dogWalk.size() == 0) {
+            dogs.setError(getString(R.string.not_enough_dogs));
+            result =  false;
+        }
+        else {
+            dogs.setError(null);
+        }
+
+        return result;
+    }
+
     public void useWalk(View view) {
+        if(!filter())
+            return;
+
         Intent result = new Intent(WalkProfileActivity.this, UseWalkActivity.class);
         Walk newWalk = getWalk();
 
@@ -241,6 +315,9 @@ public class WalkProfileActivity extends AppCompatActivity {
 
     public void saveChangeWalk(View view) throws JSONException {
 
+        if(!filter())
+            return;
+
         Walk newWalk = getWalk();
 
         if(newWalk.getDogs().size() == 0) {
@@ -269,8 +346,6 @@ public class WalkProfileActivity extends AppCompatActivity {
     }
 
     private Walk getWalk() {
-
-
 
         EditText walkTitle = (EditText) findViewById(R.id.walkTitle);
         String name = walkTitle.getText().toString();

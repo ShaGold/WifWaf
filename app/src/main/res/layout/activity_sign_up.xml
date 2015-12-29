@@ -48,6 +48,10 @@
             android:layout_height="match_parent"
             android:text="@string/birthday"
             android:layout_marginTop="10dp"
+            android:focusable="true"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:id="@+id/BirthdayMaster"
             style="@style/Title.TextView" />
 
         <TextView
