@@ -80,4 +80,5 @@
     <string name="starting_point">Point de départ</string>
     <string name="take_picture">Prendre une photo</string>
     <string name="change_picture">Modifier la photo</string>
+    <string name="select_picture_from_explorer">Sélectionner une photo depuis la gallerie</string>
 </resources>
