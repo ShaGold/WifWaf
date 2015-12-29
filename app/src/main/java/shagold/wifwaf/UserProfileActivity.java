@@ -76,7 +76,17 @@ public class UserProfileActivity extends AppCompatActivity {
         return MenuManager.defaultMenu(this, item) || super.onOptionsItemSelected(item);
     }
 
+    private boolean filter() {
+        boolean result = true;
+
+
+        return result;
+    }
+
     public void saveProfileUser(View view) {
+        if(!filter())
+            return;
+
         EditText userProfileName = (EditText) findViewById(R.id.userProfileName);
         String nameU = userProfileName.getText().toString();
 
