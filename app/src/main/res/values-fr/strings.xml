@@ -32,7 +32,7 @@
     <string name="size">Taille</string>
     <string name="title_activity_add_walk">Ajouter une balade</string>
     <string name="title_activity_dog_profile">Profil du chien</string>
-    <string name="timeStamp">Définissez l\'heure de départ</string>
+    <string name="timeStamp">Quelle heure?</string>
     <string name="cancel">Annuler</string>
     <string name="title_prompt_select_dogs">Sélectionnez les chiens participant à cette balade</string>
     <string name="title_activity_user_walks">Mes Balades</string>
@@ -44,7 +44,7 @@
     <string name="behaviour">Traits de caractère</string>
     <string name="button_sign_up">Inscription</string>
     <string name="city">Ville</string>
-    <string name="date">Définissez le jour de la balade</string>
+    <string name="date">Quel jour?</string>
     <string name="departure">Heure de départ</string>
     <string name="error_email_already_exists">Cette adresse mail est déjà utilisée</string>
     <string name="gender">Sexe</string>

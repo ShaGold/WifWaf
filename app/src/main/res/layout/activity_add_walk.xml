@@ -30,53 +30,59 @@
             android:hint="@string/description"
             android:id="@+id/descriptionWalk" />
 
-        <TextView
-            android:text="@string/date"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
             android:layout_height="wrap_content"
-            style="@style/Title.TextView"
-            android:focusable="true"
-            android:clickable="true"
-            android:focusableInTouchMode="true"
-            android:id="@+id/dateAddWalkMaster"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"/>
+            android:focusableInTouchMode="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/dateAddWalk"
-            style="@style/Title.TextView" />
+            <TextView
+                android:text="@string/date"
+                android:layout_height="wrap_content"
+                style="@style/Title.TextView"
+                android:focusable="true"
+                android:clickable="true"
+                android:layout_width="200dp"
+                android:focusableInTouchMode="true"
+                android:id="@+id/dateAddWalkMaster" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/select_date"
-            android:onClick="choseDate" />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/select_date"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="2"
+                android:src="@drawable/ic_date_range_black_24dp"
+                android:onClick="choseDate" />
 
-        <TextView
-            android:text="@string/timeStamp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Title.TextView"
-            android:focusable="true"
-            android:clickable="true"
-            android:focusableInTouchMode="true"
-            android:id="@+id/timeStampAddWalkMaster"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"/>
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
             android:layout_height="wrap_content"
-            android:id="@+id/timeStampAddWalk"
-            style="@style/Title.TextView"/>
+            android:focusableInTouchMode="true">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/timeStamp"
-            android:onClick="choseTimeStamp" />
+            <TextView
+                android:text="@string/timeStamp"
+                android:layout_height="wrap_content"
+                style="@style/Title.TextView"
+                android:focusable="true"
+                android:clickable="true"
+                android:layout_width="200dp"
+                android:focusableInTouchMode="true"
+                android:id="@+id/timeStampAddWalkMaster"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timeStamp"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="2"
+                android:onClick="choseTimeStamp"
+                android:src="@drawable/ic_query_builder_black_24dp"/>
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -89,7 +95,7 @@
             style="@style/Title.TextView"
             android:layout_marginTop="10dp"
             android:textStyle="bold" />
-        
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

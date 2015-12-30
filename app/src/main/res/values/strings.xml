@@ -107,4 +107,5 @@
     <string name="select_picture_from_explorer">Select picture from explorer</string>
     <string name="change_picture_take">Take a new picture</string>
     <string name="change_picture_gallery">Select a picture from the gallery</string>
+    <string name="select_birthday">Select birth date</string>
 </resources>
