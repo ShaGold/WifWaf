@@ -1,7 +1,9 @@
 package shagold.wifwaf;
 
-/**
- * Created by Marlene on 30/12/2015.
- */
+
 public class WifWafPreferences {
+
+    public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
+    public static final String REGISTRATION_COMPLETE = "registrationComplete";
+
 }

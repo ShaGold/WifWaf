@@ -55,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
         mSocket = SocketManager.getMySocket();
         mSocket.connect();
         mSocket.on("RTrySignIn", onRTrySignIn);
+
+        Intent intent = new Intent(this, RegistrationIntentService.class);
+        startService(intent);
     }
 
     @Override
