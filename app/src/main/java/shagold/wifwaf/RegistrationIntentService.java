@@ -12,8 +12,12 @@ import com.google.android.gms.gcm.GcmPubSub;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
+import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.manager.SocketManager;
 
 public class RegistrationIntentService extends IntentService {
@@ -73,11 +77,15 @@ public class RegistrationIntentService extends IntentService {
      *
      * @param token The new token.
      */
-    private void sendRegistrationToServer(String token) {
+    private void sendRegistrationToServer(String token) throws JSONException {
         // Add custom implementation, as needed.
         Socket mSocket = SocketManager.getMySocket();
-        mSocket.emit("token", token);
-        System.out.println("emit");
+        User mUser = SocketManager.getMyUser();
+        JSONObject myJson = new JSONObject();
+        myJson.put("token", token);
+        myJson.put("idUser", mUser.getIdUser());
+        mSocket.emit("token", myJson);
+        System.out.println("param" + myJson);
     }
 
     /**
