@@ -63,7 +63,7 @@ public class AddWalkActivity extends AppCompatActivity {
     
     public void choseTimeStamp(View view) {
         WifWafTimePickerFragment newFragment = new WifWafTimePickerFragment();
-        TextView textView = (TextView) findViewById(R.id.timeStampAddWalk);
+        TextView textView = (TextView) findViewById(R.id.timeStampAddWalkMaster);
         newFragment.setTimeText(textView);
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
@@ -77,7 +77,7 @@ public class AddWalkActivity extends AppCompatActivity {
                 public void run() {
                     JSONArray dogsJSON = (JSONArray) args[0];
                     userDogs = Dog.generateDogsFromJson(dogsJSON);
-                    int positionCheckbox = 9;
+                    int positionCheckbox = 5;
                     for (Dog dog : userDogs) {
                         CheckBox cb = new CheckBox(AddWalkActivity.this);
                         cb.setText(dog.getName());
@@ -128,7 +128,7 @@ public class AddWalkActivity extends AppCompatActivity {
 
     public void choseDate(View view) {
         WifWafDatePickerFragment newFragment = new WifWafDatePickerFragment();
-        TextView textView = (TextView) findViewById(R.id.dateAddWalk);
+        TextView textView = (TextView) findViewById(R.id.dateAddWalkMaster);
         newFragment.setDateText(textView);
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
@@ -138,9 +138,9 @@ public class AddWalkActivity extends AppCompatActivity {
         String nameW = nameWalk.getText().toString();
         EditText descriptionWalk = (EditText) findViewById(R.id.descriptionWalk);
         String descriptionW = descriptionWalk.getText().toString();
-        TextView timeText = (TextView) findViewById(R.id.timeStampAddWalk);
+        TextView timeText = (TextView) findViewById(R.id.timeStampAddWalkMaster);
         String time = timeText.getText().toString();
-        TextView dateText = (TextView) findViewById(R.id.dateAddWalk);
+        TextView dateText = (TextView) findViewById(R.id.dateAddWalkMaster);
         String date = dateText.getText().toString();
         String departure = date + " " + time;
 
@@ -159,8 +159,8 @@ public class AddWalkActivity extends AppCompatActivity {
         EditText nameWalk = (EditText) findViewById(R.id.nameWalk);
         EditText descriptionWalk = (EditText) findViewById(R.id.descriptionWalk);
 
-        TextView dateText = (TextView) findViewById(R.id.dateAddWalk);
-        TextView timeText = (TextView) findViewById(R.id.timeStampAddWalk);
+        TextView dateText = (TextView) findViewById(R.id.dateAddWalkMaster);
+        TextView timeText = (TextView) findViewById(R.id.timeStampAddWalkMaster);
         TextView date = (TextView) findViewById(R.id.dateAddWalkMaster);
         TextView time = (TextView) findViewById(R.id.timeStampAddWalkMaster);
         TextView dogs = (TextView) findViewById(R.id.selectDogs);
@@ -183,23 +183,23 @@ public class AddWalkActivity extends AppCompatActivity {
             result =  false;
         }
 
-        vm = textValidator.validate(dateText, filterDate);
+        /*vm = textValidator.validate(dateText, filterDate);
         if(!vm.getValue()) {
             date.setError(vm.getError().toString());
             result =  false;
         }
         else {
             date.setError(null);
-        }
+        }*/
 
-        vm = textValidator.validate(timeText, filterTime);
+        /*vm = textValidator.validate(timeText, filterTime);
         if(!vm.getValue()) {
             time.setError(vm.getError().toString());
             result =  false;
         }
         else {
             time.setError(null);
-        }
+        }*/
 
         if (dogChoice.size() == 0) {
             dogs.setError(getString(R.string.not_enough_dogs));

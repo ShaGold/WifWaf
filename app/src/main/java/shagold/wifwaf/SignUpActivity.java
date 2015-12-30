@@ -18,6 +18,8 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import com.github.nkzawa.socketio.client.Socket;
 import com.github.nkzawa.emitter.Emitter;
 
@@ -82,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void showDatePickerDialog(View v) {
         WifWafDatePickerFragment newFragment = new WifWafDatePickerFragment();
-        TextView ETBirthday = (TextView) findViewById(R.id.Birthday);
+        TextView ETBirthday = (TextView) findViewById(R.id.BirthdayMaster);
         newFragment.setDateText(ETBirthday);
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
@@ -164,7 +166,7 @@ public class SignUpActivity extends AppCompatActivity {
         EditText ETpassword = (EditText) findViewById(R.id.Password);
         EditText ETemail = (EditText) findViewById(R.id.Email);
         EditText ETPhoneNumber = (EditText) findViewById(R.id.PhoneNumber);
-        TextView ETBirthday = (TextView) findViewById(R.id.Birthday);
+        TextView ETBirthday = (TextView) findViewById(R.id.BirthdayMaster);
         ETBirthday.setFocusable(false);
         EditText ETDescription = (EditText) findViewById(R.id.Description);
 
@@ -226,7 +228,7 @@ public class SignUpActivity extends AppCompatActivity {
             ETDescription.setError(vmDescrip.getError().toString() + " min: " + min + " max: " + max);
         }
 
-        ValidateMessage vmBirthday = textValidator.validate(ETBirthday, filterDate);
+        /*ValidateMessage vmBirthday = textValidator.validate(ETBirthday, filterDate);
         TextView birthday = (TextView) findViewById(R.id.BirthdayMaster);
         if(!vmBirthday.getValue()) {
             valid = false;
@@ -234,7 +236,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
         else {
             birthday.setError(null);
-        }
+        }*/
 
         if (!valid){
             return;
