@@ -1,6 +1,7 @@
 package shagold.wifwaf;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +38,9 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
     private User mUser;
     private User SendToUser;
     private ArrayList<Dog> dogWalk = new ArrayList<Dog>();
+    private AlertDialog dogsDialog;
+    private List<Dog> dogsUser = new ArrayList<Dog>();
+    private List<Dog> dogsUserForWalk = new ArrayList<Dog>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,8 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
 //        mSocket.emit("getUserById", walk.getIdUser());
         mUser = SocketManager.getMyUser();
         mSocket.on("RGetUser", onRGetUser);
+        mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
+        mSocket.emit("getAllMyDogs", mUser.getIdUser());
 
         walk = (Walk) getIntent().getSerializableExtra("WALK");
 
@@ -94,6 +100,43 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
     }
 
     public void sendNotif(View view){
+        CharSequence[] items = new CharSequence[dogsUser.size()];
+        final Dog[] dogTab = new Dog[dogsUser.size()];
+
+        int i = 0;
+        for(Dog dog : dogsUser) {
+            items[i] = dog.getName();
+            dogTab[i] = dog;
+            i++;
+        }
+
+        dogsDialog = new AlertDialog.Builder(PublicWalkProfileActivity.this)
+                .setTitle("My dogs")
+                .setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
+                        if (isChecked) {
+                            dogsUserForWalk.add(dogTab[indexSelected]);
+                        } else if (dogsUserForWalk.contains(dogTab[indexSelected])) {
+                            dogsUserForWalk.remove(dogTab[indexSelected]);
+                        }
+                    }
+                }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        // TODO send request
+
+
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        dogsUserForWalk.clear();
+                    }
+                }).create();
+        dogsDialog.show();
+
         //SmsManager mySms = null;
 
         /*int hisAddress = SendToUser.getPhoneNumber();
@@ -178,6 +221,21 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+            });
+        }
+
+    };
+
+    private Emitter.Listener onRGetAllMyDogs = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            PublicWalkProfileActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    dogsUser = Dog.generateDogsFromJson((JSONArray) args[0]);
+
+                }
+
             });
         }
 
