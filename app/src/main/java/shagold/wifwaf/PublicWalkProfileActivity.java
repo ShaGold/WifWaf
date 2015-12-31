@@ -110,7 +110,7 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
     public void sendNotif(View view) throws JSONException {
         // Récup id communes pour tous les chiens
         final int idWalk = walk.getIdWalk();
-        final int idUser = walk.getIdUser();
+        final int idUser = mUser.getIdUser();
 
         // Récup des id des chiens
         CharSequence[] items = new CharSequence[dogsUser.size()];
@@ -150,8 +150,8 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                             myJson.put(currentDog);
-                            mSocket.emit("addParticipation", myJson);
                         }
+                        mSocket.emit("addParticipation", myJson);
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
