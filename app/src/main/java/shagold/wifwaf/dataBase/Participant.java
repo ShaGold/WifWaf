@@ -53,6 +53,14 @@ public class Participant {
         this.valid = participantJson.getInt("valid");
     }
 
+    public JSONObject toJson() throws JSONException {
+        JSONObject resultat = new JSONObject();
+        resultat.put("idDog", this.dog.getIdDog());
+        resultat.put("idWalk", this.getIdWalk());
+        resultat.put("idUser", this.getUser().getIdUser());
+        return resultat;
+    }
+
     public static List<Participant> generateParticipantsFromJson(JSONArray participantsJson) {
         List<Participant> participants = new ArrayList<Participant>();
         if(participantsJson != null) {
