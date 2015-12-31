@@ -389,4 +389,6 @@ public class WalkProfileActivity extends AppCompatActivity {
             });
         }
     };
+
+
 }
