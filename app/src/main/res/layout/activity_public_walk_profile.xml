@@ -99,6 +99,13 @@
             android:onClick="sendNotif"/>
 
         <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/who_s_participating"
+            android:id="@+id/participation"
+            android:onClick="getParticipants"/>
+
+        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/walkDogs"
