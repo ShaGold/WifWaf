@@ -112,4 +112,10 @@
     <string name="participants">Participants</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="userName">Username</string>
+    <string name="dogName">Dog name</string>
+    <string name="delete_walk">Delete walk</string>
+    <string name="sure_delete_walk">Are you sure to delete the walk</string>
+    <string name="error_no_dogs_selected">Please select at least one dog for your walk!</string>
+    <string name="refuse">Refuse</string>
 </resources>
