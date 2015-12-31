@@ -61,6 +61,14 @@ public class Participant {
         return resultat;
     }
 
+    public static JSONArray generateJsonArrayFromListParticipants(List<Participant> participants) throws JSONException {
+        JSONArray resultat = new JSONArray();
+        for (Participant p : participants){
+            resultat.put(p.toJson());
+        }
+        return resultat;
+    }
+
     public static List<Participant> generateParticipantsFromJson(JSONArray participantsJson) {
         List<Participant> participants = new ArrayList<Participant>();
         if(participantsJson != null) {
