@@ -117,6 +117,18 @@
             android:id="@+id/walkSelectDogs"
             android:text="@string/dogsWalk"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            style="@style/Title.TextView"
+            android:focusable="true"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:id="@+id/walkSelectParticipants"
+            android:text="@string/participants"/>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

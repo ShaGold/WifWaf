@@ -23,6 +23,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import shagold.wifwaf.adapter.ParticipantAdapter;
 import shagold.wifwaf.dataBase.Dog;
 import shagold.wifwaf.dataBase.Participant;
 import shagold.wifwaf.dataBase.User;
@@ -68,9 +69,8 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
         mSocket.on("RGetDogById", onRGetDogById);
 
         //Récupération liste de participants
-        mSocket.emit("getParticipants", walk.getIdWalk());
-        mSocket.on("RgetParticipants", onRGetParticipants);
-        participants = new ArrayList<Participant>();
+        mSocket.emit("getAllParticipationsForIdWalk", walk.getIdWalk());
+        mSocket.on("RgetAllParticipationsForIdWalk", onRGetParticipants);
 
         TextView titleWalk = (TextView) findViewById(R.id.walkPublicTitle);
         titleWalk.setText(walk.getTitle());
@@ -178,7 +178,30 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
         AlertDialog.Builder participantsDialog = new AlertDialog.Builder(PublicWalkProfileActivity.this);
 
         participantsDialog.setTitle("Participants");
-        //Afficher la liste comme pour walkDogs ...
+
+        List<Participant> parts = new ArrayList<>(participants);
+
+        ParticipantAdapter adapter = new ParticipantAdapter(PublicWalkProfileActivity.this, parts);
+
+        final ListView modeList = new ListView(PublicWalkProfileActivity.this);
+        modeList.setAdapter(adapter);
+        modeList.setDividerHeight(modeList.getDividerHeight()*3);
+
+        modeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Participant p = (Participant) modeList.getItemAtPosition(position);
+                Intent userProfile = new Intent(getApplicationContext(), PublicUserProfileActivity.class);
+                userProfile.putExtra("USER", p.getUser().getIdUser());
+                startActivity(userProfile);
+            }
+        });
+
+        participantsDialog.setView(modeList);
+
+        AlertDialog alertDogs = participantsDialog.create();
+        alertDogs.show();
+
 
     }
 
@@ -238,6 +261,7 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
                     JSONArray param = (JSONArray) args[0];
                     List<Participant> participantsParam = Participant.generateParticipantsFromJson(param);
                     participants.addAll(participantsParam); //TODO afficher correctement
+                    System.out.println(participants);
                 }
             });
         }

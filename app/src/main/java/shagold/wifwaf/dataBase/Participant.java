@@ -21,8 +21,16 @@ public class Participant {
         return idWalk;
     }
 
+    public String getUserName() {
+        return user.getNickname();
+    }
+
     public int getValid() {
         return valid;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public Participant(Dog idDog, int idWalk, User idUser, int valid){

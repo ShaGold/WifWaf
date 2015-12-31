@@ -41,32 +41,9 @@ public class ParticipantAdapter extends ArrayAdapter<Participant> {
         }
 
         final Participant participant = getItem(position);
-        viewHolder.getDogName().setText(Participant.getUserName());
-        viewHolder.getUserName().setText(dog.getPhotoBitmap());
+        viewHolder.getDogName().setText(participant.getUserName());
+        viewHolder.getUserName().setText(participant.getDogName());
 
-        viewHolder.getButton().setFocusable(false);
-        viewHolder.getButton().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(c);
-                dialog.setTitle("Delete Dog");
-                dialog.setMessage("Are you sure to delete the dog : \n\n\t" + dog.getName());
-                dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        int id = dog.getIdDog();
-                        mSocket.emit("deleteDog", id);
-                    }
-                });
-                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                AlertDialog alertDeleteDogs = dialog.create();
-                alertDeleteDogs.show();
-            }
-        });
         return convertView;
     }
 

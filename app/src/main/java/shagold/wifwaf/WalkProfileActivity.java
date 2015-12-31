@@ -25,6 +25,7 @@ import java.util.List;
 
 import shagold.wifwaf.dataBase.Dog;
 import shagold.wifwaf.dataBase.Location;
+import shagold.wifwaf.dataBase.Participant;
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.fragment.WifWafWalkChangeFragment;
@@ -48,6 +49,7 @@ public class WalkProfileActivity extends AppCompatActivity {
     private Socket mSocket;
     private ArrayList<Dog> dogWalk = new ArrayList<Dog>();
     private List<Dog> userDogs = new ArrayList<Dog>();
+    ArrayList<Participant> participants = new ArrayList<Participant>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +89,8 @@ public class WalkProfileActivity extends AppCompatActivity {
         mSocket.on("RdeleteWalk", onRredirect);
         mSocket.on("RUpdateWalk", onRredirect);
         mSocket.emit("getAllMyDogs", mUser.getIdUser());
+        mSocket.emit("getAllParticipationsForIdWalk", walk.getIdWalk());
+        mSocket.on("RgetAllParticipationsForIdWalk", onRGetParticipants);
 
     }
 
@@ -368,4 +372,21 @@ public class WalkProfileActivity extends AppCompatActivity {
 
         return newWalk;
     }
+
+    private Emitter.Listener onRGetParticipants = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            WalkProfileActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONArray param = (JSONArray) args[0];
+                    List<Participant> participantsParam = Participant.generateParticipantsFromJson(param);
+                    participants.addAll(participantsParam); //TODO afficher correctement
+
+                    int index = 15;
+
+                }
+            });
+        }
+    };
 }
