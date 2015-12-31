@@ -105,29 +105,44 @@
             android:text="@string/modify_time"
             android:onClick="showTimePickerDialog" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            style="@style/Title.TextView"
-            android:focusable="true"
-            android:clickable="true"
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="vertical"
+            android:layout_height="fill_parent"
             android:focusableInTouchMode="true"
-            android:id="@+id/walkSelectDogs"
-            android:text="@string/dogsWalk"/>
+            android:id="@+id/checkboxDogs">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                style="@style/Title.TextView"
+                android:focusable="true"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
+                android:id="@+id/walkSelectDogs"
+                android:text="@string/dogsWalk"/>
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            style="@style/Title.TextView"
-            android:focusable="true"
-            android:clickable="true"
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="vertical"
+            android:layout_height="fill_parent"
             android:focusableInTouchMode="true"
-            android:id="@+id/walkSelectParticipants"
-            android:text="@string/participants"/>
+            android:id="@+id/checkboxParticipants">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                style="@style/Title.TextView"
+                android:focusable="true"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
+                android:id="@+id/walkSelectParticipants"
+                android:text="@string/participants"/>
+        </LinearLayout>
 
         <Button
             android:layout_width="wrap_content"

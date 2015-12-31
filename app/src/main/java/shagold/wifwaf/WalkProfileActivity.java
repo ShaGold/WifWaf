@@ -19,6 +19,7 @@ import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,8 @@ public class WalkProfileActivity extends AppCompatActivity {
     private ArrayList<Dog> dogWalk = new ArrayList<Dog>();
     private List<Dog> userDogs = new ArrayList<Dog>();
     ArrayList<Participant> participants = new ArrayList<Participant>();
+    private ArrayList<Participant> participantsWalkRefused = new ArrayList<Participant>();
+    private ArrayList<Participant> participantsWalkAccepted = new ArrayList<Participant>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +154,7 @@ public class WalkProfileActivity extends AppCompatActivity {
 
                     JSONArray dogsJSON = (JSONArray) args[0];
                     userDogs = Dog.generateDogsFromJson(dogsJSON);
-                    int index = 13;
+                    int index = 1;
                     for (Dog dog : userDogs) {
                         CheckBox cb = new CheckBox(WalkProfileActivity.this);
                         cb.setText(dog.getName());
@@ -180,7 +183,7 @@ public class WalkProfileActivity extends AppCompatActivity {
                             }
                         });
 
-                        LinearLayout layout = (LinearLayout) findViewById(R.id.walkProfileLayout);
+                        LinearLayout layout = (LinearLayout) findViewById(R.id.checkboxDogs);
                         layout.addView(cb, index);
                         index++;
                     }
@@ -379,12 +382,82 @@ public class WalkProfileActivity extends AppCompatActivity {
             WalkProfileActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    JSONArray param = (JSONArray) args[0];
-                    List<Participant> participantsParam = Participant.generateParticipantsFromJson(param);
-                    participants.addAll(participantsParam); //TODO afficher correctement
 
-                    int index = 15;
+                    LinearLayout layout = (LinearLayout) findViewById(R.id.checkboxParticipants);
+                    JSONArray participantsJSON = (JSONArray) args[0];
+                    ArrayList<Participant> participants = new ArrayList<Participant>();
+                    participants.addAll(Participant.generateParticipantsFromJson(participantsJSON));
+                    System.out.println(participants);
+                    int index = 0;
 
+                    for (final Participant p : participants) {
+                        TextView tvUser = new TextView(getApplicationContext());
+                        tvUser.setText(p.getUserName());
+                        tvUser.setTextColor(WifWafColor.BLACK);
+                        tvUser.setOnClickListener(new View.OnClickListener() {
+                                                      @Override
+                                                      public void onClick(View v) {
+                                                          Intent i = new Intent(getApplicationContext(), PublicUserProfileActivity.class);
+                                                          i.putExtra("USER", p.getUser().getIdUser());
+                                                          startActivity(i);
+                                                      }
+                                                  }
+
+                        );
+                        layout.addView(tvUser, index+1);
+
+                        TextView tvDog = new TextView(getApplicationContext());
+                        tvDog.setText(p.getDogName());
+                        tvDog.setTextColor(WifWafColor.BLACK);
+                        tvDog.setOnClickListener(new View.OnClickListener() {
+                                                      @Override
+                                                      public void onClick(View v) {
+                                                          Intent i = new Intent(getApplicationContext(), PublicDogProfileActivity.class);
+                                                          i.putExtra("DOG", p.getDog());
+                                                          startActivity(i);
+                                                      }
+                                                  }
+
+                        );
+                        layout.addView(tvDog, index+1);
+
+                        //si la participation n'avait jamais été vue encore
+                        if (p.getValid() == 0) {
+                            CheckBox cb = new CheckBox(WalkProfileActivity.this);
+                            cb.setText("Accept");
+                            cb.setTextColor(WifWafColor.BLACK);
+                            final Participant participantCB = p;
+                            cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                    if (isChecked)
+                                        participantsWalkAccepted.add(participantCB);
+                                    else {
+                                        participantsWalkAccepted.remove(participantCB);
+                                    }
+                                }
+                            });
+
+                            layout.addView(cb, index+1);
+                        }
+
+                        if (p.getValid() == 0) {
+                            CheckBox cb = new CheckBox(WalkProfileActivity.this);
+                            cb.setText("Refuse");
+                            cb.setTextColor(WifWafColor.BLACK);
+                            final Participant participantCB = p;
+                            cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                    if (isChecked)
+                                        participantsWalkRefused.add(participantCB);
+                                    else {
+                                        participantsWalkRefused.remove(participantCB);
+                                    }
+                                }
+                            });
+
+                            layout.addView(cb, index + 1);
+                        }
+                    }
                 }
             });
         }

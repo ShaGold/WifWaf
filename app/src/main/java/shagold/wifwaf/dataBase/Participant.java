@@ -21,6 +21,10 @@ public class Participant {
         return idWalk;
     }
 
+    public Dog getDog(){
+        return this.dog;
+    }
+
     public String getUserName() {
         return user.getNickname();
     }
