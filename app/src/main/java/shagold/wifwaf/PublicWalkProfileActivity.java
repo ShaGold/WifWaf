@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,10 +19,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import shagold.wifwaf.dataBase.Dog;
+import shagold.wifwaf.dataBase.Participant;
 import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.dataBase.Walk;
 import shagold.wifwaf.adapter.DogPublicAdapter;
@@ -36,33 +37,40 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
     private Walk walk;
     private Socket mSocket;
     private User mUser;
-    private User SendToUser;
     private ArrayList<Dog> dogWalk = new ArrayList<Dog>();
     private AlertDialog dogsDialog;
     private List<Dog> dogsUser = new ArrayList<Dog>();
     private List<Dog> dogsUserForWalk = new ArrayList<Dog>();
+    ArrayList<Participant> participants = new ArrayList<Participant>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_public_walk_profile);
 
-        //on veut récupérer les infos du user propriétaire de la balade pour pouvoir lui envoyer un sms
         mSocket = SocketManager.getMySocket();
+
 //        mSocket.emit("getUserById", walk.getIdUser());
         mUser = SocketManager.getMyUser();
-        mSocket.on("RGetUser", onRGetUser);
         mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
         mSocket.emit("getAllMyDogs", mUser.getIdUser());
 
+
         walk = (Walk) getIntent().getSerializableExtra("WALK");
 
+        // Récupération liste de chiens
         for(Dog d : walk.getDogs()) {
             System.out.println("ID-DOG- " + d.getIdDog());
             mSocket.emit("getDogById", d.getIdDog());
         }
 
         mSocket.on("RGetDogById", onRGetDogById);
+
+        //Récupération liste de participants
+        mSocket.emit("getParticipants", walk.getIdWalk());
+        mSocket.on("RgetParticipants", onRGetParticipants);
+        participants = new ArrayList<Participant>();
 
         TextView titleWalk = (TextView) findViewById(R.id.walkPublicTitle);
         titleWalk.setText(walk.getTitle());
@@ -99,7 +107,12 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
         startActivity(resultat);
     }
 
-    public void sendNotif(View view){
+    public void sendNotif(View view) throws JSONException {
+        // Récup id communes pour tous les chiens
+        final int idWalk = walk.getIdWalk();
+        final int idUser = walk.getIdUser();
+
+        // Récup des id des chiens
         CharSequence[] items = new CharSequence[dogsUser.size()];
         final Dog[] dogTab = new Dog[dogsUser.size()];
 
@@ -124,10 +137,21 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
                 }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+                        JSONArray myJson = new JSONArray();
 
-                        // TODO send request
-
-
+                        for (Dog d: dogsUserForWalk) {
+                            //pour chaque chien choisi
+                            JSONObject currentDog = new JSONObject();
+                            try {
+                                currentDog.put("idWalk", idWalk);
+                                currentDog.put("idUser", idUser);
+                                currentDog.put("idDog", d.getIdDog());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            myJson.put(currentDog);
+                            mSocket.emit("addParticipation", myJson);
+                        }
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -136,16 +160,6 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
                     }
                 }).create();
         dogsDialog.show();
-
-        //SmsManager mySms = null;
-
-        /*int hisAddress = SendToUser.getPhoneNumber();
-        String hisAddressString =  Integer.toString(hisAddress);
-        int myAddress = mUser.getPhoneNumber();
-        String myAddressString = Integer.toString(myAddress);
-        String text = "Hello " + mUser.getNickname() + ", the user " + SendToUser.getNickname() + " would like to join you on " + walk.getTitle() + ". " + "He will surely contact you soon" ;
-        mySms.sendTextMessage(hisAddressString, myAddressString, text, null, null);*/
-
     }
 
     public void viewPath(View view) {
@@ -158,6 +172,14 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
         Intent resultat = new Intent(PublicWalkProfileActivity.this, UseWalkActivity.class);
         resultat.putExtra("WALK", walk);
         startActivity(resultat);
+    }
+
+    public void getParticipants(View view){
+        AlertDialog.Builder participantsDialog = new AlertDialog.Builder(PublicWalkProfileActivity.this);
+
+        participantsDialog.setTitle("Participants");
+        //Afficher la liste comme pour walkDogs ...
+
     }
 
     public void walkDogs(View view) {
@@ -202,28 +224,23 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
             });
         }
-
     };
 
-    private Emitter.Listener onRGetUser = new Emitter.Listener() {
+    private Emitter.Listener onRGetParticipants = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
             PublicWalkProfileActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    try {
-                        SendToUser = new User((JSONObject) args[0]);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    JSONArray param = (JSONArray) args[0];
+                    List<Participant> participantsParam = Participant.generateParticipantsFromJson(param);
+                    participants.addAll(participantsParam); //TODO afficher correctement
                 }
             });
         }
-
     };
 
     private Emitter.Listener onRGetAllMyDogs = new Emitter.Listener() {

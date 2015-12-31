@@ -144,6 +144,11 @@ public class MainActivity extends AppCompatActivity {
                         if(realpass.equals(typedpassencrypt) && id != -1){
                             User newUser = new User(param);
                             SocketManager.setMyUser(newUser);
+
+                            //Création/enregistrement token
+                            Intent intent = new Intent(getApplicationContext(), RegistrationIntentService.class);
+                            startService(intent);
+
                             Intent resultat = new Intent(MainActivity.this, HomeActivity.class);
                             startActivity(resultat);
                             finish();
