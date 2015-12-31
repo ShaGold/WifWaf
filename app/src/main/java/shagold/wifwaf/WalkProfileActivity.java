@@ -121,16 +121,16 @@ public class WalkProfileActivity extends AppCompatActivity {
 
     public void deleteWalk(View view) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(WalkProfileActivity.this);
-        dialog.setTitle("Delete Walk");
-        dialog.setMessage("Are you sure to delete the walk : \n\n\t" + walk.getTitle());
-        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        dialog.setTitle(getString(R.string.delete_walk));
+        dialog.setMessage(getString(R.string.sure_delete_walk) +": \n\n\t" + walk.getTitle());
+        dialog.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 int id = walk.getIdWalk();
                 mSocket.emit("deleteWalk", id);
             }
         });
-        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }
@@ -331,8 +331,8 @@ public class WalkProfileActivity extends AppCompatActivity {
 
             AlertDialog alertDialog = new AlertDialog.Builder(WalkProfileActivity.this).create();
             alertDialog.setTitle(getString(R.string.save));
-            alertDialog.setMessage("Vous n'avez pas sélectionné de chien pour la balade !");
-            alertDialog.setButton(android.app.AlertDialog.BUTTON_NEGATIVE, "Cancel",
+            alertDialog.setMessage(getString(R.string.error_no_dogs_selected));
+            alertDialog.setButton(android.app.AlertDialog.BUTTON_NEGATIVE, getString(R.string.cancel),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                         }
@@ -342,8 +342,6 @@ public class WalkProfileActivity extends AppCompatActivity {
         }
 
         if(!walk.equals(newWalk)) {
-            System.out.println("emission");
-            System.out.println(newWalk);
             mSocket.emit("updateWalk", newWalk.toJsonWithId());
         }
         else {
@@ -388,11 +386,10 @@ public class WalkProfileActivity extends AppCompatActivity {
                     ArrayList<Participant> participants = new ArrayList<Participant>();
                     participants.addAll(Participant.generateParticipantsFromJson(participantsJSON));
                     System.out.println(participants);
-                    int index = 0;
 
                     for (final Participant p : participants) {
                         TextView tvUser = new TextView(getApplicationContext());
-                        tvUser.setText(p.getUserName());
+                        tvUser.setText(getString(R.string.userName) + ": " + p.getUserName());
                         tvUser.setTextColor(WifWafColor.BLACK);
                         tvUser.setOnClickListener(new View.OnClickListener() {
                                                       @Override
@@ -404,10 +401,11 @@ public class WalkProfileActivity extends AppCompatActivity {
                                                   }
 
                         );
-                        layout.addView(tvUser, index+1);
+                        layout.addView(tvUser, 1);
+
 
                         TextView tvDog = new TextView(getApplicationContext());
-                        tvDog.setText(p.getDogName());
+                        tvDog.setText(getString(R.string.dogName) + ": " + p.getDogName());
                         tvDog.setTextColor(WifWafColor.BLACK);
                         tvDog.setOnClickListener(new View.OnClickListener() {
                                                       @Override
@@ -419,12 +417,12 @@ public class WalkProfileActivity extends AppCompatActivity {
                                                   }
 
                         );
-                        layout.addView(tvDog, index+1);
+                        layout.addView(tvDog, 2);
 
                         //si la participation n'avait jamais été vue encore
                         if (p.getValid() == 0) {
                             CheckBox cb = new CheckBox(WalkProfileActivity.this);
-                            cb.setText("Accept");
+                            cb.setText(getString(R.string.accept));
                             cb.setTextColor(WifWafColor.BLACK);
                             final Participant participantCB = p;
                             cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -437,12 +435,12 @@ public class WalkProfileActivity extends AppCompatActivity {
                                 }
                             });
 
-                            layout.addView(cb, index+1);
+                            layout.addView(cb, 3);
                         }
 
                         if (p.getValid() == 0) {
                             CheckBox cb = new CheckBox(WalkProfileActivity.this);
-                            cb.setText("Refuse");
+                            cb.setText(getString(R.string.refuse));
                             cb.setTextColor(WifWafColor.BLACK);
                             final Participant participantCB = p;
                             cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -455,7 +453,7 @@ public class WalkProfileActivity extends AppCompatActivity {
                                 }
                             });
 
-                            layout.addView(cb, index + 1);
+                            layout.addView(cb, 4);
                         }
                     }
                 }
