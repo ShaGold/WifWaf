@@ -327,7 +327,6 @@ public class WalkProfileActivity extends AppCompatActivity {
         Walk newWalk = getWalk();
 
         if(newWalk.getDogs().size() == 0) {
-
             AlertDialog alertDialog = new AlertDialog.Builder(WalkProfileActivity.this).create();
             alertDialog.setTitle(getString(R.string.save));
             alertDialog.setMessage(getString(R.string.error_no_dogs_selected));
@@ -342,12 +341,14 @@ public class WalkProfileActivity extends AppCompatActivity {
 
         //s'il y a des participants à accepter
         if(!participantsWalkAccepted.isEmpty()){
+            System.out.println("J'accepte des participations");
             JSONArray listParticipantsAccepted = Participant.generateJsonArrayWithIdFromListParticipants(participantsWalkAccepted);
             mSocket.emit("validateParticipations", listParticipantsAccepted);
         }
 
         //s'il y a des participants à refuser
         if(!participantsWalkRefused.isEmpty()){
+            System.out.println("Je refuse des participations");
             JSONArray listParticipantsRefused = Participant.generateJsonArrayWithIdFromListParticipants(participantsWalkRefused);
             mSocket.emit("refuseParticipations", listParticipantsRefused);
         }
@@ -396,42 +397,46 @@ public class WalkProfileActivity extends AppCompatActivity {
                     JSONArray participantsJSON = (JSONArray) args[0];
                     ArrayList<Participant> participants = new ArrayList<Participant>();
                     participants.addAll(Participant.generateParticipantsFromJson(participantsJSON));
-                    System.out.println(participants);
+
+                    if (!Participant.allInvalid(participants)){
+                        TextView tvparticipants = (TextView) findViewById(R.id.walkSelectParticipants);
+                        tvparticipants.setVisibility(View.VISIBLE);
+                    }
 
                     for (final Participant p : participants) {
-                        TextView tvUser = new TextView(getApplicationContext());
-                        tvUser.setText(getString(R.string.userName) + ": " + p.getUserName());
-                        tvUser.setTextColor(WifWafColor.BLACK);
-                        tvUser.setOnClickListener(new View.OnClickListener() {
-                                                      @Override
-                                                      public void onClick(View v) {
-                                                          Intent i = new Intent(getApplicationContext(), PublicUserProfileActivity.class);
-                                                          i.putExtra("USER", p.getUser().getIdUser());
-                                                          startActivity(i);
-                                                      }
-                                                  }
-
-                        );
-                        layout.addView(tvUser, 1);
-
-
-                        TextView tvDog = new TextView(getApplicationContext());
-                        tvDog.setText(getString(R.string.dogName) + ": " + p.getDogName());
-                        tvDog.setTextColor(WifWafColor.BLACK);
-                        tvDog.setOnClickListener(new View.OnClickListener() {
-                                                      @Override
-                                                      public void onClick(View v) {
-                                                          Intent i = new Intent(getApplicationContext(), PublicDogProfileActivity.class);
-                                                          i.putExtra("DOG", p.getDog());
-                                                          startActivity(i);
-                                                      }
-                                                  }
-
-                        );
-                        layout.addView(tvDog, 2);
-
-                        //si la participation n'avait jamais été vue encore
                         if (p.getValid() == 0) {
+                            TextView tvUser = new TextView(getApplicationContext());
+                            tvUser.setText(getString(R.string.userName) + ": " + p.getUserName());
+                            tvUser.setTextColor(WifWafColor.BLACK);
+                            tvUser.setOnClickListener(new View.OnClickListener() {
+                                                          @Override
+                                                          public void onClick(View v) {
+                                      Intent i = new Intent(getApplicationContext(), PublicUserProfileActivity.class);
+                                      i.putExtra("USER", p.getUser().getIdUser());
+                                      startActivity(i);
+                                  }
+                              }
+
+                            );
+                            layout.addView(tvUser, 1);
+
+
+                            TextView tvDog = new TextView(getApplicationContext());
+                            tvDog.setText(getString(R.string.dogName) + ": " + p.getDogName());
+                            tvDog.setTextColor(WifWafColor.BLACK);
+                            tvDog.setOnClickListener(new View.OnClickListener() {
+                                                         @Override
+                                                         public void onClick(View v) {
+                                         Intent i = new Intent(getApplicationContext(), PublicDogProfileActivity.class);
+                                         i.putExtra("DOG", p.getDog());
+                                         startActivity(i);
+                                     }
+                                 }
+
+                            );
+                            layout.addView(tvDog, 2);
+
+                            //si la participation n'avait jamais été vue encore
                             CheckBox cb = new CheckBox(WalkProfileActivity.this);
                             cb.setText(getString(R.string.accept));
                             cb.setTextColor(WifWafColor.BLACK);
@@ -445,25 +450,22 @@ public class WalkProfileActivity extends AppCompatActivity {
                                     }
                                 }
                             });
-
                             layout.addView(cb, 3);
-                        }
 
-                        if (p.getValid() == 0) {
-                            CheckBox cb = new CheckBox(WalkProfileActivity.this);
-                            cb.setText(getString(R.string.refuse));
-                            cb.setTextColor(WifWafColor.BLACK);
-                            final Participant participantCB = p;
+                            CheckBox cbR = new CheckBox(WalkProfileActivity.this);
+                            cbR.setText(getString(R.string.refuse));
+                            cbR.setTextColor(WifWafColor.BLACK);
+                            final Participant participantCBR = p;
                             cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                     if (isChecked)
-                                        participantsWalkRefused.add(participantCB);
+                                        participantsWalkRefused.add(participantCBR);
                                     else {
-                                        participantsWalkRefused.remove(participantCB);
+                                        participantsWalkRefused.remove(participantCBR);
                                     }
                                 }
                             });
-                            layout.addView(cb, 4);
+                            layout.addView(cbR, 4);
                         }
                     }
                 }

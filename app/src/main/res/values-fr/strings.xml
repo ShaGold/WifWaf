@@ -83,5 +83,5 @@
     <string name="select_picture_from_explorer">Sélectionner une photo depuis la gallerie</string>
     <string name="who_s_participating">Voir les participants</string>
     <string name="userName">Nom de l\'utilisateur</string>
-    <string name="error_no_dogs_selected">Vous n'avez pas sélectionné de chien pour la balade !</string>
+    <string name="error_no_dogs_selected">Vous n\'avez pas sélectionné de chien pour la balade !</string>
 </resources>

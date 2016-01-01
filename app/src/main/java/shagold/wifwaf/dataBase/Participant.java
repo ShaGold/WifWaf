@@ -110,4 +110,15 @@ public class Participant {
         return participants;
     }
 
+    /* allInvalid permet de savoir si la liste de participants est à afficher ou pas
+    * Si retourne vrai alors il n'y a pas besoin d'afficher*/
+    public static boolean allInvalid(ArrayList<Participant> participants){
+        for(Participant p : participants){
+            if(p.getValid() == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

@@ -141,6 +141,7 @@
                 android:clickable="true"
                 android:focusableInTouchMode="true"
                 android:id="@+id/walkSelectParticipants"
+                android:visibility="gone"
                 android:text="@string/participants"/>
         </LinearLayout>
 
