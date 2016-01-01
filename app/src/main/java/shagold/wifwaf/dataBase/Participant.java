@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Participant {
+
+    private int idParticipation;
     private Dog dog;
     private int idWalk;
     private User user;
@@ -15,6 +17,10 @@ public class Participant {
 
     public String getDogName() {
         return dog.getName();
+    }
+
+    public int getIdParticipation() {
+        return idParticipation;
     }
 
     public int getIdWalk() {
@@ -44,7 +50,16 @@ public class Participant {
         this.valid = valid; // valid permet de déterminer la couleur de la participation
     }
 
+    public Participant(int idP, Dog idDog, int idWalk, User idUser, int valid){
+        this.idParticipation = idP;
+        this.dog = idDog;
+        this.idWalk = idWalk;
+        this.user = idUser;
+        this.valid = valid; // valid permet de déterminer la couleur de la participation
+    }
+
     public Participant(JSONObject participantJson) throws JSONException {
+        this.idParticipation = participantJson.getInt("idParticipation");
         JSONObject objDog = participantJson.getJSONObject("dog");
         this.dog = new Dog(objDog);
         JSONObject objUser = participantJson.getJSONObject("user");
@@ -61,10 +76,19 @@ public class Participant {
         return resultat;
     }
 
-    public static JSONArray generateJsonArrayFromListParticipants(List<Participant> participants) throws JSONException {
+    public JSONObject toJsonWithId() throws JSONException {
+        JSONObject resultat = new JSONObject();
+        resultat.put("idParticipation", this.getIdParticipation());
+        resultat.put("idDog", this.dog.getIdDog());
+        resultat.put("idWalk", this.getIdWalk());
+        resultat.put("idUser", this.getUser().getIdUser());
+        return resultat;
+    }
+
+    public static JSONArray generateJsonArrayWithIdFromListParticipants(List<Participant> participants) throws JSONException {
         JSONArray resultat = new JSONArray();
         for (Participant p : participants){
-            resultat.put(p.toJson());
+            resultat.put(p.toJsonWithId());
         }
         return resultat;
     }

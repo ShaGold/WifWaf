@@ -19,7 +19,6 @@ import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -341,6 +340,18 @@ public class WalkProfileActivity extends AppCompatActivity {
             return;
         }
 
+        //s'il y a des participants à accepter
+        if(!participantsWalkAccepted.isEmpty()){
+            JSONArray listParticipantsAccepted = Participant.generateJsonArrayWithIdFromListParticipants(participantsWalkAccepted);
+            mSocket.emit("validateParticipations", listParticipantsAccepted);
+        }
+
+        //s'il y a des participants à refuser
+        if(!participantsWalkRefused.isEmpty()){
+            JSONArray listParticipantsRefused = Participant.generateJsonArrayWithIdFromListParticipants(participantsWalkRefused);
+            mSocket.emit("refuseParticipations", listParticipantsRefused);
+        }
+
         if(!walk.equals(newWalk)) {
             mSocket.emit("updateWalk", newWalk.toJsonWithId());
         }
@@ -452,7 +463,6 @@ public class WalkProfileActivity extends AppCompatActivity {
                                     }
                                 }
                             });
-
                             layout.addView(cb, 4);
                         }
                     }
@@ -460,6 +470,4 @@ public class WalkProfileActivity extends AppCompatActivity {
             });
         }
     };
-
-
 }
