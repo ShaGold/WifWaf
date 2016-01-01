@@ -87,4 +87,12 @@
     <string name="dogsWalk">Chiens participant à cette balade</string>
     <string name="dogName">Nom du chien</string>
     <string name="end">Fin</string>
+    <string name="change_picture_gallery"></string>
+    <string name="delete_walk">Supprimer la balade</string>
+    <string name="no">Non</string>
+    <string name="beginning">Début</string>
+    <string name="participants">Participants</string>
+    <string name="sure_delete_walk">Etes vous sûr de vouloir supprimer cette balade?</string>
+    <string name="select_birthday">Sélectionner la date de naissance</string>
+    <string name="yes">Oui</string>
 </resources>
