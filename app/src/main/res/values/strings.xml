@@ -64,7 +64,7 @@
     <string name="no_address_found">no address found</string>
     <string name="address_found">address found</string>
     <string name="city">City</string>
-    <string name="useWalk">Use Walk</string>
+    <string name="useWalk">Use this walk</string>
     <string name="userDogs">User Dogs</string>
     <string name="walkDogs">View the dogs participating to this walk</string>
     <string name="viewPath">View Path</string>
@@ -96,7 +96,7 @@
     <string name="error">Error</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
-    <string name="dogsWalk">Dogs as the walk</string>
+    <string name="dogsWalk">Dogs participating to this walk</string>
     <string name="take_picture">Take a picture</string>
     <string name="starting_point">Starting point</string>
     <string name="add_point">Please add points to create your walk</string>

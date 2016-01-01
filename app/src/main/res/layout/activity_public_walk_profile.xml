@@ -84,7 +84,7 @@
             style="@style/Title.TextView"/>
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/seeProfile"
             android:id="@+id/viewUserProfile"
@@ -92,14 +92,14 @@
             android:onClick="redirectUserProfile"/>
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/like_to_come"
             android:id="@+id/likeToCome"
             android:onClick="sendNotif"/>
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/who_s_participating"
             android:id="@+id/participation"
@@ -112,13 +112,13 @@
             android:onClick="walkDogs"/>
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/viewPath"
             android:onClick="viewPath"/>
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/useWalk"
             android:id="@+id/useWalkButton"

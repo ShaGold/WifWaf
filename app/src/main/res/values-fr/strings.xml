@@ -84,4 +84,7 @@
     <string name="who_s_participating">Voir les participants</string>
     <string name="userName">Nom de l\'utilisateur</string>
     <string name="error_no_dogs_selected">Vous n\'avez pas sélectionné de chien pour la balade !</string>
+    <string name="dogsWalk">Chiens participant à cette balade</string>
+    <string name="dogName">Nom du chien</string>
+    <string name="end">Fin</string>
 </resources>
