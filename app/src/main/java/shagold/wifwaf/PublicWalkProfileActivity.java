@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -261,6 +262,10 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
                     JSONArray param = (JSONArray) args[0];
                     List<Participant> participantsParam = Participant.generateParticipantsFromJson(param);
                     participants.addAll(participantsParam); //TODO afficher correctement
+                    if(!participants.isEmpty()){
+                        Button buttonPariticpants = (Button) findViewById(R.id.participation);
+                        buttonPariticpants.setVisibility(View.VISIBLE);
+                    }
                     System.out.println(participants);
                 }
             });
