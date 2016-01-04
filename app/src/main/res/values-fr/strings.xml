@@ -51,7 +51,7 @@
     <string name="modify_date">Modifier la date</string>
     <string name="modify_time">Modifier l\'heure</string>
     <string name="no_dogs_selected">Vous n\'avez selectionné aucun chien...</string>
-    <string name="promptGender"></string>
+    <string name="promptGender">Sexe</string>
     <string name="selectDog">Sélectionner les chiens</string>
     <string name="select_date">Sélectionner la date</string>
     <string name="selected_dogs">Chiens sélectionnés:</string>
@@ -95,4 +95,11 @@
     <string name="sure_delete_walk">Etes vous sûr de vouloir supprimer cette balade?</string>
     <string name="select_birthday">Sélectionner la date de naissance</string>
     <string name="yes">Oui</string>
+    <string name="change_picture_take">Prendre une nouvelle photo</string>
+    <string name="date_WA">Date:</string>
+    <string name="delete_dog">Suppression d\'un chien</string>
+    <string name="ok">Ok</string>
+    <string name="refuse">Refuser</string>
+    <string name="sure_delete_dog">Etes vous sûr de vouloir supprimer ce chien :</string>
+    <string name="what_time">A quelle heure?</string>
 </resources>
