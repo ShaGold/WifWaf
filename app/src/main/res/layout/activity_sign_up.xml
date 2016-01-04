@@ -55,7 +55,7 @@
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:inputType="date"
-                android:text="@string/select_date"
+                android:text="@string/select_birthdate"
                 style="@style/Title.TextView" >
             </TextView>
 

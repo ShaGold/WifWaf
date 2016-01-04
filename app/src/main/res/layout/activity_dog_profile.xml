@@ -47,7 +47,7 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/change_picture_gallery"
+            android:text="@string/select_picture_from_explorer"
             android:id="@+id/selectPic_AD"
             android:onClick="selectPic"/>
 

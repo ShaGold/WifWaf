@@ -6,21 +6,12 @@
     android:padding="10dp"
     >
 
-    <ImageView
-        android:id="@+id/avatarRowWalk"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        tools:background="#AAA"
-        />
-
     <TextView
         android:id="@+id/titleRowWalk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
         android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/avatarRowWalk"
-        android:layout_alignTop="@+id/avatarRowWalk"
         android:textStyle="bold"
         android:textSize="18sp"
         tools:text="@string/name"

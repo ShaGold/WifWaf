@@ -56,7 +56,7 @@
     <string name="select_date">Sélectionner la date</string>
     <string name="selected_dogs">Chiens sélectionnés:</string>
     <string name="time">Heure</string>
-    <string name="title"></string>
+    <string name="title">Titre</string>
     <string name="useWalk">Utiliser ce tracé</string>
     <string name="userDogs">Voir les chiens de l\'utilisateur</string>
     <string name="user_dogs_prompt">Sélectionnez vos chiens</string>
@@ -87,7 +87,7 @@
     <string name="dogsWalk">Chiens participant à cette balade</string>
     <string name="dogName">Nom du chien</string>
     <string name="end">Fin</string>
-    <string name="change_picture_gallery"></string>
+    <string name="change_picture_gallery">Sélectionner une photo depuis la gallerie</string>
     <string name="delete_walk">Supprimer la balade</string>
     <string name="no">Non</string>
     <string name="beginning">Début</string>
