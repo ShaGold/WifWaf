@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             style="@style/Title.TextView"
             android:textStyle="bold"
+            android:id="@+id/userProfileName_tv"
             android:text="@string/name"/>
 
         <EditText
@@ -54,6 +55,7 @@
              android:layout_height="wrap_content"
              style="@style/Title.TextView"
              android:textStyle="bold"
+             android:id="@+id/userProfileMail_tv"
              android:layout_marginTop="10dp"
              android:text="@string/email"/>
 
@@ -68,6 +70,7 @@
             android:layout_height="wrap_content"
             style="@style/Title.TextView"
             android:textStyle="bold"
+            android:id="@+id/userProfileBirthday_tv"
             android:layout_marginTop="10dp"
             android:text="@string/birthday"/>
 
@@ -101,6 +104,7 @@
             android:layout_height="wrap_content"
             style="@style/Title.TextView"
             android:textStyle="bold"
+            android:id="@+id/userProfilePhoneNumber_tv"
             android:layout_marginTop="10dp"
             android:text="@string/phone"/>
 
@@ -114,6 +118,7 @@
             android:layout_height="wrap_content"
             style="@style/Title.TextView"
             android:textStyle="bold"
+            android:id="@+id/userProfileDescription_tv"
             android:layout_marginTop="10dp"
             android:text="@string/description"/>
 
