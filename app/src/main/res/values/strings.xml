@@ -127,4 +127,6 @@
     <string name="ok">Ok</string>
     <string name="what_time">At what time?</string>
     <string name="transition_walk">Transition walk</string>
+    <string name="addP">All right!</string>
+    <string name="participation_added">Your participation has been correctly added.  The creator of this walk will tell you soon if he accepts your presence at this walk!</string>
 </resources>

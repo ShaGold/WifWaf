@@ -107,28 +107,32 @@
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
+            android:scrollHorizontally="true"
             android:hint="@string/getAlongWithMales"
             android:id="@+id/getAlongWithMales" />
 
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
+            android:scrollHorizontally="true"
             android:hint="@string/getAlongWithFemales"
             android:id="@+id/getAlongWithFemales" />
 
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:scrollHorizontally="true"
+            android:inputType="textMultiLine"
             android:hint="@string/getAlongWithKids"
             android:id="@+id/getAlongWithKids" />
 
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
+            android:scrollHorizontally="true"
             android:hint="@string/getAlongWithHumans"
             android:id="@+id/getAlongWithHumans" />
 

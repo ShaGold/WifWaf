@@ -358,8 +358,7 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
                             .setMessage(getString(R.string.participation_added))
                             .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Intent intent = new Intent(PublicWalkProfileActivity.this, AddDogActivity.class);
-                                    startActivity(intent);
+
                                 }
                             })
                             .show();
