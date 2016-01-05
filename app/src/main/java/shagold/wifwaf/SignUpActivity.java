@@ -248,7 +248,7 @@ public class SignUpActivity extends AppCompatActivity {
         String Snickname = ETnickname.getText().toString();
         String Spassword = ETpassword.getText().toString();
         String Semail = ETemail.getText().toString();
-        int SphoneNumber = Integer.parseInt(ETPhoneNumber.getText().toString());
+        String SphoneNumber = ETPhoneNumber.getText().toString();
         String Sbirthday = ETBirthday.getText().toString();
         String Sdescription = ETDescription.getText().toString();
 

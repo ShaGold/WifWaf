@@ -19,7 +19,7 @@ public class User {
     private String nickname;
     private String password;
     private String birthday = "";
-    private int phoneNumber = 0;
+    private String phoneNumber = "";
     private String description = "";
     private String photo = "";
     private int flag = 0;
@@ -32,13 +32,13 @@ public class User {
         this.nickname = (String) userJson.get("nickname");
         this.password = (String) userJson.get("password");
         this.birthday = (String) userJson.get("birthday");
-        this.phoneNumber = (int) userJson.get("phoneNumber");
+        this.phoneNumber = (String) userJson.get("phoneNumber");
         this.description = (String) userJson.get("description");
         this.photo = (String) userJson.get("photo");
         this.flag = (int) userJson.get("flag");
     }
 
-    public User(String email, String nickname, String password, String birthday, int phoneNumber, String description, String photo){
+    public User(String email, String nickname, String password, String birthday, String phoneNumber, String description, String photo){
         this.email = email;
         this.nickname = nickname;
         this.password = password;
@@ -46,10 +46,10 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.description = description;
         this.photo = photo;
-        this.flag = 0; // TODO gestion flag: niveau de privatisation des données
+        this.flag = 0;
     }
 
-    public User(int idUser, String email, String nickname, String password, String birthday, int phoneNumber, String description, String photo){
+    public User(int idUser, String email, String nickname, String password, String birthday, String phoneNumber, String description, String photo){
         this.idUser = idUser;
         this.email = email;
         this.nickname = nickname;
@@ -107,7 +107,7 @@ public class User {
         return birthday;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -137,7 +137,7 @@ public class User {
         this.birthday = birthday;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
