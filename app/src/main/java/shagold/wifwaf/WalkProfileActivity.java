@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +14,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.github.nkzawa.emitter.Emitter;
@@ -482,17 +485,20 @@ public class WalkProfileActivity extends AppCompatActivity {
                             tvDog.setOnClickListener(new View.OnClickListener() {
                                                          @Override
                                                          public void onClick(View v) {
-                                         Intent i = new Intent(getApplicationContext(), PublicDogProfileActivity.class);
-                                         i.putExtra("DOG", p.getDog());
-                                         startActivity(i);
-                                     }
-                                 }
+                                                             Intent i = new Intent(getApplicationContext(), PublicDogProfileActivity.class);
+                                                             i.putExtra("DOG", p.getDog());
+                                                             startActivity(i);
+                                                         }
+                                                     }
 
                             );
                             layout.addView(tvDog, 2);
 
                             //si la participation n'avait jamais été vue encore
-                            CheckBox cb = new CheckBox(WalkProfileActivity.this);
+                            RadioGroup rg = new RadioGroup(getApplicationContext());
+                            rg.setOrientation(RadioGroup.HORIZONTAL);
+                            RadioButton cb = new RadioButton(WalkProfileActivity.this);
+                            rg.addView(cb);
                             cb.setText(getString(R.string.accept));
                             cb.setTextColor(WifWafColor.BLACK);
                             final Participant participantCB = p;
@@ -505,13 +511,13 @@ public class WalkProfileActivity extends AppCompatActivity {
                                     }
                                 }
                             });
-                            layout.addView(cb, 3);
 
-                            CheckBox cbR = new CheckBox(WalkProfileActivity.this);
+                            RadioButton cbR = new RadioButton(WalkProfileActivity.this);
                             cbR.setText(getString(R.string.refuse));
+                            rg.addView(cbR);
                             cbR.setTextColor(WifWafColor.BLACK);
                             final Participant participantCBR = p;
-                            cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            cbR.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                     if (isChecked)
                                         participantsWalkRefused.add(participantCBR);
@@ -520,7 +526,7 @@ public class WalkProfileActivity extends AppCompatActivity {
                                     }
                                 }
                             });
-                            layout.addView(cbR, 4);
+                            layout.addView(rg);
                         }
                     }
                 }
