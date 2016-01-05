@@ -1,5 +1,6 @@
 package shagold.wifwaf;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -7,9 +8,12 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import shagold.wifwaf.dataBase.Behaviour;
 import shagold.wifwaf.dataBase.Dog;
 import shagold.wifwaf.manager.MenuManager;
+import shagold.wifwaf.tool.WifWafColor;
 
 public class PublicDogProfileActivity extends AppCompatActivity {
 
@@ -22,6 +26,12 @@ public class PublicDogProfileActivity extends AppCompatActivity {
 
         dog = (Dog) getIntent().getSerializableExtra("DOG");
 
+        initFields();
+        style();
+
+    }
+
+    public void initFields(){
         TextView nameDog = (TextView) findViewById(R.id.namePublicDog);
         nameDog.setText(dog.getName());
 
@@ -62,7 +72,69 @@ public class PublicDogProfileActivity extends AppCompatActivity {
             listB += " " + b.getDescription();
         }
         Behaviours.setText(listB);
+    }
 
+    public void style(){
+        //Récupération des textView
+        TextView tvName = (TextView) findViewById(R.id.namePublicDogProfile_tv);
+        TextView tvAge = (TextView) findViewById(R.id.dogPublicProfileAge_tv);
+        TextView tvDesc = (TextView) findViewById(R.id.dogPublicProfileDesc_tv);
+        TextView tvGender = (TextView) findViewById(R.id.dogPublicProfileGender_tv);
+        TextView tvBreed = (TextView) findViewById(R.id.dogPublicProfileBreed_tv);
+        TextView tvSize = (TextView) findViewById(R.id.dogPublicProfileSize_tv);
+        TextView tvGAWM = (TextView) findViewById(R.id.dogPublicProfileGAWM_tv);
+        TextView tvGAWF = (TextView) findViewById(R.id.dogPublicProfileGAWF_tv);
+        TextView tvGAWK = (TextView) findViewById(R.id.dogPublicProfileGAWK_tv);
+        TextView tvGAWH = (TextView) findViewById(R.id.dogPublicProfileGAWH_tv);
+        TextView tvBehaviour = (TextView) findViewById(R.id.dogPublicProfileBehaviour_tv);
+
+        //Récupération police
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/coolvetica rg.ttf");
+
+        //On ajoute le style à tous les textview
+        tvName.setTypeface(tf);
+        tvName.setTextSize(24.0f);
+        tvName.setTextColor(WifWafColor.BROWN);
+
+        tvAge.setTypeface(tf);
+        tvAge.setTextSize(24.0f);
+        tvAge.setTextColor(WifWafColor.BROWN);
+
+        tvBehaviour.setTypeface(tf);
+        tvBehaviour.setTextSize(24.0f);
+        tvBehaviour.setTextColor(WifWafColor.BROWN);
+
+        tvBreed.setTypeface(tf);
+        tvBreed.setTextSize(20.0f);
+        tvBreed.setTextColor(WifWafColor.BROWN);
+
+        tvDesc.setTypeface(tf);
+        tvDesc.setTextSize(20.0f);
+        tvDesc.setTextColor(WifWafColor.BROWN);
+
+        tvGAWF.setTypeface(tf);
+        tvGAWF.setTextSize(20.0f);
+        tvGAWF.setTextColor(WifWafColor.BROWN);
+
+        tvGAWM.setTypeface(tf);
+        tvGAWM.setTextSize(20.0f);
+        tvGAWM.setTextColor(WifWafColor.BROWN);
+
+        tvGAWK.setTypeface(tf);
+        tvGAWK.setTextSize(20.0f);
+        tvGAWK.setTextColor(WifWafColor.BROWN);
+
+        tvGAWH.setTypeface(tf);
+        tvGAWH.setTextSize(20.0f);
+        tvGAWH.setTextColor(WifWafColor.BROWN);
+
+        tvSize.setTypeface(tf);
+        tvSize.setTextSize(20.0f);
+        tvSize.setTextColor(WifWafColor.BROWN);
+
+        tvGender.setTypeface(tf);
+        tvGender.setTextSize(20.0f);
+        tvGender.setTextColor(WifWafColor.BROWN);
     }
 
     @Override

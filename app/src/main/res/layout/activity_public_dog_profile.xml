@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             style="@style/Title.TextView"
+            android:id="@+id/namePublicDogProfile_tv"
             android:textStyle="bold"
             android:text="@string/name"/>
 
@@ -39,6 +40,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             style="@style/Title.TextView"
+            android:id="@+id/dogPublicProfileAge_tv"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:text="@string/age" />
@@ -53,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Title.TextView"
+            android:id="@+id/dogPublicProfileDesc_tv"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:text="@string/description" />
@@ -68,6 +71,7 @@
             android:layout_height="wrap_content"
             style="@style/Title.TextView"
             android:textStyle="bold"
+            android:id="@+id/dogPublicProfileGender_tv"
             android:layout_marginTop="10dp"
             android:text="@string/gender"/>
 
@@ -81,6 +85,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             style="@style/Title.TextView"
+            android:id="@+id/dogPublicProfileBreed_tv"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:text="@string/breed" />
@@ -97,6 +102,7 @@
             style="@style/Title.TextView"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
+            android:id="@+id/dogPublicProfileSize_tv"
             android:text="@string/size" />
 
         <TextView
@@ -110,6 +116,7 @@
             android:layout_height="wrap_content"
             style="@style/Title.TextView"
             android:textStyle="bold"
+            android:id="@+id/dogPublicProfileGAWM_tv"
             android:layout_marginTop="10dp"
             android:text="@string/getAlongWithMales" />
 
@@ -125,6 +132,7 @@
             style="@style/Title.TextView"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
+            android:id="@+id/dogPublicProfileGAWF_tv"
             android:text="@string/getAlongWithFemales" />
 
         <TextView
@@ -139,6 +147,7 @@
             style="@style/Title.TextView"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
+            android:id="@+id/dogPublicProfileGAWK_tv"
             android:text="@string/getAlongWithKids" />
 
         <TextView
@@ -153,6 +162,7 @@
             style="@style/Title.TextView"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
+            android:id="@+id/dogPublicProfileGAWH_tv"
             android:text="@string/getAlongWithHumans" />
 
         <TextView
@@ -166,6 +176,7 @@
             android:layout_height="wrap_content"
             style="@style/Title.TextView"
             android:textStyle="bold"
+            android:id="@+id/dogPublicProfileBehaviour_tv"
             android:layout_marginTop="10dp"
             android:text="@string/behaviour" />
 

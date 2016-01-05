@@ -2,6 +2,7 @@ package shagold.wifwaf;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -28,6 +29,7 @@ import shagold.wifwaf.dataBase.User;
 import shagold.wifwaf.adapter.DogPublicAdapter;
 import shagold.wifwaf.manager.MenuManager;
 import shagold.wifwaf.manager.SocketManager;
+import shagold.wifwaf.tool.WifWafColor;
 import shagold.wifwaf.tool.WifWafUserBirthday;
 
 public class PublicUserProfileActivity extends AppCompatActivity {
@@ -48,9 +50,44 @@ public class PublicUserProfileActivity extends AppCompatActivity {
         System.out.println("ID U : " + idUser);
         mSocket.emit("getUserById", idUser);
         mSocket.on("RGetUser", onRGetUser);
-
-        // TODO besoin de l'user que lon veut
         mSocket.emit("getAllMyDogs", idUser);
+
+        //Mise en page formulaire
+        style();
+    }
+
+    public void style(){
+        //Récupération des textView
+        //Récupération typeface
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/coolvetica rg.ttf");
+
+        //Récupération texview
+        TextView tvName = (TextView) findViewById(R.id.userPublicProfileName_tv);
+        TextView tvMail = (TextView) findViewById(R.id.userPublicProfileMail_tv);
+        TextView tvBirth = (TextView) findViewById(R.id.userPublicProfileBirthday_tv);
+        TextView tvPhone = (TextView) findViewById(R.id.userPublicProfilePhoneNumber_tv);
+        TextView tvDesc = (TextView) findViewById(R.id.userPublicProfileDescription_tv);
+
+        //On ajoute le style à tous les textview
+        tvName.setTypeface(tf);
+        tvName.setTextSize(24.0f);
+        tvName.setTextColor(WifWafColor.BROWN);
+
+        tvMail.setTypeface(tf);
+        tvMail.setTextSize(24.0f);
+        tvMail.setTextColor(WifWafColor.BROWN);
+
+        tvBirth.setTypeface(tf);
+        tvBirth.setTextSize(24.0f);
+        tvBirth.setTextColor(WifWafColor.BROWN);
+
+        tvPhone.setTypeface(tf);
+        tvPhone.setTextSize(20.0f);
+        tvPhone.setTextColor(WifWafColor.BROWN);
+
+        tvDesc.setTypeface(tf);
+        tvDesc.setTextSize(20.0f);
+        tvDesc.setTextColor(WifWafColor.BROWN);
     }
 
     @Override
@@ -134,12 +171,10 @@ public class PublicUserProfileActivity extends AppCompatActivity {
                     userProfileDescription.setText(user.getDescription());
 
                     TextView userProfilePhoneNumber = (TextView) findViewById(R.id.userProfilePhoneNumber);
-                    userProfilePhoneNumber.setText(Html.fromHtml("<a href=tel:" + Integer.toString(user.getPhoneNumber()) + ">" + Integer.toString(user.getPhoneNumber()) + "</a>"));
+                    userProfilePhoneNumber.setText(Html.fromHtml("<a href=tel:" + user.getPhoneNumber() + ">" + user.getPhoneNumber() + "</a>"));
 
                     ImageView userAvatar = (ImageView) findViewById(R.id.avatarPublicUserProfile);
                     userAvatar.setImageBitmap(user.getPhotoBitmap());
-
-                    // TODO send to public dog profile
 
                     userProfileMail.setMovementMethod(LinkMovementMethod.getInstance());
                     userProfilePhoneNumber.setMovementMethod(LinkMovementMethod.getInstance());
