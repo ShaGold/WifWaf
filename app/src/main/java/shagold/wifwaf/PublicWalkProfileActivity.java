@@ -57,6 +57,7 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
         mSocket = SocketManager.getMySocket();
         mUser = SocketManager.getMyUser();
         mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
+        mSocket.on("RAddParticipation", onRAddParticipation);
         System.out.println("getAllMyDogs pour " + mUser.getNickname());
         mSocket.emit("getAllMyDogs", mUser.getIdUser());
 
@@ -337,6 +338,34 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     dogsUser = Dog.generateDogsFromJson((JSONArray) args[0]);
+                }
+
+            });
+        }
+
+    };
+
+    private Emitter.Listener onRAddParticipation = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            PublicWalkProfileActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mSocket.off("RAddParticipation");
+                    //Participation ajoutée
+                    new AlertDialog.Builder(PublicWalkProfileActivity.this)
+                            .setTitle(getString(R.string.addP))
+                            .setMessage(getString(R.string.participation_added))
+                            .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent intent = new Intent(PublicWalkProfileActivity.this, AddDogActivity.class);
+                                    startActivity(intent);
+                                }
+                            })
+                            .show();
+                    //Disparition bouton j'aimerais participer
+                    Button buttonAddP = (Button) findViewById(R.id.likeToCome);
+                    buttonAddP.setVisibility(View.GONE);
                 }
 
             });
