@@ -178,6 +178,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/viewPath"
+            android:drawableLeft="@drawable/ic_directions_black_24dp"
             android:layout_marginTop="10dp"
             android:onClick="viewPathWalk"/>
 
@@ -191,6 +192,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_directions_run_black_24dp"
             android:text="@string/useWalk"
             android:onClick="useWalk"/>
 
@@ -198,6 +200,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/save"
+            android:drawableLeft="@drawable/ic_save_black_24dp"
             android:id="@+id/applyChangeWalkProfile"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"

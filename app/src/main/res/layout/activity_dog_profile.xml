@@ -42,6 +42,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/change_picture_take"
+            android:drawableLeft="@drawable/ic_photo_camera_black_24dp"
             android:id="@+id/selectImage"
             android:onClick="takePic"/>
 
@@ -49,6 +50,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/select_picture_from_explorer"
+            android:drawableLeft="@drawable/ic_folder_black_24dp"
             android:id="@+id/selectPic_AD"
             android:onClick="selectPic"/>
 
@@ -231,6 +233,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/save"
+            android:drawableLeft="@drawable/ic_save_black_24dp"
             android:id="@+id/applyChangeDogProfile"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"

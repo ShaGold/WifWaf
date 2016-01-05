@@ -40,6 +40,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/change_picture_take"
+            android:drawableLeft="@drawable/ic_photo_camera_black_24dp"
             android:id="@+id/selectImage"
             android:onClick="takePic"/>
 
@@ -47,6 +48,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/change_picture_gallery"
+            android:drawableLeft="@drawable/ic_folder_black_24dp"
             android:id="@+id/selectPic_UP"
             android:onClick="selectPic"/>
 
@@ -131,6 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/save"
+            android:drawableLeft="@drawable/ic_save_black_24dp"
             android:id="@+id/applyChangeUserProfile"
             android:layout_gravity="center_horizontal"
             android:onClick="saveProfileUser"/>
