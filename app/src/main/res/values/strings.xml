@@ -125,4 +125,5 @@
     <string name="sure_delete_dog">Are you sure you want to delete the dog :</string>
     <string name="ok">Ok</string>
     <string name="what_time">At what time?</string>
+    <string name="transition_walk">Transition walk</string>
 </resources>

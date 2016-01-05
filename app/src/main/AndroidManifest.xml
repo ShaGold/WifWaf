@@ -52,7 +52,6 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:noHistory="true"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -93,6 +92,7 @@
         <activity
             android:name=".PublicWalkProfileActivity"
             android:label="@string/title_activity_public_walk_profile"
+            android:parentActivityName=".HomeActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity

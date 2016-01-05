@@ -1,6 +1,10 @@
 package shagold.wifwaf;
 
+import android.app.ActivityOptions;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,8 +60,10 @@ public class HomeActivity extends AppCompatActivity {
                                     int position, long id) {
                 Walk walk = (Walk) mListView.getItemAtPosition(position);
                 Intent clickedWalkProfile = new Intent(getApplicationContext(), PublicWalkProfileActivity.class);
+                ActivityOptionsCompat options =  ActivityOptionsCompat.makeSceneTransitionAnimation(HomeActivity.this, view, getString(R.string.transition_walk));
+
                 clickedWalkProfile.putExtra("WALK", walk);
-                startActivity(clickedWalkProfile);
+                ActivityCompat.startActivity(HomeActivity.this, clickedWalkProfile, options.toBundle());
             }
         });
     }

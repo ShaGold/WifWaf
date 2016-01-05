@@ -317,7 +317,7 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
                 public void run() {
                     JSONArray param = (JSONArray) args[0];
                     List<Participant> participantsParam = Participant.generateParticipantsFromJson(param);
-                    participants.addAll(participantsParam); //TODO afficher correctement
+                    participants.addAll(participantsParam);
                     if(!participants.isEmpty()){
                         Button buttonPariticpants = (Button) findViewById(R.id.participation);
                         buttonPariticpants.setVisibility(View.VISIBLE);
