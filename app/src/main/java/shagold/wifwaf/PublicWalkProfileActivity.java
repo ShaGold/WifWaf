@@ -53,13 +53,13 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_public_walk_profile);
 
+        // Gestion socket
         mSocket = SocketManager.getMySocket();
-
-//        mSocket.emit("getUserById", walk.getIdUser());
         mUser = SocketManager.getMyUser();
         mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
         mSocket.emit("getAllMyDogs", mUser.getIdUser());
 
+        // Récupération des infos de la balade
         walk = (Walk) getIntent().getSerializableExtra("WALK");
 
         // Récupération liste de chiens
@@ -74,6 +74,7 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
         mSocket.emit("getAllParticipationsForIdWalk", walk.getIdWalk());
         mSocket.on("RgetAllParticipationsForIdWalk", onRGetParticipants);
 
+        //Préparation du formulaire
         initFields();
         style();
     }

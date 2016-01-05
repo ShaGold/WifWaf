@@ -48,6 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
     private User mUser;
     private ImageView mImageView;
 
+    //Attributs spécifiques à la gestion de l'image
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int ACTION_SELECT_PICTURE = 2;
     Bitmap imageBitmap;
@@ -62,8 +63,8 @@ public class SignUpActivity extends AppCompatActivity {
         mSocket = SocketManager.getMySocket();
         mSocket.on("RTrySignUp", onRTrySignUp);
 
+        //Gestion de l'image
         mImageView = (ImageView) findViewById(R.id.imageviewSignUp);
-
     }
 
     @Override
@@ -104,6 +105,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void dispatchTakePictureIntent() {
+        //Prendre une photo avec la caméra
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, 1);
@@ -112,13 +114,13 @@ public class SignUpActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) { // l'image provient de l'appareil photo
             Bundle extras = data.getExtras();
             imageBitmap = (Bitmap) extras.get("data");
             mImageView.setImageBitmap(imageBitmap);
             preparePhoto();
         }
-        if (requestCode == ACTION_SELECT_PICTURE && resultCode == RESULT_OK) {
+        if (requestCode == ACTION_SELECT_PICTURE && resultCode == RESULT_OK) { // l'image provient de la gallerie
             getFileFromPath(data);
         }
     }
@@ -267,7 +269,7 @@ public class SignUpActivity extends AppCompatActivity {
                 public void run() {
                     JSONObject param = (JSONObject) args[0];
                     try {
-                        if((int)param.get("idUser") < 0) {
+                        if((int)param.get("idUser") < 0) { // adresse mail déjà utilisée
                            AlertDialog alertDialog = new AlertDialog.Builder(SignUpActivity.this).create();
                             String error = getString(R.string.oups);
                             alertDialog.setTitle(error);
@@ -281,11 +283,10 @@ public class SignUpActivity extends AppCompatActivity {
                                     });
                             alertDialog.show();
                         }
-                        else{
+                        else{ //inscription réussie
                             mUser = new User(param);
                             Intent resultat = new Intent(SignUpActivity.this, HomeActivity.class);
-                            System.out.println("[Réussite inscription]"+param);
-                            SocketManager.setMyUser(mUser);
+                            SocketManager.setMyUser(mUser); // on enregistre le user dans la session courante
 
                             //Création/enregistrement token
                             Intent intent = new Intent(getApplicationContext(), RegistrationIntentService.class);

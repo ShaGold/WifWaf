@@ -100,7 +100,7 @@ public class PublicPathProfileActivity extends FragmentActivity implements Googl
                 mMap.addPolyline(temp);
                 if (i == path.size() - 2){
                     //last line
-                    shagold.wifwaf.dataBase.Location end = path.get(i);
+                    shagold.wifwaf.dataBase.Location end = path.get(i + 1);
                     String fin = getString(R.string.end);
                     mMap.addMarker(new MarkerOptions().position(end.transform()).title(fin));
                 }

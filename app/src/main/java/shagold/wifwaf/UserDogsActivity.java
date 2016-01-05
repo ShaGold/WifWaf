@@ -31,6 +31,7 @@ public class UserDogsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_dogs);
+
         initListView();
 
         mSocket = SocketManager.getMySocket();

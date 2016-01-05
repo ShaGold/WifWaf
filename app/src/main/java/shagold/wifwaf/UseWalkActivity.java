@@ -124,6 +124,7 @@ public class UseWalkActivity extends AppCompatActivity {
     }
 
     public void saveUseWalk(View view) {
+        //Récupération des valeurs du formulaire
         EditText titleET = (EditText) findViewById(R.id.nameUseWalk);
         String name = titleET.getText().toString();
         EditText descriptionET = (EditText) findViewById(R.id.descriptionUseWalk);
