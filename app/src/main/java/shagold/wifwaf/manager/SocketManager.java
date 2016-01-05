@@ -20,4 +20,9 @@ public class SocketManager {
 
     public static synchronized void setMyUser(User myUser){ SocketManager.myUser = myUser;}
 
+    public static synchronized void setMyUserWithoutPic(User myUser){
+        User newU = new User( myUser.getIdUser(), myUser.getEmail(), myUser.getNickname(), myUser.getPassword(), myUser.getBirthday(), myUser.getPhoneNumber(), myUser.getDescription(), myUser.getPhoto());
+        SocketManager.myUser = newU;
+    }
+
 }

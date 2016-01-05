@@ -57,6 +57,7 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
         mSocket = SocketManager.getMySocket();
         mUser = SocketManager.getMyUser();
         mSocket.on("RGetAllMyDogs", onRGetAllMyDogs);
+        System.out.println("getAllMyDogs pour " + mUser.getNickname());
         mSocket.emit("getAllMyDogs", mUser.getIdUser());
 
         // Récupération des infos de la balade
@@ -155,7 +156,7 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
             //cet usr n'a aucun chien
             new AlertDialog.Builder(PublicWalkProfileActivity.this)
                     .setTitle(getString(R.string.oups))
-                    .setMessage(getString(R.string.no_dogs_for_now))
+                    .setMessage(getString(R.string.no_dog_for_now_participation))
                     .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Intent intent = new Intent(PublicWalkProfileActivity.this, AddDogActivity.class);
@@ -164,59 +165,60 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
                     })
                     .show();
         }
+        else{
+            // Récup id communes pour tous les chiens
+            final int idWalk = walk.getIdWalk();
+            final int idUser = mUser.getIdUser();
 
-        // Récup id communes pour tous les chiens
-        final int idWalk = walk.getIdWalk();
-        final int idUser = mUser.getIdUser();
+            // Récup des id des chiens
+            CharSequence[] items = new CharSequence[dogsUser.size()];
+            final Dog[] dogTab = new Dog[dogsUser.size()];
 
-        // Récup des id des chiens
-        CharSequence[] items = new CharSequence[dogsUser.size()];
-        final Dog[] dogTab = new Dog[dogsUser.size()];
+            int i = 0;
+            for(Dog dog : dogsUser) {
+                items[i] = dog.getName();
+                dogTab[i] = dog;
+                i++;
+            }
 
-        int i = 0;
-        for(Dog dog : dogsUser) {
-            items[i] = dog.getName();
-            dogTab[i] = dog;
-            i++;
-        }
-
-        dogsDialog = new AlertDialog.Builder(PublicWalkProfileActivity.this)
-                .setTitle("My dogs")
-                .setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
-                        if (isChecked) {
-                            dogsUserForWalk.add(dogTab[indexSelected]);
-                        } else if (dogsUserForWalk.contains(dogTab[indexSelected])) {
-                            dogsUserForWalk.remove(dogTab[indexSelected]);
-                        }
-                    }
-                }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        JSONArray myJson = new JSONArray();
-
-                        for (Dog d: dogsUserForWalk) {
-                            //pour chaque chien choisi
-                            JSONObject currentDog = new JSONObject();
-                            try {
-                                currentDog.put("idWalk", idWalk);
-                                currentDog.put("idUser", idUser);
-                                currentDog.put("idDog", d.getIdDog());
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+            dogsDialog = new AlertDialog.Builder(PublicWalkProfileActivity.this)
+                    .setTitle("My dogs")
+                    .setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
+                            if (isChecked) {
+                                dogsUserForWalk.add(dogTab[indexSelected]);
+                            } else if (dogsUserForWalk.contains(dogTab[indexSelected])) {
+                                dogsUserForWalk.remove(dogTab[indexSelected]);
                             }
-                            myJson.put(currentDog);
                         }
-                        mSocket.emit("addParticipation", myJson);
-                    }
-                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        dogsUserForWalk.clear();
-                    }
-                }).create();
-        dogsDialog.show();
+                    }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            JSONArray myJson = new JSONArray();
+
+                            for (Dog d: dogsUserForWalk) {
+                                //pour chaque chien choisi
+                                JSONObject currentDog = new JSONObject();
+                                try {
+                                    currentDog.put("idWalk", idWalk);
+                                    currentDog.put("idUser", idUser);
+                                    currentDog.put("idDog", d.getIdDog());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                myJson.put(currentDog);
+                            }
+                            mSocket.emit("addParticipation", myJson);
+                        }
+                    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            dogsUserForWalk.clear();
+                        }
+                    }).create();
+            dogsDialog.show();
+        }
     }
 
     public void viewPath(View view) {

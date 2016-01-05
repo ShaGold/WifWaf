@@ -31,6 +31,15 @@ import shagold.wifwaf.manager.SocketManager;
 import shagold.wifwaf.fragment.WifWafDatePickerFragment;
 import shagold.wifwaf.tool.WifWafColor;
 import shagold.wifwaf.tool.WifWafUserBirthday;
+import shagold.wifwaf.view.ErrorMessage;
+import shagold.wifwaf.view.TextValidator;
+import shagold.wifwaf.view.ValidateMessage;
+import shagold.wifwaf.view.filter.text.EditTextFilter;
+import shagold.wifwaf.view.filter.text.EmailFilter;
+import shagold.wifwaf.view.filter.text.NumberFilter;
+import shagold.wifwaf.view.filter.text.SizeFilter;
+import shagold.wifwaf.view.filter.textview.PersonalizedBlankFilter;
+import shagold.wifwaf.view.filter.textview.TextViewFilter;
 
 public class UserProfileActivity extends AppCompatActivity {
 
@@ -42,8 +51,16 @@ public class UserProfileActivity extends AppCompatActivity {
 
     ImageView mImageView;
 
+    //Edit text
+    EditText userProfileName;
+    EditText userProfileMail;
+    TextView userProfileBirthday;
+    EditText userProfileDescription;
+    EditText userProfilePhoneNumber;
+    ImageView creatorWalk;
+
     Bitmap imageBitmap;
-    String bitmapImagedata = null;
+    String bitmapImagedata = "not changed";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,29 +72,10 @@ public class UserProfileActivity extends AppCompatActivity {
         mSocket = SocketManager.getMySocket();
         mSocket.on("RUpdateUser", onRUpdateUser);
 
-        //Récupération values
-        mImageView = (ImageView) findViewById(R.id.avatarUserProfile);
+        initFields();
+    }
 
-        EditText userProfileName = (EditText) findViewById(R.id.userProfileName);
-        userProfileName.setText(mUser.getNickname());
-
-        EditText userProfileMail = (EditText) findViewById(R.id.userProfileMail);
-        userProfileMail.setText(mUser.getEmail());
-
-        TextView userProfileBirthday = (TextView) findViewById(R.id.userProfileBirthday);
-        WifWafUserBirthday birthday = new WifWafUserBirthday(mUser.getBirthday());
-        userProfileBirthday.setText(birthday.getDate());
-
-        EditText userProfileDescription = (EditText) findViewById(R.id.userProfileDescription);
-        userProfileDescription.setText(mUser.getDescription());
-
-        EditText userProfilePhoneNumber = (EditText) findViewById(R.id.userProfilePhoneNumber);
-        userProfilePhoneNumber.setText(Integer.toString(mUser.getPhoneNumber()));
-
-        ImageView creatorWalk = (ImageView) findViewById(R.id.avatarUserProfile);
-        Bitmap myphoto = mUser.getPhotoBitmap();
-        creatorWalk.setImageBitmap(myphoto);
-
+    public void style(){
         //Récupération typeface
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/coolvetica rg.ttf");
 
@@ -110,6 +108,30 @@ public class UserProfileActivity extends AppCompatActivity {
         tvDesc.setTextColor(WifWafColor.BROWN);
     }
 
+    public void initFields(){
+        //Récupération values
+        mImageView = (ImageView) findViewById(R.id.avatarUserProfile);
+
+        userProfileName = (EditText) findViewById(R.id.userProfileName);
+        userProfileName.setText(mUser.getNickname());
+
+        userProfileMail = (EditText) findViewById(R.id.userProfileMail);
+        userProfileMail.setText(mUser.getEmail());
+
+        userProfileBirthday = (TextView) findViewById(R.id.userProfileBirthday);
+        WifWafUserBirthday birthday = new WifWafUserBirthday(mUser.getBirthday());
+        userProfileBirthday.setText(birthday.getDate());
+
+        userProfileDescription = (EditText) findViewById(R.id.userProfileDescription);
+        userProfileDescription.setText(mUser.getDescription());
+
+        userProfilePhoneNumber = (EditText) findViewById(R.id.userProfilePhoneNumber);
+        userProfilePhoneNumber.setText(mUser.getPhoneNumber());
+
+        Bitmap myphoto = mUser.getPhotoBitmap();
+        mImageView.setImageBitmap(myphoto);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_default, menu);
@@ -122,37 +144,102 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private boolean filter() {
-        boolean result = true;
+        //Définition des filtres
+        EditTextFilter[] filterNumber = {new SizeFilter(0,9), new NumberFilter()}; //pour le champ numéro de téléphone
+        EditTextFilter[] filterSize = {new SizeFilter()}; // pour les champs texte classiques
+        EditTextFilter[] filterEmail = {new SizeFilter(), new EmailFilter()};
+        TextViewFilter filterDate = new PersonalizedBlankFilter(ErrorMessage.DATE);
 
+        //Test validité des champs
+        TextValidator textValidator = new TextValidator();
+        boolean valid = true;
 
-        return result;
+        //Nickname
+        ValidateMessage vmNickname = textValidator.validate(userProfileName, filterSize);
+        if(!vmNickname.getValue()) {
+            valid = false;
+            int min = ((SizeFilter) filterSize[0]).getMin();
+            int max = ((SizeFilter) filterSize[0]).getMax();
+            userProfileName.setError(vmNickname.getError().toString() + " min: " + min + " max: " + max);
+        }
+
+        //Adresse mail
+        ValidateMessage vmMail = textValidator.validate(userProfileMail, filterEmail);
+        if(!vmMail.getValue()) {
+            valid = false;
+            if (vmMail.getError().equals(ErrorMessage.SIZE)){
+                int min = ((SizeFilter) filterSize[0]).getMin();
+                int max = ((SizeFilter) filterSize[0]).getMax();
+                userProfileMail.setError(vmMail.getError().toString() + " min: " + min + " max: " + max);
+            }
+            else{
+                userProfileMail.setError(vmMail.getError().toString());
+            }
+        }
+
+        //Numéro de téléphone
+        /*ValidateMessage vmNumTel = textValidator.validate(userProfilePhoneNumber, filterNumber);
+        if(!vmNumTel.getValue()) {
+            valid = false;
+            if (vmNumTel.getError().equals(ErrorMessage.SIZE)){
+                int min = ((SizeFilter) filterSize[0]).getMin();
+                int max = ((SizeFilter) filterSize[0]).getMax();
+                userProfilePhoneNumber.setError(vmNumTel.getError().toString() + " min: " + min + " max: " + max);
+            }
+            else{
+                userProfilePhoneNumber.setError(vmNumTel.getError().toString());
+            }
+        }*/
+
+        //Description
+        ValidateMessage vmDescrip = textValidator.validate(userProfileDescription, filterSize);
+        if(!vmDescrip.getValue()) {
+            valid = false;
+            int min = ((SizeFilter) filterSize[0]).getMin();
+            int max = ((SizeFilter) filterSize[0]).getMax();
+            userProfileDescription.setError(vmDescrip.getError().toString() + " min: " + min + " max: " + max);
+        }
+
+        //date de naissance
+       /* ValidateMessage vmBirthday = textValidator.validate(userProfileBirthday, filterDate);
+        TextView birthday = (TextView) findViewById(R.id.BirthdayMaster);
+        if(!vmBirthday.getValue()) {
+            valid = false;
+            birthday.setError(vmBirthday.getError().toString());
+        }
+        else {
+            birthday.setError(null);
+        }*/
+
+        return valid;
     }
 
     public void saveProfileUser(View view) {
+        //Vérification saisie
         if(!filter())
             return;
 
-        EditText userProfileName = (EditText) findViewById(R.id.userProfileName);
+        //Récupération valeurs des champs
         String nameU = userProfileName.getText().toString();
-
-        EditText userProfileMail = (EditText) findViewById(R.id.userProfileMail);
         String mailU = userProfileMail.getText().toString();
-
-        TextView userProfileBirthday = (TextView) findViewById(R.id.userProfileBirthday);
         String birthday = userProfileBirthday.getText().toString();
-
-        EditText userProfileDescription = (EditText) findViewById(R.id.userProfileDescription);
         String descriptionU = userProfileDescription.getText().toString();
+        String phoneU = userProfilePhoneNumber.getText().toString();
 
-        EditText userProfilePhoneNumber = (EditText) findViewById(R.id.userProfilePhoneNumber);
-        userProfilePhoneNumber.setText(Integer.toString(mUser.getPhoneNumber()));
-        int phoneU = Integer.parseInt(userProfilePhoneNumber.getText().toString());
+        if(bitmapImagedata == "not changed"){
+            bitmapImagedata = mUser.getPhoto();
+        }
 
         User u = new User(mUser.getIdUser(), mailU, nameU, mUser.getPassword(), birthday, phoneU, descriptionU, bitmapImagedata);
-        SocketManager.setMyUser(u);
 
         try {
             mSocket.emit("updateUser", u.toJsonWithId());
+            if(bitmapImagedata == "not changed") {
+                SocketManager.setMyUserWithoutPic(u);
+            }
+            else{
+                SocketManager.setMyUser(u);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
