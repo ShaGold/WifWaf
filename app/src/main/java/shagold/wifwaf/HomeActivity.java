@@ -6,6 +6,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +36,10 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        //Gestion push notifs/vibreur
+        WifWafPreferences.isLaunched = true;
+
         mSocket = SocketManager.getMySocket();
         mSocket.on("RGetAllWalks", onRGetAllWalks);
         mSocket.emit("getAllWalks");
@@ -83,5 +88,12 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     };
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        Log.d("MainActivity", "destroy");
+        WifWafPreferences.isLaunched = false;
+    }
 
 }

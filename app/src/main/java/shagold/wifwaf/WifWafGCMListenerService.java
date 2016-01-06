@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
@@ -28,30 +30,33 @@ import com.google.android.gms.gcm.GcmListenerService;
             String message = data.getString("TypeNotif");
             Log.d(TAG, "From: " + from);
             Log.d(TAG, "Message: " + message);
-
+            String messageShow = null; //message à afficher soit dans le toast soit dans la notif
             if (message.equals("addWalk")){
-                sendNotification("A new walk has been added!");
+                messageShow = "A new walk has been added!";
             }
-            else{
-                if(message.equals("addParticipation")){
+            else if(message.equals("addParticipation")){
+                String idwalk = data.getString("walk");
+                messageShow = " Someone would like to participate to your walk. The id of this walk is" + idwalk;
+            }
+            else if(message.equals("validateParticipation")){
+                String idwalk = data.getString("walk");
+                messageShow = "Your participation has been validated! The id of this walk is" + idwalk;
+            }
+            else if(message.equals("refuseParticipation")){
                     String idwalk = data.getString("walk");
-                    sendNotification(" Someone would like to participate to your walk. The id of this walk is" + idwalk);
-                }
-                else{
-                    if(message.equals("validateParticipation")){
-                        String idwalk = data.getString("walk");
-                        sendNotification("Your participation has been validated! The id of this walk is" + idwalk);
-                    }
-                    else{
-                        if(message.equals("refuseParticipation")){
-                            String idwalk = data.getString("walk");
-                            sendNotification("Your participation has been refused! The id of this walk is" + idwalk);
-                        }
-                    }
-                }
+                    messageShow = "Your participation has been refused! The id of this walk is" + idwalk;
             }
 
+            //Si appli lancée
+            if (WifWafPreferences.isLaunched) {
+                Vibrator vib = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vib.vibrate(200);
+            }
+            else {
+                sendNotification(messageShow);
+            }
         }
+
 
         /**
          * Create and show a simple notification containing the received GCM message.

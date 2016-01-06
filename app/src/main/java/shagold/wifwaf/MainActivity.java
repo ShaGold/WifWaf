@@ -58,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
         mSocket.connect();
         mSocket.on("RTrySignIn", onRTrySignIn);
 
+        // Savoir si l'appli est lancée ou pas
+        Log.d("MainActivity", "islaunched true");
+        Log.d("MainActivityPref", String.valueOf(WifWafPreferences.isLaunched));
+
         //Police perso sur le titre
         TextView text = (TextView) findViewById(R.id.titreappli);
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/JennaSue.ttf");
@@ -74,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         return MenuManager.emptyMenu(item) || super.onOptionsItemSelected(item);
     }
+
+
 
     public void trySignInDebug(View view) throws JSONException {
         connexionDebug = (Button) findViewById(R.id.connexionDebug);
