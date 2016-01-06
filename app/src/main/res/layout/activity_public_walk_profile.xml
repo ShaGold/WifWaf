@@ -104,6 +104,7 @@
             android:text="@string/like_to_come"
             android:drawableLeft="@drawable/ic_group_add_black_24dp"
             android:id="@+id/likeToCome"
+            android:visibility="gone"
             android:onClick="sendNotif"/>
 
         <Button

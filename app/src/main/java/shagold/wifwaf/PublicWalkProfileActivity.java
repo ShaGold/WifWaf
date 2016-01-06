@@ -1,6 +1,7 @@
 package shagold.wifwaf;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -13,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
@@ -63,6 +65,12 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
 
         // Récupération des infos de la balade
         walk = (Walk) getIntent().getSerializableExtra("WALK");
+
+        //Si le user connecté n'est pas le créateur de la balade il peut demander à participer
+        if(mUser.getIdUser() != walk.getIdUser()){
+            Button likeToCome = (Button) findViewById(R.id.likeToCome);
+            likeToCome.setVisibility(View.VISIBLE);
+        }
 
         // Récupération liste de chiens
         for(Dog d : walk.getDogs()) {
@@ -198,7 +206,7 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int id) {
                             JSONArray myJson = new JSONArray();
 
-                            for (Dog d: dogsUserForWalk) {
+                            for (Dog d : dogsUserForWalk) {
                                 //pour chaque chien choisi
                                 JSONObject currentDog = new JSONObject();
                                 try {
@@ -208,7 +216,18 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                myJson.put(currentDog);
+
+                                //on vérifie que la participation n'existe pas déjà
+                                if (!Participant.alreadyExists(participants, idWalk, idUser, d.getIdDog())) {
+                                    myJson.put(currentDog);
+                                } else {
+                                    Context context = getApplicationContext();
+                                    CharSequence text = getString(R.string.participation_already_exists);
+                                    int duration = Toast.LENGTH_SHORT;
+
+                                    Toast alreadyExists = Toast.makeText(context, text, duration);
+                                    alreadyExists.show();
+                                }
                             }
                             mSocket.emit("addParticipation", myJson);
                         }
@@ -236,13 +255,9 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
 
     public void getParticipants(View view){
         AlertDialog.Builder participantsDialog = new AlertDialog.Builder(PublicWalkProfileActivity.this);
-
         participantsDialog.setTitle("Participants");
-
         List<Participant> parts = new ArrayList<>(participants);
-
         ParticipantAdapter adapter = new ParticipantAdapter(PublicWalkProfileActivity.this, parts);
-
         final ListView modeList = new ListView(PublicWalkProfileActivity.this);
         modeList.setAdapter(adapter);
         modeList.setDividerHeight(modeList.getDividerHeight()*3);

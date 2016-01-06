@@ -121,4 +121,13 @@ public class Participant {
         return true;
     }
 
+    public static boolean alreadyExists(ArrayList<Participant> participants, int idWalk, int idUser, int idDog){
+        for (Participant p: participants) {
+            if(p.getIdWalk() == idWalk && p.user.getIdUser() == idUser && p.dog.getIdDog() == idDog){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

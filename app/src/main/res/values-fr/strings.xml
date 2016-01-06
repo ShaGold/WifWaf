@@ -88,7 +88,7 @@
     <string name="dogName">Nom du chien</string>
     <string name="end">Fin</string>
     <string name="change_picture_gallery">Sélectionner une photo depuis la gallerie</string>
-    <string name="delete_walk">Supprimer la balade</string>
+    <string name="delete_walk">Supprimer cette balade</string>
     <string name="no">Non</string>
     <string name="beginning">Début</string>
     <string name="participants">Participants</string>
@@ -96,10 +96,22 @@
     <string name="select_birthday">Sélectionner la date de naissance</string>
     <string name="yes">Oui</string>
     <string name="change_picture_take">Prendre une nouvelle photo</string>
-    <string name="date_WA">Date:</string>
+    <string name="date_WA">Date</string>
     <string name="delete_dog">Suppression d\'un chien</string>
     <string name="ok">Ok</string>
     <string name="refuse">Refuser</string>
     <string name="sure_delete_dog">Etes vous sûr de vouloir supprimer ce chien :</string>
     <string name="what_time">A quelle heure?</string>
+    <string name="addP">Bien reçu!</string>
+    <string name="contact_creator">Contacter le créateur</string>
+    <string name="no_dog_for_now_participation">Vous n\'avez aucun chien pour l\'instant! Ajoutez un chien à WifWaf avant de demnder à participer à une balade.</string>
+    <string name="participation_added">Votre demande de participation a bien été prise en compte. Le créateur de la balade a été informé de votre demande et donnera sa réponse rapidement!</string>
+    <string name="participation_already_exists">Vous avez déjà demandé à participer à cette balade... Votre requête à été ignorée.</string>
+    <string name="select_birthdate">Sélectionner la date de naissance</string>
+    <string name="title_activity_public_walk_profile">Balade</string>
+    <string name="title_activity_result_sign_up">Résultat inscription</string>
+    <string name="title_activity_walk_profile">Informations sur la balade</string>
+    <string name="no_address_found">Aucune adresse n\'a été trouvée.</string>
+    <string name="address_found">Adresse trouvée!</string>
+    <string name="careful_modified_walk">Attention vous avez modifié cette balade!</string>
 </resources>

@@ -42,7 +42,7 @@
     <string name="action_profile">Profile</string>
     <string name="action_home">Home</string>
     <string name="action_dogs">Dogs</string>
-    <string name="connect"></string>
+    <string name="connect">Connection</string>
     <string name="button_sign_in">Sign In</string>
 
     <!-- Jimmy add -->
@@ -64,14 +64,14 @@
     <string name="no_address_found">no address found</string>
     <string name="address_found">address found</string>
     <string name="city">City</string>
-    <string name="useWalk">Use this walk</string>
+    <string name="useWalk">Use this path</string>
     <string name="userDogs">User Dogs</string>
     <string name="walkDogs">View the dogs participating to this walk</string>
     <string name="viewPath">View Path</string>
     <string name="departure">Departure</string>
     <string name="timeStamp">At what time?</string>
     <string name="date">Which day?</string>
-    <string name="date_WA">Date:</string>
+    <string name="date_WA">Date</string>
     <string name="TraceByWalking">Trace by walking</string>
     <string name="TraceByDrawing">Trace by drawing</string>
     <string name="promptGender">Gender</string>
@@ -117,7 +117,7 @@
     <string name="no">No</string>
     <string name="userName">Username</string>
     <string name="dogName">Dog name</string>
-    <string name="delete_walk">Delete walk</string>
+    <string name="delete_walk">Delete this walk</string>
     <string name="sure_delete_walk">Are you sure you want to delete this walk?</string>
     <string name="error_no_dogs_selected">Please select at least one dog for your walk!</string>
     <string name="refuse">Refuse</string>
@@ -126,7 +126,10 @@
     <string name="sure_delete_dog">Are you sure you want to delete the dog :</string>
     <string name="ok">Ok</string>
     <string name="what_time">At what time?</string>
-    <string name="transition_walk">Transition walk</string>
+    <string name="transition_walk" translatable="false">Transition walk</string>
     <string name="addP">All right!</string>
-    <string name="participation_added">Your participation has been correctly added.  The creator of this walk will tell you soon if he accepts your presence at this walk!</string>
+    <string name="participation_added">Your request to participate to this walk has been added correctly.  The creator of this walk has been informed and will tell you soon if he accepts your presence at this walk!</string>
+    <string name="participation_already_exists">You have already asked to participate to this walk... Your request has been ignored.</string>
+    <string name="careful_modified_walk">This walk has been modified!</string>
+    <string name="continue_without_saving">Continue without saving</string>
 </resources>
