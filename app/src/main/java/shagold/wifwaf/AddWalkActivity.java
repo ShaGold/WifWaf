@@ -227,7 +227,7 @@ public class AddWalkActivity extends AppCompatActivity {
     }
 
     public void walkingWalk(View view) {
-        Intent actGPSWalk = new Intent(getApplicationContext(), GPSWalkActivity.class);
+        Intent actGPSWalk = new Intent(AddWalkActivity.this, GPSWalkActivity.class);
         nextScreen(actGPSWalk);
     }
 }
