@@ -207,20 +207,6 @@ public class SignUpActivity extends AppCompatActivity {
             }
         }
 
-        //Numéro de téléphone
-        /*ValidateMessage vmNumTel = textValidator.validate(ETPhoneNumber, filterNumber);
-        if(!vmNumTel.getValue()) {
-            valid = false;
-            if (vmNumTel.getError().equals(ErrorMessage.SIZE)){
-                int min = ((SizeFilter) filterSize[0]).getMin();
-                int max = ((SizeFilter) filterSize[0]).getMax();
-                ETPhoneNumber.setError(vmNumTel.getError().toString() + " min: " + min + " max: " + max);
-            }
-            else{
-                ETPhoneNumber.setError(vmNumTel.getError().toString());
-            }
-        }*/
-
         //Description
         ValidateMessage vmDescrip = textValidator.validate(ETDescription, filterSize);
         if(!vmDescrip.getValue()) {

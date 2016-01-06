@@ -37,6 +37,8 @@ public class PublicUserProfileActivity extends AppCompatActivity {
     private User user;
     private Socket mSocket;
     private DogPublicAdapter adapter;
+    private TextView tvPhone;
+    private TextView tvMail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,8 @@ public class PublicUserProfileActivity extends AppCompatActivity {
         mSocket.emit("getAllMyDogs", idUser);
 
         //Mise en page formulaire
+        tvMail = (TextView) findViewById(R.id.userPublicProfileMail_tv);
+        tvPhone = (TextView) findViewById(R.id.userPublicProfilePhoneNumber_tv);
         style();
     }
 
@@ -63,9 +67,7 @@ public class PublicUserProfileActivity extends AppCompatActivity {
 
         //Récupération texview
         TextView tvName = (TextView) findViewById(R.id.userPublicProfileName_tv);
-        TextView tvMail = (TextView) findViewById(R.id.userPublicProfileMail_tv);
         TextView tvBirth = (TextView) findViewById(R.id.userPublicProfileBirthday_tv);
-        TextView tvPhone = (TextView) findViewById(R.id.userPublicProfilePhoneNumber_tv);
         TextView tvDesc = (TextView) findViewById(R.id.userPublicProfileDescription_tv);
 
         //On ajoute le style à tous les textview
@@ -172,6 +174,11 @@ public class PublicUserProfileActivity extends AppCompatActivity {
 
                     TextView userProfilePhoneNumber = (TextView) findViewById(R.id.userProfilePhoneNumber);
                     userProfilePhoneNumber.setText(Html.fromHtml("<a href=tel:" + user.getPhoneNumber() + ">" + user.getPhoneNumber() + "</a>"));
+                    System.out.println("Val" + user.getPhoneNumber());
+                    if (user.getPhoneNumber().isEmpty()){
+                        userProfilePhoneNumber.setVisibility(View.GONE);
+                        tvPhone.setVisibility(View.GONE);
+                    }
 
                     ImageView userAvatar = (ImageView) findViewById(R.id.avatarPublicUserProfile);
                     userAvatar.setImageBitmap(user.getPhotoBitmap());
