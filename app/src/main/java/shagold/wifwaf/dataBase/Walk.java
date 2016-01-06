@@ -191,7 +191,9 @@ public class Walk implements Serializable {
         if(!this.getCity().equals(other.getCity()))
             return false;
 
-        if(!this.getDeparture().equals(other.getDeparture()))
+        WifWafWalkDeparture correctDeparture = new WifWafWalkDeparture(this.getDeparture());
+        String correctDate = correctDeparture.getFormattedDate() + " " + correctDeparture.getFormattedTime();
+        if(!correctDate.equals(other.getDeparture()))
             return false;
 
         if(this.getDogs().size() != other.getDogs().size())

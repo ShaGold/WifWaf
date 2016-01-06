@@ -45,7 +45,6 @@ public class WifWafWalkDeparture {
 
     public String getFormattedDate() {
         String s = getDate();
-
         return s;
     }
 

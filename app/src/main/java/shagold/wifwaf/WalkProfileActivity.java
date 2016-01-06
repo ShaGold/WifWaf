@@ -411,13 +411,10 @@ public class WalkProfileActivity extends AppCompatActivity {
             mSocket.emit("refuseParticipations", listParticipantsRefused);
         }
 
-        if(!walk.equals(newWalk)) {
-            mSocket.emit("updateWalk", newWalk.toJsonWithId());
-        }
-        else {
-            Intent result = new Intent(WalkProfileActivity.this, UserWalksActivity.class);
-            startActivity(result);
-        }
+        mSocket.emit("updateWalk", newWalk.toJsonWithId());
+        Intent result = new Intent(WalkProfileActivity.this, UserWalksActivity.class);
+        startActivity(result);
+
     }
 
     private Walk getWalk() {
@@ -437,9 +434,6 @@ public class WalkProfileActivity extends AppCompatActivity {
         String departure = date + " " + time;
 
         Walk newWalk = new Walk(walk.getIdWalk(), walk.getIdUser(), name, description, walk.getCity(), departure, dogWalk);
-
-        for(Location location : walk.getPath())
-            newWalk.addLocationToWalk(location.getLattitude(), location.getLongitude());
 
         return newWalk;
     }

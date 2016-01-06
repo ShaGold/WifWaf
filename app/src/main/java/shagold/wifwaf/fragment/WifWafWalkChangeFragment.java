@@ -25,21 +25,9 @@ public class WifWafWalkChangeFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.useWalk)
-                .setMessage("Attention vous avez modifié cette balade!")
+                .setMessage(R.string.careful_modified_walk)
 
-                .setPositiveButton("Save and continue", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-
-                        // TODO Save walk first
-                        // Il faut appeler saveChangeWalk contenu dans WalkProfileActivity
-
-                        Intent result = new Intent(getContext(), UseWalkActivity.class);
-                        result.putExtra("WALK", walk);
-                        startActivity(result);
-                    }
-                })
-
-                .setNegativeButton("Not save but continue", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.continue_without_saving, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent result = new Intent(getContext(), UseWalkActivity.class);
                         result.putExtra("WALK", walk);
@@ -47,7 +35,7 @@ public class WifWafWalkChangeFragment extends DialogFragment {
                     }
                 })
 
-                .setNeutralButton("Return to the edition", new DialogInterface.OnClickListener() {
+                .setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                     }
                 });
