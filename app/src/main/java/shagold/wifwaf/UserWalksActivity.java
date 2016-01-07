@@ -7,7 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
@@ -40,7 +42,6 @@ public class UserWalksActivity extends AppCompatActivity {
 
         mSocket.on("RGetAllMyWalks", onRGetAllMyWalks);
         mSocket.emit("getAllMyWalks", mUser.getIdUser());
-
     }
 
     private void initListView() {

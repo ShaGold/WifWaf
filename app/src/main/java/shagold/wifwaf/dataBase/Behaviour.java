@@ -40,7 +40,6 @@ public class Behaviour implements Serializable {
     public Behaviour(JSONObject behaviourJson) throws JSONException {
         this.idBehaviour = behaviourJson.getInt("idBehaviour");
         this.description = behaviourJson.getString("description");
-        System.out.println("Valeurs ds constructeur" + this.idBehaviour + this.description);
     }
 
 

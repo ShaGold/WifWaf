@@ -132,4 +132,6 @@
     <string name="participation_already_exists">You have already asked to participate to this walk... Your request has been ignored.</string>
     <string name="careful_modified_walk">This walk has been modified!</string>
     <string name="continue_without_saving">Continue without saving</string>
+    <string name="no_walks">You have saved no walks for the moment</string>
+    <string name="no_dogs">You have no dogs for the moment</string>
 </resources>
