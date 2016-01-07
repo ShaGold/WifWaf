@@ -224,7 +224,9 @@ public class Dog implements Serializable {
                 try {
                     currentObj = dogsJSON.getJSONObject(i);
                     Dog newDog = new Dog(currentObj);
-                    dogs.add(newDog);
+                    if (!dogs.contains(newDog)) {
+                        dogs.add(newDog);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -248,6 +250,26 @@ public class Dog implements Serializable {
         String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
 
         return imageEncoded;
+    }
+
+    public boolean equals(Object d){
+        if (d == null){
+            return false;
+        }
+        if (d == this){
+            return true;
+        }
+        if(!(d instanceof Dog) ){
+            return false;
+        }
+        Dog dDog = (Dog) d;
+        if (this.getIdDog() != dDog.getIdDog()){
+            return false;
+        }
+        if (this.getIdUser() != dDog.getIdUser()){
+            return false;
+        }
+        return true;
     }
 
 }

@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,6 +54,7 @@ public class WalkProfileActivity extends AppCompatActivity {
     private Socket mSocket;
     private ArrayList<Dog> dogWalk = new ArrayList<Dog>();
     private List<Dog> userDogs = new ArrayList<Dog>();
+    private List<Dog> dogCheckbox = new ArrayList<Dog>();
     ArrayList<Participant> participants = new ArrayList<Participant>();
     private ArrayList<Participant> participantsWalkRefused = new ArrayList<Participant>();
     private ArrayList<Participant> participantsWalkAccepted = new ArrayList<Participant>();
@@ -72,9 +74,9 @@ public class WalkProfileActivity extends AppCompatActivity {
         mUser = SocketManager.getMyUser();
 
         //récupération des infos pour chaque chien de la balade
-        for(Dog d : walk.getDogs()) {
+       /* for(Dog d : walk.getDogs()) {
             mSocket.emit("getDogById", d.getIdDog());
-        }
+        }*/
 
         mSocket.on("RGetDogById", onRGetDogById);
         mSocket.on("RdeleteWalk", onRredirect);
@@ -204,45 +206,54 @@ public class WalkProfileActivity extends AppCompatActivity {
                 public void run() {
                     mSocket.off("RGetAllMyDogs");
 
+                    //dogWalkId contient tous les id des chiens qui appartiennent à la balade récupérée
                     List<Integer> dogWalkId = new ArrayList<Integer>();
+                    Log.d("checkbox", "for");
                     for (Dog d : walk.getDogs()) {
                         dogWalkId.add(d.getIdDog());
+                        Log.d("checkbox", "id:" + d.getIdDog());
                     }
 
                     JSONArray dogsJSON = (JSONArray) args[0];
                     userDogs = Dog.generateDogsFromJson(dogsJSON);
+                    System.out.println(userDogs);
                     int index = 1;
                     for (Dog dog : userDogs) {
-                        CheckBox cb = new CheckBox(WalkProfileActivity.this);
-                        cb.setText(dog.getName());
-                        cb.setTextColor(WifWafColor.BLACK);
+                        if(!dogCheckbox.contains(dog)){ // s'il n'y a pas déjà une checkbox pour ce chien
+                            CheckBox cb = new CheckBox(WalkProfileActivity.this);
+                            cb.setText(dog.getName());
+                            cb.setTextColor(WifWafColor.BLACK);
 
-                        if (dogWalkId.contains(dog.getIdDog())) {
-                            cb.setChecked(true);
-                        }
+                            dogCheckbox.add(dog);
 
-                        final Dog dogCB = dog;
-                        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                if (isChecked)
-                                    dogWalk.add(dogCB);
-                                else {
-                                    Dog[] dw = new Dog[dogWalk.size()];
-                                    for(int i = 0; i < dogWalk.size(); i++)
-                                        dw[i] = dogWalk.get(i);
+                            if (dogWalkId.contains(dog.getIdDog())) {
+                                cb.setChecked(true);
+                                dogWalk.add(dog);
+                            }
 
-                                    for(int j = 0; j < dw.length; j++) {
-                                        if(dw[j].getIdDog() == dogCB.getIdDog()) {
-                                            dogWalk.remove(j);
+                            final Dog dogCB = dog;
+                            cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                    if (isChecked)
+                                        dogWalk.add(dogCB);
+                                    else {
+                                        Dog[] dw = new Dog[dogWalk.size()];
+                                        for(int i = 0; i < dogWalk.size(); i++)
+                                            dw[i] = dogWalk.get(i);
+
+                                        for(int j = 0; j < dw.length; j++) {
+                                            if(dw[j].getIdDog() == dogCB.getIdDog()) {
+                                                dogWalk.remove(j);
+                                            }
                                         }
                                     }
                                 }
-                            }
-                        });
+                            });
 
-                        LinearLayout layout = (LinearLayout) findViewById(R.id.checkboxDogs);
-                        layout.addView(cb, index);
-                        index++;
+                            LinearLayout layout = (LinearLayout) findViewById(R.id.checkboxDogs);
+                            layout.addView(cb, index);
+                            index++;
+                        }
                     }
                 }
             });
