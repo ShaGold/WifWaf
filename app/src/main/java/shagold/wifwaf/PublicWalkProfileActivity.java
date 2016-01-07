@@ -368,15 +368,17 @@ public class PublicWalkProfileActivity extends AppCompatActivity {
                 public void run() {
                     mSocket.off("RAddParticipation");
                     //Participation ajoutée
-                    new AlertDialog.Builder(PublicWalkProfileActivity.this)
-                            .setTitle(getString(R.string.addP))
-                            .setMessage(getString(R.string.participation_added))
-                            .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
+                    if (!isFinishing()) {
+                        new AlertDialog.Builder(PublicWalkProfileActivity.this)
+                                .setTitle(getString(R.string.addP))
+                                .setMessage(getString(R.string.participation_added))
+                                .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
 
-                                }
-                            })
-                            .show();
+                                    }
+                                })
+                                .show();
+                    }
                     //Disparition bouton j'aimerais participer
                     Button buttonAddP = (Button) findViewById(R.id.likeToCome);
                     buttonAddP.setVisibility(View.GONE);
