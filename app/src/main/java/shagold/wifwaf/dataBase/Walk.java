@@ -47,27 +47,32 @@ public class Walk implements Serializable {
         this.description = (String) jsonWalk.get("description");
         this.city = (String) jsonWalk.get("city");
         this.departure = (String) jsonWalk.get("departure");
-        JSONArray trace= (JSONArray) jsonWalk.get("path");
-        if (trace != null){
-            for (int i = 0; i < trace.length(); i++) {
-                JSONObject currentLoc = null;
-                try{
-                    currentLoc = trace.getJSONObject(i);
-                    Location newLoc = new Location(currentLoc);
-                    this.path.add(newLoc);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+        if (jsonWalk.has("path")) {
+            JSONArray trace= (JSONArray) jsonWalk.get("path");
+            if (trace != null) {
+                for (int i = 0; i < trace.length(); i++) {
+                    JSONObject currentLoc = null;
+                    try {
+                        currentLoc = trace.getJSONObject(i);
+                        Location newLoc = new Location(currentLoc);
+                        this.path.add(newLoc);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
-        JSONArray dogs= (JSONArray) jsonWalk.get("dogs");
-        if (dogs != null){
-            JSONObject currentDog;
-            for (int i = 0; i < dogs.length(); i++) {
-                currentDog = dogs.getJSONObject(i);
-                int id = currentDog.getInt("idDog");
-                Dog newDog = new Dog(id);
-                this.dogs.add(newDog);
+
+        if (jsonWalk.has("dogs")) {
+            JSONArray dogs= (JSONArray) jsonWalk.get("dogs");
+            if (dogs != null){
+                JSONObject currentDog;
+                for (int i = 0; i < dogs.length(); i++) {
+                    currentDog = dogs.getJSONObject(i);
+                    int id = currentDog.getInt("idDog");
+                    Dog newDog = new Dog(id);
+                    this.dogs.add(newDog);
+                }
             }
         }
     }
